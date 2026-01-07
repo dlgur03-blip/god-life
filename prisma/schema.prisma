@@ -1,0 +1,174 @@
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  destinyDays      DestinyDay[]
+  destinyEvents    DestinyEvent[]
+  successProjects  SuccessProject[]
+  disciplineRules  DisciplineRule[]
+  epistleDays      EpistleDay[]
+}
+
+// M3: Destiny Navigator
+model DestinyDay {
+  id        String   @id @default(cuid())
+  date      String   // YYYY-MM-DD
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  
+  // Goals
+  goalUltimate String?
+  goalLong     String?
+  goalMonth    String?
+  goalWeek     String?
+  goalToday    String?
+
+  timeblocks DestinyTimeBlock[]
+  events     DestinyEvent[] // Events linked to a day
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, date])
+}
+
+model DestinyTimeBlock {
+  id            String     @id @default(cuid())
+  dayId         String
+  day           DestinyDay @relation(fields: [dayId], references: [id], onDelete: Cascade)
+  
+  seq           Int        // 1..11
+  startTime     String?    // "06:00"
+  endTime       String?    // "07:00"
+  
+  planText      String?
+  planLocation  String?
+  
+  actualText    String?
+  score         Int?       // 0..10
+  feedback      String?
+  
+  status        String     @default("planned") // planned, active, completed, skipped
+
+  updatedAt     DateTime   @updatedAt
+
+  @@unique([dayId, seq])
+}
+
+// M4: Events
+model DestinyEvent {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  dayId       String?
+  day         DestinyDay? @relation(fields: [dayId], references: [id])
+
+  title       String
+  recordedAt  DateTime @default(now())
+  
+  createdAt   DateTime @default(now())
+}
+
+// M5: Success Code
+model SuccessProject {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id])
+  
+  title        String
+  startDate    DateTime
+  reminderTime String?  // "09:00"
+  enabled      Boolean  @default(true)
+
+  entries      SuccessEntry[]
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model SuccessEntry {
+  id          String         @id @default(cuid())
+  projectId   String
+  project     SuccessProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  dayIndex    Int            // 1..100
+  content     String?
+  imageUrl    String?        // M6
+  
+  isCompleted Boolean        @default(false)
+  completedAt DateTime?
+
+  updatedAt   DateTime       @updatedAt
+
+  @@unique([projectId, dayIndex])
+}
+
+// M7: Discipline Mastery
+model DisciplineRule {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  
+  title     String
+  sortOrder Int      @default(0)
+
+  checks    DisciplineCheck[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model DisciplineCheck {
+  id        String         @id @default(cuid())
+  ruleId    String
+  rule      DisciplineRule @relation(fields: [ruleId], references: [id], onDelete: Cascade)
+
+  date      String         // YYYY-MM-DD
+  checkedAt DateTime       @default(now())
+
+  @@unique([ruleId, date])
+}
+
+// M8: Self Epistle
+model EpistleDay {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  
+  date        String   // YYYY-MM-DD
+  toYesterday String?  // Letter to yesterday
+  toTomorrow  String?  // Letter to tomorrow
+  mood        String?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([userId, date])
+}
+
+// M9: Bio Hacking (Global Content)
+model BioPost {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  title     String
+  content   String   // Markdown
+  category  String
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
