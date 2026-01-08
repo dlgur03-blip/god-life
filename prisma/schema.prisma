@@ -17,11 +17,14 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
-  destinyDays      DestinyDay[]
-  destinyEvents    DestinyEvent[]
-  successProjects  SuccessProject[]
-  disciplineRules  DisciplineRule[]
-  epistleDays      EpistleDay[]
+  destinyDays       DestinyDay[]
+  destinyEvents     DestinyEvent[]
+  destinyTemplates  DestinyTemplate[]
+  successProjects   SuccessProject[]
+  disciplineRules   DisciplineRule[]
+  epistleDays       EpistleDay[]
+  weeklyPlans       WeeklyPlan[]
+  errorLogs         ErrorLog[]
 }
 
 // M3: Destiny Navigator
@@ -29,7 +32,7 @@ model DestinyDay {
   id        String   @id @default(cuid())
   date      String   // YYYY-MM-DD
   userId    String
-  user      User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   
   // Goals
   goalUltimate String?
@@ -51,30 +54,45 @@ model DestinyTimeBlock {
   id            String     @id @default(cuid())
   dayId         String
   day           DestinyDay @relation(fields: [dayId], references: [id], onDelete: Cascade)
-  
-  seq           Int        // 1..11
-  startTime     String?    // "06:00"
-  endTime       String?    // "07:00"
-  
+
+  seq           Int        // Now supports 1..N (no upper limit)
+  startTime     String     @default("00:00")  // REQUIRED - no longer optional
+  endTime       String     @default("01:00")  // REQUIRED - no longer optional
+
   planText      String?
   planLocation  String?
-  
+
   actualText    String?
   score         Int?       // 0..10
   feedback      String?
-  
-  status        String     @default("planned") // planned, active, completed, skipped
+
+  status        String     @default("planned")
 
   updatedAt     DateTime   @updatedAt
 
   @@unique([dayId, seq])
 }
 
+// Destiny Timeblock Templates
+model DestinyTemplate {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  name      String   // Template name (e.g., 'Weekday Routine', 'Weekend Routine')
+  blocks    Json     // Array of {seq, startTime, endTime, planText, planLocation}
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, name])
+}
+
 // M4: Events
 model DestinyEvent {
   id          String   @id @default(cuid())
   userId      String
-  user        User     @relation(fields: [userId], references: [id])
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   dayId       String?
   day         DestinyDay? @relation(fields: [dayId], references: [id])
 
@@ -88,7 +106,7 @@ model DestinyEvent {
 model SuccessProject {
   id           String   @id @default(cuid())
   userId       String
-  user         User     @relation(fields: [userId], references: [id])
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   
   title        String
   startDate    DateTime
@@ -122,7 +140,7 @@ model SuccessEntry {
 model DisciplineRule {
   id        String   @id @default(cuid())
   userId    String
-  user      User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   
   title     String
   sortOrder Int      @default(0)
@@ -148,7 +166,7 @@ model DisciplineCheck {
 model EpistleDay {
   id          String   @id @default(cuid())
   userId      String
-  user        User     @relation(fields: [userId], references: [id])
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   
   date        String   // YYYY-MM-DD
   toYesterday String?  // Letter to yesterday
@@ -161,14 +179,61 @@ model EpistleDay {
   @@unique([userId, date])
 }
 
-// M9: Bio Hacking (Global Content)
+// Weekly Plan for 7-day goal tracking
+model WeeklyPlan {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  date      String   // YYYY-MM-DD (specific day)
+  mainGoal  String?  // Main goal for this specific day
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, date])
+}
+
+// M9: Bio Hacking (Global Content with Translations)
 model BioPost {
   id        String   @id @default(cuid())
   slug      String   @unique
-  title     String
-  content   String   // Markdown
   category  String
-  
+
+  translations BioPostTranslation[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model BioPostTranslation {
+  id        String   @id @default(cuid())
+  postId    String
+  post      BioPost  @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  locale    String   // 'ko' | 'en' | 'ja'
+  title     String
+  content   String   // Markdown
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([postId, locale])
+}
+
+// Error Logging
+model ErrorLog {
+  id            String   @id @default(cuid())
+  level         String   // 'error' | 'warning' | 'info'
+  message       String
+  stack         String?  // Max 5000 chars (truncated on save)
+  userId        String?
+  user          User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  requestUrl    String?
+  requestMethod String?
+  createdAt     DateTime @default(now())
+
+  @@index([level])
+  @@index([createdAt])
+  @@index([userId])
 }

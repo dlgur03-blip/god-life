@@ -6,6 +6,19 @@ export type ErrorCode =
   | 'MAX_RULES_REACHED'
   | 'NETWORK_ERROR'
   | 'SERVER_ERROR'
+  | 'DATE_NOT_TODAY'
+  | 'INVALID_FILE_TYPE'
+  | 'FILE_TOO_LARGE'
+  | 'UPLOAD_FAILED'
+  | 'FORBIDDEN'
+  | 'ADMIN_ONLY'
+  | 'SLUG_TAKEN'
+  | 'INVALID_SLUG_FORMAT'
+  | 'POST_NOT_FOUND'
+  | 'SELF_DELETE_NOT_ALLOWED'
+  | 'USER_NOT_FOUND_FOR_DELETE'
+  | 'ERROR_LOG_NOT_FOUND'
+  | 'INVALID_DATE_RANGE'
   | 'UNKNOWN';
 
 // Map error codes to translation keys under Common.errors
@@ -16,6 +29,19 @@ export const errorCodeToTranslationKey: Record<ErrorCode, string> = {
   MAX_RULES_REACHED: 'errors.maxRulesReached',
   NETWORK_ERROR: 'errors.networkError',
   SERVER_ERROR: 'errors.serverError',
+  DATE_NOT_TODAY: 'errors.dateNotToday',
+  INVALID_FILE_TYPE: 'errors.invalidFileType',
+  FILE_TOO_LARGE: 'errors.fileTooLarge',
+  UPLOAD_FAILED: 'errors.uploadFailed',
+  FORBIDDEN: 'errors.forbidden',
+  ADMIN_ONLY: 'errors.adminOnly',
+  SLUG_TAKEN: 'errors.slugTaken',
+  INVALID_SLUG_FORMAT: 'errors.invalidSlugFormat',
+  POST_NOT_FOUND: 'errors.postNotFound',
+  SELF_DELETE_NOT_ALLOWED: 'errors.selfDeleteNotAllowed',
+  USER_NOT_FOUND_FOR_DELETE: 'errors.userNotFoundForDelete',
+  ERROR_LOG_NOT_FOUND: 'errors.errorLogNotFound',
+  INVALID_DATE_RANGE: 'errors.invalidDateRange',
   UNKNOWN: 'errors.unknown'
 };
 
@@ -43,4 +69,38 @@ export function mapErrorToCode(errorMessage: string): ErrorCode {
     'Max 13 rules allowed': 'MAX_RULES_REACHED'
   };
   return errorMap[errorMessage] || 'UNKNOWN';
+}
+
+// Error logging types and utility
+export type ErrorLevel = 'error' | 'warning' | 'info';
+
+export type LogErrorParams = {
+  level: ErrorLevel;
+  message: string;
+  stack?: string;
+  userId?: string;
+  requestUrl?: string;
+  requestMethod?: string;
+};
+
+const MAX_STACK_LENGTH = 5000;
+
+export async function logError(params: LogErrorParams): Promise<void> {
+  try {
+    // Dynamic import to avoid circular dependency
+    const { prisma } = await import('@/lib/prisma');
+    const stack = params.stack?.slice(0, MAX_STACK_LENGTH);
+    await prisma.errorLog.create({
+      data: {
+        level: params.level,
+        message: params.message,
+        stack,
+        userId: params.userId,
+        requestUrl: params.requestUrl,
+        requestMethod: params.requestMethod,
+      },
+    });
+  } catch (e) {
+    console.error('Failed to log error:', e);
+  }
 }

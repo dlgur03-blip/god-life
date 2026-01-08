@@ -1,4 +1,7 @@
 {
+  "Header": {
+    "goToDashboard": "Go to Dashboard"
+  },
   "Home": {
     "title": "GOD LIFE MAKER",
     "subtitle": "Architect your destiny. Master your discipline. Hack your biology.",
@@ -68,18 +71,48 @@
     "verifying": "Verifying...",
     "confirmEntry": "Confirm Entry",
     "projectNotFound": "Project Not Found",
-    "projectNotFoundMessage": "The requested project does not exist or has been deleted."
+    "projectNotFoundMessage": "The requested project does not exist or has been deleted.",
+    "deleteProject": "Delete Project",
+    "deleteProjectConfirm": "Are you sure you want to delete this project?",
+    "deleteProjectWarning": "This will permanently delete the project and all 100 day entries. This action cannot be undone.",
+    "deleting": "Deleting...",
+    "image": {
+      "notePhoto": "Note Photo",
+      "dropOrClick": "Drop image or click to upload",
+      "maxSize": "Max {size}MB",
+      "selectFile": "Select File",
+      "takePhoto": "Take Photo",
+      "uploading": "Uploading...",
+      "dayPhoto": "Day {day} Photo",
+      "notePhotoAlt": "Handwritten note for day {day}",
+      "close": "Close",
+      "zoomIn": "Zoom In",
+      "zoomOut": "Zoom Out",
+      "resetZoom": "Reset Zoom",
+      "pinchToZoom": "Pinch or use buttons to zoom",
+      "errors": {
+        "invalidFileType": "Please upload a JPG, PNG, or WebP image.",
+        "fileTooLarge": "Image must be smaller than 10MB.",
+        "uploadFailed": "Failed to upload image. Please try again."
+      }
+    }
   },
   "Destiny": {
     "title": "DESTINY NAVIGATOR",
     "coreObjectives": "Core Objectives",
-    "timeblocks": "Timeblocks (06:00 - 16:00)",
+    "timeblocks": "24-Hour Timeblocks",
     "goals": {
       "ultimate": "Ultimate",
       "longTerm": "Long-term",
       "month": "Month",
-      "week": "Week",
-      "today": "Today"
+      "week": "This Week",
+      "today": "Today",
+      "weekPlaceholder": "Enter your weekly goal...",
+      "todayPlaceholder": "Enter today's goal..."
+    },
+    "weeklyPlan": {
+      "title": "Weekly Plan",
+      "placeholder": "Enter plan..."
     },
     "flowOfEvents": "Flow of Events",
     "noEventsRecorded": "No significant events recorded yet.",
@@ -100,7 +133,34 @@
       "scoreLabel": "Score",
       "scoreSuffix": "/ 10",
       "feedLabel": "Feed",
-      "feedbackPlaceholder": "Feedback..."
+      "feedbackPlaceholder": "Feedback...",
+      "addBlock": "Add Timeblock",
+      "adding": "Adding...",
+      "deleteBlock": "Delete Block",
+      "deleteBlockTitle": "Delete Timeblock",
+      "deleteBlockConfirm": "Are you sure you want to delete this timeblock? This action cannot be undone.",
+      "editTime": "Edit Time",
+      "endMustBeAfterStart": "End time must be after start time.",
+      "timeOverlap": "Time range overlaps with another block.",
+      "invalidTimeFormat": "Invalid time format. Use HH:MM.",
+      "fiveMinuteIncrement": "Time must be in 5-minute increments."
+    },
+    "template": {
+      "save": "Save Template",
+      "load": "Load Template",
+      "saveTitle": "Save as Template",
+      "saveDescription": "Save your current timeblock structure as a reusable template.",
+      "namePlaceholder": "Template name (e.g., Weekday Routine)",
+      "nameRequired": "Template name is required",
+      "loadTitle": "Load Template",
+      "loadDescription": "Select a template to apply to today's schedule.",
+      "loadWarningTitle": "Replace Current Timeblocks?",
+      "loadWarningMessage": "This will delete all existing timeblocks and replace them with the template. This action cannot be undone.",
+      "confirmLoad": "Apply Template",
+      "noTemplates": "No saved templates yet.",
+      "blockCount": "{count} blocks",
+      "savedSuccess": "Template saved successfully",
+      "loadedSuccess": "Template applied successfully"
     }
   },
   "Discipline": {
@@ -114,7 +174,12 @@
     "noRulesInsight": "Add rules to see your performance trends.",
     "deleteRuleConfirm": "Delete this rule?",
     "noRulesDefined": "No rules defined. Add a discipline to start mastery.",
-    "addNewDiscipline": "Add a new discipline..."
+    "addNewDiscipline": "Add a new discipline...",
+    "dateRestriction": {
+      "pastDateReadOnly": "Past dates are read-only",
+      "futureDateLocked": "Future dates are locked",
+      "todayOnly": "You can only check today's rules"
+    }
   },
   "Epistle": {
     "title": "SELF EPISTLE",
@@ -127,7 +192,14 @@
     "reflectOnPassed": "Reflect on what passed...",
     "manifestIntent": "Manifest your intent...",
     "sealing": "Sealing...",
-    "sealEpistle": "Seal Epistle"
+    "sealEpistle": "Seal Epistle",
+    "receivedLetter": "Received Letter",
+    "noLetterFromYesterday": "No letter from yesterday's self.",
+    "receivedLetterFrom": "Letter received from {date}",
+    "dateBlocked": "Date Locked",
+    "dateBlockedHint": "You cannot access dates beyond tomorrow.",
+    "readOnly": "Read Only",
+    "composeLetter": "Compose Letter"
   },
   "Bio": {
     "title": "BIO HACKING",
@@ -137,7 +209,9 @@
     "readProtocol": "Read Protocol",
     "protocolNotFound": "Protocol not found.",
     "protocolNotFoundMessage": "The requested protocol does not exist in our database.",
-    "updated": "Updated"
+    "updated": "Updated",
+    "viewingIn": "Viewing in {locale}",
+    "translationUnavailable": "Translation unavailable for this language."
   },
   "Common": {
     "loading": "Loading...",
@@ -147,6 +221,7 @@
     "save": "Save",
     "delete": "Delete",
     "back": "Back",
+    "retry": "Retry",
     "notFound": {
       "title": "Page Not Found",
       "message": "The page you are looking for does not exist or has been moved.",
@@ -159,7 +234,17 @@
       "maxRulesReached": "Maximum number of rules reached (13).",
       "networkError": "Network error. Please check your connection.",
       "serverError": "Server error. Please try again later.",
-      "unknown": "An unexpected error occurred."
+      "unknown": "An unexpected error occurred.",
+      "dateNotToday": "You can only check rules for today.",
+      "forbidden": "You do not have permission to perform this action.",
+      "adminOnly": "This feature is only available to administrators.",
+      "slugTaken": "This slug is already in use.",
+      "invalidSlugFormat": "Slug can only contain lowercase letters, numbers, and hyphens.",
+      "postNotFound": "Post not found.",
+      "selfDeleteNotAllowed": "You cannot delete yourself.",
+      "userNotFoundForDelete": "User not found for deletion.",
+      "errorLogNotFound": "Error log not found.",
+      "invalidDateRange": "Invalid date range."
     },
     "validation": {
       "required": "This field is required.",
@@ -190,6 +275,257 @@
       "en": "English",
       "ko": "Korean",
       "ja": "Japanese"
+    }
+  },
+  "Admin": {
+    "title": "Admin Panel",
+    "accessDenied": {
+      "title": "Access Denied",
+      "message": "You do not have permission to access the admin area. Please contact an administrator if you believe this is an error.",
+      "backHome": "Back to Home"
+    },
+    "nav": {
+      "dashboard": "Dashboard",
+      "stats": "Statistics",
+      "users": "Users",
+      "bio": "Bio Posts",
+      "system": "System"
+    },
+    "dashboard": {
+      "title": "Dashboard"
+    },
+    "stats": {
+      "title": "Detailed Statistics",
+      "totalUsers": "Total Users",
+      "newUsersThisWeek": "New This Week",
+      "activeDaily": "Daily Active",
+      "activeWeekly": "Weekly Active",
+      "activeMonthly": "Monthly Active",
+      "noData": "No data available.",
+      "period": {
+        "week": "7 Days",
+        "month": "30 Days",
+        "quarter": "90 Days"
+      },
+      "charts": {
+        "userTrend": "Active Users Trend",
+        "moduleActivity": "Module Activity",
+        "disciplineTrend": "Discipline Achievement Trend",
+        "moduleSummary": "Module Summary",
+        "activeUsers": "Active Users",
+        "achievementRate": "Achievement Rate",
+        "average": "Avg",
+        "totalDays": "Total Days",
+        "avgRate": "Avg Rate",
+        "activeProjects": "Active Projects",
+        "totalLetters": "Total Letters"
+      },
+      "modules": {
+        "destiny": "Destiny",
+        "discipline": "Discipline",
+        "success": "Success",
+        "epistle": "Epistle"
+      },
+      "errors": {
+        "loadFailed": "Failed to load statistics."
+      }
+    },
+    "moduleUsage": "Module Usage",
+    "modules": {
+      "destiny": { "name": "Destiny Navigator", "desc": "Days tracked" },
+      "success": { "name": "Success Code", "desc": "Active projects" },
+      "discipline": { "name": "Discipline Mastery", "desc": "Rules created" },
+      "epistle": { "name": "Self Epistle", "desc": "Letters written" },
+      "bio": { "name": "Bio Hacking", "desc": "Posts published" }
+    },
+    "users": {
+      "title": "User Management",
+      "email": "Email",
+      "name": "Name",
+      "joined": "Joined",
+      "activity": "Activity",
+      "items": "items",
+      "searchPlaceholder": "Search by email or name...",
+      "noUsers": "No users registered.",
+      "noSearchResults": "No search results found.",
+      "viewDetail": "View Detail",
+      "userDetail": "User Detail",
+      "memberSince": "Member Since",
+      "lastUpdated": "Last Updated",
+      "moduleActivity": "Module Activity",
+      "deleteUser": "Delete User",
+      "deleteConfirm": "Are you sure you want to delete this user?",
+      "deleteWarning": "All user data will be permanently deleted. This action cannot be undone.",
+      "deleteWarningItems": "Data to be deleted:",
+      "deleting": "Deleting...",
+      "stats": {
+        "destinyDays": "Destiny Navigator",
+        "destinyEvents": "Events",
+        "destinyTemplates": "Templates",
+        "successProjects": "Success Code Projects",
+        "successEntries": "Success Entries",
+        "disciplineRules": "Discipline Rules",
+        "disciplineChecks": "Discipline Checks",
+        "epistleDays": "Self Epistle",
+        "weeklyPlans": "Weekly Plans"
+      }
+    },
+    "bio": {
+      "title": "Bio Post Management",
+      "newPost": "New Post",
+      "editPost": "Edit Post",
+      "slug": "Slug",
+      "category": "Category",
+      "translations": "Translations",
+      "created": "Created",
+      "updated": "Updated",
+      "noPosts": "No bio posts yet.",
+      "createFirst": "Create your first post to get started.",
+      "form": {
+        "slugPlaceholder": "url-friendly-slug",
+        "slugHint": "Unique identifier for the URL. Use lowercase letters, numbers, and hyphens only.",
+        "titlePlaceholder": "Post title",
+        "contentPlaceholder": "Write content in markdown...",
+        "selectCategory": "Select category",
+        "atLeastOneTranslation": "At least one language must have title and content."
+      },
+      "preview": "Preview",
+      "editor": "Editor",
+      "actions": {
+        "create": "Create Post",
+        "update": "Save Changes",
+        "delete": "Delete Post",
+        "cancel": "Cancel",
+        "creating": "Creating...",
+        "updating": "Saving...",
+        "deleting": "Deleting..."
+      },
+      "deleteConfirm": {
+        "title": "Delete Post",
+        "message": "Are you sure you want to delete this post and all its translations? This action cannot be undone."
+      },
+      "validation": {
+        "slugRequired": "Slug is required.",
+        "slugFormat": "Slug can only contain lowercase letters, numbers, and hyphens.",
+        "slugTaken": "This slug is already in use.",
+        "categoryRequired": "Please select a category.",
+        "translationRequired": "At least one language must have title and content."
+      },
+      "translationStatus": {
+        "complete": "Complete",
+        "incomplete": "Incomplete",
+        "empty": "Empty"
+      },
+      "markdown": {
+        "bold": "Bold",
+        "italic": "Italic",
+        "heading": "Heading",
+        "link": "Link",
+        "list": "List",
+        "code": "Code"
+      },
+      "categories": {
+        "Nutrition": "Nutrition",
+        "Supplements": "Supplements",
+        "Recovery": "Recovery",
+        "Exercise": "Exercise",
+        "Mindset": "Mindset"
+      }
+    },
+    "errors": {
+      "loadFailed": "Failed to load data. Please try again."
+    },
+    "system": {
+      "title": "System Management",
+      "overview": "System Overview",
+      "environment": {
+        "title": "Environment Variables",
+        "description": "List of configured environment variables",
+        "name": "Name",
+        "value": "Value",
+        "masked": "[SECURED]",
+        "notSet": "[NOT SET]",
+        "requiredMissing": "Required environment variables are missing"
+      },
+      "database": {
+        "title": "Database",
+        "description": "Database connection status",
+        "status": "Connection Status",
+        "connected": "Connected",
+        "disconnected": "Disconnected",
+        "responseTime": "Response Time",
+        "provider": "Provider",
+        "checkingConnection": "Checking connection...",
+        "refresh": "Refresh",
+        "refreshing": "Checking..."
+      },
+      "info": {
+        "title": "System Information",
+        "description": "Runtime and framework information",
+        "nodeVersion": "Node.js Version",
+        "nextVersion": "Next.js Version",
+        "reactVersion": "React Version",
+        "prismaVersion": "Prisma Version",
+        "platform": "Platform",
+        "timezone": "Timezone",
+        "locale": "Locale",
+        "environment": "Environment"
+      },
+      "status": {
+        "healthy": "Healthy",
+        "warning": "Warning",
+        "error": "Error"
+      },
+      "errorLog": {
+        "title": "Error Logs",
+        "description": "Application errors and warning logs",
+        "noLogs": "No error logs found.",
+        "systemHealthy": "System is running normally.",
+        "levels": {
+          "all": "All",
+          "error": "Error",
+          "warning": "Warning",
+          "info": "Info"
+        },
+        "summary": {
+          "totalErrors": "Total Errors",
+          "totalWarnings": "Total Warnings",
+          "totalInfo": "Total Info",
+          "recent24h": "Last 24 Hours"
+        },
+        "table": {
+          "level": "Level",
+          "message": "Message",
+          "requestUrl": "Request URL",
+          "createdAt": "Created At",
+          "user": "User",
+          "requestMethod": "Method"
+        },
+        "detail": {
+          "title": "Error Details",
+          "stackTrace": "Stack Trace",
+          "noStack": "No stack trace available",
+          "deleteLog": "Delete Log"
+        },
+        "bulkDelete": {
+          "button": "Bulk Delete",
+          "title": "Bulk Delete Error Logs",
+          "description": "Delete all error logs before the selected date.",
+          "options": {
+            "7days": "Older than 7 days",
+            "30days": "Older than 30 days",
+            "90days": "Older than 90 days"
+          },
+          "confirmMessage": "{count} logs will be deleted. This action cannot be undone.",
+          "success": "{count} logs have been deleted.",
+          "deleting": "Deleting..."
+        },
+        "pagination": {
+          "prev": "Previous",
+          "next": "Next",
+          "page": "Page {current} / {total}"
+        }
+      }
     }
   }
 }

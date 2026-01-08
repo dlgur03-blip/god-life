@@ -1,4 +1,5 @@
 import { NextAuthOptions } from "next-auth"
+import { getServerSession } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { prisma } from "@/lib/prisma"
@@ -78,4 +79,24 @@ export const authOptions: NextAuthOptions = {
     },
   },
   // Using NextAuth default pages
+}
+
+// Admin email checking utilities
+export function getAdminEmails(): string[] {
+  const adminEmails = process.env.ADMIN_EMAILS;
+  if (!adminEmails) return [];
+  return adminEmails.split(',').map(email => email.trim().toLowerCase()).filter(Boolean);
+}
+
+export function isAdmin(email: string | null | undefined): boolean {
+  if (!email) return false;
+  const adminEmails = getAdminEmails();
+  if (adminEmails.length === 0) return false;
+  return adminEmails.includes(email.toLowerCase());
+}
+
+export async function checkAdminAccess(): Promise<{ isAdmin: boolean; email: string | null }> {
+  const session = await getServerSession(authOptions);
+  const email = session?.user?.email || null;
+  return { isAdmin: isAdmin(email), email };
 }

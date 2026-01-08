@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { ActionResult, success, error } from '@/lib/errors';
+import { getDateStatus } from '@/lib/utils';
 
 async function getUser() {
   const session = await getServerSession(authOptions);
@@ -65,35 +66,50 @@ export async function createRule(title: string): Promise<ActionResult> {
   }
 }
 
-export async function toggleRuleCheck(ruleId: string, date: string, isChecked: boolean) {
-  await getUser();
+export async function toggleRuleCheck(ruleId: string, date: string, isChecked: boolean): Promise<ActionResult> {
+  try {
+    await getUser();
 
-  if (isChecked) {
-    // Check (Upsert handled by unique constraint logic usually, but here create if not exists)
-    // We used simple create because unique constraint is [ruleId, date].
-    // But check if exists first to avoid error? or use upsert?
-    // Since id is cuid, upsert needs unique where.
-    await prisma.disciplineCheck.upsert({
-      where: {
-        ruleId_date: { ruleId, date }
-      },
-      update: {}, // Already checked
-      create: {
-        ruleId,
-        date
-      }
-    });
-  } else {
-    // Uncheck (Delete)
-    await prisma.disciplineCheck.deleteMany({
-      where: {
-        ruleId,
-        date
-      }
-    });
+    // Validate date is today
+    const dateStatus = getDateStatus(date);
+    if (dateStatus !== 'today') {
+      return error('DATE_NOT_TODAY');
+    }
+
+    if (isChecked) {
+      // Check (Upsert handled by unique constraint logic usually, but here create if not exists)
+      // We used simple create because unique constraint is [ruleId, date].
+      // But check if exists first to avoid error? or use upsert?
+      // Since id is cuid, upsert needs unique where.
+      await prisma.disciplineCheck.upsert({
+        where: {
+          ruleId_date: { ruleId, date }
+        },
+        update: {}, // Already checked
+        create: {
+          ruleId,
+          date
+        }
+      });
+    } else {
+      // Uncheck (Delete)
+      await prisma.disciplineCheck.deleteMany({
+        where: {
+          ruleId,
+          date
+        }
+      });
+    }
+
+    revalidatePath('/discipline/day/[date]');
+    return success(undefined);
+  } catch (e) {
+    if (e instanceof Error) {
+      if (e.message === 'Unauthorized') return error('UNAUTHORIZED');
+      if (e.message === 'User not found') return error('USER_NOT_FOUND');
+    }
+    return error('UNKNOWN');
   }
-
-  revalidatePath('/discipline/day/[date]');
 }
 
 export async function deleteRule(ruleId: string) {

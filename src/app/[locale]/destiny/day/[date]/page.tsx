@@ -1,5 +1,6 @@
-import { getOrCreateDestinyDay } from '@/app/actions/destiny';
-import TimeblockCard from '@/components/destiny/TimeblockCard';
+import { getOrCreateDestinyDay, getWeeklyPlans } from '@/app/actions/destiny';
+import TimeblockList from '@/components/destiny/TimeblockList';
+import DestinyNavigatorCard from '@/components/destiny/DestinyNavigatorCard';
 import { Link } from '@/navigation';
 import { redirect } from 'next/navigation';
 import { getServerSession } from 'next-auth';
@@ -24,21 +25,31 @@ export default async function DestinyDayPage({ params }: { params: Promise<{ dat
     redirect(`/${locale}/destiny/day/${getTodayStr()}`);
   }
 
-  // Fetch or Create Data
+  // Fetch Data
   const day = await getOrCreateDestinyDay(date);
 
-  // Date Navigation Logic
+  // Calculate week start (Monday of current week)
   const currentDate = new Date(date);
+  const dayOfWeek = currentDate.getDay();
+  const mondayOffset = dayOfWeek === 0 ? -6 : 1 - dayOfWeek; // Sunday = -6, else 1 - dayOfWeek
+  const weekStart = new Date(currentDate);
+  weekStart.setDate(weekStart.getDate() + mondayOffset);
+  const weekStartStr = weekStart.toISOString().split('T')[0];
+
+  // Fetch weekly plans
+  const weeklyPlans = await getWeeklyPlans(weekStartStr);
+
+  // Date Navigation Logic
   const prevDate = new Date(currentDate); prevDate.setDate(prevDate.getDate() - 1);
   const nextDate = new Date(currentDate); nextDate.setDate(nextDate.getDate() + 1);
-  
+
   const prevStr = prevDate.toISOString().split('T')[0];
   const nextStr = nextDate.toISOString().split('T')[0];
 
   return (
     <main className="min-h-screen bg-[url('/bg-grid.svg')] pb-20">
       <div className="max-w-3xl mx-auto p-4 md:p-6">
-        
+
         {/* Header Navigation */}
         <header className="flex items-center justify-between mb-8 sticky top-0 z-10 bg-black/80 backdrop-blur-md p-4 -mx-4 rounded-b-xl border-b border-white/5">
           <Link href={`/destiny/day/${prevStr}`} className="p-2 hover:bg-white/10 rounded-full text-gray-400 hover:text-primary transition-colors">
@@ -55,35 +66,17 @@ export default async function DestinyDayPage({ params }: { params: Promise<{ dat
           </Link>
         </header>
 
-        {/* 5 Goals Section (Placeholder for now, can be componentized) */}
-        <section className="mb-8 space-y-3 bg-white/5 p-6 rounded-2xl border border-white/5">
-          <h2 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-4">{t('coreObjectives')}</h2>
-          {[
-            { label: t('goals.ultimate'), key: 'goalUltimate' },
-            { label: t('goals.longTerm'), key: 'goalLong' },
-            { label: t('goals.month'), key: 'goalMonth' },
-            { label: t('goals.week'), key: 'goalWeek' },
-            { label: t('goals.today'), key: 'goalToday' }
-          ].map((item) => (
-             <div key={item.key} className="flex items-center gap-4">
-               <span className="w-20 text-xs font-bold text-gray-500 uppercase text-right">{item.label}</span>
-               <div className="flex-1 h-8 bg-black/20 rounded border border-white/5 flex items-center px-3 text-sm text-gray-300">
-                  {/* Connect to updateDestinyGoals later */}
-                  {(day as unknown as Record<string, string | null>)[item.key] || '-'}
-               </div>
-             </div>
-          ))}
-        </section>
+        {/* NEW: Simplified Goals Section */}
+        <DestinyNavigatorCard
+          dayId={day.id}
+          goalWeek={day.goalWeek}
+          goalToday={day.goalToday}
+          startDate={weekStartStr}
+          weeklyPlans={weeklyPlans}
+        />
 
-        {/* Timeblocks Grid */}
-        <section className="space-y-4">
-          <h2 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-4 px-2">{t('timeblocks')}</h2>
-          <div className="grid grid-cols-1 gap-4">
-            {day.timeblocks.map((block) => (
-              <TimeblockCard key={block.id} block={block} />
-            ))}
-          </div>
-        </section>
+        {/* Timeblocks Grid - 24-Hour System */}
+        <TimeblockList dayId={day.id} initialBlocks={day.timeblocks} />
 
         {/* M4: Event Timeline */}
         <EventTimeline dayId={day.id} events={day.events} />

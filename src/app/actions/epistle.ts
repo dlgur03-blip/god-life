@@ -62,3 +62,26 @@ export async function getEpistleTimeline() {
     orderBy: { date: 'desc' }
   });
 }
+
+export async function getYesterdayLetter(todayDate: string) {
+  const user = await getUser();
+  const yesterday = new Date(todayDate + 'T00:00:00');
+  yesterday.setDate(yesterday.getDate() - 1);
+  const yesterdayStr = yesterday.toISOString().split('T')[0];
+
+  const epistle = await prisma.epistleDay.findUnique({
+    where: {
+      userId_date: {
+        userId: user.id,
+        date: yesterdayStr
+      }
+    },
+    select: {
+      toTomorrow: true,
+      mood: true,
+      date: true
+    }
+  });
+
+  return epistle;
+}

@@ -1,4 +1,7 @@
 {
+  "Header": {
+    "goToDashboard": "대시보드로 이동"
+  },
   "Home": {
     "title": "GOD LIFE MAKER",
     "subtitle": "운명을 설계하고, 규율을 마스터하며, 바이오 해킹으로 최적화하라.",
@@ -68,18 +71,48 @@
     "verifying": "검증 중...",
     "confirmEntry": "기록 확인",
     "projectNotFound": "프로젝트를 찾을 수 없습니다",
-    "projectNotFoundMessage": "요청하신 프로젝트가 존재하지 않거나 삭제되었습니다."
+    "projectNotFoundMessage": "요청하신 프로젝트가 존재하지 않거나 삭제되었습니다.",
+    "deleteProject": "프로젝트 삭제",
+    "deleteProjectConfirm": "이 프로젝트를 삭제하시겠습니까?",
+    "deleteProjectWarning": "프로젝트와 100일 기록이 모두 영구 삭제됩니다. 이 작업은 취소할 수 없습니다.",
+    "deleting": "삭제 중...",
+    "image": {
+      "notePhoto": "노트 사진",
+      "dropOrClick": "이미지를 드래그하거나 클릭하여 업로드",
+      "maxSize": "최대 {size}MB",
+      "selectFile": "파일 선택",
+      "takePhoto": "사진 찍기",
+      "uploading": "업로드 중...",
+      "dayPhoto": "Day {day} 사진",
+      "notePhotoAlt": "Day {day} 손글씨 노트",
+      "close": "닫기",
+      "zoomIn": "확대",
+      "zoomOut": "축소",
+      "resetZoom": "초기화",
+      "pinchToZoom": "핀치 또는 버튼으로 확대/축소",
+      "errors": {
+        "invalidFileType": "JPG, PNG, WebP 이미지만 업로드 가능합니다.",
+        "fileTooLarge": "이미지는 10MB 이하여야 합니다.",
+        "uploadFailed": "이미지 업로드에 실패했습니다. 다시 시도해주세요."
+      }
+    }
   },
   "Destiny": {
     "title": "DESTINY NAVIGATOR",
     "coreObjectives": "핵심 목표",
-    "timeblocks": "타임블록 (06:00 - 16:00)",
+    "timeblocks": "24시간 타임블록",
     "goals": {
       "ultimate": "궁극적",
       "longTerm": "장기",
       "month": "이번 달",
       "week": "이번 주",
-      "today": "오늘"
+      "today": "오늘",
+      "weekPlaceholder": "이번 주 목표를 입력하세요...",
+      "todayPlaceholder": "오늘의 목표를 입력하세요..."
+    },
+    "weeklyPlan": {
+      "title": "주간 계획",
+      "placeholder": "계획 입력..."
     },
     "flowOfEvents": "이벤트 흐름",
     "noEventsRecorded": "아직 기록된 중요한 이벤트가 없습니다.",
@@ -88,11 +121,11 @@
     "recording": "기록 중...",
     "recordToTimeline": "타임라인에 기록",
     "timeblock": {
-      "timeTo": "{time}까지",
+      "timeTo": "~ {time}",
       "planMode": "계획",
-      "actualMode": "실제",
+      "actualMode": "실행",
       "whereLabel": "장소",
-      "whatLabel": "할일",
+      "whatLabel": "할 일",
       "locationPlaceholder": "장소...",
       "planPlaceholder": "계획 내용...",
       "actualPlaceholder": "실제로 한 일...",
@@ -100,7 +133,34 @@
       "scoreLabel": "점수",
       "scoreSuffix": "/ 10",
       "feedLabel": "피드백",
-      "feedbackPlaceholder": "피드백..."
+      "feedbackPlaceholder": "피드백...",
+      "addBlock": "타임블록 추가",
+      "adding": "추가 중...",
+      "deleteBlock": "블록 삭제",
+      "deleteBlockTitle": "타임블록 삭제",
+      "deleteBlockConfirm": "이 타임블록을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.",
+      "editTime": "시간 수정",
+      "endMustBeAfterStart": "종료 시간은 시작 시간 이후여야 합니다.",
+      "timeOverlap": "다른 블록과 시간이 겹칩니다.",
+      "invalidTimeFormat": "잘못된 시간 형식입니다. HH:MM 형식을 사용하세요.",
+      "fiveMinuteIncrement": "시간은 5분 단위로 설정해야 합니다."
+    },
+    "template": {
+      "save": "템플릿 저장",
+      "load": "템플릿 불러오기",
+      "saveTitle": "템플릿으로 저장",
+      "saveDescription": "현재 타임블록 구조를 재사용 가능한 템플릿으로 저장합니다.",
+      "namePlaceholder": "템플릿 이름 (예: 평일 루틴)",
+      "nameRequired": "템플릿 이름을 입력해주세요",
+      "loadTitle": "템플릿 불러오기",
+      "loadDescription": "오늘 일정에 적용할 템플릿을 선택하세요.",
+      "loadWarningTitle": "현재 타임블록을 교체하시겠습니까?",
+      "loadWarningMessage": "기존 타임블록이 모두 삭제되고 템플릿으로 대체됩니다. 이 작업은 되돌릴 수 없습니다.",
+      "confirmLoad": "템플릿 적용",
+      "noTemplates": "저장된 템플릿이 없습니다.",
+      "blockCount": "{count}개 블록",
+      "savedSuccess": "템플릿이 저장되었습니다",
+      "loadedSuccess": "템플릿이 적용되었습니다"
     }
   },
   "Discipline": {
@@ -114,7 +174,12 @@
     "noRulesInsight": "성과 추이를 보려면 규칙을 추가하세요.",
     "deleteRuleConfirm": "이 규칙을 삭제하시겠습니까?",
     "noRulesDefined": "정의된 규칙이 없습니다. 마스터리를 시작하려면 규율을 추가하세요.",
-    "addNewDiscipline": "새 규율 추가..."
+    "addNewDiscipline": "새 규율 추가...",
+    "dateRestriction": {
+      "pastDateReadOnly": "과거 날짜는 읽기 전용입니다",
+      "futureDateLocked": "미래 날짜는 잠겨 있습니다",
+      "todayOnly": "오늘의 규칙만 체크할 수 있습니다"
+    }
   },
   "Epistle": {
     "title": "SELF EPISTLE",
@@ -127,7 +192,14 @@
     "reflectOnPassed": "지나간 것을 되돌아보세요...",
     "manifestIntent": "당신의 의지를 담으세요...",
     "sealing": "봉인 중...",
-    "sealEpistle": "편지 봉인"
+    "sealEpistle": "편지 봉인",
+    "receivedLetter": "받은 서신",
+    "noLetterFromYesterday": "어제의 나로부터 온 서신이 없습니다.",
+    "receivedLetterFrom": "{date}로부터 받은 서신",
+    "dateBlocked": "잠긴 날짜",
+    "dateBlockedHint": "내일 이후의 날짜에는 접근할 수 없습니다.",
+    "readOnly": "읽기 전용",
+    "composeLetter": "서신 작성"
   },
   "Bio": {
     "title": "BIO HACKING",
@@ -137,7 +209,9 @@
     "readProtocol": "프로토콜 읽기",
     "protocolNotFound": "프로토콜을 찾을 수 없습니다.",
     "protocolNotFoundMessage": "요청하신 프로토콜이 데이터베이스에 존재하지 않습니다.",
-    "updated": "업데이트"
+    "updated": "업데이트",
+    "viewingIn": "{locale}로 보기",
+    "translationUnavailable": "이 언어의 번역이 없습니다."
   },
   "Common": {
     "loading": "로딩 중...",
@@ -147,6 +221,7 @@
     "save": "저장",
     "delete": "삭제",
     "back": "뒤로",
+    "retry": "다시 시도",
     "notFound": {
       "title": "페이지를 찾을 수 없습니다",
       "message": "요청하신 페이지가 존재하지 않거나 이동되었습니다.",
@@ -159,7 +234,17 @@
       "maxRulesReached": "최대 규칙 수에 도달했습니다 (13개).",
       "networkError": "네트워크 오류입니다. 연결을 확인해 주세요.",
       "serverError": "서버 오류입니다. 나중에 다시 시도해 주세요.",
-      "unknown": "예기치 않은 오류가 발생했습니다."
+      "unknown": "예기치 않은 오류가 발생했습니다.",
+      "dateNotToday": "오늘 날짜의 규칙만 체크할 수 있습니다.",
+      "forbidden": "이 작업을 수행할 권한이 없습니다.",
+      "adminOnly": "이 기능은 관리자만 사용할 수 있습니다.",
+      "slugTaken": "이 슬러그는 이미 사용 중입니다.",
+      "invalidSlugFormat": "슬러그는 영문 소문자, 숫자, 하이픈만 사용할 수 있습니다.",
+      "postNotFound": "게시물을 찾을 수 없습니다.",
+      "selfDeleteNotAllowed": "자기 자신은 삭제할 수 없습니다.",
+      "userNotFoundForDelete": "삭제할 사용자를 찾을 수 없습니다.",
+      "errorLogNotFound": "에러 로그를 찾을 수 없습니다.",
+      "invalidDateRange": "유효하지 않은 날짜 범위입니다."
     },
     "validation": {
       "required": "필수 항목입니다.",
@@ -190,6 +275,257 @@
       "en": "영어",
       "ko": "한국어",
       "ja": "일본어"
+    }
+  },
+  "Admin": {
+    "title": "관리자 패널",
+    "accessDenied": {
+      "title": "접근 거부",
+      "message": "관리자 영역에 접근할 권한이 없습니다. 오류라고 생각되시면 관리자에게 문의하세요.",
+      "backHome": "홈으로 돌아가기"
+    },
+    "nav": {
+      "dashboard": "대시보드",
+      "stats": "통계",
+      "users": "사용자",
+      "bio": "바이오 게시물",
+      "system": "시스템"
+    },
+    "dashboard": {
+      "title": "대시보드"
+    },
+    "stats": {
+      "title": "상세 통계",
+      "totalUsers": "전체 사용자",
+      "newUsersThisWeek": "이번 주 신규",
+      "activeDaily": "일일 활성",
+      "activeWeekly": "주간 활성",
+      "activeMonthly": "월간 활성",
+      "noData": "데이터가 없습니다.",
+      "period": {
+        "week": "7일",
+        "month": "30일",
+        "quarter": "90일"
+      },
+      "charts": {
+        "userTrend": "활성 사용자 추이",
+        "moduleActivity": "모듈별 활동",
+        "disciplineTrend": "규율 달성률 추이",
+        "moduleSummary": "모듈 요약",
+        "activeUsers": "활성 사용자",
+        "achievementRate": "달성률",
+        "average": "평균",
+        "totalDays": "총 기록 일수",
+        "avgRate": "평균 달성률",
+        "activeProjects": "활성 프로젝트",
+        "totalLetters": "총 서신 수"
+      },
+      "modules": {
+        "destiny": "운명",
+        "discipline": "규율",
+        "success": "성공",
+        "epistle": "서신"
+      },
+      "errors": {
+        "loadFailed": "통계 데이터를 불러오지 못했습니다."
+      }
+    },
+    "moduleUsage": "모듈 사용 현황",
+    "modules": {
+      "destiny": { "name": "운명 네비게이터", "desc": "추적된 일수" },
+      "success": { "name": "성공 코드", "desc": "활성 프로젝트" },
+      "discipline": { "name": "규율 마스터리", "desc": "생성된 규칙" },
+      "epistle": { "name": "셀프 서신", "desc": "작성된 편지" },
+      "bio": { "name": "바이오 해킹", "desc": "게시된 글" }
+    },
+    "users": {
+      "title": "사용자 관리",
+      "email": "이메일",
+      "name": "이름",
+      "joined": "가입일",
+      "activity": "활동",
+      "items": "개",
+      "searchPlaceholder": "이메일 또는 이름으로 검색...",
+      "noUsers": "등록된 사용자가 없습니다.",
+      "noSearchResults": "검색 결과가 없습니다.",
+      "viewDetail": "상세 보기",
+      "userDetail": "사용자 상세 정보",
+      "memberSince": "가입일",
+      "lastUpdated": "마지막 업데이트",
+      "moduleActivity": "모듈별 활동",
+      "deleteUser": "사용자 삭제",
+      "deleteConfirm": "이 사용자를 삭제하시겠습니까?",
+      "deleteWarning": "사용자의 모든 데이터가 영구적으로 삭제됩니다. 이 작업은 취소할 수 없습니다.",
+      "deleteWarningItems": "삭제될 데이터:",
+      "deleting": "삭제 중...",
+      "stats": {
+        "destinyDays": "운명 네비게이터",
+        "destinyEvents": "이벤트",
+        "destinyTemplates": "템플릿",
+        "successProjects": "성공 코드 프로젝트",
+        "successEntries": "성공 기록",
+        "disciplineRules": "규율 규칙",
+        "disciplineChecks": "규율 체크",
+        "epistleDays": "셀프 서신",
+        "weeklyPlans": "주간 계획"
+      }
+    },
+    "bio": {
+      "title": "바이오 게시물 관리",
+      "newPost": "새 게시물",
+      "editPost": "게시물 수정",
+      "slug": "슬러그",
+      "category": "카테고리",
+      "translations": "번역",
+      "created": "생성일",
+      "updated": "수정일",
+      "noPosts": "아직 바이오 게시물이 없습니다.",
+      "createFirst": "첫 번째 게시물을 작성하세요.",
+      "form": {
+        "slugPlaceholder": "url-friendly-slug",
+        "slugHint": "URL에 사용될 고유 식별자입니다. 영문 소문자, 숫자, 하이픈만 사용하세요.",
+        "titlePlaceholder": "게시물 제목",
+        "contentPlaceholder": "마크다운으로 내용을 작성하세요...",
+        "selectCategory": "카테고리 선택",
+        "atLeastOneTranslation": "최소 하나의 언어로 제목과 내용을 입력해야 합니다."
+      },
+      "preview": "미리보기",
+      "editor": "에디터",
+      "actions": {
+        "create": "게시물 생성",
+        "update": "변경사항 저장",
+        "delete": "게시물 삭제",
+        "cancel": "취소",
+        "creating": "생성 중...",
+        "updating": "저장 중...",
+        "deleting": "삭제 중..."
+      },
+      "deleteConfirm": {
+        "title": "게시물 삭제",
+        "message": "이 게시물과 모든 번역을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다."
+      },
+      "validation": {
+        "slugRequired": "슬러그는 필수입니다.",
+        "slugFormat": "슬러그는 영문 소문자, 숫자, 하이픈만 사용할 수 있습니다.",
+        "slugTaken": "이 슬러그는 이미 사용 중입니다.",
+        "categoryRequired": "카테고리를 선택해주세요.",
+        "translationRequired": "최소 하나의 언어로 제목과 내용을 입력해주세요."
+      },
+      "translationStatus": {
+        "complete": "완료",
+        "incomplete": "미완료",
+        "empty": "없음"
+      },
+      "markdown": {
+        "bold": "굵게",
+        "italic": "기울임",
+        "heading": "제목",
+        "link": "링크",
+        "list": "목록",
+        "code": "코드"
+      },
+      "categories": {
+        "Nutrition": "영양",
+        "Supplements": "보충제",
+        "Recovery": "회복",
+        "Exercise": "운동",
+        "Mindset": "마인드셋"
+      }
+    },
+    "errors": {
+      "loadFailed": "데이터를 불러오지 못했습니다. 다시 시도해주세요."
+    },
+    "system": {
+      "title": "시스템 관리",
+      "overview": "시스템 개요",
+      "environment": {
+        "title": "환경 변수",
+        "description": "현재 설정된 환경 변수 목록",
+        "name": "변수명",
+        "value": "값",
+        "masked": "[보안]",
+        "notSet": "[미설정]",
+        "requiredMissing": "필수 환경 변수가 누락되었습니다"
+      },
+      "database": {
+        "title": "데이터베이스",
+        "description": "데이터베이스 연결 상태",
+        "status": "연결 상태",
+        "connected": "연결됨",
+        "disconnected": "연결 안됨",
+        "responseTime": "응답 시간",
+        "provider": "프로바이더",
+        "checkingConnection": "연결 확인 중...",
+        "refresh": "새로고침",
+        "refreshing": "확인 중..."
+      },
+      "info": {
+        "title": "시스템 정보",
+        "description": "런타임 및 프레임워크 정보",
+        "nodeVersion": "Node.js 버전",
+        "nextVersion": "Next.js 버전",
+        "reactVersion": "React 버전",
+        "prismaVersion": "Prisma 버전",
+        "platform": "플랫폼",
+        "timezone": "타임존",
+        "locale": "로케일",
+        "environment": "환경"
+      },
+      "status": {
+        "healthy": "정상",
+        "warning": "경고",
+        "error": "오류"
+      },
+      "errorLog": {
+        "title": "에러 로그",
+        "description": "애플리케이션 에러 및 경고 로그",
+        "noLogs": "에러 로그가 없습니다.",
+        "systemHealthy": "시스템이 정상 작동 중입니다.",
+        "levels": {
+          "all": "전체",
+          "error": "에러",
+          "warning": "경고",
+          "info": "정보"
+        },
+        "summary": {
+          "totalErrors": "전체 에러",
+          "totalWarnings": "전체 경고",
+          "totalInfo": "전체 정보",
+          "recent24h": "24시간 내 발생"
+        },
+        "table": {
+          "level": "레벨",
+          "message": "메시지",
+          "requestUrl": "요청 URL",
+          "createdAt": "발생 시간",
+          "user": "사용자",
+          "requestMethod": "요청 방식"
+        },
+        "detail": {
+          "title": "에러 상세",
+          "stackTrace": "스택 트레이스",
+          "noStack": "스택 트레이스 없음",
+          "deleteLog": "로그 삭제"
+        },
+        "bulkDelete": {
+          "button": "일괄 삭제",
+          "title": "에러 로그 일괄 삭제",
+          "description": "선택한 날짜 이전의 모든 에러 로그를 삭제합니다.",
+          "options": {
+            "7days": "7일 이전",
+            "30days": "30일 이전",
+            "90days": "90일 이전"
+          },
+          "confirmMessage": "{count}개의 로그가 삭제됩니다. 이 작업은 되돌릴 수 없습니다.",
+          "success": "{count}개의 로그가 삭제되었습니다.",
+          "deleting": "삭제 중..."
+        },
+        "pagination": {
+          "prev": "이전",
+          "next": "다음",
+          "page": "페이지 {current} / {total}"
+        }
+      }
     }
   }
 }

@@ -50,14 +50,12 @@ export async function getOrCreateDestinyDay(date: string) {
         },
       });
 
-      // Create 11 blocks (Sequence 1 to 11)
-      // Standard Destiny blocks often start from 5:00 or 6:00, but we'll just use seq 1-11 as generic slots for now
-      // or map them to specific times if defined. Using 06:00 as start based on typical "Miracle Morning" context.
-      const blocksData = Array.from({ length: 11 }, (_, i) => ({
+      // Create 24 blocks (00:00 to 23:00-24:00)
+      const blocksData = Array.from({ length: 24 }, (_, i) => ({
         dayId: newDay.id,
         seq: i + 1,
-        startTime: `${String(6 + i).padStart(2, '0')}:00`, // 06:00, 07:00 ...
-        endTime: `${String(7 + i).padStart(2, '0')}:00`,
+        startTime: `${String(i).padStart(2, '0')}:00`,
+        endTime: i === 23 ? '24:00' : `${String(i + 1).padStart(2, '0')}:00`,
         status: 'planned',
       }));
 
@@ -80,26 +78,72 @@ export async function getOrCreateDestinyDay(date: string) {
 }
 
 export async function updateDestinyGoals(dayId: string, goals: {
-  ultimate?: string;
-  long?: string;
-  month?: string;
   week?: string;
   today?: string;
 }) {
   await getUser(); // Auth check
-  
+
   await prisma.destinyDay.update({
     where: { id: dayId },
     data: {
-      goalUltimate: goals.ultimate,
-      goalLong: goals.long,
-      goalMonth: goals.month,
       goalWeek: goals.week,
       goalToday: goals.today,
     },
   });
-  
+
   revalidatePath('/destiny/day/[date]');
+}
+
+// Upsert Weekly Plan for a specific day
+export async function updateWeeklyPlan(date: string, mainGoal: string) {
+  const user = await getUser();
+
+  await prisma.weeklyPlan.upsert({
+    where: {
+      userId_date: {
+        userId: user.id,
+        date: date,
+      },
+    },
+    update: { mainGoal },
+    create: {
+      userId: user.id,
+      date: date,
+      mainGoal,
+    },
+  });
+
+  revalidatePath('/destiny/day/[date]');
+}
+
+// Get Weekly Plans for 7 days starting from a date
+export async function getWeeklyPlans(startDate: string): Promise<Record<string, string | null>> {
+  const user = await getUser();
+
+  // Generate 7 dates starting from startDate
+  const dates: string[] = [];
+  const start = new Date(startDate);
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(start);
+    d.setDate(d.getDate() + i);
+    dates.push(d.toISOString().split('T')[0]);
+  }
+
+  const plans = await prisma.weeklyPlan.findMany({
+    where: {
+      userId: user.id,
+      date: { in: dates },
+    },
+  });
+
+  // Return as a map of date -> mainGoal
+  const result: Record<string, string | null> = {};
+  dates.forEach(date => {
+    const plan = plans.find(p => p.date === date);
+    result[date] = plan?.mainGoal || null;
+  });
+
+  return result;
 }
 
 export async function updateTimeblock(blockId: string, data: {
@@ -136,4 +180,325 @@ export async function createDestinyEvent(dayId: string, title: string) {
   });
 
   revalidatePath('/destiny/day/[date]');
+}
+
+// === TIME VALIDATION HELPERS ===
+
+function validateTimeRange(startTime: string, endTime: string): { valid: boolean; error?: string } {
+  // Allow 24:00 as valid end time
+  const timeRegex = /^([01]\d|2[0-4]):([0-5]\d)$/;
+  if (!timeRegex.test(startTime)) {
+    return { valid: false, error: 'Invalid start time format. Use HH:MM.' };
+  }
+  if (!timeRegex.test(endTime)) {
+    return { valid: false, error: 'Invalid end time format. Use HH:MM.' };
+  }
+
+  // Check 5-minute increments
+  const startMin = parseInt(startTime.split(':')[1], 10);
+  const endMin = parseInt(endTime.split(':')[1], 10);
+  if (startMin % 5 !== 0 || endMin % 5 !== 0) {
+    return { valid: false, error: 'Time must be in 5-minute increments.' };
+  }
+
+  // Check endTime > startTime (24:00 is greater than any other time)
+  if (endTime !== '24:00' && startTime >= endTime) {
+    return { valid: false, error: 'End time must be after start time.' };
+  }
+
+  return { valid: true };
+}
+
+async function checkTimeOverlap(
+  dayId: string,
+  startTime: string,
+  endTime: string,
+  excludeBlockId?: string
+): Promise<boolean> {
+  const blocks = await prisma.destinyTimeBlock.findMany({
+    where: { dayId, id: excludeBlockId ? { not: excludeBlockId } : undefined },
+    select: { startTime: true, endTime: true },
+  });
+
+  return blocks.some(block => {
+    // Overlap: new.start < existing.end AND new.end > existing.start
+    return startTime < block.endTime && endTime > block.startTime;
+  });
+}
+
+function addHour(time: string): string {
+  const [h, m] = time.split(':').map(Number);
+  const newH = Math.min(h + 1, 24);
+  return `${String(newH).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+}
+
+// === NEW SERVER ACTIONS ===
+
+export async function createTimeblock(dayId: string, afterSeq?: number) {
+  await getUser();
+
+  const existingBlocks = await prisma.destinyTimeBlock.findMany({
+    where: { dayId },
+    orderBy: { seq: 'asc' },
+  });
+
+  let newSeq: number;
+  let startTime: string;
+  let endTime: string;
+
+  if (afterSeq !== undefined) {
+    const afterBlock = existingBlocks.find(b => b.seq === afterSeq);
+    if (afterBlock) {
+      startTime = afterBlock.endTime;
+      const nextBlock = existingBlocks.find(b => b.seq > afterSeq);
+      endTime = nextBlock?.startTime || addHour(startTime);
+    } else {
+      const lastBlock = existingBlocks[existingBlocks.length - 1];
+      startTime = lastBlock?.endTime || '09:00';
+      endTime = addHour(startTime);
+    }
+
+    // Shift seq values of blocks after insertion point
+    await prisma.destinyTimeBlock.updateMany({
+      where: { dayId, seq: { gt: afterSeq } },
+      data: { seq: { increment: 1 } },
+    });
+    newSeq = afterSeq + 1;
+  } else {
+    const maxSeq = existingBlocks.length > 0
+      ? Math.max(...existingBlocks.map(b => b.seq))
+      : 0;
+    newSeq = maxSeq + 1;
+
+    const lastBlock = existingBlocks[existingBlocks.length - 1];
+    startTime = lastBlock?.endTime || '09:00';
+    endTime = addHour(startTime);
+  }
+
+  // Clamp to valid times
+  if (endTime > '24:00') endTime = '24:00';
+  if (startTime >= '24:00') {
+    throw new Error('Cannot add more blocks. Day is full.');
+  }
+
+  const newBlock = await prisma.destinyTimeBlock.create({
+    data: {
+      dayId,
+      seq: newSeq,
+      startTime,
+      endTime,
+      status: 'planned',
+    },
+  });
+
+  revalidatePath('/destiny/day/[date]');
+  return newBlock;
+}
+
+export async function deleteTimeblock(blockId: string) {
+  await getUser();
+
+  const block = await prisma.destinyTimeBlock.findUnique({
+    where: { id: blockId },
+    select: { dayId: true, seq: true },
+  });
+
+  if (!block) throw new Error('Block not found');
+
+  await prisma.destinyTimeBlock.delete({ where: { id: blockId } });
+
+  // Resequence remaining blocks
+  await prisma.destinyTimeBlock.updateMany({
+    where: { dayId: block.dayId, seq: { gt: block.seq } },
+    data: { seq: { decrement: 1 } },
+  });
+
+  revalidatePath('/destiny/day/[date]');
+}
+
+export async function reorderTimeblocks(dayId: string, orderedBlockIds: string[]) {
+  await getUser();
+
+  await prisma.$transaction(
+    orderedBlockIds.map((id, index) =>
+      prisma.destinyTimeBlock.update({
+        where: { id },
+        data: { seq: index + 1 },
+      })
+    )
+  );
+
+  revalidatePath('/destiny/day/[date]');
+}
+
+export async function updateTimeblockTime(
+  blockId: string,
+  startTime: string,
+  endTime: string
+) {
+  await getUser();
+
+  const validation = validateTimeRange(startTime, endTime);
+  if (!validation.valid) {
+    throw new Error(validation.error);
+  }
+
+  const block = await prisma.destinyTimeBlock.findUnique({
+    where: { id: blockId },
+    select: { dayId: true },
+  });
+
+  if (!block) throw new Error('Block not found');
+
+  const hasOverlap = await checkTimeOverlap(block.dayId, startTime, endTime, blockId);
+  if (hasOverlap) {
+    throw new Error('Time range overlaps with another block.');
+  }
+
+  await prisma.destinyTimeBlock.update({
+    where: { id: blockId },
+    data: { startTime, endTime },
+  });
+
+  revalidatePath('/destiny/day/[date]');
+}
+
+// ============ TEMPLATE ACTIONS ============
+
+export async function saveTemplate(dayId: string, name: string) {
+  const user = await getUser();
+
+  if (!name || name.trim().length === 0) {
+    throw new Error('Template name is required');
+  }
+
+  if (name.length > 50) {
+    throw new Error('Template name must be 50 characters or less');
+  }
+
+  // Get current day's timeblocks
+  const day = await prisma.destinyDay.findUnique({
+    where: { id: dayId },
+    include: { timeblocks: { orderBy: { seq: 'asc' } } },
+  });
+
+  if (!day || day.userId !== user.id) {
+    throw new Error('Day not found or unauthorized');
+  }
+
+  if (day.timeblocks.length === 0) {
+    throw new Error('No timeblocks to save');
+  }
+
+  // Extract only the plan-related fields for template
+  const templateBlocks = day.timeblocks.map((block, index) => ({
+    seq: index + 1,
+    startTime: block.startTime,
+    endTime: block.endTime,
+    planText: block.planText,
+    planLocation: block.planLocation,
+  }));
+
+  // Upsert template (update if name exists, create if not)
+  const template = await prisma.destinyTemplate.upsert({
+    where: {
+      userId_name: { userId: user.id, name: name.trim() },
+    },
+    update: {
+      blocks: templateBlocks,
+      updatedAt: new Date(),
+    },
+    create: {
+      userId: user.id,
+      name: name.trim(),
+      blocks: templateBlocks,
+    },
+  });
+
+  revalidatePath('/destiny');
+  return template;
+}
+
+export async function getTemplates() {
+  const user = await getUser();
+
+  const templates = await prisma.destinyTemplate.findMany({
+    where: { userId: user.id },
+    orderBy: { updatedAt: 'desc' },
+  });
+
+  return templates;
+}
+
+export async function loadTemplate(dayId: string, templateId: string) {
+  const user = await getUser();
+
+  // Verify day ownership
+  const day = await prisma.destinyDay.findUnique({
+    where: { id: dayId },
+  });
+
+  if (!day || day.userId !== user.id) {
+    throw new Error('Day not found or unauthorized');
+  }
+
+  // Fetch template
+  const template = await prisma.destinyTemplate.findUnique({
+    where: { id: templateId },
+  });
+
+  if (!template || template.userId !== user.id) {
+    throw new Error('Template not found or unauthorized');
+  }
+
+  const templateBlocks = template.blocks as Array<{
+    seq: number;
+    startTime: string;
+    endTime: string;
+    planText: string | null;
+    planLocation: string | null;
+  }>;
+
+  // Use transaction: delete existing blocks, create new ones from template
+  await prisma.$transaction(async (tx) => {
+    // Delete all existing timeblocks for this day
+    await tx.destinyTimeBlock.deleteMany({
+      where: { dayId },
+    });
+
+    // Create new timeblocks from template
+    await tx.destinyTimeBlock.createMany({
+      data: templateBlocks.map((block) => ({
+        dayId,
+        seq: block.seq,
+        startTime: block.startTime,
+        endTime: block.endTime,
+        planText: block.planText,
+        planLocation: block.planLocation,
+        status: 'planned',
+      })),
+    });
+  });
+
+  revalidatePath(`/destiny/day/${day.date}`);
+  return { success: true };
+}
+
+export async function deleteTemplate(templateId: string) {
+  const user = await getUser();
+
+  const template = await prisma.destinyTemplate.findUnique({
+    where: { id: templateId },
+  });
+
+  if (!template || template.userId !== user.id) {
+    throw new Error('Template not found or unauthorized');
+  }
+
+  await prisma.destinyTemplate.delete({
+    where: { id: templateId },
+  });
+
+  revalidatePath('/destiny');
+  return { success: true };
 }

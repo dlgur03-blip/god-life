@@ -1,5 +1,6 @@
 import { getSuccessProject } from '@/app/actions/success';
 import SuccessGrid from '@/components/success/SuccessGrid';
+import DeleteProjectButton from '@/components/success/DeleteProjectButton';
 import { Link } from '@/navigation';
 import { ArrowLeft, Calendar, Clock } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
@@ -66,9 +67,12 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
               </div>
             </div>
             
-            <div className="text-right">
-              <div className="text-3xl font-bold text-primary">{Math.min(Math.max(currentDayIndex, 1), 100)} <span className="text-lg text-gray-500">/ 100</span></div>
-              <div className="text-xs text-gray-500 uppercase tracking-widest">{t('currentDay')}</div>
+            <div className="flex flex-col items-end gap-3">
+              <div className="text-right">
+                <div className="text-3xl font-bold text-primary">{Math.min(Math.max(currentDayIndex, 1), 100)} <span className="text-lg text-gray-500">/ 100</span></div>
+                <div className="text-xs text-gray-500 uppercase tracking-widest">{t('currentDay')}</div>
+              </div>
+              <DeleteProjectButton projectId={project.id} />
             </div>
           </div>
         </header>

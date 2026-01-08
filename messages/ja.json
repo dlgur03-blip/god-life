@@ -1,4 +1,7 @@
 {
+  "Header": {
+    "goToDashboard": "ダッシュボードへ移動"
+  },
   "Home": {
     "title": "GOD LIFE MAKER",
     "subtitle": "運命を設計し、規律を極め、バイオハッキングで最適化せよ。",
@@ -68,18 +71,48 @@
     "verifying": "検証中...",
     "confirmEntry": "記録を確認",
     "projectNotFound": "プロジェクトが見つかりません",
-    "projectNotFoundMessage": "リクエストされたプロジェクトは存在しないか、削除されました。"
+    "projectNotFoundMessage": "リクエストされたプロジェクトは存在しないか、削除されました。",
+    "deleteProject": "プロジェクトを削除",
+    "deleteProjectConfirm": "このプロジェクトを削除しますか？",
+    "deleteProjectWarning": "プロジェクトと100日分の記録がすべて完全に削除されます。この操作は取り消せません。",
+    "deleting": "削除中...",
+    "image": {
+      "notePhoto": "ノート写真",
+      "dropOrClick": "画像をドロップまたはクリックしてアップロード",
+      "maxSize": "最大 {size}MB",
+      "selectFile": "ファイル選択",
+      "takePhoto": "写真を撮る",
+      "uploading": "アップロード中...",
+      "dayPhoto": "Day {day} の写真",
+      "notePhotoAlt": "Day {day} の手書きノート",
+      "close": "閉じる",
+      "zoomIn": "拡大",
+      "zoomOut": "縮小",
+      "resetZoom": "リセット",
+      "pinchToZoom": "ピンチまたはボタンでズーム",
+      "errors": {
+        "invalidFileType": "JPG、PNG、WebP画像のみアップロード可能です。",
+        "fileTooLarge": "画像は10MB以下にしてください。",
+        "uploadFailed": "画像のアップロードに失敗しました。もう一度お試しください。"
+      }
+    }
   },
   "Destiny": {
     "title": "DESTINY NAVIGATOR",
-    "coreObjectives": "コア目標",
-    "timeblocks": "タイムブロック (06:00 - 16:00)",
+    "coreObjectives": "核心目標",
+    "timeblocks": "24時間タイムブロック",
     "goals": {
       "ultimate": "究極",
       "longTerm": "長期",
       "month": "今月",
       "week": "今週",
-      "today": "今日"
+      "today": "今日",
+      "weekPlaceholder": "今週の目標を入力...",
+      "todayPlaceholder": "今日の目標を入力..."
+    },
+    "weeklyPlan": {
+      "title": "週間計画",
+      "placeholder": "計画を入力..."
     },
     "flowOfEvents": "イベントの流れ",
     "noEventsRecorded": "まだ重要なイベントが記録されていません。",
@@ -88,19 +121,46 @@
     "recording": "記録中...",
     "recordToTimeline": "タイムラインに記録",
     "timeblock": {
-      "timeTo": "{time}まで",
+      "timeTo": "〜 {time}",
       "planMode": "計画",
       "actualMode": "実績",
       "whereLabel": "場所",
       "whatLabel": "内容",
       "locationPlaceholder": "場所...",
-      "planPlaceholder": "計画の詳細...",
+      "planPlaceholder": "計画内容...",
       "actualPlaceholder": "実際に行ったこと...",
       "doneLabel": "完了",
       "scoreLabel": "スコア",
       "scoreSuffix": "/ 10",
-      "feedLabel": "フィード",
-      "feedbackPlaceholder": "フィードバック..."
+      "feedLabel": "FB",
+      "feedbackPlaceholder": "フィードバック...",
+      "addBlock": "タイムブロック追加",
+      "adding": "追加中...",
+      "deleteBlock": "ブロック削除",
+      "deleteBlockTitle": "タイムブロック削除",
+      "deleteBlockConfirm": "このタイムブロックを削除しますか？この操作は取り消せません。",
+      "editTime": "時間編集",
+      "endMustBeAfterStart": "終了時間は開始時間より後にしてください。",
+      "timeOverlap": "他のブロックと時間が重複しています。",
+      "invalidTimeFormat": "無効な時間形式です。HH:MM形式を使用してください。",
+      "fiveMinuteIncrement": "時間は5分単位で設定してください。"
+    },
+    "template": {
+      "save": "テンプレート保存",
+      "load": "テンプレート読込",
+      "saveTitle": "テンプレートとして保存",
+      "saveDescription": "現在のタイムブロック構造を再利用可能なテンプレートとして保存します。",
+      "namePlaceholder": "テンプレート名（例：平日ルーティン）",
+      "nameRequired": "テンプレート名を入力してください",
+      "loadTitle": "テンプレート読み込み",
+      "loadDescription": "今日のスケジュールに適用するテンプレートを選択してください。",
+      "loadWarningTitle": "現在のタイムブロックを置き換えますか？",
+      "loadWarningMessage": "既存のタイムブロックがすべて削除され、テンプレートに置き換えられます。この操作は元に戻せません。",
+      "confirmLoad": "テンプレート適用",
+      "noTemplates": "保存されたテンプレートがありません。",
+      "blockCount": "{count}ブロック",
+      "savedSuccess": "テンプレートを保存しました",
+      "loadedSuccess": "テンプレートを適用しました"
     }
   },
   "Discipline": {
@@ -114,7 +174,12 @@
     "noRulesInsight": "パフォーマンスの傾向を見るにはルールを追加してください。",
     "deleteRuleConfirm": "このルールを削除しますか？",
     "noRulesDefined": "ルールが定義されていません。マスタリーを始めるには規律を追加してください。",
-    "addNewDiscipline": "新しい規律を追加..."
+    "addNewDiscipline": "新しい規律を追加...",
+    "dateRestriction": {
+      "pastDateReadOnly": "過去の日付は読み取り専用です",
+      "futureDateLocked": "未来の日付はロックされています",
+      "todayOnly": "今日のルールのみチェックできます"
+    }
   },
   "Epistle": {
     "title": "SELF EPISTLE",
@@ -127,7 +192,14 @@
     "reflectOnPassed": "過ぎ去ったことを振り返って...",
     "manifestIntent": "あなたの意志を込めて...",
     "sealing": "封印中...",
-    "sealEpistle": "手紙を封印"
+    "sealEpistle": "手紙を封印",
+    "receivedLetter": "受け取った手紙",
+    "noLetterFromYesterday": "昨日の自分からの手紙はありません。",
+    "receivedLetterFrom": "{date}からの手紙",
+    "dateBlocked": "ロックされた日付",
+    "dateBlockedHint": "明日以降の日付にはアクセスできません。",
+    "readOnly": "読み取り専用",
+    "composeLetter": "手紙を書く"
   },
   "Bio": {
     "title": "BIO HACKING",
@@ -137,7 +209,9 @@
     "readProtocol": "プロトコルを読む",
     "protocolNotFound": "プロトコルが見つかりません。",
     "protocolNotFoundMessage": "リクエストされたプロトコルはデータベースに存在しません。",
-    "updated": "更新"
+    "updated": "更新日",
+    "viewingIn": "{locale}で表示中",
+    "translationUnavailable": "この言語の翻訳はありません。"
   },
   "Common": {
     "loading": "読み込み中...",
@@ -147,6 +221,7 @@
     "save": "保存",
     "delete": "削除",
     "back": "戻る",
+    "retry": "再試行",
     "notFound": {
       "title": "ページが見つかりません",
       "message": "お探しのページは存在しないか、移動した可能性があります。",
@@ -159,7 +234,17 @@
       "maxRulesReached": "ルールの最大数に達しました（13件）。",
       "networkError": "ネットワークエラーです。接続を確認してください。",
       "serverError": "サーバーエラーです。後でもう一度お試しください。",
-      "unknown": "予期しないエラーが発生しました。"
+      "unknown": "予期しないエラーが発生しました。",
+      "dateNotToday": "今日のルールのみチェックできます。",
+      "forbidden": "この操作を行う権限がありません。",
+      "adminOnly": "この機能は管理者のみ使用できます。",
+      "slugTaken": "このスラッグは既に使用されています。",
+      "invalidSlugFormat": "スラッグは小文字、数字、ハイフンのみ使用できます。",
+      "postNotFound": "投稿が見つかりません。",
+      "selfDeleteNotAllowed": "自分自身を削除することはできません。",
+      "userNotFoundForDelete": "削除するユーザーが見つかりません。",
+      "errorLogNotFound": "エラーログが見つかりません。",
+      "invalidDateRange": "無効な日付範囲です。"
     },
     "validation": {
       "required": "この項目は必須です。",
@@ -190,6 +275,257 @@
       "en": "英語",
       "ko": "韓国語",
       "ja": "日本語"
+    }
+  },
+  "Admin": {
+    "title": "管理パネル",
+    "accessDenied": {
+      "title": "アクセス拒否",
+      "message": "管理エリアにアクセスする権限がありません。これが間違いだと思われる場合は、管理者にお問い合わせください。",
+      "backHome": "ホームに戻る"
+    },
+    "nav": {
+      "dashboard": "ダッシュボード",
+      "stats": "統計",
+      "users": "ユーザー",
+      "bio": "バイオ投稿",
+      "system": "システム"
+    },
+    "dashboard": {
+      "title": "ダッシュボード"
+    },
+    "stats": {
+      "title": "詳細統計",
+      "totalUsers": "総ユーザー",
+      "newUsersThisWeek": "今週の新規",
+      "activeDaily": "日別アクティブ",
+      "activeWeekly": "週間アクティブ",
+      "activeMonthly": "月間アクティブ",
+      "noData": "データがありません。",
+      "period": {
+        "week": "7日間",
+        "month": "30日間",
+        "quarter": "90日間"
+      },
+      "charts": {
+        "userTrend": "アクティブユーザー推移",
+        "moduleActivity": "モジュール別活動",
+        "disciplineTrend": "規律達成率推移",
+        "moduleSummary": "モジュール概要",
+        "activeUsers": "アクティブユーザー",
+        "achievementRate": "達成率",
+        "average": "平均",
+        "totalDays": "総記録日数",
+        "avgRate": "平均達成率",
+        "activeProjects": "アクティブプロジェクト",
+        "totalLetters": "総書簡数"
+      },
+      "modules": {
+        "destiny": "デスティニー",
+        "discipline": "ディシプリン",
+        "success": "サクセス",
+        "epistle": "エピストル"
+      },
+      "errors": {
+        "loadFailed": "統計データの読み込みに失敗しました。"
+      }
+    },
+    "moduleUsage": "モジュール使用状況",
+    "modules": {
+      "destiny": { "name": "運命ナビゲーター", "desc": "追跡された日数" },
+      "success": { "name": "成功コード", "desc": "進行中のプロジェクト" },
+      "discipline": { "name": "規律マスタリー", "desc": "作成されたルール" },
+      "epistle": { "name": "セルフ手紙", "desc": "書かれた手紙" },
+      "bio": { "name": "バイオハッキング", "desc": "公開された投稿" }
+    },
+    "users": {
+      "title": "ユーザー管理",
+      "email": "メール",
+      "name": "名前",
+      "joined": "登録日",
+      "activity": "活動",
+      "items": "件",
+      "searchPlaceholder": "メールまたは名前で検索...",
+      "noUsers": "登録されたユーザーがいません。",
+      "noSearchResults": "検索結果がありません。",
+      "viewDetail": "詳細を見る",
+      "userDetail": "ユーザー詳細",
+      "memberSince": "登録日",
+      "lastUpdated": "最終更新",
+      "moduleActivity": "モジュール別活動",
+      "deleteUser": "ユーザー削除",
+      "deleteConfirm": "このユーザーを削除しますか？",
+      "deleteWarning": "ユーザーの全データが永久に削除されます。この操作は取り消せません。",
+      "deleteWarningItems": "削除されるデータ:",
+      "deleting": "削除中...",
+      "stats": {
+        "destinyDays": "デスティニーナビゲーター",
+        "destinyEvents": "イベント",
+        "destinyTemplates": "テンプレート",
+        "successProjects": "サクセスコードプロジェクト",
+        "successEntries": "成功記録",
+        "disciplineRules": "規律ルール",
+        "disciplineChecks": "規律チェック",
+        "epistleDays": "セルフエピストル",
+        "weeklyPlans": "週間計画"
+      }
+    },
+    "bio": {
+      "title": "バイオ投稿管理",
+      "newPost": "新規投稿",
+      "editPost": "投稿を編集",
+      "slug": "スラッグ",
+      "category": "カテゴリ",
+      "translations": "翻訳",
+      "created": "作成日",
+      "updated": "更新日",
+      "noPosts": "まだバイオ投稿がありません。",
+      "createFirst": "最初の投稿を作成してください。",
+      "form": {
+        "slugPlaceholder": "url-friendly-slug",
+        "slugHint": "URLに使用される一意の識別子です。小文字、数字、ハイフンのみ使用してください。",
+        "titlePlaceholder": "投稿タイトル",
+        "contentPlaceholder": "マークダウンで内容を書いてください...",
+        "selectCategory": "カテゴリを選択",
+        "atLeastOneTranslation": "少なくとも1つの言語でタイトルと内容を入力してください。"
+      },
+      "preview": "プレビュー",
+      "editor": "エディタ",
+      "actions": {
+        "create": "投稿を作成",
+        "update": "変更を保存",
+        "delete": "投稿を削除",
+        "cancel": "キャンセル",
+        "creating": "作成中...",
+        "updating": "保存中...",
+        "deleting": "削除中..."
+      },
+      "deleteConfirm": {
+        "title": "投稿を削除",
+        "message": "この投稿とすべての翻訳を削除しますか？この操作は元に戻せません。"
+      },
+      "validation": {
+        "slugRequired": "スラッグは必須です。",
+        "slugFormat": "スラッグは小文字、数字、ハイフンのみ使用できます。",
+        "slugTaken": "このスラッグは既に使用されています。",
+        "categoryRequired": "カテゴリを選択してください。",
+        "translationRequired": "少なくとも1つの言語でタイトルと内容を入力してください。"
+      },
+      "translationStatus": {
+        "complete": "完了",
+        "incomplete": "未完了",
+        "empty": "なし"
+      },
+      "markdown": {
+        "bold": "太字",
+        "italic": "斜体",
+        "heading": "見出し",
+        "link": "リンク",
+        "list": "リスト",
+        "code": "コード"
+      },
+      "categories": {
+        "Nutrition": "栄養",
+        "Supplements": "サプリメント",
+        "Recovery": "回復",
+        "Exercise": "運動",
+        "Mindset": "マインドセット"
+      }
+    },
+    "errors": {
+      "loadFailed": "データの読み込みに失敗しました。もう一度お試しください。"
+    },
+    "system": {
+      "title": "システム管理",
+      "overview": "システム概要",
+      "environment": {
+        "title": "環境変数",
+        "description": "設定された環境変数一覧",
+        "name": "変数名",
+        "value": "値",
+        "masked": "[セキュリティ]",
+        "notSet": "[未設定]",
+        "requiredMissing": "必須環境変数が設定されていません"
+      },
+      "database": {
+        "title": "データベース",
+        "description": "データベース接続状態",
+        "status": "接続状態",
+        "connected": "接続済み",
+        "disconnected": "未接続",
+        "responseTime": "応答時間",
+        "provider": "プロバイダー",
+        "checkingConnection": "接続確認中...",
+        "refresh": "更新",
+        "refreshing": "確認中..."
+      },
+      "info": {
+        "title": "システム情報",
+        "description": "ランタイムとフレームワーク情報",
+        "nodeVersion": "Node.jsバージョン",
+        "nextVersion": "Next.jsバージョン",
+        "reactVersion": "Reactバージョン",
+        "prismaVersion": "Prismaバージョン",
+        "platform": "プラットフォーム",
+        "timezone": "タイムゾーン",
+        "locale": "ロケール",
+        "environment": "環境"
+      },
+      "status": {
+        "healthy": "正常",
+        "warning": "警告",
+        "error": "エラー"
+      },
+      "errorLog": {
+        "title": "エラーログ",
+        "description": "アプリケーションのエラーと警告ログ",
+        "noLogs": "エラーログがありません。",
+        "systemHealthy": "システムは正常に動作しています。",
+        "levels": {
+          "all": "すべて",
+          "error": "エラー",
+          "warning": "警告",
+          "info": "情報"
+        },
+        "summary": {
+          "totalErrors": "エラー合計",
+          "totalWarnings": "警告合計",
+          "totalInfo": "情報合計",
+          "recent24h": "直近24時間"
+        },
+        "table": {
+          "level": "レベル",
+          "message": "メッセージ",
+          "requestUrl": "リクエストURL",
+          "createdAt": "発生日時",
+          "user": "ユーザー",
+          "requestMethod": "メソッド"
+        },
+        "detail": {
+          "title": "エラー詳細",
+          "stackTrace": "スタックトレース",
+          "noStack": "スタックトレースなし",
+          "deleteLog": "ログを削除"
+        },
+        "bulkDelete": {
+          "button": "一括削除",
+          "title": "エラーログの一括削除",
+          "description": "選択した日付より前のすべてのエラーログを削除します。",
+          "options": {
+            "7days": "7日以前",
+            "30days": "30日以前",
+            "90days": "90日以前"
+          },
+          "confirmMessage": "{count}件のログが削除されます。この操作は取り消せません。",
+          "success": "{count}件のログを削除しました。",
+          "deleting": "削除中..."
+        },
+        "pagination": {
+          "prev": "前へ",
+          "next": "次へ",
+          "page": "ページ {current} / {total}"
+        }
+      }
     }
   }
 }

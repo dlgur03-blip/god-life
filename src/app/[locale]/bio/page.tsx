@@ -2,10 +2,16 @@ import { getBioPosts } from '@/app/actions/bio';
 import { Link } from '@/navigation';
 import { BookOpen, ArrowRight } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
+import type { Locale } from '@/types/bio';
 
-export default async function BioPage() {
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export default async function BioPage({ params }: Props) {
+  const { locale } = await params;
   const t = await getTranslations('Bio');
-  const posts = await getBioPosts();
+  const posts = await getBioPosts(locale as Locale);
 
   return (
     <main className="min-h-screen bg-[url('/bg-grid.svg')] p-6 pb-20">
@@ -19,14 +25,27 @@ export default async function BioPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {posts.map((post) => (
-            <Link key={post.slug} href={`/bio/${post.slug}`} className="group bg-white/5 border border-white/10 p-6 rounded-2xl hover:border-green-400/50 transition-all hover:-translate-y-1">
+            <Link
+              key={post.slug}
+              href={`/bio/${post.slug}`}
+              className="group bg-white/5 border border-white/10 p-6 rounded-2xl hover:border-green-400/50 transition-all hover:-translate-y-1"
+            >
               <div className="flex justify-between items-start mb-4">
                 <span className="text-xs font-bold text-green-400 uppercase tracking-widest border border-green-400/30 px-2 py-1 rounded">
                   {post.category}
                 </span>
-                <BookOpen className="w-5 h-5 text-gray-500 group-hover:text-green-400 transition-colors" />
+                <div className="flex items-center gap-2">
+                  {post.locale !== locale && (
+                    <span className="text-xs text-amber-400/70 uppercase">
+                      {post.locale}
+                    </span>
+                  )}
+                  <BookOpen className="w-5 h-5 text-gray-500 group-hover:text-green-400 transition-colors" />
+                </div>
               </div>
-              <h2 className="text-xl font-bold text-gray-100 mb-2 group-hover:text-white">{post.title}</h2>
+              <h2 className="text-xl font-bold text-gray-100 mb-2 group-hover:text-white">
+                {post.title}
+              </h2>
               <div className="flex items-center gap-2 text-sm text-gray-500 group-hover:text-gray-300 mt-4">
                 {t('readProtocol')} <ArrowRight className="w-4 h-4" />
               </div>

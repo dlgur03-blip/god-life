@@ -38,7 +38,15 @@ export async function getSuccessProject(id: string) {
     where: { id, userId: user.id },
     include: {
       entries: {
-        orderBy: { dayIndex: 'asc' }
+        orderBy: { dayIndex: 'asc' },
+        select: {
+          id: true,
+          dayIndex: true,
+          content: true,
+          imageUrl: true,
+          isCompleted: true,
+          completedAt: true
+        }
       }
     }
   });
@@ -79,13 +87,18 @@ export async function createSuccessProject(formData: FormData) {
   redirect('/success');
 }
 
-export async function updateSuccessEntry(projectId: string, dayIndex: number, content: string) {
+export async function updateSuccessEntry(
+  projectId: string,
+  dayIndex: number,
+  content: string,
+  imageUrl?: string | null
+) {
   await getUser(); // Check auth
-  
-  // Find entry first to ensure ownership via project is complex in one query, 
+
+  // Find entry first to ensure ownership via project is complex in one query,
   // simplified: trust database constraints + projectId check if needed.
   // Ideally we check project ownership first.
-  
+
   await prisma.successEntry.update({
     where: {
       projectId_dayIndex: {
@@ -95,10 +108,33 @@ export async function updateSuccessEntry(projectId: string, dayIndex: number, co
     },
     data: {
       content,
+      imageUrl: imageUrl ?? undefined, // Only update if provided
       isCompleted: true,
       completedAt: new Date(),
     }
   });
 
   revalidatePath(`/success/project/${projectId}`);
+}
+
+export async function deleteSuccessProject(projectId: string) {
+  const user = await getUser();
+
+  // Verify ownership before deletion
+  const project = await prisma.successProject.findUnique({
+    where: { id: projectId },
+    select: { userId: true }
+  });
+
+  if (!project || project.userId !== user.id) {
+    throw new Error("Project not found or unauthorized");
+  }
+
+  // Delete project (entries cascade automatically via Prisma schema)
+  await prisma.successProject.delete({
+    where: { id: projectId }
+  });
+
+  revalidatePath('/success');
+  redirect('/success');
 }
