@@ -42,6 +42,15 @@ export const BIO_CATEGORIES = [
 
 export type BioCategory = typeof BIO_CATEGORIES[number];
 
+// Category color mapping
+export const CATEGORY_COLORS: Record<BioCategory, string> = {
+  Nutrition: '#10b981',
+  Supplements: '#8b5cf6',
+  Recovery: '#06b6d4',
+  Exercise: '#f59e0b',
+  Mindset: '#ec4899'
+};
+
 // Translation input type for forms
 export type TranslationInput = {
   title: string;

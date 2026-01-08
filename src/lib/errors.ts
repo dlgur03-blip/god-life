@@ -19,6 +19,23 @@ export type ErrorCode =
   | 'USER_NOT_FOUND_FOR_DELETE'
   | 'ERROR_LOG_NOT_FOUND'
   | 'INVALID_DATE_RANGE'
+  | 'INVALID_BLOCK_ID'
+  | 'BLOCK_NOT_FOUND'
+  | 'INVALID_TIME_RANGE'
+  | 'TIME_OVERLAP'
+  | 'DATABASE_ERROR'
+  | 'UPDATE_FAILED'
+  | 'OVERLAP_CHECK_FAILED'
+  | 'UNEXPECTED_ERROR'
+  | 'STORAGE_NOT_CONFIGURED'
+  | 'INVALID_URL'
+  | 'DELETE_FAILED'
+  | 'GOAL_NOT_FOUND'
+  | 'GOAL_CREATE_FAILED'
+  | 'GOAL_UPDATE_FAILED'
+  | 'GOAL_DELETE_FAILED'
+  | 'INVALID_GOAL_PARENT'
+  | 'INVALID_GOAL_TYPE_HIERARCHY'
   | 'UNKNOWN';
 
 // Map error codes to translation keys under Common.errors
@@ -42,6 +59,23 @@ export const errorCodeToTranslationKey: Record<ErrorCode, string> = {
   USER_NOT_FOUND_FOR_DELETE: 'errors.userNotFoundForDelete',
   ERROR_LOG_NOT_FOUND: 'errors.errorLogNotFound',
   INVALID_DATE_RANGE: 'errors.invalidDateRange',
+  INVALID_BLOCK_ID: 'errors.invalidBlockId',
+  BLOCK_NOT_FOUND: 'errors.blockNotFound',
+  INVALID_TIME_RANGE: 'errors.invalidTimeRange',
+  TIME_OVERLAP: 'errors.timeOverlap',
+  DATABASE_ERROR: 'errors.databaseError',
+  UPDATE_FAILED: 'errors.updateFailed',
+  OVERLAP_CHECK_FAILED: 'errors.overlapCheckFailed',
+  UNEXPECTED_ERROR: 'errors.unexpectedError',
+  STORAGE_NOT_CONFIGURED: 'errors.storageNotConfigured',
+  INVALID_URL: 'errors.invalidUrl',
+  DELETE_FAILED: 'errors.deleteFailed',
+  GOAL_NOT_FOUND: 'errors.goalNotFound',
+  GOAL_CREATE_FAILED: 'errors.goalCreateFailed',
+  GOAL_UPDATE_FAILED: 'errors.goalUpdateFailed',
+  GOAL_DELETE_FAILED: 'errors.goalDeleteFailed',
+  INVALID_GOAL_PARENT: 'errors.invalidGoalParent',
+  INVALID_GOAL_TYPE_HIERARCHY: 'errors.invalidGoalTypeHierarchy',
   UNKNOWN: 'errors.unknown'
 };
 

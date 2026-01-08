@@ -36,9 +36,17 @@ export default function ResizableTimeblockCard({
     async (newStart: string, newEnd: string) => {
       setIsSaving(true);
       try {
-        await updateTimeblockTime(block.id, newStart, newEnd);
+        const result = await updateTimeblockTime(block.id, newStart, newEnd);
+
+        // Handle new return type
+        if (result && 'success' in result && !result.success) {
+          const message = result.error || 'Failed to save';
+          onResizeError?.(message);
+          throw new Error(message); // Re-throw to signal failure to hook
+        }
       } catch (error) {
         const message = error instanceof Error ? error.message : 'Failed to save';
+        console.error('[ResizableTimeblockCard] Resize error:', message);
         onResizeError?.(message);
         throw error; // Re-throw to signal failure to hook
       } finally {

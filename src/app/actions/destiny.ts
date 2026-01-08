@@ -185,28 +185,55 @@ export async function createDestinyEvent(dayId: string, title: string) {
 // === TIME VALIDATION HELPERS ===
 
 function validateTimeRange(startTime: string, endTime: string): { valid: boolean; error?: string } {
-  // Allow 24:00 as valid end time
-  const timeRegex = /^([01]\d|2[0-4]):([0-5]\d)$/;
-  if (!timeRegex.test(startTime)) {
-    return { valid: false, error: 'Invalid start time format. Use HH:MM.' };
-  }
-  if (!timeRegex.test(endTime)) {
-    return { valid: false, error: 'Invalid end time format. Use HH:MM.' };
-  }
+  try {
+    // Null/undefined check
+    if (!startTime || !endTime) {
+      return { valid: false, error: 'Time values are required.' };
+    }
 
-  // Check 5-minute increments
-  const startMin = parseInt(startTime.split(':')[1], 10);
-  const endMin = parseInt(endTime.split(':')[1], 10);
-  if (startMin % 5 !== 0 || endMin % 5 !== 0) {
-    return { valid: false, error: 'Time must be in 5-minute increments.' };
-  }
+    // Type check
+    if (typeof startTime !== 'string' || typeof endTime !== 'string') {
+      return { valid: false, error: 'Time values must be strings.' };
+    }
 
-  // Check endTime > startTime (24:00 is greater than any other time)
-  if (endTime !== '24:00' && startTime >= endTime) {
-    return { valid: false, error: 'End time must be after start time.' };
-  }
+    // Allow 24:00 as valid end time
+    const timeRegex = /^([01]\d|2[0-4]):([0-5]\d)$/;
+    if (!timeRegex.test(startTime)) {
+      return { valid: false, error: 'Invalid start time format. Use HH:MM.' };
+    }
+    if (!timeRegex.test(endTime)) {
+      return { valid: false, error: 'Invalid end time format. Use HH:MM.' };
+    }
 
-  return { valid: true };
+    // Check 5-minute increments
+    const startParts = startTime.split(':');
+    const endParts = endTime.split(':');
+
+    if (startParts.length !== 2 || endParts.length !== 2) {
+      return { valid: false, error: 'Invalid time format.' };
+    }
+
+    const startMin = parseInt(startParts[1], 10);
+    const endMin = parseInt(endParts[1], 10);
+
+    if (isNaN(startMin) || isNaN(endMin)) {
+      return { valid: false, error: 'Invalid time values.' };
+    }
+
+    if (startMin % 5 !== 0 || endMin % 5 !== 0) {
+      return { valid: false, error: 'Time must be in 5-minute increments.' };
+    }
+
+    // Check endTime > startTime (24:00 is greater than any other time)
+    if (endTime !== '24:00' && startTime >= endTime) {
+      return { valid: false, error: 'End time must be after start time.' };
+    }
+
+    return { valid: true };
+  } catch (error) {
+    console.error('[validateTimeRange] Unexpected error:', error);
+    return { valid: false, error: 'Time validation failed.' };
+  }
 }
 
 async function checkTimeOverlap(
@@ -215,15 +242,24 @@ async function checkTimeOverlap(
   endTime: string,
   excludeBlockId?: string
 ): Promise<boolean> {
-  const blocks = await prisma.destinyTimeBlock.findMany({
-    where: { dayId, id: excludeBlockId ? { not: excludeBlockId } : undefined },
-    select: { startTime: true, endTime: true },
-  });
+  try {
+    if (!dayId) {
+      throw new Error('dayId is required');
+    }
 
-  return blocks.some(block => {
-    // Overlap: new.start < existing.end AND new.end > existing.start
-    return startTime < block.endTime && endTime > block.startTime;
-  });
+    const blocks = await prisma.destinyTimeBlock.findMany({
+      where: { dayId, id: excludeBlockId ? { not: excludeBlockId } : undefined },
+      select: { startTime: true, endTime: true },
+    });
+
+    return blocks.some(block => {
+      // Overlap: new.start < existing.end AND new.end > existing.start
+      return startTime < block.endTime && endTime > block.startTime;
+    });
+  } catch (error) {
+    console.error('[checkTimeOverlap] Error:', error);
+    throw error; // Re-throw to be caught by caller
+  }
 }
 
 function addHour(time: string): string {
@@ -335,32 +371,84 @@ export async function updateTimeblockTime(
   blockId: string,
   startTime: string,
   endTime: string
-) {
-  await getUser();
+): Promise<{ success: true } | { success: false; error: string }> {
+  try {
+    // 1. Auth check with error handling
+    let user;
+    try {
+      user = await getUser();
+    } catch (authError) {
+      console.error('[updateTimeblockTime] Auth error:', authError);
+      return { success: false, error: 'UNAUTHORIZED' };
+    }
 
-  const validation = validateTimeRange(startTime, endTime);
-  if (!validation.valid) {
-    throw new Error(validation.error);
+    // 2. Validate blockId format (non-empty string)
+    if (!blockId || typeof blockId !== 'string' || blockId.trim() === '') {
+      console.error('[updateTimeblockTime] Invalid blockId:', blockId);
+      return { success: false, error: 'INVALID_BLOCK_ID' };
+    }
+
+    // 3. Validate time range
+    const validation = validateTimeRange(startTime, endTime);
+    if (!validation.valid) {
+      console.error('[updateTimeblockTime] Validation failed:', validation.error);
+      return { success: false, error: validation.error || 'INVALID_TIME_RANGE' };
+    }
+
+    // 4. Find block with error handling
+    let block;
+    try {
+      block = await prisma.destinyTimeBlock.findUnique({
+        where: { id: blockId },
+        select: { dayId: true },
+      });
+    } catch (dbError) {
+      console.error('[updateTimeblockTime] Database error finding block:', dbError);
+      return { success: false, error: 'DATABASE_ERROR' };
+    }
+
+    if (!block) {
+      console.error('[updateTimeblockTime] Block not found:', blockId);
+      return { success: false, error: 'BLOCK_NOT_FOUND' };
+    }
+
+    // 5. Check overlap with error handling
+    let hasOverlap;
+    try {
+      hasOverlap = await checkTimeOverlap(block.dayId, startTime, endTime, blockId);
+    } catch (overlapError) {
+      console.error('[updateTimeblockTime] Overlap check error:', overlapError);
+      return { success: false, error: 'OVERLAP_CHECK_FAILED' };
+    }
+
+    if (hasOverlap) {
+      return { success: false, error: 'TIME_OVERLAP' };
+    }
+
+    // 6. Update block with error handling
+    try {
+      await prisma.destinyTimeBlock.update({
+        where: { id: blockId },
+        data: { startTime, endTime },
+      });
+    } catch (updateError) {
+      console.error('[updateTimeblockTime] Update error:', updateError);
+      return { success: false, error: 'UPDATE_FAILED' };
+    }
+
+    // 7. Revalidate with try-catch (critical for Server Components)
+    try {
+      revalidatePath('/destiny/day/[date]');
+    } catch (revalidateError) {
+      console.error('[updateTimeblockTime] Revalidate error:', revalidateError);
+      // Don't fail the whole operation, update succeeded
+    }
+
+    return { success: true };
+  } catch (unexpectedError) {
+    console.error('[updateTimeblockTime] Unexpected error:', unexpectedError);
+    return { success: false, error: 'UNEXPECTED_ERROR' };
   }
-
-  const block = await prisma.destinyTimeBlock.findUnique({
-    where: { id: blockId },
-    select: { dayId: true },
-  });
-
-  if (!block) throw new Error('Block not found');
-
-  const hasOverlap = await checkTimeOverlap(block.dayId, startTime, endTime, blockId);
-  if (hasOverlap) {
-    throw new Error('Time range overlaps with another block.');
-  }
-
-  await prisma.destinyTimeBlock.update({
-    where: { id: blockId },
-    data: { startTime, endTime },
-  });
-
-  revalidatePath('/destiny/day/[date]');
 }
 
 // ============ TEMPLATE ACTIONS ============

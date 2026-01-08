@@ -83,6 +83,7 @@
       "selectFile": "Select File",
       "takePhoto": "Take Photo",
       "uploading": "Uploading...",
+      "processing": "Processing...",
       "dayPhoto": "Day {day} Photo",
       "notePhotoAlt": "Handwritten note for day {day}",
       "close": "Close",
@@ -90,10 +91,14 @@
       "zoomOut": "Zoom Out",
       "resetZoom": "Reset Zoom",
       "pinchToZoom": "Pinch or use buttons to zoom",
+      "heicConversionNotice": "HEIC image will be converted to JPEG",
       "errors": {
-        "invalidFileType": "Please upload a JPG, PNG, or WebP image.",
+        "invalidFileType": "Please upload a JPG, PNG, WebP, or HEIC image.",
         "fileTooLarge": "Image must be smaller than 10MB.",
-        "uploadFailed": "Failed to upload image. Please try again."
+        "uploadFailed": "Failed to upload image. Please try again.",
+        "storageNotConfigured": "Image storage is not available. Please contact support.",
+        "networkError": "Network error. Please check your connection and try again.",
+        "unknownError": "An unexpected error occurred. Please try again."
       }
     }
   },
@@ -112,7 +117,10 @@
     },
     "weeklyPlan": {
       "title": "Weekly Plan",
-      "placeholder": "Enter plan..."
+      "placeholder": "Enter plan...",
+      "previous": "Previous week",
+      "next": "Next week",
+      "today": "Go to today"
     },
     "flowOfEvents": "Flow of Events",
     "noEventsRecorded": "No significant events recorded yet.",
@@ -187,8 +195,8 @@
     "timeline": "Timeline",
     "archives": "Archives",
     "noLetters": "No letters sealed in time.",
-    "letterToYesterday": "Letter to Yesterday",
-    "letterToTomorrow": "Letter to Tomorrow",
+    "letterToYesterday": "Letter to Yesterday's Me",
+    "letterToTomorrow": "Letter to Tomorrow's Me",
     "reflectOnPassed": "Reflect on what passed...",
     "manifestIntent": "Manifest your intent...",
     "sealing": "Sealing...",
@@ -197,9 +205,56 @@
     "noLetterFromYesterday": "No letter from yesterday's self.",
     "receivedLetterFrom": "Letter received from {date}",
     "dateBlocked": "Date Locked",
-    "dateBlockedHint": "You cannot access dates beyond tomorrow.",
+    "dateBlockedHint": "You can only write letters today.",
     "readOnly": "Read Only",
     "composeLetter": "Compose Letter"
+  },
+  "Goals": {
+    "title": "GOAL HIERARCHY",
+    "subtitle": "From long-term to short-term goals",
+    "hierarchy": "Goal Hierarchy",
+    "createGoal": "Create Goal",
+    "editGoal": "Edit Goal",
+    "deleteGoal": "Delete Goal",
+    "deleteGoalConfirm": "Are you sure you want to delete this goal? Child goal connections will be removed.",
+    "createFirstGoal": "Create Your First Goal",
+    "addChild": "Add Sub-goal",
+    "edit": "Edit",
+    "delete": "Delete",
+    "goalType": "Goal Type",
+    "titleLabel": "Title",
+    "titlePlaceholder": "Enter goal title...",
+    "description": "Description",
+    "descriptionPlaceholder": "Enter a description for this goal (optional)",
+    "parentGoal": "Parent Goal",
+    "noParent": "No Parent Goal",
+    "statusLabel": "Status",
+    "goalsCount": "goals",
+    "noGoalsOfType": "No goals of this type.",
+    "goToHierarchy": "Go to Hierarchy",
+    "types": {
+      "ultimate": "Ultimate Goal",
+      "ten_year": "10 Year Goal",
+      "five_year": "5 Year Goal",
+      "one_year": "1 Year Goal",
+      "six_month": "6 Month Goal",
+      "three_month": "3 Month Goal",
+      "one_month": "1 Month Goal",
+      "one_week": "1 Week Goal"
+    },
+    "status": {
+      "active": "Active",
+      "completed": "Completed",
+      "paused": "Paused",
+      "cancelled": "Cancelled"
+    },
+    "emptyState": {
+      "title": "No Goals Yet",
+      "description": "Set and manage your goals systematically, from ultimate aspirations to weekly targets."
+    },
+    "validation": {
+      "titleRequired": "Please enter a title."
+    }
   },
   "Bio": {
     "title": "BIO HACKING",
@@ -211,9 +266,21 @@
     "protocolNotFoundMessage": "The requested protocol does not exist in our database.",
     "updated": "Updated",
     "viewingIn": "Viewing in {locale}",
-    "translationUnavailable": "Translation unavailable for this language."
+    "translationUnavailable": "Translation unavailable for this language.",
+    "allCategories": "All",
+    "filterByCategory": "Filter by Category",
+    "postsCount": "{count} protocols",
+    "noPostsInCategory": "No protocols in this category.",
+    "categories": {
+      "Nutrition": "Nutrition",
+      "Supplements": "Supplements",
+      "Recovery": "Recovery",
+      "Exercise": "Exercise",
+      "Mindset": "Mindset"
+    }
   },
   "Common": {
+    "language": "Language",
     "loading": "Loading...",
     "error": "An error occurred.",
     "confirm": "Confirm",
@@ -244,7 +311,25 @@
       "selfDeleteNotAllowed": "You cannot delete yourself.",
       "userNotFoundForDelete": "User not found for deletion.",
       "errorLogNotFound": "Error log not found.",
-      "invalidDateRange": "Invalid date range."
+      "invalidDateRange": "Invalid date range.",
+      "invalidBlockId": "Invalid timeblock ID.",
+      "blockNotFound": "Timeblock not found.",
+      "invalidTimeRange": "Invalid time range.",
+      "timeOverlap": "Time range overlaps with another block.",
+      "databaseError": "Database error occurred.",
+      "updateFailed": "Failed to update timeblock.",
+      "overlapCheckFailed": "Failed to check time overlap.",
+      "unexpectedError": "An unexpected error occurred.",
+      "storageNotConfigured": "Image storage is not available.",
+      "invalidUrl": "Invalid URL provided.",
+      "deleteFailed": "Failed to delete the item.",
+      "dateNotAccessible": "You can only write letters for today's date.",
+      "goalNotFound": "Goal not found.",
+      "goalCreateFailed": "Failed to create goal.",
+      "goalUpdateFailed": "Failed to update goal.",
+      "goalDeleteFailed": "Failed to delete goal.",
+      "invalidGoalParent": "Invalid parent goal.",
+      "invalidGoalTypeHierarchy": "This goal type cannot be a child of the selected parent."
     },
     "validation": {
       "required": "This field is required.",
@@ -527,5 +612,8 @@
         }
       }
     }
+  },
+  "Footer": {
+    "feedbackAndInquiries": "Feedback & Inquiries"
   }
 }

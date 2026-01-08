@@ -1,13 +1,21 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
+import { ChevronLeft, ChevronRight, RotateCcw } from 'lucide-react';
 import { updateWeeklyPlan } from '@/app/actions/destiny';
 import { cn } from '@/lib/utils';
+import {
+  getAdaptiveWeekDates,
+  getWeekRangeLabel,
+  getWeekOffsetDate,
+  type SupportedLocale,
+} from '@/lib/date-utils';
+import { getTodayStr } from '@/lib/date';
 
 interface WeeklyPlanGridProps {
-  startDate: string; // YYYY-MM-DD
   initialPlans: Record<string, string | null>;
+  onWeekChange?: (startDate: string) => void;
 }
 
 interface DayColumnInputProps {
@@ -91,11 +99,11 @@ function DayColumnInput({ date, dayLabel, dateLabel, value, isToday, onSave, pla
       <div className="text-center mb-2">
         <div className={cn(
           "text-xs font-bold uppercase",
-          isToday ? "text-[#06b6d4]" : "text-gray-500"
+          isToday ? "text-[#06b6d4]" : "text-[#6b7280]"
         )}>
           {dayLabel}
         </div>
-        <div className="text-xs text-gray-600">{dateLabel}</div>
+        <div className="text-xs text-[#6b7280]">{dateLabel}</div>
       </div>
 
       <div className="relative flex-1 min-h-[60px]">
@@ -107,7 +115,7 @@ function DayColumnInput({ date, dayLabel, dateLabel, value, isToday, onSave, pla
             onBlur={handleBlur}
             placeholder={placeholder}
             className={cn(
-              "w-full h-full min-h-[60px] bg-black/30 rounded border px-2 py-1 text-xs text-gray-200 outline-none resize-none transition-all",
+              "w-full h-full min-h-[60px] bg-[rgba(0,0,0,0.3)] rounded border px-2 py-1 text-xs text-[#e2e8f0] outline-none resize-none transition-all",
               "border-[#06b6d4] focus:border-[#06b6d4]",
               isSaving && "bg-[rgba(6,182,212,0.3)]"
             )}
@@ -116,9 +124,9 @@ function DayColumnInput({ date, dayLabel, dateLabel, value, isToday, onSave, pla
           <div
             onClick={() => setIsEditing(true)}
             className={cn(
-              "w-full h-full min-h-[60px] bg-black/30 rounded border border-transparent px-2 py-1 text-xs cursor-pointer transition-all",
+              "w-full h-full min-h-[60px] bg-[rgba(0,0,0,0.3)] rounded border border-transparent px-2 py-1 text-xs cursor-pointer transition-all",
               "hover:border-[rgba(255,255,255,0.2)]",
-              inputValue ? "text-gray-300" : "text-gray-600"
+              inputValue ? "text-[#e2e8f0]" : "text-[#6b7280]"
             )}
           >
             {inputValue || placeholder}
@@ -134,10 +142,54 @@ function DayColumnInput({ date, dayLabel, dateLabel, value, isToday, onSave, pla
   );
 }
 
-export default function WeeklyPlanGrid({ startDate, initialPlans }: WeeklyPlanGridProps) {
+export default function WeeklyPlanGrid({ initialPlans, onWeekChange }: WeeklyPlanGridProps) {
   const t = useTranslations('Destiny');
-  const locale = useLocale();
+  const locale = useLocale() as SupportedLocale;
   const [plans, setPlans] = useState(initialPlans);
+
+  // 현재 표시 주의 시작일 (기본값: 오늘)
+  const [weekStartDate, setWeekStartDate] = useState(() => getTodayStr());
+
+  // useMemo로 weekDates 계산 최적화
+  const weekDates = useMemo(
+    () => getAdaptiveWeekDates(weekStartDate, locale),
+    [weekStartDate, locale]
+  );
+
+  // 주간 범위 라벨
+  const weekRangeLabel = useMemo(
+    () => getWeekRangeLabel(weekStartDate, locale),
+    [weekStartDate, locale]
+  );
+
+  // 오늘이 현재 주에 포함되어 있는지 확인
+  const isTodayInCurrentWeek = useMemo(() => {
+    return weekDates.some(d => d.isToday);
+  }, [weekDates]);
+
+  // 네비게이션 핸들러
+  const handlePreviousWeek = useCallback(() => {
+    const newStart = getWeekOffsetDate(weekStartDate, -1);
+    setWeekStartDate(newStart);
+    onWeekChange?.(newStart);
+  }, [weekStartDate, onWeekChange]);
+
+  const handleNextWeek = useCallback(() => {
+    const newStart = getWeekOffsetDate(weekStartDate, 1);
+    setWeekStartDate(newStart);
+    onWeekChange?.(newStart);
+  }, [weekStartDate, onWeekChange]);
+
+  const handleGoToToday = useCallback(() => {
+    const todayStr = getTodayStr();
+    setWeekStartDate(todayStr);
+    onWeekChange?.(todayStr);
+  }, [onWeekChange]);
+
+  // initialPlans가 변경되면 plans 상태 업데이트
+  useEffect(() => {
+    setPlans(initialPlans);
+  }, [initialPlans]);
 
   const handleSave = async (date: string, value: string) => {
     // Optimistic update
@@ -145,43 +197,61 @@ export default function WeeklyPlanGrid({ startDate, initialPlans }: WeeklyPlanGr
     await updateWeeklyPlan(date, value);
   };
 
-  // Generate 7 days
-  const days = Array.from({ length: 7 }, (_, i) => {
-    const d = new Date(startDate);
-    d.setDate(d.getDate() + i);
-    const dateStr = d.toISOString().split('T')[0];
-    const today = new Date().toISOString().split('T')[0];
-
-    // Day label based on locale
-    const dayNames = {
-      en: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-      ko: ['일', '월', '화', '수', '목', '금', '토'],
-      ja: ['日', '月', '火', '水', '木', '金', '土'],
-    };
-    const dayLabel = (dayNames[locale as keyof typeof dayNames] || dayNames.en)[d.getDay()];
-    const dateLabel = `${d.getMonth() + 1}/${d.getDate()}`;
-
-    return {
-      date: dateStr,
-      dayLabel,
-      dateLabel,
-      isToday: dateStr === today,
-    };
-  });
-
   return (
     <div className="space-y-3">
-      <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider">
-        {t('weeklyPlan.title')}
-      </h3>
+      {/* Header with Navigation */}
+      <div className="flex items-center justify-between">
+        <h3 className="text-xs font-bold text-[#9ca3af] uppercase tracking-wider">
+          {t('weeklyPlan.title')}
+        </h3>
+
+        {/* Week Navigation */}
+        <div className="flex items-center gap-2">
+          {/* Previous Week Button */}
+          <button
+            onClick={handlePreviousWeek}
+            className="p-1.5 rounded-md bg-[rgba(255,255,255,0.05)] hover:bg-[rgba(6,182,212,0.2)] text-[#9ca3af] hover:text-[#06b6d4] transition-all"
+            aria-label={t('weeklyPlan.previous')}
+          >
+            <ChevronLeft className="w-4 h-4" />
+          </button>
+
+          {/* Week Range Label */}
+          <span className="text-xs text-[#e2e8f0] font-medium min-w-[140px] text-center">
+            {weekRangeLabel}
+          </span>
+
+          {/* Next Week Button */}
+          <button
+            onClick={handleNextWeek}
+            className="p-1.5 rounded-md bg-[rgba(255,255,255,0.05)] hover:bg-[rgba(6,182,212,0.2)] text-[#9ca3af] hover:text-[#06b6d4] transition-all"
+            aria-label={t('weeklyPlan.next')}
+          >
+            <ChevronRight className="w-4 h-4" />
+          </button>
+
+          {/* Today Button (only show if today is not in current week) */}
+          {!isTodayInCurrentWeek && (
+            <button
+              onClick={handleGoToToday}
+              className="p-1.5 rounded-md bg-[rgba(6,182,212,0.1)] hover:bg-[rgba(6,182,212,0.2)] text-[#06b6d4] transition-all ml-1"
+              aria-label={t('weeklyPlan.today')}
+            >
+              <RotateCcw className="w-4 h-4" />
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Day Columns Grid */}
       <div className="flex gap-2 overflow-x-auto pb-2">
-        {days.map((day) => (
+        {weekDates.map((day) => (
           <DayColumnInput
             key={day.date}
             date={day.date}
             dayLabel={day.dayLabel}
             dateLabel={day.dateLabel}
-            value={plans[day.date]}
+            value={plans[day.date] ?? null}
             isToday={day.isToday}
             onSave={handleSave}
             placeholder={t('weeklyPlan.placeholder')}

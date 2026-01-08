@@ -1,3 +1,14 @@
+// Time configuration constants for timeblock scheduling
+export const TIME_CONFIG = {
+  MIN_HOUR: 0,      // 00:00 - earliest allowed time
+  MAX_HOUR: 23,     // 23:00 - latest allowed start time (end can be 24:00)
+  DEFAULT_START: 6, // 06:00 - default view start hour
+  DEFAULT_END: 23,  // 23:00 - default view end hour
+  INTERVAL: 30,     // 30-minute increments for time selection
+} as const;
+
+export type TimeConfig = typeof TIME_CONFIG;
+
 // Convert HH:MM string to total minutes from midnight
 export function timeToMinutes(time: string): number {
   const [h, m] = time.split(':').map(Number);
@@ -12,8 +23,8 @@ export function minutesToTime(minutes: number): string {
   return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
 }
 
-// Snap minutes to nearest 5-minute increment
-export function snapToIncrement(minutes: number, increment: number = 5): number {
+// Snap minutes to nearest increment
+export function snapToIncrement(minutes: number, increment: number = TIME_CONFIG.INTERVAL): number {
   return Math.round(minutes / increment) * increment;
 }
 
@@ -54,7 +65,7 @@ export function validateResize(
   }
 
   // Check boundaries
-  if (startMinutes < 0 || endMinutes > 24 * 60) {
+  if (startMinutes < TIME_CONFIG.MIN_HOUR * 60 || endMinutes > 24 * 60) {
     return { valid: false, reason: 'boundary' };
   }
 

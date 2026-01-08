@@ -2,7 +2,10 @@ import createMiddleware from 'next-intl/middleware';
 import { routing } from './navigation';
 import { NextRequest } from 'next/server';
 
-const intlMiddleware = createMiddleware(routing);
+const intlMiddleware = createMiddleware({
+  ...routing,
+  localeDetection: true  // Enable browser language auto-detection
+});
 
 export default function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;

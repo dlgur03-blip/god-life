@@ -28,18 +28,12 @@ export default async function DestinyDayPage({ params }: { params: Promise<{ dat
   // Fetch Data
   const day = await getOrCreateDestinyDay(date);
 
-  // Calculate week start (Monday of current week)
-  const currentDate = new Date(date);
-  const dayOfWeek = currentDate.getDay();
-  const mondayOffset = dayOfWeek === 0 ? -6 : 1 - dayOfWeek; // Sunday = -6, else 1 - dayOfWeek
-  const weekStart = new Date(currentDate);
-  weekStart.setDate(weekStart.getDate() + mondayOffset);
-  const weekStartStr = weekStart.toISOString().split('T')[0];
-
-  // Fetch weekly plans
-  const weeklyPlans = await getWeeklyPlans(weekStartStr);
+  // Fetch weekly plans starting from today (component uses today as default start)
+  const todayStr = getTodayStr();
+  const weeklyPlans = await getWeeklyPlans(todayStr);
 
   // Date Navigation Logic
+  const currentDate = new Date(date + 'T00:00:00');
   const prevDate = new Date(currentDate); prevDate.setDate(prevDate.getDate() - 1);
   const nextDate = new Date(currentDate); nextDate.setDate(nextDate.getDate() + 1);
 
@@ -71,7 +65,6 @@ export default async function DestinyDayPage({ params }: { params: Promise<{ dat
           dayId={day.id}
           goalWeek={day.goalWeek}
           goalToday={day.goalToday}
-          startDate={weekStartStr}
           weeklyPlans={weeklyPlans}
         />
 
@@ -79,7 +72,13 @@ export default async function DestinyDayPage({ params }: { params: Promise<{ dat
         <TimeblockList dayId={day.id} initialBlocks={day.timeblocks} />
 
         {/* M4: Event Timeline */}
-        <EventTimeline dayId={day.id} events={day.events} />
+        <EventTimeline
+          dayId={day.id}
+          events={day.events.map(event => ({
+            ...event,
+            recordedAt: event.recordedAt.toISOString()
+          }))}
+        />
 
       </div>
     </main>

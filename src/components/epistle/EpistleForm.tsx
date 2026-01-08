@@ -16,24 +16,48 @@ export default function EpistleForm({
   readOnly?: boolean;
 }) {
   const t = useTranslations('Epistle');
+  const tCommon = useTranslations('Common');
   const [yesterday, setYesterday] = useState(initialData?.toYesterday || '');
   const [tomorrow, setTomorrow] = useState(initialData?.toTomorrow || '');
   const [mood, setMood] = useState(initialData?.mood || '');
   const [isSaving, setIsSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSave = async () => {
     if (readOnly) return;
     setIsSaving(true);
-    await upsertEpistle(date, {
-      toYesterday: yesterday,
-      toTomorrow: tomorrow,
-      mood: mood
-    });
-    setIsSaving(false);
+    setError(null);
+
+    try {
+      await upsertEpistle(date, {
+        toYesterday: yesterday,
+        toTomorrow: tomorrow,
+        mood: mood
+      });
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'unknown';
+      setError(tCommon(`errors.${errorMessage}`));
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
     <div className={cn("space-y-8", readOnly && "opacity-80")}>
+      {/* Error Display */}
+      {error && (
+        <div
+          className="p-4 rounded-lg text-center"
+          style={{
+            backgroundColor: 'rgba(245, 158, 11, 0.1)',
+            borderColor: 'rgba(245, 158, 11, 0.3)',
+            color: '#f59e0b'
+          }}
+        >
+          {error}
+        </div>
+      )}
+
       {/* Read Only Badge */}
       {readOnly && (
         <div className="flex items-center justify-center gap-2 text-gray-500 text-sm">

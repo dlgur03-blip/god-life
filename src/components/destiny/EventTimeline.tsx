@@ -9,7 +9,7 @@ import { formatTimeDisplay } from '@/lib/date';
 type Event = {
   id: string;
   title: string;
-  recordedAt: Date;
+  recordedAt: Date | string; // Accept both Date and ISO string
 };
 
 export default function EventTimeline({ dayId, events }: { dayId: string, events: Event[] }) {
@@ -46,7 +46,12 @@ export default function EventTimeline({ dayId, events }: { dayId: string, events
 
             <div className="flex flex-col sm:flex-row sm:items-baseline gap-2">
               <span className="text-xs text-primary font-mono font-bold">
-                {formatTimeDisplay(event.recordedAt, locale)}
+                {formatTimeDisplay(
+                  typeof event.recordedAt === 'string'
+                    ? new Date(event.recordedAt)
+                    : event.recordedAt,
+                  locale
+                )}
               </span>
               <p className="text-gray-200 text-sm bg-white/5 p-2 rounded-lg border border-white/5 group-hover:border-white/20 transition-colors w-full">
                 {event.title}

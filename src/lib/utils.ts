@@ -22,7 +22,7 @@ export function getDateStatus(dateStr: string): DateStatus {
   return 'future';
 }
 
-export type EpistleDateAccess = 'past' | 'today' | 'tomorrow' | 'blocked';
+export type EpistleDateAccess = 'past' | 'today' | 'blocked';
 
 export function getEpistleDateAccess(dateStr: string): EpistleDateAccess {
   const today = new Date();
@@ -35,8 +35,7 @@ export function getEpistleDateAccess(dateStr: string): EpistleDateAccess {
 
   if (diffDays < 0) return 'past';
   if (diffDays === 0) return 'today';
-  if (diffDays === 1) return 'tomorrow';
-  return 'blocked';
+  return 'blocked'; // All future dates including tomorrow are now blocked
 }
 
 export function getYesterdayStr(dateStr: string): string {

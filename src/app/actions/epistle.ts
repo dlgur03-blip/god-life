@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { isDateAccessible } from "@/lib/date-utils";
 
 async function getUser() {
   const session = await getServerSession(authOptions);
@@ -35,6 +36,11 @@ export async function upsertEpistle(date: string, data: {
   mood?: string;
 }) {
   const user = await getUser();
+
+  // Validate date accessibility - only today can be written
+  if (!isDateAccessible(date)) {
+    throw new Error("dateNotAccessible");
+  }
 
   await prisma.epistleDay.upsert({
     where: {

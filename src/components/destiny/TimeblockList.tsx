@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import {
   DndContext,
@@ -22,6 +22,7 @@ import SortableTimeblockCard from './SortableTimeblockCard';
 import TimeblockAddButton from './TimeblockAddButton';
 import TemplateActionBar from './TemplateActionBar';
 import type { Timeblock } from '@/types/destiny';
+import { TIME_CONFIG } from '@/lib/time-utils';
 
 type TimeblockListProps = {
   dayId: string;
@@ -32,6 +33,42 @@ export default function TimeblockList({ dayId, initialBlocks }: TimeblockListPro
   const t = useTranslations('Destiny');
   const [blocks, setBlocks] = useState(initialBlocks);
   const [isReordering, setIsReordering] = useState(false);
+  const listContainerRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll to current time on mobile
+  useEffect(() => {
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    if (!isMobile || !listContainerRef.current || blocks.length === 0) return;
+
+    const now = new Date();
+    const currentHour = now.getHours();
+    const currentMinutes = now.getMinutes();
+
+    // Find the block closest to current time
+    const currentTimeInMinutes = currentHour * 60 + currentMinutes;
+    let closestBlockIndex = 0;
+    let minDiff = Infinity;
+
+    blocks.forEach((block, index) => {
+      const [h, m] = block.startTime.split(':').map(Number);
+      const blockMinutes = h * 60 + m;
+      const diff = Math.abs(blockMinutes - currentTimeInMinutes);
+      if (diff < minDiff) {
+        minDiff = diff;
+        closestBlockIndex = index;
+      }
+    });
+
+    // Scroll to the closest block with a small delay for DOM to settle
+    const timer = setTimeout(() => {
+      const cards = listContainerRef.current?.querySelectorAll('[data-timeblock-card]');
+      if (cards && cards[closestBlockIndex]) {
+        cards[closestBlockIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [blocks]);
 
   const handleResizeError = useCallback((error: string) => {
     // TODO: Replace with toast notification when toast library is added
@@ -95,9 +132,12 @@ export default function TimeblockList({ dayId, initialBlocks }: TimeblockListPro
           items={blocks.map(b => b.id)}
           strategy={verticalListSortingStrategy}
         >
-          <div className="grid grid-cols-1 gap-4">
+          <div
+            ref={listContainerRef}
+            className="grid grid-cols-1 gap-4 max-h-[70vh] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent"
+          >
             {blocks.map((block, index) => (
-              <div key={block.id}>
+              <div key={block.id} data-timeblock-card>
                 <SortableTimeblockCard
                   block={block}
                   allBlocks={blocks}

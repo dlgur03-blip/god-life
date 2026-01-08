@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { Clock } from 'lucide-react';
+import { TIME_CONFIG } from '@/lib/time-utils';
 
 type TimePickerProps = {
   value: string;
@@ -15,10 +16,10 @@ export default function TimePicker({ value, onChange, label, disabled }: TimePic
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Generate time options (5-minute increments, 00:00 to 24:00)
+  // Generate time options (30-minute increments, 00:00 to 24:00)
   const timeOptions: string[] = [];
-  for (let h = 0; h < 24; h++) {
-    for (let m = 0; m < 60; m += 5) {
+  for (let h = TIME_CONFIG.MIN_HOUR; h < 24; h++) {
+    for (let m = 0; m < 60; m += TIME_CONFIG.INTERVAL) {
       timeOptions.push(`${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`);
     }
   }
@@ -55,6 +56,16 @@ export default function TimePicker({ value, onChange, label, disabled }: TimePic
         type="button"
         disabled={disabled}
         onClick={() => setIsOpen(!isOpen)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            setIsOpen(!isOpen);
+          } else if (e.key === 'Escape' && isOpen) {
+            setIsOpen(false);
+          }
+        }}
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
         className={cn(
           "flex items-center gap-1 px-2 py-1 rounded-md text-sm font-mono",
           "bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)]",
@@ -76,6 +87,15 @@ export default function TimePicker({ value, onChange, label, disabled }: TimePic
               key={time}
               data-selected={time === value}
               onClick={() => handleSelect(time)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  handleSelect(time);
+                }
+              }}
+              role="option"
+              aria-selected={time === value}
+              tabIndex={isOpen ? 0 : -1}
               className={cn(
                 "w-full px-3 py-1.5 text-left text-sm font-mono",
                 "hover:bg-[rgba(6,182,212,0.2)] transition-colors",

@@ -59,6 +59,51 @@ export async function getBioPosts(locale: Locale = 'en'): Promise<BioPostWithTra
     .filter((post): post is BioPostWithTranslation => post !== null);
 }
 
+export async function getBioPostsByCategory(
+  category: string,
+  locale: Locale = 'en'
+): Promise<BioPostWithTranslation[]> {
+  const posts = await prisma.bioPost.findMany({
+    where: { category },
+    include: {
+      translations: true
+    },
+    orderBy: { createdAt: 'desc' }
+  });
+
+  return posts
+    .map(post => {
+      const translation = resolveTranslation(post.translations, locale);
+      if (!translation) return null;
+
+      return {
+        id: post.id,
+        slug: post.slug,
+        category: post.category,
+        title: translation.title,
+        content: translation.content,
+        locale: translation.locale,
+        createdAt: post.createdAt,
+        updatedAt: post.updatedAt
+      };
+    })
+    .filter((post): post is BioPostWithTranslation => post !== null);
+}
+
+export async function getCategoryCounts(): Promise<Record<string, number>> {
+  const result = await prisma.bioPost.groupBy({
+    by: ['category'],
+    _count: {
+      _all: true
+    }
+  });
+
+  return result.reduce((acc, item) => {
+    acc[item.category] = item._count._all;
+    return acc;
+  }, {} as Record<string, number>);
+}
+
 export async function getBioPost(slug: string, locale: Locale = 'en'): Promise<BioPostWithTranslation | null> {
   const post = await prisma.bioPost.findUnique({
     where: { slug },

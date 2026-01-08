@@ -4,6 +4,7 @@ import { Link } from '@/navigation';
 import { ArrowLeft, Globe } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import NotFoundFallback from '@/components/navigation/NotFoundFallback';
+import CategoryBadge from '@/components/bio/CategoryBadge';
 import type { Locale } from '@/types/bio';
 
 type Props = {
@@ -37,9 +38,7 @@ export default async function BioPostPage({ params }: Props) {
 
         <header className="mb-10 border-b border-white/10 pb-10">
           <div className="flex items-center gap-3 mb-2">
-            <span className="text-xs font-bold text-green-400 uppercase tracking-widest">
-              {post.category}
-            </span>
+            <CategoryBadge category={post.category} size="md" />
             {post.locale !== locale && (
               <span className="flex items-center gap-1 text-xs text-amber-400/70 border border-amber-400/30 px-2 py-0.5 rounded">
                 <Globe className="w-3 h-3" />

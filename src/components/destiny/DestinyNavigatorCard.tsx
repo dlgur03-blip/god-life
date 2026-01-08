@@ -9,7 +9,6 @@ interface DestinyNavigatorCardProps {
   dayId: string;
   goalWeek: string | null;
   goalToday: string | null;
-  startDate: string;
   weeklyPlans: Record<string, string | null>;
 }
 
@@ -17,7 +16,6 @@ export default function DestinyNavigatorCard({
   dayId,
   goalWeek,
   goalToday,
-  startDate,
   weeklyPlans,
 }: DestinyNavigatorCardProps) {
   const t = useTranslations('Destiny');
@@ -46,7 +44,6 @@ export default function DestinyNavigatorCard({
 
       {/* Weekly Plan 7-Day Grid */}
       <WeeklyPlanGrid
-        startDate={startDate}
         initialPlans={weeklyPlans}
       />
 

@@ -25,6 +25,7 @@ model User {
   epistleDays       EpistleDay[]
   weeklyPlans       WeeklyPlan[]
   errorLogs         ErrorLog[]
+  goals             Goal[]
 }
 
 // M3: Destiny Navigator
@@ -236,4 +237,55 @@ model ErrorLog {
   @@index([level])
   @@index([createdAt])
   @@index([userId])
+}
+
+// Goal Type Enum
+enum GoalType {
+  ULTIMATE    // 궁극의 목표
+  TEN_YEAR    // 10년 목표
+  FIVE_YEAR   // 5년 목표
+  ONE_YEAR    // 1년 목표
+  SIX_MONTH   // 6개월 목표
+  THREE_MONTH // 3개월 목표
+  ONE_MONTH   // 1개월 목표
+  ONE_WEEK    // 1주 목표
+}
+
+// Goal Status Enum
+enum GoalStatus {
+  ACTIVE
+  COMPLETED
+  PAUSED
+  CANCELLED
+}
+
+// Goal Model with self-referential hierarchy
+model Goal {
+  id          String     @id @default(cuid())
+  userId      String
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  type        GoalType
+  title       String
+  description String?
+
+  // Self-referential hierarchy
+  parentId    String?
+  parent      Goal?      @relation("GoalHierarchy", fields: [parentId], references: [id], onDelete: SetNull)
+  children    Goal[]     @relation("GoalHierarchy")
+
+  // Dates
+  startDate   DateTime?
+  targetDate  DateTime?
+
+  // Progress tracking (0-100)
+  progress    Int        @default(0)
+  status      GoalStatus @default(ACTIVE)
+
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  @@index([userId])
+  @@index([userId, type])
+  @@index([parentId])
 }

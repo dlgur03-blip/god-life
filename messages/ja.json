@@ -27,7 +27,7 @@
       },
       "bio": {
         "name": "バイオハッキング",
-        "desc": "最適化コラム & データベース"
+        "desc": "最適化コラム"
       }
     },
     "status": {
@@ -83,6 +83,7 @@
       "selectFile": "ファイル選択",
       "takePhoto": "写真を撮る",
       "uploading": "アップロード中...",
+      "processing": "処理中...",
       "dayPhoto": "Day {day} の写真",
       "notePhotoAlt": "Day {day} の手書きノート",
       "close": "閉じる",
@@ -90,10 +91,14 @@
       "zoomOut": "縮小",
       "resetZoom": "リセット",
       "pinchToZoom": "ピンチまたはボタンでズーム",
+      "heicConversionNotice": "HEIC画像はJPEGに変換されます",
       "errors": {
-        "invalidFileType": "JPG、PNG、WebP画像のみアップロード可能です。",
+        "invalidFileType": "JPG、PNG、WebP、HEIC画像のみアップロード可能です。",
         "fileTooLarge": "画像は10MB以下にしてください。",
-        "uploadFailed": "画像のアップロードに失敗しました。もう一度お試しください。"
+        "uploadFailed": "画像のアップロードに失敗しました。もう一度お試しください。",
+        "storageNotConfigured": "画像ストレージが利用できません。サポートにお問い合わせください。",
+        "networkError": "ネットワークエラーです。接続を確認して再試行してください。",
+        "unknownError": "予期しないエラーが発生しました。もう一度お試しください。"
       }
     }
   },
@@ -112,7 +117,10 @@
     },
     "weeklyPlan": {
       "title": "週間計画",
-      "placeholder": "計画を入力..."
+      "placeholder": "計画を入力...",
+      "previous": "前の週",
+      "next": "次の週",
+      "today": "今日へ移動"
     },
     "flowOfEvents": "イベントの流れ",
     "noEventsRecorded": "まだ重要なイベントが記録されていません。",
@@ -187,8 +195,8 @@
     "timeline": "タイムライン",
     "archives": "アーカイブ",
     "noLetters": "時間に封印された手紙はありません。",
-    "letterToYesterday": "昨日への手紙",
-    "letterToTomorrow": "明日への手紙",
+    "letterToYesterday": "昨日の自分への手紙",
+    "letterToTomorrow": "明日の自分への手紙",
     "reflectOnPassed": "過ぎ去ったことを振り返って...",
     "manifestIntent": "あなたの意志を込めて...",
     "sealing": "封印中...",
@@ -197,9 +205,56 @@
     "noLetterFromYesterday": "昨日の自分からの手紙はありません。",
     "receivedLetterFrom": "{date}からの手紙",
     "dateBlocked": "ロックされた日付",
-    "dateBlockedHint": "明日以降の日付にはアクセスできません。",
+    "dateBlockedHint": "今日のみ手紙を書くことができます。",
     "readOnly": "読み取り専用",
     "composeLetter": "手紙を書く"
+  },
+  "Goals": {
+    "title": "目標階層",
+    "subtitle": "長期目標から短期目標まで",
+    "hierarchy": "目標階層構造",
+    "createGoal": "目標を作成",
+    "editGoal": "目標を編集",
+    "deleteGoal": "目標を削除",
+    "deleteGoalConfirm": "この目標を削除しますか？下位目標との接続が解除されます。",
+    "createFirstGoal": "最初の目標を作成",
+    "addChild": "下位目標を追加",
+    "edit": "編集",
+    "delete": "削除",
+    "goalType": "目標タイプ",
+    "titleLabel": "タイトル",
+    "titlePlaceholder": "目標タイトルを入力...",
+    "description": "説明",
+    "descriptionPlaceholder": "この目標の説明を入力（任意）",
+    "parentGoal": "上位目標",
+    "noParent": "上位目標なし",
+    "statusLabel": "ステータス",
+    "goalsCount": "個の目標",
+    "noGoalsOfType": "このタイプの目標はありません。",
+    "goToHierarchy": "階層へ移動",
+    "types": {
+      "ultimate": "究極の目標",
+      "ten_year": "10年目標",
+      "five_year": "5年目標",
+      "one_year": "1年目標",
+      "six_month": "6ヶ月目標",
+      "three_month": "3ヶ月目標",
+      "one_month": "1ヶ月目標",
+      "one_week": "1週間目標"
+    },
+    "status": {
+      "active": "進行中",
+      "completed": "完了",
+      "paused": "一時停止",
+      "cancelled": "キャンセル"
+    },
+    "emptyState": {
+      "title": "まだ目標がありません",
+      "description": "究極の目標から週間目標まで、体系的に目標を設定・管理しましょう。"
+    },
+    "validation": {
+      "titleRequired": "タイトルを入力してください。"
+    }
   },
   "Bio": {
     "title": "BIO HACKING",
@@ -211,9 +266,21 @@
     "protocolNotFoundMessage": "リクエストされたプロトコルはデータベースに存在しません。",
     "updated": "更新日",
     "viewingIn": "{locale}で表示中",
-    "translationUnavailable": "この言語の翻訳はありません。"
+    "translationUnavailable": "この言語の翻訳はありません。",
+    "allCategories": "すべて",
+    "filterByCategory": "カテゴリーで絞り込み",
+    "postsCount": "{count}件のプロトコル",
+    "noPostsInCategory": "このカテゴリーにはプロトコルがありません。",
+    "categories": {
+      "Nutrition": "栄養",
+      "Supplements": "サプリメント",
+      "Recovery": "回復",
+      "Exercise": "運動",
+      "Mindset": "マインドセット"
+    }
   },
   "Common": {
+    "language": "Language",
     "loading": "読み込み中...",
     "error": "エラーが発生しました。",
     "confirm": "確認",
@@ -244,7 +311,25 @@
       "selfDeleteNotAllowed": "自分自身を削除することはできません。",
       "userNotFoundForDelete": "削除するユーザーが見つかりません。",
       "errorLogNotFound": "エラーログが見つかりません。",
-      "invalidDateRange": "無効な日付範囲です。"
+      "invalidDateRange": "無効な日付範囲です。",
+      "invalidBlockId": "無効なタイムブロックIDです。",
+      "blockNotFound": "タイムブロックが見つかりません。",
+      "invalidTimeRange": "無効な時間範囲です。",
+      "timeOverlap": "他のブロックと時間が重複しています。",
+      "databaseError": "データベースエラーが発生しました。",
+      "updateFailed": "タイムブロックの更新に失敗しました。",
+      "overlapCheckFailed": "時間重複の確認に失敗しました。",
+      "unexpectedError": "予期しないエラーが発生しました。",
+      "storageNotConfigured": "画像ストレージが利用できません。",
+      "invalidUrl": "無効なURLです。",
+      "deleteFailed": "削除に失敗しました。",
+      "dateNotAccessible": "今日の日付のみ手紙を書くことができます。",
+      "goalNotFound": "目標が見つかりません。",
+      "goalCreateFailed": "目標の作成に失敗しました。",
+      "goalUpdateFailed": "目標の更新に失敗しました。",
+      "goalDeleteFailed": "目標の削除に失敗しました。",
+      "invalidGoalParent": "無効な上位目標です。",
+      "invalidGoalTypeHierarchy": "この目標タイプは選択した上位目標の下位に設定できません。"
     },
     "validation": {
       "required": "この項目は必須です。",
@@ -527,5 +612,8 @@
         }
       }
     }
+  },
+  "Footer": {
+    "feedbackAndInquiries": "フィードバック・お問い合わせ"
   }
 }

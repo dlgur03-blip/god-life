@@ -5,6 +5,7 @@ import Providers from "../providers";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import HeaderWrapper from '@/components/HeaderWrapper';
+import FeedbackFooter from '@/components/FeedbackFooter';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,14 +35,15 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#050b14] min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#050b14] min-h-screen flex flex-col`}
       >
         <NextIntlClientProvider messages={messages}>
           <Providers>
             <HeaderWrapper />
-            <main className="pt-14">
+            <main className="pt-14 flex-1">
               {children}
             </main>
+            <FeedbackFooter />
           </Providers>
         </NextIntlClientProvider>
       </body>

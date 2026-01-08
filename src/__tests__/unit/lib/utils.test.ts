@@ -42,15 +42,20 @@ describe('utils', () => {
   })
 
   describe('getEpistleDateAccess', () => {
-    it('returns correct access levels', () => {
+    it('returns "past" for yesterday', () => {
       expect(getEpistleDateAccess('2026-01-07')).toBe('past')
-      expect(getEpistleDateAccess('2026-01-08')).toBe('today')
-      expect(getEpistleDateAccess('2026-01-09')).toBe('tomorrow')
-      expect(getEpistleDateAccess('2026-01-10')).toBe('blocked')
     })
 
-    it('returns blocked for dates more than 1 day in the future', () => {
-      expect(getEpistleDateAccess('2026-01-15')).toBe('blocked')
+    it('returns "today" for today', () => {
+      expect(getEpistleDateAccess('2026-01-08')).toBe('today')
+    })
+
+    it('returns "blocked" for tomorrow', () => {
+      expect(getEpistleDateAccess('2026-01-09')).toBe('blocked')
+    })
+
+    it('returns "blocked" for future dates', () => {
+      expect(getEpistleDateAccess('2026-01-10')).toBe('blocked')
       expect(getEpistleDateAccess('2026-02-01')).toBe('blocked')
     })
   })
