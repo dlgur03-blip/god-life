@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npx prisma db push --accept-data-loss && next build",
     "start": "next start",
     "lint": "eslint",
     "postinstall": "prisma generate"
@@ -16,6 +16,7 @@
     "lucide-react": "^0.562.0",
     "next": "16.1.1",
     "next-auth": "^4.24.13",
+    "next-intl": "^4.7.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-markdown": "^10.1.0",

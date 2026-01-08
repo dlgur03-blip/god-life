@@ -1,0 +1,195 @@
+{
+  "Home": {
+    "title": "GOD LIFE MAKER",
+    "subtitle": "Architect your destiny. Master your discipline. Hack your biology.",
+    "enterSystem": "Enter System",
+    "welcome": "Welcome, {name}",
+    "userError": "User account not found. Please try signing in again.",
+    "modules": {
+      "destiny": {
+        "name": "Destiny Navigator",
+        "desc": "Daily Goals & Timeblocks"
+      },
+      "success": {
+        "name": "Success Code",
+        "desc": "100 Days Projects"
+      },
+      "discipline": {
+        "name": "Discipline Mastery",
+        "desc": "Daily Rules & Check"
+      },
+      "epistle": {
+        "name": "Self Epistle",
+        "desc": "Letters to Self"
+      },
+      "bio": {
+        "name": "Bio Hacking",
+        "desc": "Optimization Columns"
+      }
+    },
+    "status": {
+      "notStarted": "Not Started",
+      "inProgress": "In Progress",
+      "planned": "Planned",
+      "noRules": "No Rules",
+      "percentDone": "{percent}% Done",
+      "noActive": "No Active Missions",
+      "activeCount": "{count} Active",
+      "sealed": "Sealed",
+      "pending": "Pending",
+      "database": "Database"
+    }
+  },
+  "Success": {
+    "title": "SUCCESS CODE",
+    "subtitle": "100 Days of Consistency",
+    "newProject": "New Project",
+    "dayCount": "Day {current} / 100",
+    "started": "Started {date}",
+    "noProjects": "No active missions.",
+    "startJourney": "Start your first 100-day journey",
+    "backToDashboard": "Back to Dashboard",
+    "backToList": "Back to List",
+    "currentDay": "Current Day",
+    "start": "Start",
+    "reminder": "Reminder",
+    "form": {
+      "title": "Initiate Protocol",
+      "projectTitle": "Project Title",
+      "projectTitlePlaceholder": "e.g. 100 Days of Code",
+      "startDate": "Start Date",
+      "reminderTime": "Reminder",
+      "generateGrid": "Generate 100-Day Grid"
+    },
+    "day": "Day",
+    "missionComplete": "Mission Complete",
+    "pendingVerification": "Pending Verification",
+    "logProgress": "Log your progress...",
+    "verifying": "Verifying...",
+    "confirmEntry": "Confirm Entry",
+    "projectNotFound": "Project Not Found",
+    "projectNotFoundMessage": "The requested project does not exist or has been deleted."
+  },
+  "Destiny": {
+    "title": "DESTINY NAVIGATOR",
+    "coreObjectives": "Core Objectives",
+    "timeblocks": "Timeblocks (06:00 - 16:00)",
+    "goals": {
+      "ultimate": "Ultimate",
+      "longTerm": "Long-term",
+      "month": "Month",
+      "week": "Week",
+      "today": "Today"
+    },
+    "flowOfEvents": "Flow of Events",
+    "noEventsRecorded": "No significant events recorded yet.",
+    "recordEvent": "Record Event",
+    "whatJustHappened": "What just happened?",
+    "recording": "Recording...",
+    "recordToTimeline": "Record to Timeline",
+    "timeblock": {
+      "timeTo": "to {time}",
+      "planMode": "Plan",
+      "actualMode": "Actual",
+      "whereLabel": "Where",
+      "whatLabel": "What",
+      "locationPlaceholder": "Location...",
+      "planPlaceholder": "Plan details...",
+      "actualPlaceholder": "What actually happened...",
+      "doneLabel": "Done",
+      "scoreLabel": "Score",
+      "scoreSuffix": "/ 10",
+      "feedLabel": "Feed",
+      "feedbackPlaceholder": "Feedback..."
+    }
+  },
+  "Discipline": {
+    "title": "DISCIPLINE MASTERY",
+    "dailyCompletion": "Daily Completion",
+    "backToCheck": "Back to Check",
+    "insights": "Insights",
+    "masteryInsights": "Mastery Insights",
+    "sevenDayRate": "7-Day Rate",
+    "thirtyDayRate": "30-Day Rate",
+    "noRulesInsight": "Add rules to see your performance trends.",
+    "deleteRuleConfirm": "Delete this rule?",
+    "noRulesDefined": "No rules defined. Add a discipline to start mastery.",
+    "addNewDiscipline": "Add a new discipline..."
+  },
+  "Epistle": {
+    "title": "SELF EPISTLE",
+    "backToWriting": "Back to Writing",
+    "timeline": "Timeline",
+    "archives": "Archives",
+    "noLetters": "No letters sealed in time.",
+    "letterToYesterday": "Letter to Yesterday",
+    "letterToTomorrow": "Letter to Tomorrow",
+    "reflectOnPassed": "Reflect on what passed...",
+    "manifestIntent": "Manifest your intent...",
+    "sealing": "Sealing...",
+    "sealEpistle": "Seal Epistle"
+  },
+  "Bio": {
+    "title": "BIO HACKING",
+    "subtitle": "Optimize your wetware.",
+    "backToDatabase": "Back to Database",
+    "returnToDatabase": "Return to Database",
+    "readProtocol": "Read Protocol",
+    "protocolNotFound": "Protocol not found.",
+    "protocolNotFoundMessage": "The requested protocol does not exist in our database.",
+    "updated": "Updated"
+  },
+  "Common": {
+    "loading": "Loading...",
+    "error": "An error occurred.",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "back": "Back",
+    "notFound": {
+      "title": "Page Not Found",
+      "message": "The page you are looking for does not exist or has been moved.",
+      "backHome": "Back to Home"
+    },
+    "errors": {
+      "unauthorized": "You must be logged in to perform this action.",
+      "userNotFound": "User account not found.",
+      "missingFields": "Please fill in all required fields.",
+      "maxRulesReached": "Maximum number of rules reached (13).",
+      "networkError": "Network error. Please check your connection.",
+      "serverError": "Server error. Please try again later.",
+      "unknown": "An unexpected error occurred."
+    },
+    "validation": {
+      "required": "This field is required.",
+      "invalidDate": "Please enter a valid date.",
+      "maxLength": "Maximum {max} characters allowed.",
+      "minLength": "Minimum {min} characters required.",
+      "invalidFormat": "Invalid format."
+    },
+    "dialog": {
+      "confirmTitle": "Confirm Action",
+      "confirmDelete": "Are you sure you want to delete this item?",
+      "confirmCancel": "Discard unsaved changes?"
+    },
+    "status": {
+      "saving": "Saving...",
+      "saved": "Saved successfully.",
+      "deleting": "Deleting...",
+      "deleted": "Deleted successfully.",
+      "updating": "Updating...",
+      "updated": "Updated successfully."
+    },
+    "dates": {
+      "today": "Today",
+      "yesterday": "Yesterday",
+      "tomorrow": "Tomorrow"
+    },
+    "locales": {
+      "en": "English",
+      "ko": "Korean",
+      "ja": "Japanese"
+    }
+  }
+}

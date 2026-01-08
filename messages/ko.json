@@ -1,0 +1,195 @@
+{
+  "Home": {
+    "title": "GOD LIFE MAKER",
+    "subtitle": "운명을 설계하고, 규율을 마스터하며, 바이오 해킹으로 최적화하라.",
+    "enterSystem": "시스템 접속",
+    "welcome": "환영합니다, {name}님",
+    "userError": "사용자 계정을 찾을 수 없습니다. 다시 로그인해 주세요.",
+    "modules": {
+      "destiny": {
+        "name": "운명 네비게이터",
+        "desc": "일일 목표 및 타임 블록"
+      },
+      "success": {
+        "name": "성공 코드",
+        "desc": "100일 프로젝트"
+      },
+      "discipline": {
+        "name": "규율 마스터리",
+        "desc": "매일의 규칙 및 체크"
+      },
+      "epistle": {
+        "name": "셀프 서신",
+        "desc": "나에게 쓰는 편지"
+      },
+      "bio": {
+        "name": "바이오 해킹",
+        "desc": "최적화 칼럼 및 데이터베이스"
+      }
+    },
+    "status": {
+      "notStarted": "시작 전",
+      "inProgress": "진행 중",
+      "planned": "계획됨",
+      "noRules": "규칙 없음",
+      "percentDone": "{percent}% 완료",
+      "noActive": "활성 미션 없음",
+      "activeCount": "{count}개 진행 중",
+      "sealed": "봉인됨",
+      "pending": "대기 중",
+      "database": "데이터베이스"
+    }
+  },
+  "Success": {
+    "title": "SUCCESS CODE",
+    "subtitle": "100일 일관성의 법칙",
+    "newProject": "새 프로젝트",
+    "dayCount": "Day {current} / 100",
+    "started": "{date}에 시작",
+    "noProjects": "활성 미션이 없습니다.",
+    "startJourney": "첫 100일 여정을 시작하세요",
+    "backToDashboard": "대시보드로 돌아가기",
+    "backToList": "목록으로 돌아가기",
+    "currentDay": "현재 일차",
+    "start": "시작",
+    "reminder": "알림",
+    "form": {
+      "title": "프로토콜 시작",
+      "projectTitle": "프로젝트 제목",
+      "projectTitlePlaceholder": "예: 100일 코딩",
+      "startDate": "시작 날짜",
+      "reminderTime": "알림 시간",
+      "generateGrid": "100일 그리드 생성"
+    },
+    "day": "Day",
+    "missionComplete": "미션 완료",
+    "pendingVerification": "검증 대기 중",
+    "logProgress": "진행 상황을 기록하세요...",
+    "verifying": "검증 중...",
+    "confirmEntry": "기록 확인",
+    "projectNotFound": "프로젝트를 찾을 수 없습니다",
+    "projectNotFoundMessage": "요청하신 프로젝트가 존재하지 않거나 삭제되었습니다."
+  },
+  "Destiny": {
+    "title": "DESTINY NAVIGATOR",
+    "coreObjectives": "핵심 목표",
+    "timeblocks": "타임블록 (06:00 - 16:00)",
+    "goals": {
+      "ultimate": "궁극적",
+      "longTerm": "장기",
+      "month": "이번 달",
+      "week": "이번 주",
+      "today": "오늘"
+    },
+    "flowOfEvents": "이벤트 흐름",
+    "noEventsRecorded": "아직 기록된 중요한 이벤트가 없습니다.",
+    "recordEvent": "이벤트 기록",
+    "whatJustHappened": "방금 무슨 일이 있었나요?",
+    "recording": "기록 중...",
+    "recordToTimeline": "타임라인에 기록",
+    "timeblock": {
+      "timeTo": "{time}까지",
+      "planMode": "계획",
+      "actualMode": "실제",
+      "whereLabel": "장소",
+      "whatLabel": "할일",
+      "locationPlaceholder": "장소...",
+      "planPlaceholder": "계획 내용...",
+      "actualPlaceholder": "실제로 한 일...",
+      "doneLabel": "완료",
+      "scoreLabel": "점수",
+      "scoreSuffix": "/ 10",
+      "feedLabel": "피드백",
+      "feedbackPlaceholder": "피드백..."
+    }
+  },
+  "Discipline": {
+    "title": "DISCIPLINE MASTERY",
+    "dailyCompletion": "일일 완료율",
+    "backToCheck": "체크로 돌아가기",
+    "insights": "인사이트",
+    "masteryInsights": "마스터리 인사이트",
+    "sevenDayRate": "7일 달성률",
+    "thirtyDayRate": "30일 달성률",
+    "noRulesInsight": "성과 추이를 보려면 규칙을 추가하세요.",
+    "deleteRuleConfirm": "이 규칙을 삭제하시겠습니까?",
+    "noRulesDefined": "정의된 규칙이 없습니다. 마스터리를 시작하려면 규율을 추가하세요.",
+    "addNewDiscipline": "새 규율 추가..."
+  },
+  "Epistle": {
+    "title": "SELF EPISTLE",
+    "backToWriting": "글쓰기로 돌아가기",
+    "timeline": "타임라인",
+    "archives": "아카이브",
+    "noLetters": "시간 속에 봉인된 편지가 없습니다.",
+    "letterToYesterday": "어제에게 보내는 편지",
+    "letterToTomorrow": "내일에게 보내는 편지",
+    "reflectOnPassed": "지나간 것을 되돌아보세요...",
+    "manifestIntent": "당신의 의지를 담으세요...",
+    "sealing": "봉인 중...",
+    "sealEpistle": "편지 봉인"
+  },
+  "Bio": {
+    "title": "BIO HACKING",
+    "subtitle": "당신의 웨트웨어를 최적화하세요.",
+    "backToDatabase": "데이터베이스로 돌아가기",
+    "returnToDatabase": "데이터베이스로 돌아가기",
+    "readProtocol": "프로토콜 읽기",
+    "protocolNotFound": "프로토콜을 찾을 수 없습니다.",
+    "protocolNotFoundMessage": "요청하신 프로토콜이 데이터베이스에 존재하지 않습니다.",
+    "updated": "업데이트"
+  },
+  "Common": {
+    "loading": "로딩 중...",
+    "error": "오류가 발생했습니다.",
+    "confirm": "확인",
+    "cancel": "취소",
+    "save": "저장",
+    "delete": "삭제",
+    "back": "뒤로",
+    "notFound": {
+      "title": "페이지를 찾을 수 없습니다",
+      "message": "요청하신 페이지가 존재하지 않거나 이동되었습니다.",
+      "backHome": "홈으로 돌아가기"
+    },
+    "errors": {
+      "unauthorized": "이 작업을 수행하려면 로그인해야 합니다.",
+      "userNotFound": "사용자 계정을 찾을 수 없습니다.",
+      "missingFields": "모든 필수 항목을 입력해 주세요.",
+      "maxRulesReached": "최대 규칙 수에 도달했습니다 (13개).",
+      "networkError": "네트워크 오류입니다. 연결을 확인해 주세요.",
+      "serverError": "서버 오류입니다. 나중에 다시 시도해 주세요.",
+      "unknown": "예기치 않은 오류가 발생했습니다."
+    },
+    "validation": {
+      "required": "필수 항목입니다.",
+      "invalidDate": "유효한 날짜를 입력해 주세요.",
+      "maxLength": "최대 {max}자까지 입력할 수 있습니다.",
+      "minLength": "최소 {min}자 이상 입력해 주세요.",
+      "invalidFormat": "형식이 올바르지 않습니다."
+    },
+    "dialog": {
+      "confirmTitle": "작업 확인",
+      "confirmDelete": "이 항목을 삭제하시겠습니까?",
+      "confirmCancel": "저장하지 않은 변경 사항을 취소하시겠습니까?"
+    },
+    "status": {
+      "saving": "저장 중...",
+      "saved": "저장되었습니다.",
+      "deleting": "삭제 중...",
+      "deleted": "삭제되었습니다.",
+      "updating": "업데이트 중...",
+      "updated": "업데이트되었습니다."
+    },
+    "dates": {
+      "today": "오늘",
+      "yesterday": "어제",
+      "tomorrow": "내일"
+    },
+    "locales": {
+      "en": "영어",
+      "ko": "한국어",
+      "ja": "일본어"
+    }
+  }
+}

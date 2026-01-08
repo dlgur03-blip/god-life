@@ -4,14 +4,16 @@ import { useState } from 'react';
 import { upsertEpistle } from '@/app/actions/epistle';
 import { cn } from '@/lib/utils';
 import { Save } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
-export default function EpistleForm({ 
-  date, 
-  initialData 
-}: { 
-  date: string; 
-  initialData: any; 
+export default function EpistleForm({
+  date,
+  initialData
+}: {
+  date: string;
+  initialData: { toYesterday?: string | null; toTomorrow?: string | null; mood?: string | null } | null;
 }) {
+  const t = useTranslations('Epistle');
   const [yesterday, setYesterday] = useState(initialData?.toYesterday || '');
   const [tomorrow, setTomorrow] = useState(initialData?.toTomorrow || '');
   const [mood, setMood] = useState(initialData?.mood || '');
@@ -49,12 +51,12 @@ export default function EpistleForm({
         {/* To Yesterday */}
         <div className="bg-white/5 border border-white/10 rounded-2xl p-6 relative group focus-within:border-secondary/50 transition-colors">
           <label className="block text-xs font-bold text-gray-500 uppercase mb-4 tracking-widest">
-            Letter to Yesterday
+            {t('letterToYesterday')}
           </label>
           <textarea
             value={yesterday}
             onChange={(e) => setYesterday(e.target.value)}
-            placeholder="Reflect on what passed..."
+            placeholder={t('reflectOnPassed')}
             className="w-full h-64 bg-transparent resize-none outline-none text-gray-200 leading-relaxed font-serif placeholder:italic placeholder:text-gray-600"
           />
           <div className="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
@@ -65,12 +67,12 @@ export default function EpistleForm({
         {/* To Tomorrow */}
         <div className="bg-white/5 border border-white/10 rounded-2xl p-6 relative group focus-within:border-primary/50 transition-colors">
           <label className="block text-xs font-bold text-gray-500 uppercase mb-4 tracking-widest">
-            Letter to Tomorrow
+            {t('letterToTomorrow')}
           </label>
           <textarea
             value={tomorrow}
             onChange={(e) => setTomorrow(e.target.value)}
-            placeholder="Manifest your intent..."
+            placeholder={t('manifestIntent')}
             className="w-full h-64 bg-transparent resize-none outline-none text-gray-200 leading-relaxed font-serif placeholder:italic placeholder:text-gray-600"
           />
            <div className="absolute bottom-0 right-0 p-4 opacity-10 pointer-events-none rotate-180">
@@ -86,7 +88,7 @@ export default function EpistleForm({
           className="bg-primary/20 hover:bg-primary/30 text-primary border border-primary/50 px-8 py-3 rounded-xl flex items-center gap-2 font-bold transition-all disabled:opacity-50"
         >
           <Save className="w-5 h-5" />
-          {isSaving ? 'Sealing...' : 'Seal Epistle'}
+          {isSaving ? t('sealing') : t('sealEpistle')}
         </button>
       </div>
     </div>

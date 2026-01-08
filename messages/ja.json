@@ -1,0 +1,195 @@
+{
+  "Home": {
+    "title": "GOD LIFE MAKER",
+    "subtitle": "運命を設計し、規律を極め、バイオハッキングで最適化せよ。",
+    "enterSystem": "システムに入る",
+    "welcome": "ようこそ、{name}さん",
+    "userError": "ユーザーアカウントが見つかりません。もう一度ログインしてください。",
+    "modules": {
+      "destiny": {
+        "name": "運命ナビゲーター",
+        "desc": "毎日の目標と時間割"
+      },
+      "success": {
+        "name": "成功コード",
+        "desc": "100日プロジェクト"
+      },
+      "discipline": {
+        "name": "規律マスタリー",
+        "desc": "毎日のルールとチェック"
+      },
+      "epistle": {
+        "name": "セルフ手紙",
+        "desc": "自分への手紙"
+      },
+      "bio": {
+        "name": "バイオハッキング",
+        "desc": "最適化コラム & データベース"
+      }
+    },
+    "status": {
+      "notStarted": "未着手",
+      "inProgress": "進行中",
+      "planned": "計画済み",
+      "noRules": "ルールなし",
+      "percentDone": "{percent}% 完了",
+      "noActive": "進行中のミッションなし",
+      "activeCount": "{count}個 進行中",
+      "sealed": "封印済み",
+      "pending": "保留中",
+      "database": "データベース"
+    }
+  },
+  "Success": {
+    "title": "SUCCESS CODE",
+    "subtitle": "100日一貫性の法則",
+    "newProject": "新規プロジェクト",
+    "dayCount": "Day {current} / 100",
+    "started": "{date}に開始",
+    "noProjects": "進行中のミッションがありません。",
+    "startJourney": "最初の100日の旅を始めましょう",
+    "backToDashboard": "ダッシュボードに戻る",
+    "backToList": "リストに戻る",
+    "currentDay": "現在の日数",
+    "start": "開始",
+    "reminder": "リマインダー",
+    "form": {
+      "title": "プロトコル開始",
+      "projectTitle": "プロジェクトタイトル",
+      "projectTitlePlaceholder": "例: 100日コーディング",
+      "startDate": "開始日",
+      "reminderTime": "リマインダー時間",
+      "generateGrid": "100日グリッドを生成"
+    },
+    "day": "Day",
+    "missionComplete": "ミッション完了",
+    "pendingVerification": "検証待ち",
+    "logProgress": "進捗を記録してください...",
+    "verifying": "検証中...",
+    "confirmEntry": "記録を確認",
+    "projectNotFound": "プロジェクトが見つかりません",
+    "projectNotFoundMessage": "リクエストされたプロジェクトは存在しないか、削除されました。"
+  },
+  "Destiny": {
+    "title": "DESTINY NAVIGATOR",
+    "coreObjectives": "コア目標",
+    "timeblocks": "タイムブロック (06:00 - 16:00)",
+    "goals": {
+      "ultimate": "究極",
+      "longTerm": "長期",
+      "month": "今月",
+      "week": "今週",
+      "today": "今日"
+    },
+    "flowOfEvents": "イベントの流れ",
+    "noEventsRecorded": "まだ重要なイベントが記録されていません。",
+    "recordEvent": "イベントを記録",
+    "whatJustHappened": "今何が起こりましたか？",
+    "recording": "記録中...",
+    "recordToTimeline": "タイムラインに記録",
+    "timeblock": {
+      "timeTo": "{time}まで",
+      "planMode": "計画",
+      "actualMode": "実績",
+      "whereLabel": "場所",
+      "whatLabel": "内容",
+      "locationPlaceholder": "場所...",
+      "planPlaceholder": "計画の詳細...",
+      "actualPlaceholder": "実際に行ったこと...",
+      "doneLabel": "完了",
+      "scoreLabel": "スコア",
+      "scoreSuffix": "/ 10",
+      "feedLabel": "フィード",
+      "feedbackPlaceholder": "フィードバック..."
+    }
+  },
+  "Discipline": {
+    "title": "DISCIPLINE MASTERY",
+    "dailyCompletion": "毎日の完了率",
+    "backToCheck": "チェックに戻る",
+    "insights": "インサイト",
+    "masteryInsights": "マスタリーインサイト",
+    "sevenDayRate": "7日間達成率",
+    "thirtyDayRate": "30日間達成率",
+    "noRulesInsight": "パフォーマンスの傾向を見るにはルールを追加してください。",
+    "deleteRuleConfirm": "このルールを削除しますか？",
+    "noRulesDefined": "ルールが定義されていません。マスタリーを始めるには規律を追加してください。",
+    "addNewDiscipline": "新しい規律を追加..."
+  },
+  "Epistle": {
+    "title": "SELF EPISTLE",
+    "backToWriting": "執筆に戻る",
+    "timeline": "タイムライン",
+    "archives": "アーカイブ",
+    "noLetters": "時間に封印された手紙はありません。",
+    "letterToYesterday": "昨日への手紙",
+    "letterToTomorrow": "明日への手紙",
+    "reflectOnPassed": "過ぎ去ったことを振り返って...",
+    "manifestIntent": "あなたの意志を込めて...",
+    "sealing": "封印中...",
+    "sealEpistle": "手紙を封印"
+  },
+  "Bio": {
+    "title": "BIO HACKING",
+    "subtitle": "あなたのウェットウェアを最適化せよ。",
+    "backToDatabase": "データベースに戻る",
+    "returnToDatabase": "データベースに戻る",
+    "readProtocol": "プロトコルを読む",
+    "protocolNotFound": "プロトコルが見つかりません。",
+    "protocolNotFoundMessage": "リクエストされたプロトコルはデータベースに存在しません。",
+    "updated": "更新"
+  },
+  "Common": {
+    "loading": "読み込み中...",
+    "error": "エラーが発生しました。",
+    "confirm": "確認",
+    "cancel": "キャンセル",
+    "save": "保存",
+    "delete": "削除",
+    "back": "戻る",
+    "notFound": {
+      "title": "ページが見つかりません",
+      "message": "お探しのページは存在しないか、移動した可能性があります。",
+      "backHome": "ホームに戻る"
+    },
+    "errors": {
+      "unauthorized": "この操作を行うにはログインが必要です。",
+      "userNotFound": "ユーザーアカウントが見つかりません。",
+      "missingFields": "すべての必須項目を入力してください。",
+      "maxRulesReached": "ルールの最大数に達しました（13件）。",
+      "networkError": "ネットワークエラーです。接続を確認してください。",
+      "serverError": "サーバーエラーです。後でもう一度お試しください。",
+      "unknown": "予期しないエラーが発生しました。"
+    },
+    "validation": {
+      "required": "この項目は必須です。",
+      "invalidDate": "有効な日付を入力してください。",
+      "maxLength": "最大{max}文字まで入力できます。",
+      "minLength": "最低{min}文字以上入力してください。",
+      "invalidFormat": "形式が正しくありません。"
+    },
+    "dialog": {
+      "confirmTitle": "操作の確認",
+      "confirmDelete": "この項目を削除してもよろしいですか？",
+      "confirmCancel": "保存されていない変更を破棄しますか？"
+    },
+    "status": {
+      "saving": "保存中...",
+      "saved": "保存しました。",
+      "deleting": "削除中...",
+      "deleted": "削除しました。",
+      "updating": "更新中...",
+      "updated": "更新しました。"
+    },
+    "dates": {
+      "today": "今日",
+      "yesterday": "昨日",
+      "tomorrow": "明日"
+    },
+    "locales": {
+      "en": "英語",
+      "ko": "韓国語",
+      "ja": "日本語"
+    }
+  }
+}

@@ -23,6 +23,7 @@
 # misc
 .DS_Store
 *.pem
+nul
 
 # debug
 npm-debug.log*
@@ -30,8 +31,11 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
+# env files
+.env
+.env.local
+.env*.local
+!.env.example
 
 # vercel
 .vercel
@@ -40,9 +44,14 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# prisma
 /src/generated/prisma
-
-.vercel
-몽환_인쇄용파일.zip
 dev.db
 prisma/dev.db
+
+# claude/ai tools
+.claude/
+.claude-orchestrator/
+
+# misc project files
+scripts/

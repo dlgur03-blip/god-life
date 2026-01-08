@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { ActionResult, success, error } from '@/lib/errors';
 
 async function getUser() {
   const session = await getServerSession(authOptions);
@@ -38,25 +39,34 @@ export async function getDisciplineData(date: string) {
   }));
 }
 
-export async function createRule(title: string) {
-  const user = await getUser();
-  
-  const count = await prisma.disciplineRule.count({ where: { userId: user.id } });
-  if (count >= 13) throw new Error("Max 13 rules allowed");
+export async function createRule(title: string): Promise<ActionResult> {
+  try {
+    const user = await getUser();
 
-  await prisma.disciplineRule.create({
-    data: {
-      userId: user.id,
-      title,
-      sortOrder: count + 1
+    const count = await prisma.disciplineRule.count({ where: { userId: user.id } });
+    if (count >= 13) return error('MAX_RULES_REACHED');
+
+    await prisma.disciplineRule.create({
+      data: {
+        userId: user.id,
+        title,
+        sortOrder: count + 1
+      }
+    });
+
+    revalidatePath('/discipline/day/[date]');
+    return success(undefined);
+  } catch (e) {
+    if (e instanceof Error) {
+      if (e.message === 'Unauthorized') return error('UNAUTHORIZED');
+      if (e.message === 'User not found') return error('USER_NOT_FOUND');
     }
-  });
-
-  revalidatePath('/discipline/day/[date]');
+    return error('UNKNOWN');
+  }
 }
 
 export async function toggleRuleCheck(ruleId: string, date: string, isChecked: boolean) {
-  const user = await getUser();
+  await getUser();
 
   if (isChecked) {
     // Check (Upsert handled by unique constraint logic usually, but here create if not exists)
