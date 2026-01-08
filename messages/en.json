@@ -107,13 +107,16 @@
     "coreObjectives": "Core Objectives",
     "timeblocks": "24-Hour Timeblocks",
     "goals": {
-      "ultimate": "Ultimate",
-      "longTerm": "Long-term",
-      "month": "Month",
+      "ultimate": "Ultimate Goal",
+      "longTerm": "Long-term Goal",
+      "month": "This Month",
       "week": "This Week",
       "today": "Today",
-      "weekPlaceholder": "Enter your weekly goal...",
-      "todayPlaceholder": "Enter today's goal..."
+      "ultimatePlaceholder": "What is your life's ultimate goal?",
+      "longTermPlaceholder": "What do you want to achieve long-term?",
+      "monthPlaceholder": "What must you achieve this month?",
+      "weekPlaceholder": "What are you focusing on this week?",
+      "todayPlaceholder": "What must you do today?"
     },
     "weeklyPlan": {
       "title": "Weekly Plan",

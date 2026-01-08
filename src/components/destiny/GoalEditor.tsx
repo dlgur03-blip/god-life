@@ -3,14 +3,26 @@
 import { useState, useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 
+type GoalVariant = 'ultimate' | 'longTerm' | 'month' | 'week' | 'today';
+
+const variantColors: Record<GoalVariant, { border: string; text: string; bg: string }> = {
+  ultimate: { border: 'border-[#FFD700]', text: 'text-[#FFD700]', bg: 'bg-[rgba(255,215,0,0.1)]' },
+  longTerm: { border: 'border-[#8B5CF6]', text: 'text-[#8B5CF6]', bg: 'bg-[rgba(139,92,246,0.1)]' },
+  month: { border: 'border-[#10B981]', text: 'text-[#10B981]', bg: 'bg-[rgba(16,185,129,0.1)]' },
+  week: { border: 'border-[#06b6d4]', text: 'text-[#06b6d4]', bg: 'bg-[rgba(6,182,212,0.1)]' },
+  today: { border: 'border-[#f59e0b]', text: 'text-[#f59e0b]', bg: 'bg-[rgba(245,158,11,0.1)]' },
+};
+
 interface GoalEditorProps {
   label: string;
   value: string | null;
   onSave: (value: string) => Promise<void>;
   placeholder?: string;
+  variant?: GoalVariant;
 }
 
-export default function GoalEditor({ label, value, onSave, placeholder }: GoalEditorProps) {
+export default function GoalEditor({ label, value, onSave, placeholder, variant = 'week' }: GoalEditorProps) {
+  const colors = variantColors[variant];
   const [isEditing, setIsEditing] = useState(false);
   const [inputValue, setInputValue] = useState(value || '');
   const [isSaving, setIsSaving] = useState(false);
@@ -85,7 +97,7 @@ export default function GoalEditor({ label, value, onSave, placeholder }: GoalEd
 
   return (
     <div className="flex items-center gap-4">
-      <span className="w-24 text-xs font-bold text-gray-500 uppercase text-right shrink-0">
+      <span className={cn("w-24 text-xs font-bold uppercase text-right shrink-0", colors.text)}>
         {label}
       </span>
       <div className="flex-1 relative">
@@ -100,8 +112,8 @@ export default function GoalEditor({ label, value, onSave, placeholder }: GoalEd
             placeholder={placeholder}
             className={cn(
               "w-full h-8 bg-black/20 rounded border px-3 text-sm text-gray-200 outline-none transition-all",
-              "border-[#06b6d4] focus:border-[#06b6d4]",
-              isSaving && "bg-[rgba(6,182,212,0.3)]"
+              colors.border,
+              isSaving && colors.bg
             )}
           />
         ) : (
@@ -118,7 +130,7 @@ export default function GoalEditor({ label, value, onSave, placeholder }: GoalEd
         )}
         {isSaving && (
           <div className="absolute right-2 top-1/2 -translate-y-1/2">
-            <div className="w-4 h-4 border-2 border-[#06b6d4] border-t-transparent rounded-full animate-spin" />
+            <div className={cn("w-4 h-4 border-2 border-t-transparent rounded-full animate-spin", colors.border)} />
           </div>
         )}
       </div>

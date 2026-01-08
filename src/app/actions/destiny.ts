@@ -78,6 +78,9 @@ export async function getOrCreateDestinyDay(date: string) {
 }
 
 export async function updateDestinyGoals(dayId: string, goals: {
+  ultimate?: string;
+  long?: string;
+  month?: string;
   week?: string;
   today?: string;
 }) {
@@ -86,6 +89,9 @@ export async function updateDestinyGoals(dayId: string, goals: {
   await prisma.destinyDay.update({
     where: { id: dayId },
     data: {
+      goalUltimate: goals.ultimate,
+      goalLong: goals.long,
+      goalMonth: goals.month,
       goalWeek: goals.week,
       goalToday: goals.today,
     },

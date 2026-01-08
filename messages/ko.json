@@ -107,13 +107,16 @@
     "coreObjectives": "핵심 목표",
     "timeblocks": "24시간 타임블록",
     "goals": {
-      "ultimate": "궁극적",
-      "longTerm": "장기",
-      "month": "이번 달",
-      "week": "이번 주",
-      "today": "오늘",
-      "weekPlaceholder": "이번 주 목표를 입력하세요...",
-      "todayPlaceholder": "오늘의 목표를 입력하세요..."
+      "ultimate": "궁극적 목표",
+      "longTerm": "장기 목표",
+      "month": "이번 달 목표",
+      "week": "이번 주 목표",
+      "today": "오늘의 목표",
+      "ultimatePlaceholder": "인생의 궁극적 목표는?",
+      "longTermPlaceholder": "장기적으로 이루고 싶은 것은?",
+      "monthPlaceholder": "이번 달 반드시 달성할 것은?",
+      "weekPlaceholder": "이번 주 집중할 것은?",
+      "todayPlaceholder": "오늘 반드시 해야 할 것은?"
     },
     "weeklyPlan": {
       "title": "주간 계획",

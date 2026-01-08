@@ -60,9 +60,12 @@ export default async function DestinyDayPage({ params }: { params: Promise<{ dat
           </Link>
         </header>
 
-        {/* NEW: Simplified Goals Section */}
+        {/* Core Objectives: 5-Level Goals */}
         <DestinyNavigatorCard
           dayId={day.id}
+          goalUltimate={day.goalUltimate}
+          goalLong={day.goalLong}
+          goalMonth={day.goalMonth}
           goalWeek={day.goalWeek}
           goalToday={day.goalToday}
           weeklyPlans={weeklyPlans}

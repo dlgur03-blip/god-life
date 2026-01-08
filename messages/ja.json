@@ -107,13 +107,16 @@
     "coreObjectives": "核心目標",
     "timeblocks": "24時間タイムブロック",
     "goals": {
-      "ultimate": "究極",
-      "longTerm": "長期",
-      "month": "今月",
-      "week": "今週",
-      "today": "今日",
-      "weekPlaceholder": "今週の目標を入力...",
-      "todayPlaceholder": "今日の目標を入力..."
+      "ultimate": "究極の目標",
+      "longTerm": "長期目標",
+      "month": "今月の目標",
+      "week": "今週の目標",
+      "today": "今日の目標",
+      "ultimatePlaceholder": "人生の究極の目標は？",
+      "longTermPlaceholder": "長期的に達成したいことは？",
+      "monthPlaceholder": "今月必ず達成することは？",
+      "weekPlaceholder": "今週集中することは？",
+      "todayPlaceholder": "今日必ずやることは？"
     },
     "weeklyPlan": {
       "title": "週間計画",
