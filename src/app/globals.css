@@ -4,48 +4,48 @@
 :root,
 [data-theme="dior"] {
   /* Core Colors - Dior Elegance */
-  --background: #f8f6f3;
-  --background-secondary: #ffffff;
+  --background: #faf9f7;
+  --background-secondary: #f5f3f0;
   --background-card: #ffffff;
   --foreground: #1a1a1a;
-  --foreground-muted: #6b6b6b;
+  --foreground-muted: #5c5c5c;
 
   /* Brand Colors */
   --color-primary: #1a1a1a;
-  --color-primary-hover: #333333;
-  --color-secondary: #c9a96e;
-  --color-accent: #b8860b;
+  --color-primary-hover: #000000;
+  --color-secondary: #a08050;
+  --color-accent: #8b7355;
 
   /* UI Colors */
-  --color-border: #e5e0d8;
-  --color-border-hover: #c9a96e;
+  --color-border: #d4cfc6;
+  --color-border-hover: #a08050;
   --color-input-bg: #ffffff;
   --color-card-bg: #ffffff;
-  --color-card-hover: #faf8f5;
+  --color-card-hover: #f8f6f3;
 
   /* Status Colors */
-  --color-success: #2d5a27;
-  --color-warning: #8b6914;
-  --color-error: #8b1a1a;
-  --color-info: #1a4a6b;
+  --color-success: #3d7a35;
+  --color-warning: #a07818;
+  --color-error: #a83232;
+  --color-info: #2a6090;
 
-  /* Module Colors */
-  --color-destiny: #1a1a1a;
-  --color-success-module: #c9a96e;
-  --color-discipline: #6b5344;
-  --color-epistle: #4a4a4a;
-  --color-bio: #2d5a27;
+  /* Module Colors - More vibrant for light bg */
+  --color-destiny: #2c2c2c;
+  --color-success-module: #a08050;
+  --color-discipline: #8b6b5a;
+  --color-epistle: #5a5a5a;
+  --color-bio: #4a7a42;
 
   /* Typography */
   --font-sans: "Cormorant Garamond", "Noto Serif KR", Georgia, serif;
   --font-display: "Cormorant Garamond", "Noto Serif KR", Georgia, serif;
 
   /* Effects */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-  --shadow-glow: 0 0 20px rgba(201, 169, 110, 0.15);
-  --shadow-glow-gold: 0 0 20px rgba(201, 169, 110, 0.25);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-glow: 0 4px 20px rgba(160, 128, 80, 0.15);
+  --shadow-glow-gold: 0 4px 20px rgba(160, 128, 80, 0.25);
 
   /* Border Radius */
   --radius-sm: 2px;
