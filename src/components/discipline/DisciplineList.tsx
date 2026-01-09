@@ -60,37 +60,37 @@ export default function DisciplineList({
               {dateStatus === 'future' ? (
                 // Future: Show lock icon
                 <div
-                  className="w-8 h-8 rounded-full flex items-center justify-center border-2 border-[var(--color-border)] cursor-not-allowed"
+                  className="w-10 h-10 rounded-full flex items-center justify-center border-2 border-[var(--color-border)] cursor-not-allowed shrink-0"
                   aria-label={t('dateRestriction.futureDateLocked')}
                 >
-                  <Lock className="w-4 h-4 text-[var(--foreground-muted)]" />
+                  <Lock className="w-5 h-5 text-[var(--foreground-muted)]" />
                 </div>
               ) : dateStatus === 'past' ? (
                 // Past: Show read-only state (checked or unchecked, no interaction)
                 <div
                   className={cn(
-                    "w-8 h-8 rounded-full flex items-center justify-center border-2 cursor-not-allowed",
+                    "w-10 h-10 rounded-full flex items-center justify-center border-2 cursor-not-allowed shrink-0",
                     rule.isChecked
                       ? "bg-[var(--color-success)]/50 border-[var(--color-success)]/50 text-white"
                       : "border-[var(--color-border)]"
                   )}
                   aria-label={t('dateRestriction.pastDateReadOnly')}
                 >
-                  {rule.isChecked && <Check className="w-5 h-5" />}
+                  {rule.isChecked && <Check className="w-6 h-6" />}
                 </div>
               ) : (
-                // Today: Interactive button
+                // Today: Interactive button - larger touch target for mobile
                 <button
                   onClick={() => toggleRuleCheck(rule.id, date, !rule.isChecked)}
                   className={cn(
-                    "w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all",
+                    "w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all shrink-0 active:scale-95",
                     rule.isChecked
                       ? "bg-[var(--color-success)] border-[var(--color-success)] text-white"
                       : "border-[var(--color-border)] hover:border-[var(--color-secondary)]"
                   )}
                   aria-label={t('dateRestriction.todayOnly')}
                 >
-                  {rule.isChecked && <Check className="w-5 h-5" />}
+                  {rule.isChecked && <Check className="w-6 h-6" />}
                 </button>
               )}
               <span className={cn(
@@ -107,9 +107,9 @@ export default function DisciplineList({
             {dateStatus === 'today' && (
               <button
                 onClick={() => handleDeleteClick(rule.id)}
-                className="opacity-0 group-hover:opacity-100 text-[var(--foreground-muted)] hover:text-[var(--color-error)] transition-opacity p-2"
+                className="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 text-[var(--foreground-muted)] hover:text-[var(--color-error)] active:text-[var(--color-error)] transition-opacity p-3 -mr-2"
               >
-                <Trash2 className="w-4 h-4" />
+                <Trash2 className="w-5 h-5" />
               </button>
             )}
           </div>

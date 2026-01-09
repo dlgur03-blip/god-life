@@ -290,20 +290,8 @@ function addHour(time: string): string {
   return `${String(newH).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
 }
 
-// Get current time rounded down to 5-minute increments
-function getCurrentTimeRounded(): string {
-  const now = new Date();
-  const h = now.getHours();
-  const m = Math.floor(now.getMinutes() / 5) * 5; // Round down to 5-min
-  return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
-}
-
-// Get next full hour (e.g., 12:16 -> 13:00)
-function getNextFullHour(time: string): string {
-  const [h] = time.split(':').map(Number);
-  const nextH = Math.min(h + 1, 24);
-  return `${String(nextH).padStart(2, '0')}:00`;
-}
+// Default start time for first block (fixed 24-hour schedule)
+const DEFAULT_START_TIME = '00:00';
 
 // === NEW SERVER ACTIONS ===
 
@@ -331,9 +319,9 @@ export async function createTimeblock(dayId: string, afterSeq?: number) {
         startTime = lastBlock.endTime;
         endTime = addHour(startTime);
       } else {
-        // No existing blocks - use current time
-        startTime = getCurrentTimeRounded();
-        endTime = getNextFullHour(startTime);
+        // No existing blocks - start from 00:00
+        startTime = DEFAULT_START_TIME;
+        endTime = '01:00';
       }
     }
 
@@ -355,9 +343,9 @@ export async function createTimeblock(dayId: string, afterSeq?: number) {
       startTime = lastBlock.endTime;
       endTime = addHour(startTime);
     } else {
-      // First block: current time (rounded) to next full hour
-      startTime = getCurrentTimeRounded();
-      endTime = getNextFullHour(startTime);
+      // First block: fixed 00:00 ~ 01:00
+      startTime = DEFAULT_START_TIME;
+      endTime = '01:00';
     }
   }
 
