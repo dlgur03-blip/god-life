@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "GOD LIFE MAKER - 갓생메이커",
     description: "운명 설계 · 100일 프로젝트 · 규율 마스터리 · 셀프 서신 · 바이오해킹",
-    url: "https://god-life.vercel.app",
+    url: "https://god-life-six.vercel.app",
     siteName: "GOD LIFE MAKER",
     images: [
       {
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     description: "운명 설계 · 100일 프로젝트 · 규율 마스터리 · 셀프 서신 · 바이오해킹",
     images: ["/og-image.png"],
   },
-  metadataBase: new URL("https://god-life.vercel.app"),
+  metadataBase: new URL("https://god-life-six.vercel.app"),
 };
 
 export default async function LocaleLayout({
