@@ -6,7 +6,7 @@ import { Check } from 'lucide-react';
 
 const themes: { id: ThemeName; preview: { bg: string; accent: string; text: string } }[] = [
   {
-    id: 'dior',
+    id: 'cream',
     preview: { bg: '#f8f6f3', accent: '#c9a96e', text: '#1a1a1a' },
   },
   {

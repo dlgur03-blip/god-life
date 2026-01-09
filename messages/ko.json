@@ -645,9 +645,9 @@
     "theme": {
       "title": "테마 설정",
       "options": {
-        "dior": {
-          "name": "Dior",
-          "description": "우아하고 클래식한 디자인"
+        "cream": {
+          "name": "크림",
+          "description": "깔끔하고 우아한 디자인"
         },
         "cyber": {
           "name": "Cyber",

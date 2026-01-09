@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
-/* ===== DIOR THEME (Default) ===== */
+/* ===== CREAM THEME (Default) ===== */
 :root,
-[data-theme="dior"] {
-  /* Core Colors - Dior Elegance */
+[data-theme="cream"] {
+  /* Core Colors - Cream Elegance */
   --background: #faf9f7;
   --background-secondary: #f5f3f0;
   --background-card: #ffffff;
@@ -36,9 +36,9 @@
   --color-epistle: #5a5a5a;
   --color-bio: #4a7a42;
 
-  /* Typography */
-  --font-sans: "Cormorant Garamond", "Noto Serif KR", Georgia, serif;
-  --font-display: "Cormorant Garamond", "Noto Serif KR", Georgia, serif;
+  /* Typography - Sans-serif (Gulim style) */
+  --font-sans: "Noto Sans KR", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: "Noto Sans KR", ui-sans-serif, system-ui, -apple-system, sans-serif;
 
   /* Effects */
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
@@ -143,8 +143,8 @@ body {
   background-color: var(--color-card-hover);
 }
 
-/* ===== DIOR SPECIFIC STYLES ===== */
-[data-theme="dior"] {
+/* ===== CREAM SPECIFIC STYLES ===== */
+[data-theme="cream"] {
   /* Elegant underline effect for links */
   a:not([class]) {
     text-decoration: none;
@@ -156,11 +156,9 @@ body {
     border-color: var(--color-primary);
   }
 
-  /* Subtle button styling */
+  /* Clean button styling */
   button, .btn {
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    font-size: 0.85em;
+    letter-spacing: 0.05em;
   }
 }
 

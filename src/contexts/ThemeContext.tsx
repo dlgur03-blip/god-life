@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 
-export type ThemeName = 'dior' | 'cyber';
+export type ThemeName = 'cream' | 'cyber';
 
 interface ThemeContextType {
   theme: ThemeName;
@@ -14,13 +14,13 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 const THEME_STORAGE_KEY = 'godlife-theme';
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<ThemeName>('dior');
+  const [theme, setThemeState] = useState<ThemeName>('cream');
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
     const stored = localStorage.getItem(THEME_STORAGE_KEY) as ThemeName | null;
-    if (stored && (stored === 'dior' || stored === 'cyber')) {
+    if (stored && (stored === 'cream' || stored === 'cyber')) {
       setThemeState(stored);
     }
   }, []);
@@ -39,7 +39,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   // Prevent flash of wrong theme
   if (!mounted) {
     return (
-      <ThemeContext.Provider value={{ theme: 'dior', setTheme }}>
+      <ThemeContext.Provider value={{ theme: 'cream', setTheme }}>
         {children}
       </ThemeContext.Provider>
     );
