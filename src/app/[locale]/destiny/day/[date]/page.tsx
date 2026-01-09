@@ -41,6 +41,9 @@ export default async function DestinyDayPage({ params }: { params: Promise<{ dat
   const prevStr = prevDate.toISOString().split('T')[0];
   const nextStr = nextDate.toISOString().split('T')[0];
 
+  // Check if viewing today
+  const isToday = date === getTodayStr();
+
   return (
     <main className="min-h-screen bg-[var(--background)] pb-20">
       <div className="max-w-3xl mx-auto p-4 md:p-6">
@@ -82,6 +85,7 @@ export default async function DestinyDayPage({ params }: { params: Promise<{ dat
             ...event,
             recordedAt: event.recordedAt.toISOString()
           }))}
+          isToday={isToday}
         />
 
       </div>

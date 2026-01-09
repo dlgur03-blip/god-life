@@ -165,6 +165,45 @@ export async function createDestinyEvent(dayId: string, title: string) {
   revalidatePath('/destiny/day/[date]');
 }
 
+export async function updateDestinyEvent(eventId: string, title: string) {
+  const user = await getUser();
+
+  const event = await prisma.destinyEvent.findUnique({
+    where: { id: eventId },
+    select: { userId: true },
+  });
+
+  if (!event || event.userId !== user.id) {
+    throw new Error('Event not found or unauthorized');
+  }
+
+  await prisma.destinyEvent.update({
+    where: { id: eventId },
+    data: { title },
+  });
+
+  revalidatePath('/destiny/day/[date]');
+}
+
+export async function deleteDestinyEvent(eventId: string) {
+  const user = await getUser();
+
+  const event = await prisma.destinyEvent.findUnique({
+    where: { id: eventId },
+    select: { userId: true },
+  });
+
+  if (!event || event.userId !== user.id) {
+    throw new Error('Event not found or unauthorized');
+  }
+
+  await prisma.destinyEvent.delete({
+    where: { id: eventId },
+  });
+
+  revalidatePath('/destiny/day/[date]');
+}
+
 // === TIME VALIDATION HELPERS ===
 
 function validateTimeRange(startTime: string, endTime: string): { valid: boolean; error?: string } {
@@ -251,6 +290,21 @@ function addHour(time: string): string {
   return `${String(newH).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
 }
 
+// Get current time rounded down to 5-minute increments
+function getCurrentTimeRounded(): string {
+  const now = new Date();
+  const h = now.getHours();
+  const m = Math.floor(now.getMinutes() / 5) * 5; // Round down to 5-min
+  return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+}
+
+// Get next full hour (e.g., 12:16 -> 13:00)
+function getNextFullHour(time: string): string {
+  const [h] = time.split(':').map(Number);
+  const nextH = Math.min(h + 1, 24);
+  return `${String(nextH).padStart(2, '0')}:00`;
+}
+
 // === NEW SERVER ACTIONS ===
 
 export async function createTimeblock(dayId: string, afterSeq?: number) {
@@ -273,8 +327,14 @@ export async function createTimeblock(dayId: string, afterSeq?: number) {
       endTime = nextBlock?.startTime || addHour(startTime);
     } else {
       const lastBlock = existingBlocks[existingBlocks.length - 1];
-      startTime = lastBlock?.endTime || '09:00';
-      endTime = addHour(startTime);
+      if (lastBlock) {
+        startTime = lastBlock.endTime;
+        endTime = addHour(startTime);
+      } else {
+        // No existing blocks - use current time
+        startTime = getCurrentTimeRounded();
+        endTime = getNextFullHour(startTime);
+      }
     }
 
     // Shift seq values of blocks after insertion point
@@ -290,8 +350,15 @@ export async function createTimeblock(dayId: string, afterSeq?: number) {
     newSeq = maxSeq + 1;
 
     const lastBlock = existingBlocks[existingBlocks.length - 1];
-    startTime = lastBlock?.endTime || '09:00';
-    endTime = addHour(startTime);
+    if (lastBlock) {
+      // Continue from last block's end time to +1 hour
+      startTime = lastBlock.endTime;
+      endTime = addHour(startTime);
+    } else {
+      // First block: current time (rounded) to next full hour
+      startTime = getCurrentTimeRounded();
+      endTime = getNextFullHour(startTime);
+    }
   }
 
   // Clamp to valid times
