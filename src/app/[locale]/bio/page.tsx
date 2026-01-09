@@ -13,13 +13,13 @@ export default async function BioPage({ params }: Props) {
   const posts = await getBioPosts(locale as Locale);
 
   return (
-    <main className="min-h-screen bg-[url('/bg-grid.svg')] p-6 pb-20">
+    <main className="min-h-screen bg-[var(--background)] p-6 pb-20">
       <div className="max-w-4xl mx-auto">
         <header className="mb-10 text-center">
-          <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#10b981] to-[#06b6d4] mb-2">
+          <h1 className="text-4xl font-extrabold text-[var(--color-success)] mb-2">
             {t('title')}
           </h1>
-          <p className="text-[#9ca3af]">{t('subtitle')}</p>
+          <p className="text-[var(--foreground-muted)]">{t('subtitle')}</p>
         </header>
 
         <BioPostGrid posts={posts} locale={locale} />

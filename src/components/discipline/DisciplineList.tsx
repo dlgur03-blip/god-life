@@ -49,21 +49,21 @@ export default function DisciplineList({
             className={cn(
               "flex items-center justify-between border p-4 rounded-xl group transition-colors",
               // Today state
-              dateStatus === 'today' && "bg-[rgba(6,182,212,0.1)] border-[rgba(6,182,212,0.3)] hover:bg-white/10",
+              dateStatus === 'today' && "bg-[var(--color-card-bg)] border-[var(--color-secondary)]/30 hover:bg-[var(--color-card-hover)]",
               // Past state
-              dateStatus === 'past' && "bg-[rgba(255,255,255,0.03)] border-white/10 opacity-50",
+              dateStatus === 'past' && "bg-[var(--background-secondary)] border-[var(--color-border)] opacity-60",
               // Future state
-              dateStatus === 'future' && "bg-[rgba(255,255,255,0.02)] border-white/10 opacity-40"
+              dateStatus === 'future' && "bg-[var(--background-secondary)] border-[var(--color-border)] opacity-40"
             )}
           >
             <div className="flex items-center gap-4 flex-1">
               {dateStatus === 'future' ? (
                 // Future: Show lock icon
                 <div
-                  className="w-8 h-8 rounded-full flex items-center justify-center border-2 border-gray-600 cursor-not-allowed"
+                  className="w-8 h-8 rounded-full flex items-center justify-center border-2 border-[var(--color-border)] cursor-not-allowed"
                   aria-label={t('dateRestriction.futureDateLocked')}
                 >
-                  <Lock className="w-4 h-4 text-[#6b7280]" />
+                  <Lock className="w-4 h-4 text-[var(--foreground-muted)]" />
                 </div>
               ) : dateStatus === 'past' ? (
                 // Past: Show read-only state (checked or unchecked, no interaction)
@@ -71,8 +71,8 @@ export default function DisciplineList({
                   className={cn(
                     "w-8 h-8 rounded-full flex items-center justify-center border-2 cursor-not-allowed",
                     rule.isChecked
-                      ? "bg-primary/50 border-primary/50 text-black/50"
-                      : "border-gray-600/50"
+                      ? "bg-[var(--color-success)]/50 border-[var(--color-success)]/50 text-white"
+                      : "border-[var(--color-border)]"
                   )}
                   aria-label={t('dateRestriction.pastDateReadOnly')}
                 >
@@ -85,8 +85,8 @@ export default function DisciplineList({
                   className={cn(
                     "w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all",
                     rule.isChecked
-                      ? "bg-primary border-primary text-black"
-                      : "border-gray-600 hover:border-gray-400"
+                      ? "bg-[var(--color-success)] border-[var(--color-success)] text-white"
+                      : "border-[var(--color-border)] hover:border-[var(--color-secondary)]"
                   )}
                   aria-label={t('dateRestriction.todayOnly')}
                 >
@@ -95,10 +95,10 @@ export default function DisciplineList({
               )}
               <span className={cn(
                 "text-lg font-medium transition-colors",
-                dateStatus === 'today' && rule.isChecked && "text-primary line-through opacity-70",
-                dateStatus === 'today' && !rule.isChecked && "text-gray-200",
-                dateStatus === 'past' && "text-[#4b5563]",
-                dateStatus === 'future' && "text-[#4b5563]"
+                dateStatus === 'today' && rule.isChecked && "text-[var(--color-success)] line-through opacity-70",
+                dateStatus === 'today' && !rule.isChecked && "text-[var(--foreground)]",
+                dateStatus === 'past' && "text-[var(--foreground-muted)]",
+                dateStatus === 'future' && "text-[var(--foreground-muted)]"
               )}>
                 {rule.title}
               </span>
@@ -107,7 +107,7 @@ export default function DisciplineList({
             {dateStatus === 'today' && (
               <button
                 onClick={() => handleDeleteClick(rule.id)}
-                className="opacity-0 group-hover:opacity-100 text-gray-500 hover:text-red-500 transition-opacity p-2"
+                className="opacity-0 group-hover:opacity-100 text-[var(--foreground-muted)] hover:text-[var(--color-error)] transition-opacity p-2"
               >
                 <Trash2 className="w-4 h-4" />
               </button>
@@ -116,7 +116,7 @@ export default function DisciplineList({
         ))}
 
         {rules.length === 0 && (
-          <div className="text-center py-10 text-gray-500 italic">
+          <div className="text-center py-10 text-[var(--foreground-muted)] italic">
             {t('noRulesDefined')}
           </div>
         )}

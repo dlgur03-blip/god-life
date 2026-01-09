@@ -85,22 +85,22 @@ export default function SuccessGrid({
                 onClick={() => handleEntryClick(idx)}
                 disabled={isFuture}
                 className={cn(
-                  "aspect-square rounded-md flex items-center justify-center text-xs font-bold transition-all duration-300 relative group",
+                  "aspect-square rounded-md flex items-center justify-center text-xs font-bold transition-all duration-300 relative group border",
                   isCompleted
-                    ? "bg-[#06b6d4] text-black shadow-[0_0_10px_rgba(6,182,212,0.4)]"
+                    ? "bg-[var(--color-success)] text-white border-[var(--color-success)] shadow-md"
                     : isToday
-                      ? "bg-[#f59e0b] text-black animate-pulse shadow-[0_0_15px_rgba(245,158,11,0.6)] border-2 border-white"
+                      ? "bg-[var(--color-warning)] text-white animate-pulse shadow-lg border-[var(--color-warning)]"
                       : isFuture
-                        ? "bg-white/5 text-[#4b5563] cursor-not-allowed border border-white/5"
-                        : "bg-white/5 text-[#9ca3af] hover:bg-white/10 border border-[rgba(255,255,255,0.1)] hover:border-[rgba(255,255,255,0.3)]"
+                        ? "bg-[var(--background-secondary)] text-[var(--foreground-muted)] cursor-not-allowed border-[var(--color-border)] opacity-50"
+                        : "bg-[var(--color-card-bg)] text-[var(--foreground)] hover:bg-[var(--color-card-hover)] border-[var(--color-border)] hover:border-[var(--color-border-hover)]"
                 )}
               >
                 {idx}
                 {isCompleted && <Check className="w-3 h-3 absolute" />}
-                {isFuture && <Lock className="w-3 h-3 absolute opacity-20" />}
+                {isFuture && <Lock className="w-3 h-3 absolute opacity-30" />}
                 {/* Image indicator for completed entries with photos */}
                 {isCompleted && hasImage && (
-                  <ImageIcon className="w-2.5 h-2.5 absolute bottom-0.5 right-0.5 text-black/60" />
+                  <ImageIcon className="w-2.5 h-2.5 absolute bottom-0.5 right-0.5 text-white/60" />
                 )}
               </button>
             );
@@ -109,19 +109,19 @@ export default function SuccessGrid({
 
         {/* Detail Panel */}
         <div className={cn(
-          "lg:w-80 bg-black/40 backdrop-blur-md border border-[rgba(255,255,255,0.1)] rounded-2xl p-6 h-fit sticky top-6 transition-all",
-          !selectedEntry ? "opacity-50 pointer-events-none grayscale" : "opacity-100"
+          "lg:w-80 bg-[var(--color-card-bg)] backdrop-blur-md border border-[var(--color-border)] rounded-2xl p-6 h-fit sticky top-6 transition-all",
+          !selectedEntry ? "opacity-50 pointer-events-none" : "opacity-100"
         )}>
-          <h3 className="text-xl font-bold text-white mb-1">
+          <h3 className="text-xl font-bold text-[var(--foreground)] mb-1">
             {t('day')} {selectedEntry?.dayIndex || '0'}
           </h3>
-          <p className="text-xs text-[#6b7280] mb-6 uppercase tracking-wider">
+          <p className="text-xs text-[var(--foreground-muted)] mb-6 uppercase tracking-wider">
             {selectedEntry?.isCompleted ? t('missionComplete') : t('pendingVerification')}
           </p>
 
           {/* Image Upload Section */}
           <div className="mb-4">
-            <label className="block text-xs text-[#9ca3af] mb-2 uppercase tracking-wider">
+            <label className="block text-xs text-[var(--foreground-muted)] mb-2 uppercase tracking-wider">
               {t('image.notePhoto')}
             </label>
             <ImageUpload
@@ -138,13 +138,13 @@ export default function SuccessGrid({
             value={content}
             onChange={(e) => setContent(e.target.value)}
             placeholder={t('logProgress')}
-            className="w-full h-32 bg-white/5 border border-[rgba(255,255,255,0.1)] rounded-lg p-3 text-sm text-[#e2e8f0] focus:border-[#06b6d4] focus:outline-none resize-none mb-4"
+            className="w-full h-32 bg-[var(--background-secondary)] border border-[var(--color-border)] rounded-lg p-3 text-sm text-[var(--foreground)] focus:border-[var(--color-secondary)] focus:outline-none resize-none mb-4"
           />
 
           <button
             onClick={handleSubmit}
             disabled={isSubmitting}
-            className="w-full bg-[#06b6d4] hover:bg-[#0891b2] text-black font-bold py-3 rounded-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+            className="w-full bg-[var(--color-secondary)] hover:opacity-90 text-white font-bold py-3 rounded-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
           >
             {isSubmitting ? t('verifying') : t('confirmEntry')}
           </button>

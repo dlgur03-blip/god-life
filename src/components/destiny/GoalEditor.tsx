@@ -111,7 +111,7 @@ export default function GoalEditor({ label, value, onSave, placeholder, variant 
             onKeyDown={handleKeyDown}
             placeholder={placeholder}
             className={cn(
-              "w-full h-8 bg-black/20 rounded border px-3 text-sm text-gray-200 outline-none transition-all",
+              "w-full h-8 bg-[var(--background-secondary)] rounded border px-3 text-sm text-[var(--foreground)] outline-none transition-all",
               colors.border,
               isSaving && colors.bg
             )}
@@ -120,9 +120,9 @@ export default function GoalEditor({ label, value, onSave, placeholder, variant 
           <div
             onClick={() => setIsEditing(true)}
             className={cn(
-              "flex-1 h-8 bg-black/20 rounded border border-[rgba(255,255,255,0.05)] flex items-center px-3 text-sm cursor-pointer transition-all",
-              "hover:border-[rgba(255,255,255,0.2)] hover:bg-[rgba(255,255,255,0.1)]",
-              inputValue ? "text-gray-300" : "text-gray-500"
+              "flex-1 h-8 bg-[var(--background-secondary)] rounded border border-[var(--color-border)] flex items-center px-3 text-sm cursor-pointer transition-all",
+              "hover:border-[var(--color-border-hover)] hover:bg-[var(--color-card-hover)]",
+              inputValue ? "text-[var(--foreground)]" : "text-[var(--foreground-muted)]"
             )}
           >
             {inputValue || placeholder || '-'}

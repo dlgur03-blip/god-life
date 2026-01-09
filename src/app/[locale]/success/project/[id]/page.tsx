@@ -50,27 +50,27 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
   const currentDayIndex = calculateDayIndex(project.startDate);
 
   return (
-    <main className="min-h-screen bg-[url('/bg-grid.svg')] p-4 md:p-8 pb-20">
+    <main className="min-h-screen bg-[var(--background)] p-4 md:p-8 pb-20">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <header className="mb-8">
-           <Link href="/success" className="text-gray-500 hover:text-white flex items-center gap-2 mb-4 text-sm w-fit">
+           <Link href="/success" className="text-[var(--foreground-muted)] hover:text-[var(--foreground)] flex items-center gap-2 mb-4 text-sm w-fit transition-colors">
             <ArrowLeft className="w-4 h-4" /> {t('backToDashboard')}
           </Link>
-          
+
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
-              <h1 className="text-4xl font-extrabold text-white mb-2">{project.title}</h1>
-              <div className="flex gap-4 text-sm text-gray-400">
+              <h1 className="text-4xl font-extrabold text-[var(--foreground)] mb-2">{project.title}</h1>
+              <div className="flex gap-4 text-sm text-[var(--foreground-muted)]">
                 <span className="flex items-center gap-1"><Calendar className="w-4 h-4" /> {t('start')}: {new Date(project.startDate).toLocaleDateString()}</span>
                 <span className="flex items-center gap-1"><Clock className="w-4 h-4" /> {t('reminder')}: {project.reminderTime}</span>
               </div>
             </div>
-            
+
             <div className="flex flex-col items-end gap-3">
               <div className="text-right">
-                <div className="text-3xl font-bold text-primary">{Math.min(Math.max(currentDayIndex, 1), 100)} <span className="text-lg text-gray-500">/ 100</span></div>
-                <div className="text-xs text-gray-500 uppercase tracking-widest">{t('currentDay')}</div>
+                <div className="text-3xl font-bold text-[var(--color-primary)]">{Math.min(Math.max(currentDayIndex, 1), 100)} <span className="text-lg text-[var(--foreground-muted)]">/ 100</span></div>
+                <div className="text-xs text-[var(--foreground-muted)] uppercase tracking-widest">{t('currentDay')}</div>
               </div>
               <DeleteProjectButton projectId={project.id} />
             </div>

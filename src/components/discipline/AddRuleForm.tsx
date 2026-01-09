@@ -61,7 +61,7 @@ export default function AddRuleForm() {
               setValidationError(null);
             }}
             placeholder={t('addNewDiscipline')}
-            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-secondary outline-none"
+            className="w-full bg-[var(--background-secondary)] border border-[var(--color-border)] rounded-xl px-4 py-3 text-[var(--foreground)] focus:border-[var(--color-secondary)] outline-none placeholder:text-[var(--foreground-muted)]"
           />
           {validationError && (
             <ValidationMessage

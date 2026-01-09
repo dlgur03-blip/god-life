@@ -47,8 +47,8 @@ export default function DestinyNavigatorCard({
   };
 
   return (
-    <section className="mb-8 space-y-6 bg-[rgba(255,255,255,0.05)] p-6 rounded-2xl border border-[rgba(255,255,255,0.05)]">
-      <h2 className="text-sm font-bold text-gray-400 uppercase tracking-wider">
+    <section className="mb-8 space-y-6 bg-[var(--color-card-bg)] p-6 rounded-2xl border border-[var(--color-border)]">
+      <h2 className="text-sm font-bold text-[var(--foreground-muted)] uppercase tracking-wider">
         {t('coreObjectives')}
       </h2>
 

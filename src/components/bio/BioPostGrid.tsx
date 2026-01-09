@@ -42,7 +42,7 @@ export default function BioPostGrid({ posts, locale }: Props) {
 
       {filteredPosts.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-[#9ca3af]">{t('noPostsInCategory')}</p>
+          <p className="text-[var(--foreground-muted)]">{t('noPostsInCategory')}</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -50,23 +50,23 @@ export default function BioPostGrid({ posts, locale }: Props) {
             <Link
               key={post.slug}
               href={`/bio/${post.slug}`}
-              className="group bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] p-6 rounded-2xl hover:border-[rgba(74,222,128,0.5)] transition-all hover:-translate-y-1"
+              className="group bg-[var(--color-card-bg)] border border-[var(--color-border)] p-6 rounded-2xl hover:border-[var(--color-success)] transition-all hover:-translate-y-1"
             >
               <div className="flex justify-between items-start mb-4">
                 <CategoryBadge category={post.category} />
                 <div className="flex items-center gap-2">
                   {post.locale !== locale && (
-                    <span className="text-xs text-[#f59e0b]/70 uppercase">
+                    <span className="text-xs text-[var(--color-warning)]/70 uppercase">
                       {post.locale}
                     </span>
                   )}
-                  <BookOpen className="w-5 h-5 text-[#4b5563] group-hover:text-[#10b981] transition-colors" />
+                  <BookOpen className="w-5 h-5 text-[var(--foreground-muted)] group-hover:text-[var(--color-success)] transition-colors" />
                 </div>
               </div>
-              <h2 className="text-xl font-bold text-[#e2e8f0] mb-2 group-hover:text-white">
+              <h2 className="text-xl font-bold text-[var(--foreground)] mb-2 group-hover:text-[var(--color-primary)]">
                 {post.title}
               </h2>
-              <div className="flex items-center gap-2 text-sm text-[#4b5563] group-hover:text-[#9ca3af] mt-4">
+              <div className="flex items-center gap-2 text-sm text-[var(--foreground-muted)] group-hover:text-[var(--foreground)] mt-4">
                 {t('readProtocol')} <ArrowRight className="w-4 h-4" />
               </div>
             </Link>
@@ -75,7 +75,7 @@ export default function BioPostGrid({ posts, locale }: Props) {
       )}
 
       {selectedCategory && filteredPosts.length > 0 && (
-        <p className="text-center text-[#4b5563] text-sm mt-6">
+        <p className="text-center text-[var(--foreground-muted)] text-sm mt-6">
           {t('postsCount', { count: filteredPosts.length })}
         </p>
       )}

@@ -48,32 +48,32 @@ export default async function EpistleDayPage({ params }: { params: Promise<{ dat
   const canNavigateNext = nextAccess !== 'blocked';
 
   return (
-    <main className="min-h-screen bg-[url('/bg-grid.svg')] p-4 md:p-8 pb-20">
+    <main className="min-h-screen bg-[var(--background)] p-4 md:p-8 pb-20">
       <div className="max-w-5xl mx-auto">
 
         {/* Header */}
-        <header className="flex items-center justify-between mb-8 sticky top-0 z-10 bg-black/80 backdrop-blur-md p-4 -mx-4 rounded-b-xl border-b border-white/5">
-          <Link href={`/epistle/day/${prevStr}`} className="p-2 hover:bg-white/10 rounded-full text-gray-400 hover:text-primary transition-colors">
+        <header className="flex items-center justify-between mb-8 sticky top-0 z-10 bg-[var(--background)]/80 backdrop-blur-md p-4 -mx-4 rounded-b-xl border-b border-[var(--color-border)]">
+          <Link href={`/epistle/day/${prevStr}`} className="p-2 hover:bg-[var(--color-card-hover)] rounded-full text-[var(--foreground-muted)] hover:text-[var(--color-primary)] transition-colors">
             <ChevronLeft />
           </Link>
           <div className="text-center">
-            <h1 className="text-2xl font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-primary">
+            <h1 className="text-2xl font-bold tracking-widest text-[var(--color-accent)]">
               {t('title')}
             </h1>
-            <p className="text-sm text-gray-500 font-mono">{date}</p>
+            <p className="text-sm text-[var(--foreground-muted)] font-mono">{date}</p>
           </div>
           <div className="flex gap-2">
-            <Link href="/epistle/timeline" className="p-2 hover:bg-white/10 rounded-full text-gray-400 hover:text-primary transition-colors" title={t('timeline')}>
+            <Link href="/epistle/timeline" className="p-2 hover:bg-[var(--color-card-hover)] rounded-full text-[var(--foreground-muted)] hover:text-[var(--color-primary)] transition-colors" title={t('timeline')}>
               <History />
             </Link>
             {canNavigateNext ? (
-              <Link href={`/epistle/day/${nextStr}`} className="p-2 hover:bg-white/10 rounded-full text-gray-400 hover:text-primary transition-colors">
+              <Link href={`/epistle/day/${nextStr}`} className="p-2 hover:bg-[var(--color-card-hover)] rounded-full text-[var(--foreground-muted)] hover:text-[var(--color-primary)] transition-colors">
                 <ChevronRight />
               </Link>
             ) : (
               <button
                 disabled
-                className="p-2 rounded-full text-gray-600 cursor-not-allowed opacity-50"
+                className="p-2 rounded-full text-[var(--foreground-muted)] cursor-not-allowed opacity-50"
                 title={t('dateBlockedHint')}
               >
                 <ChevronRight />

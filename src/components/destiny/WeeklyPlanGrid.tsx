@@ -94,13 +94,13 @@ function PlanBox({ index, id, content, onSave, onDelete, placeholder }: PlanBoxP
     <div
       className={cn(
         "flex-1 min-w-[120px] rounded-lg border p-3 transition-all",
-        "border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.03)]",
-        "hover:border-[rgba(255,255,255,0.2)] hover:bg-[rgba(255,255,255,0.05)]",
-        isEditing && "border-[#06b6d4] bg-[rgba(6,182,212,0.05)]"
+        "border-[var(--color-border)] bg-[var(--background-secondary)]",
+        "hover:border-[var(--color-border-hover)] hover:bg-[var(--color-card-hover)]",
+        isEditing && "border-[var(--color-secondary)] bg-[var(--color-secondary)]/5"
       )}
     >
       <div className="text-center mb-2">
-        <div className="text-xs font-bold text-[#4b5563]">
+        <div className="text-xs font-bold text-[var(--foreground-muted)]">
           {index + 1}
         </div>
       </div>
@@ -114,8 +114,8 @@ function PlanBox({ index, id, content, onSave, onDelete, placeholder }: PlanBoxP
             onBlur={handleBlur}
             placeholder={placeholder}
             className={cn(
-              "w-full h-full min-h-[80px] bg-transparent rounded border-none px-1 py-1 text-sm text-[#e2e8f0] outline-none resize-none",
-              "placeholder:text-[#4b5563]"
+              "w-full h-full min-h-[80px] bg-transparent rounded border-none px-1 py-1 text-sm text-[var(--foreground)] outline-none resize-none",
+              "placeholder:text-[var(--foreground-muted)]"
             )}
           />
         ) : (
@@ -123,7 +123,7 @@ function PlanBox({ index, id, content, onSave, onDelete, placeholder }: PlanBoxP
             onClick={() => setIsEditing(true)}
             className={cn(
               "w-full h-full min-h-[80px] px-1 py-1 text-sm cursor-pointer whitespace-pre-wrap break-words",
-              inputValue ? "text-[#e2e8f0]" : "text-[#4b5563]"
+              inputValue ? "text-[var(--foreground)]" : "text-[var(--foreground-muted)]"
             )}
           >
             {inputValue || placeholder}
@@ -131,7 +131,7 @@ function PlanBox({ index, id, content, onSave, onDelete, placeholder }: PlanBoxP
         )}
         {isSaving && (
           <div className="absolute right-1 top-1">
-            <div className="w-3 h-3 border-2 border-[#06b6d4] border-t-transparent rounded-full animate-spin" />
+            <div className="w-3 h-3 border-2 border-[var(--color-secondary)] border-t-transparent rounded-full animate-spin" />
           </div>
         )}
       </div>
@@ -183,7 +183,7 @@ export default function WeeklyPlanGrid({ initialPlans }: WeeklyPlanGridProps) {
 
   return (
     <div className="space-y-3">
-      <h3 className="text-xs font-bold text-[#9ca3af] uppercase tracking-wider">
+      <h3 className="text-xs font-bold text-[var(--foreground-muted)] uppercase tracking-wider">
         {t('weeklyPlan.title')}
       </h3>
 
