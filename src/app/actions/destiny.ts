@@ -369,6 +369,50 @@ export async function createTimeblock(dayId: string, afterSeq?: number) {
   return newBlock;
 }
 
+// Create timeblock with custom data (time, location, plan)
+export async function createTimeblockWithData(
+  dayId: string,
+  data: {
+    startTime: string;
+    endTime: string;
+    planLocation?: string;
+    planText?: string;
+  }
+) {
+  await getUser();
+
+  // Validate time format
+  const validation = validateTimeRange(data.startTime, data.endTime);
+  if (!validation.valid) {
+    throw new Error(validation.error || 'Invalid time range');
+  }
+
+  const existingBlocks = await prisma.destinyTimeBlock.findMany({
+    where: { dayId },
+    orderBy: { seq: 'asc' },
+  });
+
+  // Calculate seq - add at the end
+  const maxSeq = existingBlocks.length > 0
+    ? Math.max(...existingBlocks.map(b => b.seq))
+    : 0;
+
+  const newBlock = await prisma.destinyTimeBlock.create({
+    data: {
+      dayId,
+      seq: maxSeq + 1,
+      startTime: data.startTime,
+      endTime: data.endTime,
+      planLocation: data.planLocation || null,
+      planText: data.planText || null,
+      status: 'planned',
+    },
+  });
+
+  revalidatePath('/destiny/day/[date]');
+  return newBlock;
+}
+
 // Create all 24 timeblocks at once (00:00~24:00)
 export async function createAllTimeblocks(dayId: string) {
   await getUser();
