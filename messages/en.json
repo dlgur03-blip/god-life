@@ -1,6 +1,7 @@
 {
   "Header": {
-    "goToDashboard": "Go to Dashboard"
+    "goToDashboard": "Go to Dashboard",
+    "myPage": "My Page"
   },
   "Home": {
     "title": "GOD LIFE MAKER",
@@ -616,5 +617,71 @@
   },
   "Footer": {
     "feedbackAndInquiries": "Feedback & Inquiries"
+  },
+  "InAppBrowser": {
+    "title": "Please open in an external browser",
+    "description": "Google Sign-in is not supported in {browser}'s built-in browser.",
+    "openChrome": "Open in Chrome",
+    "copyLink": "Copy Link",
+    "copied": "Copied!",
+    "iosInstruction": "Paste the copied link in Safari or Chrome.",
+    "continueAnyway": "Continue anyway",
+    "browsers": {
+      "kakaotalk": "KakaoTalk",
+      "line": "LINE",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "other": "App"
+    }
+  },
+  "MyPage": {
+    "title": "My Page",
+    "subtitle": "Manage your activities and settings",
+    "signOut": "Sign Out",
+    "profile": {
+      "anonymous": "User",
+      "memberSince": "Member since {date}"
+    },
+    "theme": {
+      "title": "Theme Settings",
+      "options": {
+        "dior": {
+          "name": "Dior",
+          "description": "Elegant and classic design"
+        },
+        "cyber": {
+          "name": "Cyber",
+          "description": "Futuristic tech design"
+        }
+      }
+    },
+    "stats": {
+      "title": "My Statistics",
+      "destiny": {
+        "title": "Destiny Navigator",
+        "totalDays": "Days Tracked",
+        "timeblocks": "Timeblocks",
+        "completed": "Completed",
+        "avgScore": "Avg Score"
+      },
+      "success": {
+        "title": "Success Code",
+        "projects": "Total Projects",
+        "active": "Active",
+        "daysLogged": "Days Logged"
+      },
+      "discipline": {
+        "title": "Discipline Mastery",
+        "rules": "Rules",
+        "streak": "Streak",
+        "last7Days": "7-Day Rate",
+        "last30Days": "30-Day Rate"
+      },
+      "epistle": {
+        "title": "Self Epistle",
+        "totalLetters": "Letters Written",
+        "lastWritten": "Last Written"
+      }
+    }
   }
 }

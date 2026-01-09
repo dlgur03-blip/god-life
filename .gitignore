@@ -55,3 +55,4 @@ prisma/dev.db
 
 # misc project files
 scripts/
+backup-*

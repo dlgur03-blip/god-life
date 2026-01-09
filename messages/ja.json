@@ -1,6 +1,7 @@
 {
   "Header": {
-    "goToDashboard": "ダッシュボードへ移動"
+    "goToDashboard": "ダッシュボードへ移動",
+    "myPage": "マイページ"
   },
   "Home": {
     "title": "GOD LIFE MAKER",
@@ -616,5 +617,71 @@
   },
   "Footer": {
     "feedbackAndInquiries": "フィードバック・お問い合わせ"
+  },
+  "InAppBrowser": {
+    "title": "外部ブラウザで開いてください",
+    "description": "{browser}の内蔵ブラウザではGoogleログインがサポートされていません。",
+    "openChrome": "Chromeで開く",
+    "copyLink": "リンクをコピー",
+    "copied": "コピーしました！",
+    "iosInstruction": "コピーしたリンクをSafariまたはChromeに貼り付けてください。",
+    "continueAnyway": "このまま続ける",
+    "browsers": {
+      "kakaotalk": "カカオトーク",
+      "line": "LINE",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "other": "アプリ"
+    }
+  },
+  "MyPage": {
+    "title": "マイページ",
+    "subtitle": "活動と設定を管理",
+    "signOut": "ログアウト",
+    "profile": {
+      "anonymous": "ユーザー",
+      "memberSince": "{date}から活動中"
+    },
+    "theme": {
+      "title": "テーマ設定",
+      "options": {
+        "dior": {
+          "name": "Dior",
+          "description": "エレガントでクラシックなデザイン"
+        },
+        "cyber": {
+          "name": "Cyber",
+          "description": "未来的なテックデザイン"
+        }
+      }
+    },
+    "stats": {
+      "title": "統計",
+      "destiny": {
+        "title": "運命ナビゲーター",
+        "totalDays": "記録日数",
+        "timeblocks": "タイムブロック",
+        "completed": "完了",
+        "avgScore": "平均スコア"
+      },
+      "success": {
+        "title": "サクセスコード",
+        "projects": "プロジェクト数",
+        "active": "進行中",
+        "daysLogged": "記録日数"
+      },
+      "discipline": {
+        "title": "規律マスタリー",
+        "rules": "ルール数",
+        "streak": "連続達成",
+        "last7Days": "7日間達成率",
+        "last30Days": "30日間達成率"
+      },
+      "epistle": {
+        "title": "セルフ書簡",
+        "totalLetters": "手紙数",
+        "lastWritten": "最終作成日"
+      }
+    }
   }
 }

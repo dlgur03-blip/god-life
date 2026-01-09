@@ -1,6 +1,7 @@
 {
   "Header": {
-    "goToDashboard": "대시보드로 이동"
+    "goToDashboard": "대시보드로 이동",
+    "myPage": "마이페이지"
   },
   "Home": {
     "title": "GOD LIFE MAKER",
@@ -616,5 +617,71 @@
   },
   "Footer": {
     "feedbackAndInquiries": "피드백 및 문의"
+  },
+  "InAppBrowser": {
+    "title": "외부 브라우저에서 열어주세요",
+    "description": "{browser} 내장 브라우저에서는 Google 로그인이 지원되지 않습니다.",
+    "openChrome": "Chrome에서 열기",
+    "copyLink": "링크 복사하기",
+    "copied": "복사되었습니다!",
+    "iosInstruction": "복사한 링크를 Safari 또는 Chrome에 붙여넣어 주세요.",
+    "continueAnyway": "그냥 계속하기",
+    "browsers": {
+      "kakaotalk": "카카오톡",
+      "line": "LINE",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "other": "앱"
+    }
+  },
+  "MyPage": {
+    "title": "마이페이지",
+    "subtitle": "나의 활동과 설정을 관리하세요",
+    "signOut": "로그아웃",
+    "profile": {
+      "anonymous": "사용자",
+      "memberSince": "{date}부터 활동"
+    },
+    "theme": {
+      "title": "테마 설정",
+      "options": {
+        "dior": {
+          "name": "Dior",
+          "description": "우아하고 클래식한 디자인"
+        },
+        "cyber": {
+          "name": "Cyber",
+          "description": "미래지향적 테크 디자인"
+        }
+      }
+    },
+    "stats": {
+      "title": "나의 통계",
+      "destiny": {
+        "title": "운명 네비게이터",
+        "totalDays": "기록 일수",
+        "timeblocks": "타임블록",
+        "completed": "완료된 블록",
+        "avgScore": "평균 점수"
+      },
+      "success": {
+        "title": "성공 코드",
+        "projects": "전체 프로젝트",
+        "active": "진행 중",
+        "daysLogged": "기록 일수"
+      },
+      "discipline": {
+        "title": "규율 마스터리",
+        "rules": "규칙 수",
+        "streak": "연속 달성",
+        "last7Days": "7일 달성률",
+        "last30Days": "30일 달성률"
+      },
+      "epistle": {
+        "title": "셀프 서신",
+        "totalLetters": "작성 편지",
+        "lastWritten": "마지막 작성"
+      }
+    }
   }
 }
