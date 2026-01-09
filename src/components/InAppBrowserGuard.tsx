@@ -111,7 +111,7 @@ export default function InAppBrowserGuard() {
           {isAndroid ? (
             <button
               onClick={handleOpenExternal}
-              className="w-full py-3 px-4 bg-primary hover:bg-primary/80 text-black font-bold rounded-xl flex items-center justify-center gap-2 transition-colors"
+              className="w-full py-3 px-4 bg-primary hover:bg-primary/80 text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-colors"
             >
               <ExternalLink className="w-5 h-5" />
               {t('openChrome')}
@@ -119,7 +119,7 @@ export default function InAppBrowserGuard() {
           ) : (
             <button
               onClick={handleCopyLink}
-              className="w-full py-3 px-4 bg-primary hover:bg-primary/80 text-black font-bold rounded-xl flex items-center justify-center gap-2 transition-colors"
+              className="w-full py-3 px-4 bg-primary hover:bg-primary/80 text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-colors"
             >
               {copied ? <Check className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
               {copied ? t('copied') : t('copyLink')}
