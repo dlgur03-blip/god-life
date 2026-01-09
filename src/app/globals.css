@@ -35,6 +35,7 @@
   --color-discipline: #8b6b5a;
   --color-epistle: #5a5a5a;
   --color-bio: #4a7a42;
+  --color-money: #c49a6c;
 
   /* Typography - Sans-serif (Gulim style) */
   --font-sans: "Noto Sans KR", ui-sans-serif, system-ui, -apple-system, sans-serif;
@@ -88,6 +89,7 @@
   --color-discipline: #a855f7;
   --color-epistle: #22c55e;
   --color-bio: #f97316;
+  --color-money: #fbbf24;
 
   /* Typography */
   --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;

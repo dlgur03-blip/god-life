@@ -29,6 +29,10 @@
       "bio": {
         "name": "바이오 해킹",
         "desc": "최적화 칼럼"
+      },
+      "money": {
+        "name": "머니 플로우",
+        "desc": "수입과 지출 관리"
       }
     },
     "status": {
@@ -129,8 +133,11 @@
     "whatJustHappened": "방금 무슨 일이 있었나요?",
     "recording": "기록 중...",
     "recordToTimeline": "타임라인에 기록",
+    "or": "또는",
     "timeblock": {
       "noBlocks": "타임블록이 없습니다. 첫 번째 블록을 추가하세요.",
+      "create24h": "24시간 블록 생성",
+      "creating": "생성 중...",
       "timeTo": "~ {time}",
       "planMode": "계획",
       "actualMode": "실행",
@@ -614,6 +621,45 @@
         }
       }
     }
+  },
+  "Money": {
+    "title": "MONEY FLOW",
+    "subtitle": "수입과 지출을 추적하세요",
+    "income": "수입",
+    "expense": "지출",
+    "balance": "잔액",
+    "today": "오늘",
+    "thisMonth": "이번 달",
+    "category": "카테고리",
+    "amount": "금액",
+    "memo": "메모",
+    "date": "날짜",
+    "addTransaction": "거래 추가",
+    "noTransactions": "거래 내역이 없습니다.",
+    "totalIncome": "총 수입",
+    "totalExpense": "총 지출",
+    "addIncome": "수입 추가",
+    "addExpense": "지출 추가",
+    "categories": {
+      "salary": "급여",
+      "investment": "투자",
+      "bonus": "보너스",
+      "other_income": "기타 수입",
+      "food": "식비",
+      "transport": "교통",
+      "housing": "주거",
+      "utilities": "공과금",
+      "shopping": "쇼핑",
+      "entertainment": "여가",
+      "health": "건강",
+      "education": "교육",
+      "other_expense": "기타 지출"
+    },
+    "summary": "요약",
+    "transactions": "거래 내역",
+    "deleteConfirm": "이 거래를 삭제하시겠습니까?",
+    "edit": "수정",
+    "delete": "삭제"
   },
   "Footer": {
     "feedbackAndInquiries": "피드백 및 문의"

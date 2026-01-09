@@ -369,6 +369,36 @@ export async function createTimeblock(dayId: string, afterSeq?: number) {
   return newBlock;
 }
 
+// Create all 24 timeblocks at once (00:00~24:00)
+export async function createAllTimeblocks(dayId: string) {
+  await getUser();
+
+  // Check if blocks already exist
+  const existingCount = await prisma.destinyTimeBlock.count({
+    where: { dayId },
+  });
+
+  if (existingCount > 0) {
+    throw new Error('Timeblocks already exist for this day');
+  }
+
+  // Create 24 blocks (00:00~01:00, 01:00~02:00, ..., 23:00~24:00)
+  const blocks = Array.from({ length: 24 }, (_, i) => ({
+    dayId,
+    seq: i + 1,
+    startTime: `${String(i).padStart(2, '0')}:00`,
+    endTime: `${String(i + 1).padStart(2, '0')}:00`,
+    status: 'planned',
+  }));
+
+  await prisma.destinyTimeBlock.createMany({
+    data: blocks,
+  });
+
+  revalidatePath('/destiny/day/[date]');
+  return { success: true, count: 24 };
+}
+
 export async function deleteTimeblock(blockId: string) {
   await getUser();
 

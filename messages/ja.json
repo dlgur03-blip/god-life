@@ -29,6 +29,10 @@
       "bio": {
         "name": "バイオハッキング",
         "desc": "最適化コラム"
+      },
+      "money": {
+        "name": "マネーフロー",
+        "desc": "収入と支出の管理"
       }
     },
     "status": {
@@ -129,8 +133,11 @@
     "whatJustHappened": "今何が起こりましたか？",
     "recording": "記録中...",
     "recordToTimeline": "タイムラインに記録",
+    "or": "または",
     "timeblock": {
       "noBlocks": "タイムブロックがありません。最初のブロックを追加してください。",
+      "create24h": "24時間ブロック作成",
+      "creating": "作成中...",
       "timeTo": "〜 {time}",
       "planMode": "計画",
       "actualMode": "実績",
@@ -614,6 +621,45 @@
         }
       }
     }
+  },
+  "Money": {
+    "title": "MONEY FLOW",
+    "subtitle": "収入と支出を追跡",
+    "income": "収入",
+    "expense": "支出",
+    "balance": "残高",
+    "today": "今日",
+    "thisMonth": "今月",
+    "category": "カテゴリ",
+    "amount": "金額",
+    "memo": "メモ",
+    "date": "日付",
+    "addTransaction": "取引追加",
+    "noTransactions": "取引がありません。",
+    "totalIncome": "総収入",
+    "totalExpense": "総支出",
+    "addIncome": "収入追加",
+    "addExpense": "支出追加",
+    "categories": {
+      "salary": "給与",
+      "investment": "投資",
+      "bonus": "ボーナス",
+      "other_income": "その他収入",
+      "food": "食費",
+      "transport": "交通",
+      "housing": "住居",
+      "utilities": "公共料金",
+      "shopping": "買い物",
+      "entertainment": "娯楽",
+      "health": "健康",
+      "education": "教育",
+      "other_expense": "その他支出"
+    },
+    "summary": "概要",
+    "transactions": "取引履歴",
+    "deleteConfirm": "この取引を削除しますか？",
+    "edit": "編集",
+    "delete": "削除"
   },
   "Footer": {
     "feedbackAndInquiries": "フィードバック・お問い合わせ"

@@ -2,8 +2,10 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
+import { Calendar } from 'lucide-react';
 import TimeblockCard from './TimeblockCard';
 import TimeblockAddButton from './TimeblockAddButton';
+import { createAllTimeblocks } from '@/app/actions/destiny';
 import type { Timeblock } from '@/types/destiny';
 
 type TimeblockListProps = {
@@ -14,7 +16,20 @@ type TimeblockListProps = {
 export default function TimeblockList({ dayId, initialBlocks }: TimeblockListProps) {
   const t = useTranslations('Destiny');
   const [blocks, setBlocks] = useState(initialBlocks);
+  const [isCreatingAll, setIsCreatingAll] = useState(false);
   const listContainerRef = useRef<HTMLDivElement>(null);
+
+  const handleCreateAll = async () => {
+    if (isCreatingAll) return;
+    setIsCreatingAll(true);
+    try {
+      await createAllTimeblocks(dayId);
+    } catch (e) {
+      console.error('Failed to create all timeblocks:', e);
+    } finally {
+      setIsCreatingAll(false);
+    }
+  };
 
   useEffect(() => {
     setBlocks(initialBlocks);
@@ -71,7 +86,18 @@ export default function TimeblockList({ dayId, initialBlocks }: TimeblockListPro
       {blocks.length === 0 ? (
         <div className="text-center py-8 text-[#6b7280]">
           <p className="text-sm mb-4">{t('timeblock.noBlocks')}</p>
-          <TimeblockAddButton dayId={dayId} variant="inline" />
+          <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+            <button
+              onClick={handleCreateAll}
+              disabled={isCreatingAll}
+              className="flex items-center gap-2 px-4 py-2 bg-[var(--color-primary)]/20 hover:bg-[var(--color-primary)]/30 text-[var(--color-primary)] border border-[var(--color-primary)]/50 rounded-lg text-sm font-bold transition-all disabled:opacity-50"
+            >
+              <Calendar className="w-4 h-4" />
+              {isCreatingAll ? t('timeblock.creating') : t('timeblock.create24h')}
+            </button>
+            <span className="text-xs text-[var(--foreground-muted)]">{t('or')}</span>
+            <TimeblockAddButton dayId={dayId} variant="inline" />
+          </div>
         </div>
       ) : (
         <>

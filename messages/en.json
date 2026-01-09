@@ -29,6 +29,10 @@
       "bio": {
         "name": "Bio Hacking",
         "desc": "Optimization Columns"
+      },
+      "money": {
+        "name": "Money Flow",
+        "desc": "Income & Expense Tracking"
       }
     },
     "status": {
@@ -129,8 +133,11 @@
     "whatJustHappened": "What just happened?",
     "recording": "Recording...",
     "recordToTimeline": "Record to Timeline",
+    "or": "or",
     "timeblock": {
       "noBlocks": "No timeblocks yet. Add your first block.",
+      "create24h": "Create 24h Blocks",
+      "creating": "Creating...",
       "timeTo": "to {time}",
       "planMode": "Plan",
       "actualMode": "Actual",
@@ -614,6 +621,45 @@
         }
       }
     }
+  },
+  "Money": {
+    "title": "MONEY FLOW",
+    "subtitle": "Track your income and expenses",
+    "income": "Income",
+    "expense": "Expense",
+    "balance": "Balance",
+    "today": "Today",
+    "thisMonth": "This Month",
+    "category": "Category",
+    "amount": "Amount",
+    "memo": "Memo",
+    "date": "Date",
+    "addTransaction": "Add Transaction",
+    "noTransactions": "No transactions yet.",
+    "totalIncome": "Total Income",
+    "totalExpense": "Total Expense",
+    "addIncome": "Add Income",
+    "addExpense": "Add Expense",
+    "categories": {
+      "salary": "Salary",
+      "investment": "Investment",
+      "bonus": "Bonus",
+      "other_income": "Other Income",
+      "food": "Food",
+      "transport": "Transport",
+      "housing": "Housing",
+      "utilities": "Utilities",
+      "shopping": "Shopping",
+      "entertainment": "Entertainment",
+      "health": "Health",
+      "education": "Education",
+      "other_expense": "Other Expense"
+    },
+    "summary": "Summary",
+    "transactions": "Transactions",
+    "deleteConfirm": "Delete this transaction?",
+    "edit": "Edit",
+    "delete": "Delete"
   },
   "Footer": {
     "feedbackAndInquiries": "Feedback & Inquiries"

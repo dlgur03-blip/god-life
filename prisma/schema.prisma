@@ -26,6 +26,7 @@ model User {
   weeklyPlans       WeeklyPlan[]
   errorLogs         ErrorLog[]
   goals             Goal[]
+  transactions      MoneyTransaction[]
 }
 
 // M3: Destiny Navigator
@@ -288,4 +289,24 @@ model Goal {
   @@index([userId])
   @@index([userId, type])
   @@index([parentId])
+}
+
+// M10: Money Flow (가계부)
+model MoneyTransaction {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  type      String   // 'income' | 'expense'
+  category  String   // e.g., 'salary', 'food', 'transport'
+  amount    Int      // Amount in smallest unit (e.g., cents, won)
+  memo      String?
+  date      String   // YYYY-MM-DD
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([userId, date])
+  @@index([userId, type])
 }
