@@ -16,7 +16,7 @@ export default function TimePicker({ value, onChange, label, disabled }: TimePic
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Generate time options (30-minute increments, 00:00 to 24:00)
+  // Generate time options (5-minute increments per TIME_CONFIG.INTERVAL)
   const timeOptions: string[] = [];
   for (let h = TIME_CONFIG.MIN_HOUR; h < 24; h++) {
     for (let m = 0; m < 60; m += TIME_CONFIG.INTERVAL) {

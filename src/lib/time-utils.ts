@@ -4,7 +4,7 @@ export const TIME_CONFIG = {
   MAX_HOUR: 23,     // 23:00 - latest allowed start time (end can be 24:00)
   DEFAULT_START: 6, // 06:00 - default view start hour
   DEFAULT_END: 23,  // 23:00 - default view end hour
-  INTERVAL: 30,     // 30-minute increments for time selection
+  INTERVAL: 5,      // 5-minute increments for time selection (v2 requirement)
 } as const;
 
 export type TimeConfig = typeof TIME_CONFIG;
