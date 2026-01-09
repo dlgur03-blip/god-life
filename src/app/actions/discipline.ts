@@ -22,9 +22,15 @@ async function getUser() {
 export async function getDisciplineData(date: string) {
   const user = await getUser();
 
-  // Fetch Rules
+  // Parse the requested date to filter rules created on or before this date
+  const requestedDate = new Date(date + 'T23:59:59.999Z');
+
+  // Fetch Rules - only show rules created on or before the requested date
   const rules = await prisma.disciplineRule.findMany({
-    where: { userId: user.id },
+    where: {
+      userId: user.id,
+      createdAt: { lte: requestedDate }
+    },
     orderBy: { sortOrder: 'asc' },
     include: {
       checks: {

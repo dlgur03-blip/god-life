@@ -12,7 +12,7 @@ interface DestinyNavigatorCardProps {
   goalMonth: string | null;
   goalWeek: string | null;
   goalToday: string | null;
-  weeklyPlans: Record<string, string | null>;
+  weeklyPlans: Array<{ id: string; content: string }>;
 }
 
 export default function DestinyNavigatorCard({

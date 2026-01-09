@@ -180,19 +180,19 @@ model EpistleDay {
   @@unique([userId, date])
 }
 
-// Weekly Plan for 7-day goal tracking
+// Weekly Plan - 7 free-form slots
 model WeeklyPlan {
   id        String   @id @default(cuid())
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  date      String   // YYYY-MM-DD (specific day)
-  mainGoal  String?  // Main goal for this specific day
+  slot      Int      // 0-6 (7 slots)
+  content   String   // Free-form content
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@unique([userId, date])
+  @@unique([userId, slot])
 }
 
 // M9: Bio Hacking (Global Content with Translations)

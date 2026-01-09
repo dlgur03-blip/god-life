@@ -4,17 +4,10 @@ import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { updateTimeblock } from '@/app/actions/destiny';
 import { cn } from '@/lib/utils';
-import DragHandle from './DragHandle';
 import TimeRangeEditor from './TimeRangeEditor';
 import TimeblockDeleteButton from './TimeblockDeleteButton';
 import { Edit2 } from 'lucide-react';
 import type { Timeblock } from '@/types/destiny';
-import type { DraggableSyntheticListeners, DraggableAttributes } from '@dnd-kit/core';
-
-type DragHandlePropsType = {
-  listeners?: DraggableSyntheticListeners;
-  attributes?: DraggableAttributes;
-};
 
 function DebouncedInput({
   value,
@@ -47,15 +40,7 @@ function DebouncedInput({
   );
 }
 
-export default function TimeblockCard({
-  block,
-  dragHandleProps,
-  isDragging,
-}: {
-  block: Timeblock;
-  dragHandleProps?: DragHandlePropsType;
-  isDragging?: boolean;
-}) {
+export default function TimeblockCard({ block }: { block: Timeblock }) {
   const t = useTranslations('Destiny');
   const [mode, setMode] = useState<'plan' | 'actual'>('plan');
   const [isEditingTime, setIsEditingTime] = useState(false);
@@ -69,20 +54,11 @@ export default function TimeblockCard({
       "relative p-4 rounded-xl border bg-[rgba(255,255,255,0.05)] backdrop-blur-sm transition-all duration-300",
       block.status === 'active'
         ? "border-[#06b6d4] shadow-[0_0_15px_rgba(6,182,212,0.3)]"
-        : "border-[rgba(255,255,255,0.1)] hover:border-[rgba(255,255,255,0.2)]",
-      isDragging && "ring-2 ring-[#06b6d4] ring-offset-2 ring-offset-[#050b14]"
+        : "border-[rgba(255,255,255,0.1)] hover:border-[rgba(255,255,255,0.2)]"
     )}>
       {/* Header */}
       <div className="flex justify-between items-center mb-3 flex-wrap gap-2">
         <div className="flex items-center gap-2">
-          {dragHandleProps && (
-            <DragHandle
-              listeners={dragHandleProps.listeners}
-              attributes={dragHandleProps.attributes}
-              isDragging={isDragging}
-            />
-          )}
-
           {isEditingTime ? (
             <TimeRangeEditor
               blockId={block.id}

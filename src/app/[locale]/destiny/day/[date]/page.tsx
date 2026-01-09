@@ -11,6 +11,8 @@ import { getTranslations, getLocale } from 'next-intl/server';
 import { isValidDateParam } from '@/lib/validateDate';
 import { getTodayStr } from '@/lib/date';
 
+type WeeklyPlan = { id: string; content: string };
+
 export default async function DestinyDayPage({ params }: { params: Promise<{ date: string }> }) {
   const t = await getTranslations('Destiny');
   const locale = await getLocale();
@@ -28,9 +30,8 @@ export default async function DestinyDayPage({ params }: { params: Promise<{ dat
   // Fetch Data
   const day = await getOrCreateDestinyDay(date);
 
-  // Fetch weekly plans starting from today (component uses today as default start)
-  const todayStr = getTodayStr();
-  const weeklyPlans = await getWeeklyPlans(todayStr);
+  // Fetch weekly plans (7 free-form slots)
+  const weeklyPlans = await getWeeklyPlans();
 
   // Date Navigation Logic
   const currentDate = new Date(date + 'T00:00:00');

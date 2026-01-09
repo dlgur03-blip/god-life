@@ -39,38 +39,17 @@ export async function getOrCreateDestinyDay(date: string) {
     },
   });
 
-  // 2. If not exists, create day and 11 blocks
+  // 2. If not exists, create day (no default blocks - user adds as needed)
   if (!day) {
-    // Transaction to ensure atomicity
-    day = await prisma.$transaction(async (tx) => {
-      const newDay = await tx.destinyDay.create({
-        data: {
-          userId: user.id,
-          date: date,
-        },
-      });
-
-      // Create 24 blocks (00:00 to 23:00-24:00)
-      const blocksData = Array.from({ length: 24 }, (_, i) => ({
-        dayId: newDay.id,
-        seq: i + 1,
-        startTime: `${String(i).padStart(2, '0')}:00`,
-        endTime: i === 23 ? '24:00' : `${String(i + 1).padStart(2, '0')}:00`,
-        status: 'planned',
-      }));
-
-      // SQLite does not support createMany in standard Prisma
-      await Promise.all(blocksData.map(block => 
-        tx.destinyTimeBlock.create({ data: block })
-      ));
-
-      return await tx.destinyDay.findUnique({
-        where: { id: newDay.id },
-        include: {
-          timeblocks: { orderBy: { seq: 'asc' } },
-          events: { orderBy: { recordedAt: 'asc' } },
-        },
-      });
+    day = await prisma.destinyDay.create({
+      data: {
+        userId: user.id,
+        date: date,
+      },
+      include: {
+        timeblocks: { orderBy: { seq: 'asc' } },
+        events: { orderBy: { recordedAt: 'asc' } },
+      },
     });
   }
 
@@ -100,56 +79,54 @@ export async function updateDestinyGoals(dayId: string, goals: {
   revalidatePath('/destiny/day/[date]');
 }
 
-// Upsert Weekly Plan for a specific day
-export async function updateWeeklyPlan(date: string, mainGoal: string) {
+// Upsert Weekly Plan for a slot (0-6)
+export async function updateWeeklyPlan(slot: number, content: string): Promise<{ id: string }> {
   const user = await getUser();
 
-  await prisma.weeklyPlan.upsert({
+  if (slot < 0 || slot > 6) {
+    throw new Error('Invalid slot');
+  }
+
+  const plan = await prisma.weeklyPlan.upsert({
     where: {
-      userId_date: {
+      userId_slot: {
         userId: user.id,
-        date: date,
+        slot: slot,
       },
     },
-    update: { mainGoal },
+    update: { content },
     create: {
       userId: user.id,
-      date: date,
-      mainGoal,
+      slot: slot,
+      content,
     },
   });
 
   revalidatePath('/destiny/day/[date]');
+  return { id: plan.id };
 }
 
-// Get Weekly Plans for 7 days starting from a date
-export async function getWeeklyPlans(startDate: string): Promise<Record<string, string | null>> {
+// Delete Weekly Plan for a slot
+export async function deleteWeeklyPlan(id: string) {
+  await getUser();
+  await prisma.weeklyPlan.delete({ where: { id } });
+  revalidatePath('/destiny/day/[date]');
+}
+
+// Get all 7 Weekly Plan slots
+export async function getWeeklyPlans(): Promise<Array<{ id: string; content: string }>> {
   const user = await getUser();
 
-  // Generate 7 dates starting from startDate
-  const dates: string[] = [];
-  const start = new Date(startDate);
-  for (let i = 0; i < 7; i++) {
-    const d = new Date(start);
-    d.setDate(d.getDate() + i);
-    dates.push(d.toISOString().split('T')[0]);
-  }
-
   const plans = await prisma.weeklyPlan.findMany({
-    where: {
-      userId: user.id,
-      date: { in: dates },
-    },
+    where: { userId: user.id },
+    orderBy: { slot: 'asc' },
   });
 
-  // Return as a map of date -> mainGoal
-  const result: Record<string, string | null> = {};
-  dates.forEach(date => {
-    const plan = plans.find(p => p.date === date);
-    result[date] = plan?.mainGoal || null;
+  // Return array with 7 slots (empty slots have empty content)
+  return Array.from({ length: 7 }, (_, i) => {
+    const plan = plans.find(p => p.slot === i);
+    return plan ? { id: plan.id, content: plan.content } : { id: '', content: '' };
   });
-
-  return result;
 }
 
 export async function updateTimeblock(blockId: string, data: {
@@ -418,20 +395,8 @@ export async function updateTimeblockTime(
       return { success: false, error: 'BLOCK_NOT_FOUND' };
     }
 
-    // 5. Check overlap with error handling
-    let hasOverlap;
-    try {
-      hasOverlap = await checkTimeOverlap(block.dayId, startTime, endTime, blockId);
-    } catch (overlapError) {
-      console.error('[updateTimeblockTime] Overlap check error:', overlapError);
-      return { success: false, error: 'OVERLAP_CHECK_FAILED' };
-    }
-
-    if (hasOverlap) {
-      return { success: false, error: 'TIME_OVERLAP' };
-    }
-
-    // 6. Update block with error handling
+    // 5. Update block (overlaps allowed)
+    // Note: Overlap check removed - users can have overlapping timeblocks
     try {
       await prisma.destinyTimeBlock.update({
         where: { id: blockId },

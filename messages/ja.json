@@ -120,10 +120,7 @@
     },
     "weeklyPlan": {
       "title": "週間計画",
-      "placeholder": "計画を入力...",
-      "previous": "前の週",
-      "next": "次の週",
-      "today": "今日へ移動"
+      "freeformPlaceholder": "自由に記入..."
     },
     "flowOfEvents": "イベントの流れ",
     "noEventsRecorded": "まだ重要なイベントが記録されていません。",
@@ -132,6 +129,7 @@
     "recording": "記録中...",
     "recordToTimeline": "タイムラインに記録",
     "timeblock": {
+      "noBlocks": "タイムブロックがありません。最初のブロックを追加してください。",
       "timeTo": "〜 {time}",
       "planMode": "計画",
       "actualMode": "実績",

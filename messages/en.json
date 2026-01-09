@@ -120,10 +120,7 @@
     },
     "weeklyPlan": {
       "title": "Weekly Plan",
-      "placeholder": "Enter plan...",
-      "previous": "Previous week",
-      "next": "Next week",
-      "today": "Go to today"
+      "freeformPlaceholder": "Write freely..."
     },
     "flowOfEvents": "Flow of Events",
     "noEventsRecorded": "No significant events recorded yet.",
@@ -132,6 +129,7 @@
     "recording": "Recording...",
     "recordToTimeline": "Record to Timeline",
     "timeblock": {
+      "noBlocks": "No timeblocks yet. Add your first block.",
       "timeTo": "to {time}",
       "planMode": "Plan",
       "actualMode": "Actual",
