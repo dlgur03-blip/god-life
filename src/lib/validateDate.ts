@@ -25,6 +25,6 @@ export function isValidDateParam(dateStr: string): boolean {
 /**
  * Returns the date string if valid, or today's date if invalid
  */
-export function getValidDateOrToday(dateStr: string): string {
-  return isValidDateParam(dateStr) ? dateStr : getTodayStr();
+export function getValidDateOrToday(dateStr: string, timezone?: string): string {
+  return isValidDateParam(dateStr) ? dateStr : getTodayStr(timezone);
 }

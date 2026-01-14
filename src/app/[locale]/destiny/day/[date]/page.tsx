@@ -10,6 +10,7 @@ import EventTimeline from '@/components/destiny/EventTimeline';
 import { getTranslations, getLocale } from 'next-intl/server';
 import { isValidDateParam } from '@/lib/validateDate';
 import { getTodayStr } from '@/lib/date';
+import { getUserTimezone } from '@/lib/timezone';
 
 type WeeklyPlan = { id: string; content: string };
 
@@ -23,8 +24,11 @@ export default async function DestinyDayPage({ params }: { params: Promise<{ dat
     redirect(`/${locale}`);
   }
 
+  const timezone = await getUserTimezone();
+  const todayStr = getTodayStr(timezone);
+
   if (!isValidDateParam(date)) {
-    redirect(`/${locale}/destiny/day/${getTodayStr()}`);
+    redirect(`/${locale}/destiny/day/${todayStr}`);
   }
 
   // Fetch Data
@@ -42,7 +46,7 @@ export default async function DestinyDayPage({ params }: { params: Promise<{ dat
   const nextStr = nextDate.toISOString().split('T')[0];
 
   // Check if viewing today
-  const isToday = date === getTodayStr();
+  const isToday = date === todayStr;
 
   return (
     <main className="min-h-screen bg-[var(--background)] pb-20">

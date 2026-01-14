@@ -7,6 +7,7 @@ import { getMessages } from "next-intl/server";
 import HeaderWrapper from '@/components/HeaderWrapper';
 import FeedbackFooter from '@/components/FeedbackFooter';
 import InAppBrowserGuard from '@/components/InAppBrowserGuard';
+import TimezoneDetector from '@/components/TimezoneDetector';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -69,6 +70,7 @@ export default async function LocaleLayout({
       >
         <NextIntlClientProvider messages={messages}>
           <Providers>
+            <TimezoneDetector />
             <InAppBrowserGuard />
             <HeaderWrapper />
             <main className="pt-14 flex-1">

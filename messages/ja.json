@@ -80,32 +80,7 @@
     "deleteProject": "プロジェクトを削除",
     "deleteProjectConfirm": "このプロジェクトを削除しますか？",
     "deleteProjectWarning": "プロジェクトと100日分の記録がすべて完全に削除されます。この操作は取り消せません。",
-    "deleting": "削除中...",
-    "image": {
-      "notePhoto": "ノート写真",
-      "dropOrClick": "画像をドロップまたはクリックしてアップロード",
-      "maxSize": "最大 {size}MB",
-      "selectFile": "ファイル選択",
-      "takePhoto": "写真を撮る",
-      "uploading": "アップロード中...",
-      "processing": "処理中...",
-      "dayPhoto": "Day {day} の写真",
-      "notePhotoAlt": "Day {day} の手書きノート",
-      "close": "閉じる",
-      "zoomIn": "拡大",
-      "zoomOut": "縮小",
-      "resetZoom": "リセット",
-      "pinchToZoom": "ピンチまたはボタンでズーム",
-      "heicConversionNotice": "HEIC画像はJPEGに変換されます",
-      "errors": {
-        "invalidFileType": "JPG、PNG、WebP、HEIC画像のみアップロード可能です。",
-        "fileTooLarge": "画像は10MB以下にしてください。",
-        "uploadFailed": "画像のアップロードに失敗しました。もう一度お試しください。",
-        "storageNotConfigured": "画像ストレージが利用できません。サポートにお問い合わせください。",
-        "networkError": "ネットワークエラーです。接続を確認して再試行してください。",
-        "unknownError": "予期しないエラーが発生しました。もう一度お試しください。"
-      }
-    }
+    "deleting": "削除中..."
   },
   "Destiny": {
     "title": "DESTINY NAVIGATOR",

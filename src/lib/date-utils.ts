@@ -1,6 +1,6 @@
 /**
  * Date accessibility utilities for epistle module
- * Uses Asia/Seoul timezone consistently
+ * Uses user's timezone parameter
  */
 
 import { getTodayStr } from './date';
@@ -20,14 +20,16 @@ export interface AdaptiveWeekDate {
  * 주어진 시작일부터 7일간의 날짜 배열을 반환합니다.
  * @param startDate - 시작 날짜 (YYYY-MM-DD 형식). 기본값은 오늘.
  * @param locale - 로케일 ('en' | 'ko' | 'ja')
+ * @param timezone - 타임존
  * @returns AdaptiveWeekDate 배열
  */
 export function getAdaptiveWeekDates(
   startDate: string | null = null,
-  locale: SupportedLocale = 'ko'
+  locale: SupportedLocale = 'ko',
+  timezone?: string
 ): AdaptiveWeekDate[] {
-  const today = getTodayStr();
-  const start = startDate || today;
+  const todayStr = getTodayStr(timezone);
+  const start = startDate || todayStr;
 
   const dayNames: Record<SupportedLocale, string[]> = {
     en: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
@@ -46,7 +48,7 @@ export function getAdaptiveWeekDates(
       date: dateStr,
       dayLabel,
       dateLabel,
-      isToday: dateStr === today,
+      isToday: dateStr === todayStr,
     };
   });
 }
@@ -95,20 +97,22 @@ export function getWeekOffsetDate(baseDate: string, weekOffset: number): string 
 /**
  * Check if a date is accessible for writing (only today is accessible)
  * @param dateStr - Date string in YYYY-MM-DD format
+ * @param timezone - User's timezone
  * @returns boolean - true only if the date is today
  */
-export function isDateAccessible(dateStr: string): boolean {
-  const today = getTodayStr();
+export function isDateAccessible(dateStr: string, timezone?: string): boolean {
+  const today = getTodayStr(timezone);
   return dateStr === today;
 }
 
 /**
  * Get the access status of a date relative to today
  * @param dateStr - Date string in YYYY-MM-DD format
+ * @param timezone - User's timezone
  * @returns DateAccessStatus - 'past' | 'today' | 'future'
  */
-export function getDateAccessStatus(dateStr: string): DateAccessStatus {
-  const today = getTodayStr();
+export function getDateAccessStatus(dateStr: string, timezone?: string): DateAccessStatus {
+  const today = getTodayStr(timezone);
 
   if (dateStr === today) return 'today';
   if (dateStr < today) return 'past';

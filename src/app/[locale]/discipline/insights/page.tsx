@@ -7,7 +7,9 @@ import { getTodayStr } from '@/lib/date';
 export default async function DisciplineInsightsPage() {
   const t = await getTranslations('Discipline');
   const stats = await getDisciplineStats();
-  const todayStr = getTodayStr();
+  const { getUserTimezone } = await import('@/lib/timezone');
+  const timezone = await getUserTimezone();
+  const todayStr = getTodayStr(timezone);
 
   return (
     <main className="min-h-screen bg-[var(--background)] p-6 pb-20">

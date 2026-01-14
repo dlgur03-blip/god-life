@@ -3,17 +3,13 @@
 import { useState } from 'react';
 import { updateSuccessEntry } from '@/app/actions/success';
 import { cn } from '@/lib/utils';
-import { Check, Lock, Image as ImageIcon } from 'lucide-react';
+import { Check, Lock } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import ImageUpload from './ImageUpload';
-import ImagePreviewModal from './ImagePreviewModal';
 
-// Updated Entry type with imageUrl
 type Entry = {
   id: string;
   dayIndex: number;
   content: string | null;
-  imageUrl: string | null;
   isCompleted: boolean;
 };
 
@@ -30,13 +26,7 @@ export default function SuccessGrid({
   const t = useTranslations('Success');
   const [selectedEntry, setSelectedEntry] = useState<Entry | null>(null);
   const [content, setContent] = useState('');
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  // Image preview modal state
-  const [previewModal, setPreviewModal] = useState<{ isOpen: boolean; imageUrl: string; dayIndex: number }>(
-    { isOpen: false, imageUrl: '', dayIndex: 0 }
-  );
 
   const getEntry = (idx: number) => entries.find(e => e.dayIndex === idx);
 
@@ -45,25 +35,17 @@ export default function SuccessGrid({
 
     const entry = getEntry(idx);
     if (entry) {
-      // If clicking on completed entry with image, show preview modal
-      if (entry.isCompleted && entry.imageUrl) {
-        setPreviewModal({ isOpen: true, imageUrl: entry.imageUrl, dayIndex: entry.dayIndex });
-        return;
-      }
-
       setSelectedEntry(entry);
       setContent(entry.content || '');
-      setImageUrl(entry.imageUrl || null);
     }
   };
 
   const handleSubmit = async () => {
     if (!selectedEntry) return;
     setIsSubmitting(true);
-    await updateSuccessEntry(projectId, selectedEntry.dayIndex, content, imageUrl);
+    await updateSuccessEntry(projectId, selectedEntry.dayIndex, content);
     setIsSubmitting(false);
     setSelectedEntry(null);
-    setImageUrl(null);
   };
 
   return (
@@ -75,7 +57,6 @@ export default function SuccessGrid({
             const idx = i + 1;
             const entry = getEntry(idx);
             const isCompleted = entry?.isCompleted;
-            const hasImage = entry?.imageUrl;
             const isToday = idx === currentDayIndex;
             const isFuture = idx > currentDayIndex;
 
@@ -98,10 +79,6 @@ export default function SuccessGrid({
                 {idx}
                 {isCompleted && <Check className="w-3 h-3 absolute" />}
                 {isFuture && <Lock className="w-3 h-3 absolute opacity-30" />}
-                {/* Image indicator for completed entries with photos */}
-                {isCompleted && hasImage && (
-                  <ImageIcon className="w-2.5 h-2.5 absolute bottom-0.5 right-0.5 text-white/60" />
-                )}
               </button>
             );
           })}
@@ -119,21 +96,6 @@ export default function SuccessGrid({
             {selectedEntry?.isCompleted ? t('missionComplete') : t('pendingVerification')}
           </p>
 
-          {/* Image Upload Section */}
-          <div className="mb-4">
-            <label className="block text-xs text-[var(--foreground-muted)] mb-2 uppercase tracking-wider">
-              {t('image.notePhoto')}
-            </label>
-            <ImageUpload
-              projectId={projectId}
-              dayIndex={selectedEntry?.dayIndex || 0}
-              currentImageUrl={selectedEntry?.imageUrl}
-              onUploadComplete={(url) => setImageUrl(url)}
-              onRemove={() => setImageUrl(null)}
-              disabled={!selectedEntry}
-            />
-          </div>
-
           <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
@@ -150,14 +112,6 @@ export default function SuccessGrid({
           </button>
         </div>
       </div>
-
-      {/* Image Preview Modal */}
-      <ImagePreviewModal
-        isOpen={previewModal.isOpen}
-        imageUrl={previewModal.imageUrl}
-        dayIndex={previewModal.dayIndex}
-        onClose={() => setPreviewModal({ isOpen: false, imageUrl: '', dayIndex: 0 })}
-      />
     </>
   );
 }

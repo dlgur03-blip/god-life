@@ -43,7 +43,6 @@ export async function getSuccessProject(id: string) {
           id: true,
           dayIndex: true,
           content: true,
-          imageUrl: true,
           isCompleted: true,
           completedAt: true
         }
@@ -90,14 +89,9 @@ export async function createSuccessProject(formData: FormData) {
 export async function updateSuccessEntry(
   projectId: string,
   dayIndex: number,
-  content: string,
-  imageUrl?: string | null
+  content: string
 ) {
   await getUser(); // Check auth
-
-  // Find entry first to ensure ownership via project is complex in one query,
-  // simplified: trust database constraints + projectId check if needed.
-  // Ideally we check project ownership first.
 
   await prisma.successEntry.update({
     where: {
@@ -108,7 +102,6 @@ export async function updateSuccessEntry(
     },
     data: {
       content,
-      imageUrl: imageUrl ?? undefined, // Only update if provided
       isCompleted: true,
       completedAt: new Date(),
     }

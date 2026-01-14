@@ -7,7 +7,9 @@ import { getTodayStr } from '@/lib/date';
 export default async function EpistleTimelinePage() {
   const t = await getTranslations('Epistle');
   const letters = await getEpistleTimeline();
-  const todayStr = getTodayStr();
+  const { getUserTimezone } = await import('@/lib/timezone');
+  const timezone = await getUserTimezone();
+  const todayStr = getTodayStr(timezone);
 
   return (
     <main className="min-h-screen bg-[var(--background)] p-6 pb-20">

@@ -18,8 +18,12 @@ export default async function DisciplinePage({ params }: { params: Promise<{ dat
 
   if (!session) redirect(`/${locale}`);
 
+  const { getUserTimezone } = await import('@/lib/timezone');
+  const timezone = await getUserTimezone();
+  const todayStr = getTodayStr(timezone);
+
   if (!isValidDateParam(date)) {
-    redirect(`/${locale}/discipline/day/${getTodayStr()}`);
+    redirect(`/${locale}/discipline/day/${todayStr}`);
   }
 
   const rules = await getDisciplineData(date);

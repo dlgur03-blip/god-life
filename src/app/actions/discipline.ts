@@ -76,8 +76,10 @@ export async function toggleRuleCheck(ruleId: string, date: string, isChecked: b
   try {
     await getUser();
 
-    // Validate date is today
-    const dateStatus = getDateStatus(date);
+    // Validate date is today (using user's timezone from cookie)
+    const { getUserTimezone } = await import('@/lib/timezone');
+    const timezone = await getUserTimezone();
+    const dateStatus = getDateStatus(date, timezone);
     if (dateStatus !== 'today') {
       return error('DATE_NOT_TODAY');
     }

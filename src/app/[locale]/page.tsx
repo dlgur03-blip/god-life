@@ -4,12 +4,12 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { getTodayStr } from '@/lib/date';
+import { getUserTimezone } from '@/lib/timezone';
 import { getTranslations } from 'next-intl/server';
 
 export const dynamic = 'force-dynamic'; // Ensure real-time status
 
-async function getDashboardStats(userId: string, t: (key: string, values?: Record<string, string | number>) => string) {
-  const today = getTodayStr();
+async function getDashboardStats(userId: string, today: string, t: (key: string, values?: Record<string, string | number>) => string) {
 
   // Parallel Fetch
   const [destinyDay, disciplineRules, successProjects, epistleDay] = await Promise.all([
@@ -97,8 +97,9 @@ export default async function Home() {
     </div>
   );
 
-  const stats = await getDashboardStats(user.id, t);
-  const todayStr = getTodayStr();
+  const timezone = await getUserTimezone();
+  const todayStr = getTodayStr(timezone);
+  const stats = await getDashboardStats(user.id, todayStr, t);
 
   const modules = [
     { name: t('modules.destiny.name'), href: `/destiny/day/${todayStr}`, icon: Compass, desc: t('modules.destiny.desc'), status: stats.destinyStatus, moduleColor: 'var(--color-destiny)' },

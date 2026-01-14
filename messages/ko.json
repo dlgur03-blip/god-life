@@ -80,32 +80,7 @@
     "deleteProject": "프로젝트 삭제",
     "deleteProjectConfirm": "이 프로젝트를 삭제하시겠습니까?",
     "deleteProjectWarning": "프로젝트와 100일 기록이 모두 영구 삭제됩니다. 이 작업은 취소할 수 없습니다.",
-    "deleting": "삭제 중...",
-    "image": {
-      "notePhoto": "노트 사진",
-      "dropOrClick": "이미지를 드래그하거나 클릭하여 업로드",
-      "maxSize": "최대 {size}MB",
-      "selectFile": "파일 선택",
-      "takePhoto": "사진 찍기",
-      "uploading": "업로드 중...",
-      "processing": "처리 중...",
-      "dayPhoto": "Day {day} 사진",
-      "notePhotoAlt": "Day {day} 손글씨 노트",
-      "close": "닫기",
-      "zoomIn": "확대",
-      "zoomOut": "축소",
-      "resetZoom": "초기화",
-      "pinchToZoom": "핀치 또는 버튼으로 확대/축소",
-      "heicConversionNotice": "HEIC 이미지가 JPEG로 변환됩니다",
-      "errors": {
-        "invalidFileType": "JPG, PNG, WebP, HEIC 이미지만 업로드 가능합니다.",
-        "fileTooLarge": "이미지는 10MB 이하여야 합니다.",
-        "uploadFailed": "이미지 업로드에 실패했습니다. 다시 시도해주세요.",
-        "storageNotConfigured": "이미지 저장소를 사용할 수 없습니다. 관리자에게 문의하세요.",
-        "networkError": "네트워크 오류입니다. 연결을 확인하고 다시 시도해주세요.",
-        "unknownError": "예상치 못한 오류가 발생했습니다. 다시 시도해주세요."
-      }
-    }
+    "deleting": "삭제 중..."
   },
   "Destiny": {
     "title": "DESTINY NAVIGATOR",

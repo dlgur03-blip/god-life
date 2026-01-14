@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
+import { getTodayStr, DEFAULT_TIMEZONE } from "./date"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -7,39 +8,26 @@ export function cn(...inputs: ClassValue[]) {
 
 export type DateStatus = 'today' | 'past' | 'future';
 
-export function getDateStatus(dateStr: string): DateStatus {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+export function getDateStatus(dateStr: string, timezone?: string): DateStatus {
+  const today = getTodayStr(timezone);
 
-  const targetDate = new Date(dateStr + 'T00:00:00');
-  targetDate.setHours(0, 0, 0, 0);
-
-  const todayTime = today.getTime();
-  const targetTime = targetDate.getTime();
-
-  if (targetTime === todayTime) return 'today';
-  if (targetTime < todayTime) return 'past';
+  if (dateStr === today) return 'today';
+  if (dateStr < today) return 'past';
   return 'future';
 }
 
 export type EpistleDateAccess = 'past' | 'today' | 'blocked';
 
-export function getEpistleDateAccess(dateStr: string): EpistleDateAccess {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+export function getEpistleDateAccess(dateStr: string, timezone?: string): EpistleDateAccess {
+  const today = getTodayStr(timezone);
 
-  const targetDate = new Date(dateStr + 'T00:00:00');
-  targetDate.setHours(0, 0, 0, 0);
-
-  const diffDays = Math.floor((targetDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
-
-  if (diffDays < 0) return 'past';
-  if (diffDays === 0) return 'today';
-  return 'blocked'; // All future dates including tomorrow are now blocked
+  if (dateStr === today) return 'today';
+  if (dateStr < today) return 'past';
+  return 'blocked';
 }
 
-export function getYesterdayStr(dateStr: string): string {
-  const date = new Date(dateStr + 'T00:00:00');
+export function getYesterdayStr(dateStr: string, timezone?: string): string {
+  const date = new Date(dateStr + 'T12:00:00');
   date.setDate(date.getDate() - 1);
-  return date.toISOString().split('T')[0];
+  return date.toLocaleDateString('en-CA', { timeZone: timezone || DEFAULT_TIMEZONE });
 }

@@ -1,20 +1,24 @@
-// Existing functions remain unchanged for internal date operations (YYYY-MM-DD format)
-export function getTodayStr() {
-  return new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Seoul' });
+export const DEFAULT_TIMEZONE = 'Asia/Seoul';
+
+// Get today's date string in specified timezone
+export function getTodayStr(timezone?: string): string {
+  const tz = timezone || DEFAULT_TIMEZONE;
+  return new Date().toLocaleDateString('en-CA', { timeZone: tz });
 }
 
-export function formatDate(date: Date) {
-  return date.toLocaleDateString('en-CA', { timeZone: 'Asia/Seoul' });
+export function formatDate(date: Date, timezone?: string) {
+  const tz = timezone || DEFAULT_TIMEZONE;
+  return date.toLocaleDateString('en-CA', { timeZone: tz });
 }
 
-// NEW: Locale-aware display formatting
+// Locale-aware display formatting
 type SupportedLocale = 'en' | 'ko' | 'ja';
 
 // Format date for display (e.g., "January 15, 2026" in en, "2026년 1월 15일" in ko)
-export function formatDateDisplay(date: Date | string, locale: SupportedLocale): string {
+export function formatDateDisplay(date: Date | string, locale: SupportedLocale, timezone?: string): string {
   const d = typeof date === 'string' ? new Date(date) : date;
   return d.toLocaleDateString(getLocaleCode(locale), {
-    timeZone: 'Asia/Seoul',
+    timeZone: timezone || DEFAULT_TIMEZONE,
     year: 'numeric',
     month: 'long',
     day: 'numeric'
@@ -22,20 +26,20 @@ export function formatDateDisplay(date: Date | string, locale: SupportedLocale):
 }
 
 // Format date short (e.g., "Jan 15" in en, "1월 15일" in ko)
-export function formatDateShort(date: Date | string, locale: SupportedLocale): string {
+export function formatDateShort(date: Date | string, locale: SupportedLocale, timezone?: string): string {
   const d = typeof date === 'string' ? new Date(date) : date;
   return d.toLocaleDateString(getLocaleCode(locale), {
-    timeZone: 'Asia/Seoul',
+    timeZone: timezone || DEFAULT_TIMEZONE,
     month: 'short',
     day: 'numeric'
   });
 }
 
 // Format time for display (e.g., "14:30" in 24h format or locale-appropriate)
-export function formatTimeDisplay(date: Date | string, locale: SupportedLocale): string {
+export function formatTimeDisplay(date: Date | string, locale: SupportedLocale, timezone?: string): string {
   const d = typeof date === 'string' ? new Date(date) : date;
   return d.toLocaleTimeString(getLocaleCode(locale), {
-    timeZone: 'Asia/Seoul',
+    timeZone: timezone || DEFAULT_TIMEZONE,
     hour: '2-digit',
     minute: '2-digit',
     hour12: locale === 'en' // 12-hour for English, 24-hour for ko/ja
@@ -43,10 +47,10 @@ export function formatTimeDisplay(date: Date | string, locale: SupportedLocale):
 }
 
 // Format datetime for display
-export function formatDateTimeDisplay(date: Date | string, locale: SupportedLocale): string {
+export function formatDateTimeDisplay(date: Date | string, locale: SupportedLocale, timezone?: string): string {
   const d = typeof date === 'string' ? new Date(date) : date;
   return d.toLocaleString(getLocaleCode(locale), {
-    timeZone: 'Asia/Seoul',
+    timeZone: timezone || DEFAULT_TIMEZONE,
     year: 'numeric',
     month: 'short',
     day: 'numeric',

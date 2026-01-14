@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { toggleRuleCheck, deleteRule } from '@/app/actions/discipline';
 import { Check, Trash2, Lock } from 'lucide-react';
 import { cn, getDateStatus, type DateStatus } from '@/lib/utils';
@@ -27,7 +27,9 @@ export default function DisciplineList({
     ruleId: null
   });
 
-  const dateStatus: DateStatus = getDateStatus(date);
+  // Get user's local timezone from browser
+  const timezone = useMemo(() => Intl.DateTimeFormat().resolvedOptions().timeZone, []);
+  const dateStatus: DateStatus = getDateStatus(date, timezone);
 
   const handleDeleteClick = (ruleId: string) => {
     setDeleteConfirm({ isOpen: true, ruleId });

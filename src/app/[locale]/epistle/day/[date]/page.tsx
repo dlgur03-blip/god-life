@@ -20,15 +20,19 @@ export default async function EpistleDayPage({ params }: { params: Promise<{ dat
 
   if (!session) redirect(`/${locale}`);
 
+  const { getUserTimezone } = await import('@/lib/timezone');
+  const timezone = await getUserTimezone();
+  const todayStr = getTodayStr(timezone);
+
   if (!isValidDateParam(date)) {
-    redirect(`/${locale}/epistle/day/${getTodayStr()}`);
+    redirect(`/${locale}/epistle/day/${todayStr}`);
   }
 
-  const access = getEpistleDateAccess(date);
+  const access = getEpistleDateAccess(date, timezone);
 
   // Redirect blocked dates to today
   if (access === 'blocked') {
-    redirect(`/${locale}/epistle/day/${getTodayStr()}`);
+    redirect(`/${locale}/epistle/day/${todayStr}`);
   }
 
   const [data, yesterdayLetter] = await Promise.all([
@@ -44,7 +48,7 @@ export default async function EpistleDayPage({ params }: { params: Promise<{ dat
   const nextStr = nextDate.toISOString().split('T')[0];
 
   // Check if next navigation is allowed
-  const nextAccess = getEpistleDateAccess(nextStr);
+  const nextAccess = getEpistleDateAccess(nextStr, timezone);
   const canNavigateNext = nextAccess !== 'blocked';
 
   return (
