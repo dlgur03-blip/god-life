@@ -53,7 +53,7 @@ export default async function MoneyPage({
     <main className="min-h-screen bg-[var(--background)] pb-20">
       <div className="max-w-3xl mx-auto p-4 md:p-6">
         {/* Header */}
-        <header className="flex items-center justify-between mb-8 sticky top-[72px] md:top-[80px] z-10 bg-[var(--background)]/95 p-4 -mx-4 rounded-b-xl border-b border-[var(--color-border)]">
+        <header className="flex items-center justify-between mb-8 sticky top-[52px] md:top-[56px] z-10 bg-[var(--background)]/95 p-4 -mx-4 rounded-b-xl border-b border-[var(--color-border)]">
           <Link
             href={`/money?month=${prevMonth}`}
             className="p-2 hover:bg-[var(--color-card-hover)] rounded-full text-[var(--foreground-muted)] hover:text-[var(--color-primary)] transition-colors"
