@@ -48,6 +48,8 @@ model DestinyDay {
   goal2Week      String?  // 2주 후의 나
   goal1Week      String?  // 1주 후의 나
   goalToday      String?  // 오늘의 목표
+  habitToKeep    String?  // 목표 달성을 위해 반드시 필요한 습관
+  habitToRemove  String?  // 반드시 없애야 하는 습관
   restTime       String?  // 휴식 시간 배정
 
   // Legacy fields (keeping for migration compatibility)

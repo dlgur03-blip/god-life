@@ -68,6 +68,8 @@ export async function updateDestinyGoals(dayId: string, goals: {
   twoWeek?: string;
   oneWeek?: string;
   today?: string;
+  habitToKeep?: string;
+  habitToRemove?: string;
   restTime?: string;
   // Legacy fields for compatibility
   long?: string;
@@ -90,6 +92,8 @@ export async function updateDestinyGoals(dayId: string, goals: {
       goal2Week: goals.twoWeek,
       goal1Week: goals.oneWeek,
       goalToday: goals.today,
+      habitToKeep: goals.habitToKeep,
+      habitToRemove: goals.habitToRemove,
       restTime: goals.restTime,
       // Legacy fields
       goalLong: goals.long,

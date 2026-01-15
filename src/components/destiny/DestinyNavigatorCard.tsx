@@ -18,6 +18,8 @@ interface DestinyNavigatorCardProps {
   goal2Week: string | null;
   goal1Week: string | null;
   goalToday: string | null;
+  habitToKeep: string | null;
+  habitToRemove: string | null;
   restTime: string | null;
   weeklyPlans: Array<{ id: string; content: string }>;
 }
@@ -35,6 +37,8 @@ export default function DestinyNavigatorCard({
   goal2Week,
   goal1Week,
   goalToday,
+  habitToKeep,
+  habitToRemove,
   restTime,
   weeklyPlans,
 }: DestinyNavigatorCardProps) {
@@ -152,6 +156,24 @@ export default function DestinyNavigatorCard({
         onSave={handleGoalSave('today')}
         placeholder={t('goals.todayPlaceholder')}
         variant="today"
+      />
+
+      {/* Habit to Keep */}
+      <GoalEditor
+        label={t('goals.habitToKeep')}
+        value={habitToKeep}
+        onSave={handleGoalSave('habitToKeep')}
+        placeholder={t('goals.habitToKeepPlaceholder')}
+        variant="habit"
+      />
+
+      {/* Habit to Remove */}
+      <GoalEditor
+        label={t('goals.habitToRemove')}
+        value={habitToRemove}
+        onSave={handleGoalSave('habitToRemove')}
+        placeholder={t('goals.habitToRemovePlaceholder')}
+        variant="habit"
       />
 
       {/* Rest Time Allocation */}

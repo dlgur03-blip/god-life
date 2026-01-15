@@ -117,12 +117,13 @@ export default function TimeblockCard({ block }: { block: Timeblock }) {
       </div>
 
       {/* Content */}
-      <div className="space-y-2">
+      <div className="space-y-2" key={mode}>
         {mode === 'plan' ? (
           <>
             <div className="flex items-center gap-2">
               <span className="text-xs text-[var(--foreground-muted)] w-12">{t('timeblock.whereLabel')}</span>
               <DebouncedInput
+                key={`location-${block.id}`}
                 value={block.planLocation}
                 onSave={(v) => handleUpdate({ planLocation: v })}
                 placeholder={t('timeblock.locationPlaceholder')}
@@ -131,6 +132,7 @@ export default function TimeblockCard({ block }: { block: Timeblock }) {
             <div className="flex items-center gap-2">
               <span className="text-xs text-[var(--foreground-muted)] w-12">{t('timeblock.whatLabel')}</span>
               <DebouncedInput
+                key={`plan-${block.id}`}
                 value={block.planText}
                 onSave={(v) => handleUpdate({ planText: v })}
                 placeholder={t('timeblock.planPlaceholder')}
@@ -143,6 +145,7 @@ export default function TimeblockCard({ block }: { block: Timeblock }) {
             <div className="flex items-center gap-2">
               <span className="text-xs text-[var(--foreground-muted)] w-12">{t('timeblock.doneLabel')}</span>
               <DebouncedInput
+                key={`actual-${block.id}`}
                 value={block.actualText}
                 onSave={(v) => handleUpdate({ actualText: v })}
                 placeholder={t('timeblock.actualPlaceholder')}
@@ -163,6 +166,7 @@ export default function TimeblockCard({ block }: { block: Timeblock }) {
             <div className="flex items-center gap-2">
               <span className="text-xs text-[var(--foreground-muted)] w-12">{t('timeblock.feedLabel')}</span>
               <DebouncedInput
+                key={`feedback-${block.id}`}
                 value={block.feedback}
                 onSave={(v) => handleUpdate({ feedback: v })}
                 placeholder={t('timeblock.feedbackPlaceholder')}

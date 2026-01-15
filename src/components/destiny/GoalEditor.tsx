@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 
-type GoalVariant = 'ultimate' | 'longTerm' | 'month' | 'week' | 'today';
+type GoalVariant = 'ultimate' | 'longTerm' | 'month' | 'week' | 'today' | 'habit';
 
 const variantColors: Record<GoalVariant, { border: string; text: string; bg: string }> = {
   ultimate: { border: 'border-[#FFD700]', text: 'text-[#FFD700]', bg: 'bg-[rgba(255,215,0,0.1)]' },
@@ -11,6 +11,7 @@ const variantColors: Record<GoalVariant, { border: string; text: string; bg: str
   month: { border: 'border-[#10B981]', text: 'text-[#10B981]', bg: 'bg-[rgba(16,185,129,0.1)]' },
   week: { border: 'border-[#06b6d4]', text: 'text-[#06b6d4]', bg: 'bg-[rgba(6,182,212,0.1)]' },
   today: { border: 'border-[#f59e0b]', text: 'text-[#f59e0b]', bg: 'bg-[rgba(245,158,11,0.1)]' },
+  habit: { border: 'border-[#ec4899]', text: 'text-[#ec4899]', bg: 'bg-[rgba(236,72,153,0.1)]' },
 };
 
 interface GoalEditorProps {

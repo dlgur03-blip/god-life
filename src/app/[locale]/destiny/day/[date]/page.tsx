@@ -88,6 +88,8 @@ export default async function DestinyDayPage({ params }: { params: Promise<{ dat
           goal2Week={day.goal2Week}
           goal1Week={day.goal1Week}
           goalToday={day.goalToday}
+          habitToKeep={day.habitToKeep}
+          habitToRemove={day.habitToRemove}
           restTime={day.restTime}
           weeklyPlans={weeklyPlans}
         />
