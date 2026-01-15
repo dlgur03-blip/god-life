@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 type LocaleOption = {
-  code: 'ko' | 'en' | 'ja';
+  code: 'ko' | 'en' | 'ja' | 'zh';
   label: string;
   flag: string;
 };
@@ -20,6 +20,7 @@ const localeOptions: LocaleOption[] = [
   { code: 'ko', label: '한국어', flag: '🇰🇷' },
   { code: 'en', label: 'English', flag: '🇺🇸' },
   { code: 'ja', label: '日本語', flag: '🇯🇵' },
+  { code: 'zh', label: '中文', flag: '🇨🇳' },
 ];
 
 export default function LanguageSwitcher() {

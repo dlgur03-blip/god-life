@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Noto_Sans_KR } from "next/font/google";
+import { Geist, Geist_Mono, Noto_Sans_KR, Noto_Sans_SC } from "next/font/google";
 import "../globals.css";
 import Providers from "../providers";
 import { NextIntlClientProvider } from "next-intl";
@@ -23,6 +23,12 @@ const notoSansKR = Noto_Sans_KR({
   variable: "--font-noto-sans-kr",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+});
+
+const notoSansSC = Noto_Sans_SC({
+  variable: "--font-noto-sans-sc",
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
 });
 
 export const metadata: Metadata = {
@@ -69,7 +75,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${notoSansKR.variable} antialiased min-h-screen flex flex-col`}
+        className={`${geistSans.variable} ${geistMono.variable} ${notoSansKR.variable} ${notoSansSC.variable} antialiased min-h-screen flex flex-col`}
       >
         <NextIntlClientProvider messages={messages}>
           <Providers>

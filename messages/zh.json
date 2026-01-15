@@ -1,0 +1,810 @@
+{
+  "Header": {
+    "goToDashboard": "进入控制台",
+    "myPage": "个人主页"
+  },
+  "Home": {
+    "title": "GOD LIFE MAKER",
+    "subtitle": "规划你的命运。掌控你的自律。优化你的生物系统。",
+    "enterSystem": "进入系统",
+    "welcome": "欢迎，{name}",
+    "userError": "找不到用户账户。请重新登录。",
+    "modules": {
+      "destiny": {
+        "name": "命运导航员",
+        "desc": "每日目标与时间块"
+      },
+      "success": {
+        "name": "成功代码",
+        "desc": "100天项目"
+      },
+      "discipline": {
+        "name": "自律掌控",
+        "desc": "每日规则与检查"
+      },
+      "epistle": {
+        "name": "自省书信",
+        "desc": "写给自己的信"
+      },
+      "bio": {
+        "name": "生物黑客",
+        "desc": "优化专栏"
+      },
+      "money": {
+        "name": "财务流向",
+        "desc": "收支跟踪"
+      }
+    },
+    "status": {
+      "notStarted": "未开始",
+      "inProgress": "进行中",
+      "planned": "已计划",
+      "noRules": "无规则",
+      "percentDone": "{percent}% 已完成",
+      "noActive": "无活跃任务",
+      "activeCount": "{count} 个活跃",
+      "sealed": "已密封",
+      "pending": "待定",
+      "database": "数据库"
+    }
+  },
+  "Success": {
+    "title": "SUCCESS CODE",
+    "subtitle": "100天的坚持",
+    "newProject": "新项目",
+    "dayCount": "第 {current} / 100 天",
+    "started": "开始于 {date}",
+    "noProjects": "暂无活跃任务。",
+    "startJourney": "开启你的第一个100天之旅",
+    "backToDashboard": "返回控制台",
+    "backToList": "返回列表",
+    "currentDay": "当前天数",
+    "start": "开始",
+    "reminder": "提醒",
+    "form": {
+      "title": "启动协议",
+      "projectTitle": "项目标题",
+      "projectTitlePlaceholder": "例如：100天代码挑战",
+      "startDate": "开始日期",
+      "reminderTime": "提醒时间",
+      "generateGrid": "生成100天网格"
+    },
+    "day": "天",
+    "missionComplete": "任务完成",
+    "pendingVerification": "等待验证",
+    "logProgress": "记录你的进度...",
+    "verifying": "验证中...",
+    "confirmEntry": "确认输入",
+    "projectNotFound": "找不到项目",
+    "projectNotFoundMessage": "请求的项目不存在或已被删除。",
+    "deleteProject": "删除项目",
+    "deleteProjectConfirm": "确定要删除这个项目吗？",
+    "deleteProjectWarning": "这将永久删除该项目及其所有100天的记录。此操作不可撤销。",
+    "deleting": "删除中..."
+  },
+  "Destiny": {
+    "title": "DESTINY NAVIGATOR",
+    "coreObjectives": "长期视角",
+    "longTermGoals": "展开/收起长期目标",
+    "timeblocks": "24小时时间块",
+    "calendar": "日历",
+    "goToToday": "回到今天",
+    "goals": {
+      "ultimate": "终极自我",
+      "tenYear": "10年后的我",
+      "fiveYear": "5年后的我",
+      "threeYear": "3年后的我",
+      "oneYear": "1年后的我",
+      "sixMonth": "6个月后的我",
+      "threeMonth": "3个月后的我",
+      "oneMonth": "1个月后的我",
+      "twoWeek": "2周后的我",
+      "oneWeek": "1周后的我",
+      "today": "今日目标",
+      "habitToKeep": "核心习惯",
+      "habitToRemove": "需消除的习惯",
+      "restTime": "休息时间分配",
+      "ultimatePlaceholder": "我最终想成为什么样的人？",
+      "tenYearPlaceholder": "10年后我会是什么样子？",
+      "fiveYearPlaceholder": "5年后我会是什么样子？",
+      "threeYearPlaceholder": "3年后我会是什么样子？",
+      "oneYearPlaceholder": "1年后我会是什么样子？",
+      "sixMonthPlaceholder": "6个月后我会是什么样子？",
+      "threeMonthPlaceholder": "3个月后我会是什么样子？",
+      "oneMonthPlaceholder": "1个月后我会是什么样子？",
+      "twoWeekPlaceholder": "2周后我会是什么样子？",
+      "oneWeekPlaceholder": "1周后我会是什么样子？",
+      "todayPlaceholder": "今天必须做什么？",
+      "habitToKeepPlaceholder": "实现目标必不可少的习惯",
+      "habitToRemovePlaceholder": "必须消除的一个习惯",
+      "restTimePlaceholder": "今天休息多久？",
+      "longTerm": "长期目标",
+      "month": "本月目标",
+      "week": "本周目标",
+      "longTermPlaceholder": "你想实现什么长期目标？",
+      "monthPlaceholder": "本月必须实现什么？",
+      "weekPlaceholder": "本周你关注的重点是什么？"
+    },
+    "weeklyPlan": {
+      "title": "每周计划",
+      "freeformPlaceholder": "自由书写..."
+    },
+    "flowOfEvents": "事件流",
+    "noEventsRecorded": "尚未记录任何重要事件。",
+    "recordEvent": "记录事件",
+    "whatJustHappened": "刚刚发生了什么？",
+    "recording": "记录中...",
+    "recordToTimeline": "记录到时间轴",
+    "or": "或",
+    "timeblock": {
+      "noBlocks": "尚未添加时间块。添加你的第一个块。",
+      "create24h": "创建24小时时间块",
+      "creating": "创建中...",
+      "timeTo": "至 {time}",
+      "planMode": "计划",
+      "actualMode": "实际",
+      "whereLabel": "地点",
+      "whatLabel": "内容",
+      "locationPlaceholder": "地点...",
+      "planPlaceholder": "计划详情...",
+      "actualPlaceholder": "实际发生了什么...",
+      "doneLabel": "完成",
+      "scoreLabel": "评分",
+      "scoreSuffix": "/ 10",
+      "feedLabel": "反馈",
+      "feedbackPlaceholder": "反馈...",
+      "addBlock": "添加时间块",
+      "adding": "添加中...",
+      "deleteBlock": "删除块",
+      "deleteBlockTitle": "删除时间块",
+      "deleteBlockConfirm": "确定要删除此时间块吗？此操作不可撤销。",
+      "editTime": "编辑时间",
+      "endMustBeAfterStart": "结束时间必须在开始时间之后。",
+      "timeOverlap": "时间范围与另一个块重叠。",
+      "invalidTimeFormat": "时间格式无效。请使用 HH:MM。",
+      "fiveMinuteIncrement": "时间必须以5分钟为增量。"
+    },
+    "template": {
+      "save": "保存模板",
+      "load": "加载模板",
+      "saveTitle": "保存为模板",
+      "saveDescription": "将当前时间块结构保存为可重复使用的模板。",
+      "namePlaceholder": "模板名称 (例如：工作日例程)",
+      "nameRequired": "模板名称是必需的",
+      "loadTitle": "加载模板",
+      "loadDescription": "选择一个模板应用到今天的日程中。",
+      "loadWarningTitle": "替换当前时间块？",
+      "loadWarningMessage": "这将删除所有现有时间块并替换为模板。此操作不可撤销。",
+      "confirmLoad": "应用模板",
+      "noTemplates": "尚未保存任何模板。",
+      "blockCount": "{count} 个块",
+      "savedSuccess": "模板保存成功",
+      "loadedSuccess": "模板应用成功"
+    }
+  },
+  "Discipline": {
+    "title": "DISCIPLINE MASTERY",
+    "dailyCompletion": "每日完成情况",
+    "backToCheck": "返回检查",
+    "insights": "见解",
+    "masteryInsights": "掌控见解",
+    "sevenDayRate": "7天达成率",
+    "thirtyDayRate": "30天达成率",
+    "noRulesInsight": "添加规则以查看你的表现趋势。",
+    "deleteRuleConfirm": "删除此规则？",
+    "noRulesDefined": "尚未定义规则。添加一项自律任务开始掌控。",
+    "addNewDiscipline": "添加新的自律任务...",
+    "dateRestriction": {
+      "pastDateReadOnly": "过去的日期仅供阅读",
+      "futureDateLocked": "未来的日期已锁定",
+      "todayOnly": "你只能检查今天的规则"
+    }
+  },
+  "Epistle": {
+    "title": "SELF EPISTLE",
+    "backToWriting": "返回写作",
+    "timeline": "时间轴",
+    "archives": "档案",
+    "noLetters": "没有密封在时间里的信件。",
+    "letterToYesterday": "给昨天自己的信",
+    "letterToTomorrow": "给明天自己的信",
+    "reflectOnPassed": "反思过去...",
+    "manifestIntent": "表达你的意图...",
+    "sealing": "密封中...",
+    "sealEpistle": "密封书信",
+    "receivedLetter": "收到的信件",
+    "noLetterFromYesterday": "没有收到昨天自己的信。",
+    "receivedLetterFrom": "收到来自 {date} 的信",
+    "dateBlocked": "日期已锁定",
+    "dateBlockedHint": "你只能写今天和昨天的信。",
+    "readOnly": "只读",
+    "composeLetter": "撰写信件",
+    "fixedFields": {
+      "gratitude": "感恩的事",
+      "gratitudePlaceholder": "今天我感激什么？",
+      "important": "重要的事",
+      "importantPlaceholder": "今天有什么重要的事？",
+      "anger": "一件让我生气的事",
+      "angerPlaceholder": "今天什么让我生气？",
+      "leisure": "闲暇活动",
+      "leisurePlaceholder": "今天我享受了什么？",
+      "reflection": "需要反思的事",
+      "reflectionPlaceholder": "明天我会如何改进？"
+    }
+  },
+  "Goals": {
+    "title": "目标层级",
+    "subtitle": "从长期到短期目标",
+    "hierarchy": "目标层级图",
+    "createGoal": "创建目标",
+    "editGoal": "编辑目标",
+    "deleteGoal": "删除目标",
+    "deleteGoalConfirm": "确定要删除此目标吗？子目标连接将被移除。",
+    "createFirstGoal": "创建你的第一个目标",
+    "addChild": "添加子目标",
+    "edit": "编辑",
+    "delete": "删除",
+    "goalType": "Goal Type",
+    "titleLabel": "标题",
+    "titlePlaceholder": "输入目标标题...",
+    "description": "描述",
+    "descriptionPlaceholder": "输入此目标的描述（可选）",
+    "parentGoal": "父级目标",
+    "noParent": "无父级目标",
+    "statusLabel": "状态",
+    "goalsCount": "个目标",
+    "noGoalsOfType": "此类目标为空。",
+    "goToHierarchy": "前往层级图",
+    "types": {
+      "ultimate": "终极目标",
+      "ten_year": "10年目标",
+      "five_year": "5年目标",
+      "one_year": "1年目标",
+      "six_month": "6个月目标",
+      "three_month": "3个月目标",
+      "one_month": "1个月目标",
+      "one_week": "1周目标"
+    },
+    "status": {
+      "active": "进行中",
+      "completed": "已完成",
+      "paused": "已暂停",
+      "cancelled": "已取消"
+    },
+    "emptyState": {
+      "title": "尚未设定目标",
+      "description": "系统地设定和管理你的目标，从终极愿望到每周目标。"
+    },
+    "validation": {
+      "titleRequired": "请输入标题。"
+    }
+  },
+  "Bio": {
+    "title": "BIO HACKING",
+    "subtitle": "优化你的硬件。",
+    "backToDatabase": "返回数据库",
+    "returnToDatabase": "返回数据库",
+    "readProtocol": "阅读方案",
+    "protocolNotFound": "未找到方案。",
+    "protocolNotFoundMessage": "请求的方案在我们的数据库中不存在。",
+    "updated": "更新于",
+    "viewingIn": "正在以 {locale} 查看",
+    "translationUnavailable": "此语言暂无翻译。",
+    "allCategories": "全部",
+    "filterByCategory": "按类别筛选",
+    "postsCount": "{count} 个方案",
+    "noPostsInCategory": "此类别下暂无方案。",
+    "categories": {
+      "Nutrition": "营养",
+      "Supplements": "补剂",
+      "Recovery": "恢复",
+      "Exercise": "运动",
+      "Mindset": "心态"
+    }
+  },
+  "Common": {
+    "language": "语言",
+    "loading": "加载中...",
+    "error": "发生错误。",
+    "confirm": "确认",
+    "cancel": "取消",
+    "save": "保存",
+    "delete": "删除",
+    "back": "返回",
+    "retry": "重试",
+    "print": "打印",
+    "notFound": {
+      "title": "页面未找到",
+      "message": "你寻找的页面不存在或已被移动。",
+      "backHome": "返回首页"
+    },
+    "errors": {
+      "unauthorized": "你必须登录才能执行此操作。",
+      "userNotFound": "找不到用户账户。",
+      "missingFields": "请填写所有必填字段。",
+      "maxRulesReached": "已达到最大规则数 (13)。",
+      "networkError": "网络错误。请检查你的连接。",
+      "serverError": "服务器错误。请稍后再试。",
+      "unknown": "发生了意外错误。",
+      "dateNotToday": "你只能检查今天的规则。",
+      "forbidden": "你没有权限执行此操作。",
+      "adminOnly": "此功能仅对管理员开放。",
+      "slugTaken": "此 Slug 已被使用。",
+      "invalidSlugFormat": "Slug 只能包含小写字母、数字和连字符。",
+      "postNotFound": "找不到文章。",
+      "selfDeleteNotAllowed": "你不能删除自己。",
+      "userNotFoundForDelete": "找不到要删除的用户。",
+      "errorLogNotFound": "找不到错误日志。",
+      "invalidDateRange": "日期范围无效。",
+      "invalidBlockId": "时间块 ID 无效。",
+      "blockNotFound": "找不到时间块。",
+      "invalidTimeRange": "时间范围无效。",
+      "timeOverlap": "时间范围与另一个块重叠。",
+      "databaseError": "发生数据库错误。",
+      "updateFailed": "更新时间块失败。",
+      "overlapCheckFailed": "检查时间重叠失败。",
+      "unexpectedError": "发生了意外错误。",
+      "storageNotConfigured": "图片存储不可用。",
+      "invalidUrl": "提供的 URL 无效。",
+      "deleteFailed": "删除项目失败。",
+      "dateNotAccessible": "你只能写今天的信。",
+      "goalNotFound": "找不到目标。",
+      "goalCreateFailed": "创建目标失败。",
+      "goalUpdateFailed": "更新目标失败。",
+      "goalDeleteFailed": "删除目标失败。",
+      "invalidGoalParent": "父级目标无效。",
+      "invalidGoalTypeHierarchy": "此目标类型不能作为所选父目标的子目标。"
+    },
+    "validation": {
+      "required": "此字段为必填项。",
+      "invalidDate": "请输入有效的日期。",
+      "maxLength": "最多允许 {max} 个字符。",
+      "minLength": "最少需要 {min} 个字符。",
+      "invalidFormat": "格式无效。"
+    },
+    "dialog": {
+      "confirmTitle": "确认操作",
+      "confirmDelete": "你确定要删除此项吗？",
+      "confirmCancel": "丢弃未保存的更改？"
+    },
+    "status": {
+      "saving": "保存中...",
+      "saved": "保存成功。",
+      "deleting": "删除中...",
+      "deleted": "删除成功。",
+      "updating": "更新中...",
+      "updated": "更新成功。"
+    },
+    "dates": {
+      "today": "今天",
+      "yesterday": "昨天",
+      "tomorrow": "明天"
+    },
+    "locales": {
+      "en": "英语",
+      "ko": "韩语",
+      "ja": "日语",
+      "zh": "中文"
+    }
+  },
+  "Admin": {
+    "title": "管理面板",
+    "accessDenied": {
+      "title": "拒绝访问",
+      "message": "你没有权限访问管理区域。如果你认为这是个错误，请联系管理员。",
+      "backHome": "返回首页"
+    },
+    "nav": {
+      "dashboard": "控制台",
+      "stats": "统计",
+      "users": "用户",
+      "bio": "Bio 文章",
+      "system": "系统"
+    },
+    "dashboard": {
+      "title": "控制台"
+    },
+    "stats": {
+      "title": "详细统计",
+      "totalUsers": "总用户数",
+      "newUsersThisWeek": "本周新增",
+      "activeDaily": "日活跃",
+      "activeWeekly": "周活跃",
+      "activeMonthly": "月活跃",
+      "noData": "暂无数据。",
+      "period": {
+        "week": "7天",
+        "month": "30天",
+        "quarter": "90天"
+      },
+      "charts": {
+        "userTrend": "活跃用户趋势",
+        "moduleActivity": "模块活跃度",
+        "disciplineTrend": "自律达成趋势",
+        "moduleSummary": "模块概览",
+        "activeUsers": "活跃用户",
+        "achievementRate": "达成率",
+        "average": "平均",
+        "totalDays": "总天数",
+        "avgRate": "平均率",
+        "activeProjects": "活跃项目",
+        "totalLetters": "总信件数"
+      },
+      "modules": {
+        "destiny": "命运",
+        "discipline": "自律",
+        "success": "成功",
+        "epistle": "书信"
+      },
+      "errors": {
+        "loadFailed": "加载统计数据失败。"
+      }
+    },
+    "moduleUsage": "模块使用情况",
+    "modules": {
+      "destiny": { "name": "命运导航员", "desc": "追踪天数" },
+      "success": { "name": "成功代码", "desc": "活跃项目" },
+      "discipline": { "name": "自律掌控", "desc": "创建规则" },
+      "epistle": { "name": "自省书信", "desc": "撰写信件" },
+      "bio": { "name": "生物黑客", "desc": "已发布文章" }
+    },
+    "users": {
+      "title": "用户管理",
+      "email": "邮箱",
+      "name": "姓名",
+      "joined": "加入时间",
+      "activity": "活跃度",
+      "items": "项",
+      "searchPlaceholder": "搜索邮箱或姓名...",
+      "noUsers": "尚无注册用户。",
+      "noSearchResults": "未找到搜索结果。",
+      "viewDetail": "查看详情",
+      "userDetail": "用户详情",
+      "memberSince": "成员起始于",
+      "lastUpdated": "最后更新",
+      "moduleActivity": "模块活跃度",
+      "deleteUser": "删除用户",
+      "deleteConfirm": "确定要删除此用户吗？",
+      "deleteWarning": "所有用户数据将被永久删除。此操作不可撤销。",
+      "deleteWarningItems": "将被删除的数据：",
+      "deleting": "删除中...",
+      "stats": {
+        "destinyDays": "命运导航员",
+        "destinyEvents": "事件",
+        "destinyTemplates": "模板",
+        "successProjects": "成功代码项目",
+        "successEntries": "成功记录",
+        "disciplineRules": "自律规则",
+        "disciplineChecks": "自律检查",
+        "epistleDays": "自省书信",
+        "weeklyPlans": "每周计划"
+      }
+    },
+    "bio": {
+      "title": "Bio 文章管理",
+      "newPost": "新文章",
+      "editPost": "编辑文章",
+      "slug": "Slug",
+      "category": "类别",
+      "translations": "翻译",
+      "created": "创建时间",
+      "updated": "更新时间",
+      "noPosts": "尚无 Bio 文章。",
+      "createFirst": "创建你的第一篇文章以开始。",
+      "form": {
+        "slugPlaceholder": "url-friendly-slug",
+        "slugHint": "URL 的唯一标识符。仅使用小写字母、数字 and 连字符。",
+        "titlePlaceholder": "文章标题",
+        "contentPlaceholder": "使用 Markdown 编写内容...",
+        "selectCategory": "选择类别",
+        "atLeastOneTranslation": "至少一种语言必须有标题和内容。"
+      },
+      "preview": "预览",
+      "editor": "编辑器",
+      "actions": {
+        "create": "创建文章",
+        "update": "保存更改",
+        "delete": "删除文章",
+        "cancel": "取消",
+        "creating": "创建中...",
+        "updating": "保存中...",
+        "deleting": "删除中..."
+      },
+      "deleteConfirm": {
+        "title": "删除文章",
+        "message": "确定要删除这篇文章及其所有翻译吗？此操作不可撤销。"
+      },
+      "validation": {
+        "slugRequired": "Slug 是必填的。",
+        "slugFormat": "Slug 只能包含小写字母、数字和连字符。",
+        "slugTaken": "此 Slug 已被使用。",
+        "categoryRequired": "请选择一个类别。",
+        "translationRequired": "至少一种语言必须有标题和内容。"
+      },
+      "translationStatus": {
+        "complete": "完整",
+        "incomplete": "不完整",
+        "empty": "空白"
+      },
+      "markdown": {
+        "bold": "加粗",
+        "italic": "斜体",
+        "heading": "标题",
+        "link": "链接",
+        "list": "列表",
+        "code": "代码"
+      },
+      "categories": {
+        "Nutrition": "营养",
+        "Supplements": "补剂",
+        "Recovery": "恢复",
+        "Exercise": "运动",
+        "Mindset": "心态"
+      }
+    },
+    "errors": {
+      "loadFailed": "加载数据失败。请重试。"
+    },
+    "system": {
+      "title": "系统管理",
+      "overview": "系统概览",
+      "environment": {
+        "title": "环境变量",
+        "description": "已配置的环境变量列表",
+        "name": "名称",
+        "value": "值",
+        "masked": "[已加密]",
+        "notSet": "[未设置]",
+        "requiredMissing": "缺少必需的环境变量"
+      },
+      "database": {
+        "title": "数据库",
+        "description": "数据库连接状态",
+        "status": "连接状态",
+        "connected": "已连接",
+        "disconnected": "断开连接",
+        "responseTime": "响应时间",
+        "provider": "提供商",
+        "checkingConnection": "正在检查连接...",
+        "refresh": "刷新",
+        "refreshing": "检查中..."
+      },
+      "info": {
+        "title": "系统信息",
+        "description": "运行时和框架信息",
+        "nodeVersion": "Node.js 版本",
+        "nextVersion": "Next.js 版本",
+        "reactVersion": "React 版本",
+        "prismaVersion": "Prisma 版本",
+        "platform": "平台",
+        "timezone": "时区",
+        "locale": "区域",
+        "environment": "环境"
+      },
+      "status": {
+        "healthy": "健康",
+        "warning": "警告",
+        "error": "错误"
+      },
+      "errorLog": {
+        "title": "错误日志",
+        "description": "应用程序错误和警告日志",
+        "noLogs": "未找到错误日志。",
+        "systemHealthy": "系统运行正常。",
+        "levels": {
+          "all": "全部",
+          "error": "错误",
+          "warning": "警告",
+          "info": "信息"
+        },
+        "summary": {
+          "totalErrors": "总错误数",
+          "totalWarnings": "总警告数",
+          "totalInfo": "总信息数",
+          "recent24h": "最近24小时"
+        },
+        "table": {
+          "level": "级别",
+          "message": "信息",
+          "requestUrl": "请求 URL",
+          "createdAt": "创建时间",
+          "user": "用户",
+          "requestMethod": "方法"
+        },
+        "detail": {
+          "title": "错误详情",
+          "stackTrace": "堆栈跟踪",
+          "noStack": "无可用堆栈跟踪",
+          "deleteLog": "删除日志"
+        },
+        "bulkDelete": {
+          "button": "批量删除",
+          "title": "批量删除错误日志",
+          "description": "删除所选日期之前的各所有错误日志。",
+          "options": {
+            "7days": "早于7天",
+            "30days": "早于30天",
+            "90days": "早于90天"
+          },
+          "confirmMessage": "将删除 {count} 条日志。此操作不可撤销。",
+          "success": "{count} 条日志已删除。",
+          "deleting": "删除中..."
+        },
+        "pagination": {
+          "prev": "上一页",
+          "next": "下一页",
+          "page": "第 {current} / {total} 页"
+        }
+      }
+    }
+  },
+  "Money": {
+    "title": "MONEY FLOW",
+    "subtitle": "追踪你的收入与支出",
+    "income": "收入",
+    "expense": "支出",
+    "balance": "余额",
+    "today": "今天",
+    "thisMonth": "本月",
+    "category": "类别",
+    "amount": "金额",
+    "memo": "备注",
+    "date": "日期",
+    "addTransaction": "添加记录",
+    "noTransactions": "尚无记录。",
+    "totalIncome": "总收入",
+    "totalExpense": "总支出",
+    "addIncome": "添加收入",
+    "addExpense": "添加支出",
+    "categories": {
+      "salary": "工资",
+      "investment": "投资",
+      "bonus": "奖金",
+      "other_income": "其他收入",
+      "food": "饮食",
+      "transport": "交通",
+      "housing": "居住",
+      "utilities": "水电燃气",
+      "shopping": "购物",
+      "entertainment": "娱乐",
+      "health": "健康",
+      "education": "教育",
+      "other_expense": "其他支出"
+    },
+    "summary": "概览",
+    "transactions": "记录列表",
+    "deleteConfirm": "确定删除此记录？",
+    "edit": "编辑",
+    "delete": "删除"
+  },
+  "Footer": {
+    "feedbackAndInquiries": "反馈与查询"
+  },
+  "InAppBrowser": {
+    "title": "请在外部浏览器中打开",
+    "description": "Google 登录不支持在 {browser} 的内置浏览器中使用。",
+    "openChrome": "在 Chrome 中打开",
+    "copyLink": "复制链接",
+    "copied": "已复制！",
+    "iosInstruction": "在 Safari 或 Chrome 中粘贴复制的链接。",
+    "continueAnyway": "仍然继续",
+    "browsers": {
+      "kakaotalk": "KakaoTalk",
+      "line": "LINE",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "other": "应用"
+    }
+  },
+  "Guide": {
+    "title": "GOD LIFE MAKER 指南",
+    "viewGuide": "查看指南",
+    "dontShowAgain": "不再显示",
+    "next": "下一步",
+    "prev": "上一步",
+    "start": "开始使用",
+    "close": "关闭",
+    "intro": {
+      "title": "什么是 GOD LIFE？",
+      "content1": "GOD LIFE MAKER 的背后蕴含着“大神生活 (God Life)”的哲学。",
+      "content2": "是追求极致的生活，还是过属于自己的生活，这是你的自由。",
+      "content3": "但如果你想开启“大神生活”，你必须在每天早上醒来时立即访问这个网站。",
+      "content4": "你的生活肯定会改变。",
+      "content5": "这个工具是最极端的，也是最折衷的，更是最现实的武器。",
+      "content6": "此后将不再有更新。",
+      "content7": "记住。",
+      "content8": "当你害怕失败的那一刻，你的梦想就消失了。",
+      "content9": "你的梦想越强烈，你就越不害怕失败。",
+      "content10": "如果你对梦想足够痴迷，即使知道可能会失败，你也会付诸行动。",
+      "content11": "我相信，沉溺于这样梦想的生活，才是 [GOD LIFE] 的真正含义。"
+    },
+    "modules": {
+      "success": {
+        "title": "成功代码 (100天)",
+        "subtitle": "小胜利的复利效应",
+        "description": "成功代码是一个每日记录小胜利并持续100天的系统。为什么要设定为100天？这个数字是有科学依据的。\n\n根据詹姆斯·克利尔的畅销书《原子习惯》，习惯形成的逻辑不在于重复次数，而在于“情感编码”。我们大脑的基底核会自动执行重复性行为，而情感在这个过程中起到了决定性的催化作用。当你每天记录小胜利并感受到成就感时，你的大脑会将此行为识别为“有奖赏的”，并逐步将其自动化。\n\n斯坦福大学行为设计实验室主任 BJ Fogg 博士在他的“微习惯”研究中发现，当动机、能力和触发点这三个要素汇聚时，习惯就会形成。成功代码完美满足了这三点：完成100天的明确动机、每天仅需1分钟的低门槛、以及每天同一时间记录的一致触发点。\n\n为什么要100天？伦敦大学学院 (UCL) 的 Phillippa Lally 博士的研究表明，新习惯平均需要66天才能自动化，而复杂的行为可能需要长达254天。100天足以让大多数习惯根深蒂固。\n\n如何使用：\n1. 设定一个你每天想要达成的目标，持续100天\n2. 每天记录你是否践行了该目标\n3. 简要记录你的感受和心得\n4. 完成100天后开启一个新项目\n\n关键在于“一致性”而非“完美”。如果错过了一天，不要放弃。研究显示，错过一天不会对习惯形成产生重大影响。重要的是第二天重新开始。",
+        "source": "James Clear, Atomic Habits (2018) / BJ Fogg, Tiny Habits (2019) / Phillippa Lally, UCL 习惯形成研究 (2009)"
+      },
+      "discipline": {
+        "title": "自律掌控",
+        "subtitle": "锻炼意志力肌肉",
+        "description": "自律掌控是一个每天执行“你不想做但必须做的事”的系统。这不仅仅是一个简单的清单。这是在物理层面上改变大脑的训练。\n\n斯坦福大学神经生物学教授 Andrew Huberman 在他2023年的播客中分享了突破性的研究。大脑中一个名为“前中扣带回 (aMCC)”的区域，当你“做不想做的事”时会激活并生长。这个区域在百岁老人、极限运动员和意志力坚强的人身上更为发达。\n\n显著的发现是，这个区域的生长与年龄无关。每天执行稍微不舒服的任务会物理性地增大 aMCC。相反，只做舒服的事会使其萎缩。前海豹突击队成员、超级马拉松选手 David Goggins 建议的“寻找不适感”在科学上是准确的。\n\n佛罗里达州立大学 Roy Baumeister 教授的“意志力耗损”理论指出，意志力就像肌肉。使用时会暂时疲劳，但恢复后会变得更强。自律掌控利用了这一原理。\n\n如何使用：\n1. 设定5-13条每天要遵守的规则\n2. 保持难度既不太容易也不太难\n3. 必须包含“你不想做的事”（例如：冷水浴、晨练、限制电子设备使用）\n4. 每天检查并监控你的达成率\n5. 当达成率超过90%变得容易时，加强规则\n\n注意：初期不要设定太多规则。研究表明，一次只尝试3个或更少的新习惯是最有效的。从小处开始，逐渐增加。目标不是“完美地做所有事”，而是“比昨天更好一点”。",
+        "source": "Andrew Huberman, Huberman Lab Podcast (2023) / David Goggins, Can't Hurt Me (2018) / Roy Baumeister, Willpower (2011) / 前侧中扣带回研究, Nature Neuroscience"
+      },
+      "destiny": {
+        "title": "命运导航员",
+        "subtitle": "赋予时间以意义",
+        "description": "命运导航员不仅仅是一个日程管理工具。它是一个将“终极自我”与“今日目标”连接起来的生命设计系统。它由10级长期视角和24小时时间块组成。\n\n根据乔治城大学计算机科学教授 Cal Newport 的《深度工作》，使用时间块管理的人在相同时间内完成的高质量工作量是不使用者的两倍。为什么？大脑每次做出“决定”时都会消耗能量。这被称为“决策疲劳”。\n\nRoy Baumeister 的研究显示，人们每天做出约35,000个决定，每个都会消耗精神能量。早晨规划好日程，可以一次性处理掉数百个“我现在该做什么？”的决定。\n\n本杰明·富兰克林从1726年（21岁）开始，每天早上5点起床规划“今天我要做什么好事？”并在每晚反思“我今天做了什么好事？”他坚持了这一习惯58年，直到84岁。他的日程表就是现代时间块管理的雏形。\n\n10级长期视角系统：\n1. 终极自我：我死之前想成为什么样的人？\n2. 10年后的我：10年后我会在哪里？\n3. 5年后的我：5年内要实现的最大目标是什么？\n4. 3年/1年/6个月/3个月/1个月/2周/1周：逐步具体化的目标\n5. 今日目标：今天我必须做什么？\n\n这个系统的核心是“逆向目标设定”。从终极目标出发，推导出今天要做的事。这样，日常行动就与人生目标联系在了一起。\n\n24小时时间块用法：\n1. 从起床到睡觉，以30分钟为单位规划\n2. 区分“深度工作”时间（专注任务）和“浅层工作”时间（简单任务）\n3. 也要将休息时间设为时间块\n4. 每天结束时与实际活动对比\n5. 分析差异并应用到明天的规划中",
+        "source": "Cal Newport, Deep Work (2016) / Benjamin Franklin, Autobiography (1791) / Roy Baumeister, Decision Fatigue 研究 / Stephen Covey, 7 Habits of Highly Effective People"
+      },
+      "epistle": {
+        "title": "自省书信",
+        "subtitle": "感恩与反思的神经科学",
+        "description": "自省书信是一个写信给“昨天的我”和“明天的我”的系统。这不仅仅是简单的日记。它是经前沿神经科学证实的、最有效的心理健康工具。\n\n感恩的神经科学：\n加州大学伯克利分校大善科学中心的研究表明，书写感恩之事会激活前额叶皮层，并增加多巴胺和血清素的释放。印第安纳大学2017年的 fMRI 研究发现，书写感恩信的小组在3个月后仍保持着较高的前额叶活跃度。\n\n加州大学戴维斯分校 Robert Emmons 教授长达10年的研究显示，每天记录感恩的人：\n- 幸福感提升 25%\n- 免疫力更强\n- 睡眠质量更好\n- 目标达成率更高\n\n反思的科学：\n哈佛商学院的研究显示，每天花费15分钟进行反思的员工比不反思的员工表现好 23%。反思增强了大脑的“元认知”能力——即识别和调节自身思维过程的能力。\n\n自省书信结构：\n\n[给昨天的我] - 处理过去\n- 3件感激的事：今天你感激什么\n- 3件重要的事：今天发生的有意义的事件\n- 一件愤怒的事：什么让你生气，为什么（情绪认知）\n- 3项闲暇活动：今天你享受了什么\n\n[给明天的我] - 设计未来\n- 3项反思：明天需要改进的地方\n- 自由信息：你想对明天的自己说的话\n\n为什么要用“信件”格式？\n得克萨斯大学 Pennebaker 教授的研究表明，以书面形式表达情绪可以降低皮质醇（压力荷尔蒙）并改善免疫功能。“信件”格式比独白更能诱发深度的自我反省。你必须向“另一个你”解释，而不仅仅是“你”自己。\n\n为什么只能写今天和昨天：\n研究表明，记忆中的情绪在48小时内就开始发生扭曲。当天或次日记录可以确保准确的情绪记录。",
+        "source": "Robert Emmons, Thanks! (2007) / UC Berkeley Greater Good Science Center / Indiana University fMRI 研究 (2017) / James Pennebaker, Writing to Heal / Harvard Business School 反思研究 (2014)"
+      },
+      "money": {
+        "title": "财务流向",
+        "subtitle": "理解金钱的属性",
+        "description": "财务流向不仅仅是一个记账本。它是基于金钱管家金胜镐（Kim Seung-ho）在《金钱的属性》中的哲学而设计的财富设计系统。这是一个将金钱视为“人”来对待，理解资金流动，并迈向财务自由的工具。\n\n金钱的属性 - 金胜镐会长的核心哲学：\n\n“金钱就像人一样。”金会长说。金钱的行为就像它有情感一样。它会留在受尊重的地方，离开被忽视的地方。你对待金钱的方式决定了金钱如何流向你。\n\n1000万韩元原则：\n这是金会长最著名的原则。“攒下你的第一个1000万（约1万美元）是最难的。”一旦你有了1000万，它就会变成1亿；一旦有了1亿，它就会变成10亿。复利的魔力在达到一定金额后开始显现。这就是为什么你必须倾尽全力攒下第一个1000万。\n\n单靠工资无法致富：\n“工资让你维持生计，但不会让你变得富有。”金会长强调。你需要创造工资以外的收入来源。副业、投资、创业——你需要建立“管道”。在记录财务流向时，检查你是否有工资以外的收入。\n\n关注收入而非支出：\n“节流有限，开源无界。”当然，减少不必要的开支很重要。但想办法每月多赚1000美元比每月省下100美元更有效。\n\n改变你对金钱的看法：\n穷人视角：“这个多少钱？” → 富人视角：“这个的价值是多少？”\n穷人视角：“我买不起” → 富人视角：“我选择现在不买”\n穷人视角：“钱就是用来花的” → 富人视角：“钱应该为你工作”\n\n区分资产与负债：\n正如罗伯特·清崎在《富爸爸穷爸爸》中所强调的，金会长也强调了这一点。资产是将钱放进你的口袋，而负债是将钱从你的口袋里掏走。汽车、名牌包、最新的电子产品不是资产，而是负债。\n\n财务流向用法 - 金钱的属性版：\n\n1. 记录所有收入\n- 劳动收入：工资、奖金\n- 业务收入：副业、自由职业\n- 投资收入：股息、利息、价差\n- 其他收入：礼物、退税等\n\n2. 将支出分为“必要”和“可选”\n- 必要支出：居住、食费、交通、通讯\n- 可选支出：休闲、购物、外食\n- 投资支出：教育、自我开发、健康（这是增加未来收入的支出）\n\n3. 月末检查问题：\n- 本月储蓄/投资金额占收入的百分之几？\n- 是否有工资以外的收入？\n- 有哪些不必要的支出？\n- 我的资产在增加吗？\n\n财务自由的公式：\n金胜镐会长所说的财务自由是“不工作也能支付生活费的状态”。为此：\n\n月生活费 × 12个月 × 25年 = 所需资产\n\n例如：如果月生活费是300万韩元，300 × 12 × 25 = 9亿\n\n积累了这个数额的资产，就可以按年4%的收益率在维持本金的同时生活。\n\n复利的魔力：\n“富人通过复利增加财富，穷人通过单利借钱。”\n年复利10%，持续30年：\n- 100万 → 1,745万 (17倍)\n- 1000万 → 1亿 7,450万\n- 1亿 → 17亿 4,500万\n\n让时间站在你这一边。越早开始，享受复利的益处就越多。\n\n记录的力量：\n“无法衡量的东西就无法管理。”每天记录金钱的流向是尊重金钱的第一步。当你准确知道钱从哪里来、往哪里去时，你才能真正掌控金钱。",
+        "source": "金胜镐, 金钱的属性 (2020) / 金胜镐, 社长学概论 (2018) / 罗伯特·清崎, 富爸爸穷爸爸 (1997) / Morgan Housel, 金钱心理学 (2020)"
+      },
+      "bio": {
+        "title": "生物黑客",
+        "subtitle": "优化你的生物系统",
+        "description": "生物黑客提供关于睡眠、运动、营养和心态的科学方案。这不仅仅是时尚的噱头。它是基于前沿神经科学和生理学的、经证实的优化方法。\n\n睡眠优化 - 一切的基础：\n根据加州大学伯克利分校教授 Matthew Walker（《为什么要睡觉》作者）的说法，睡眠不是“可选的奢侈品”，而是“生物学上的必需品”。睡眠少于7小时：\n- 免疫力降低 70%\n- 学习能力下降 40%\n- 死亡风险增加 24%\n\nAndrew Huberman 教授的睡眠方案：\n1. 醒来后30-60分钟内接受阳光照射（10-30分钟）。这会触发皮质醇觉醒反应，并在16小时后安排褪黑素的释放。\n2. 睡前2小时屏蔽蓝光。蓝光会抑制褪黑素释放。\n3. 卧室温度保持在 18-19°C。体温下降有助于诱导睡眠。\n4. 每天在同一时间醒来。即使是周末。一致的起床时间是一切的基础。\n\n运动的神经科学：\n哈佛医学院教授 John Ratey（《火花》作者）的研究表明，运动会物理性地改变大脑：\n- 增加 BDNF（脑源性神经营养因子）：创建新的脑细胞\n- 增大海马体：改善记忆力\n- 激活前额叶皮层：增强专注力和决策力\n\n最低有效运动量：每周3次，每次30分钟，提高心率的有氧运动。仅此一项就能显著改善大脑功能。\n\n营养方案：\nDr. Rhonda Patrick (FoundMyFitness) 的研究显示：\n- 间歇性禁食 (16:8)：激活细胞自噬，促进细胞再生\n- Omega-3：70% 的脑细胞膜是脂肪。建议食用富含 DHA 的鱼类\n- 肠道微生物群：90% 的血清素是在肠道产生的。摄入益生菌和纤维\n\n心态优化：\n斯坦福大学教授 Carol Dweck（《终身成长》作者）的研究显示，具有“成长型思维”的人能更好地接受挑战，并从失败中更快恢复。\n\n成长型思维训练法：\n- 将“我不会”改为“我还没学会”\n- 关注过程而非结果\n- 将失败重新定义为学习机会\n\n生物黑客板块提供总结了这些最新研究的专栏。阅读、应用并优化你的生物系统。",
+        "source": "Andrew Huberman, Huberman Lab Podcast / Matthew Walker, Why We Sleep (2017) / John Ratey, Spark (2008) / Rhonda Patrick, FoundMyFitness / Carol Dweck, Mindset (2006)"
+      }
+    }
+  },
+  "MyPage": {
+    "title": "个人主页",
+    "subtitle": "管理你的活动与设置",
+    "signOut": "登出",
+    "profile": {
+      "anonymous": "用户",
+      "memberSince": "成员起始于 {date}"
+    },
+    "theme": {
+      "title": "主题设置",
+      "options": {
+        "cream": {
+          "name": "奶油色",
+          "description": "简洁优雅的设计"
+        },
+        "cyber": {
+          "name": "赛博朋克",
+          "description": "未来的科技感设计"
+        }
+      }
+    },
+    "stats": {
+      "title": "我的统计",
+      "destiny": {
+        "title": "命运导航员",
+        "totalDays": "追踪天数",
+        "timeblocks": "时间块",
+        "completed": "已完成",
+        "avgScore": "平均分"
+      },
+      "success": {
+        "title": "成功代码",
+        "projects": "总项目数",
+        "active": "活跃中",
+        "daysLogged": "已记录天数"
+      },
+      "discipline": {
+        "title": "自律掌控",
+        "rules": "规则数",
+        "streak": "连续天数",
+        "last7Days": "7天达成率",
+        "last30Days": "30天达成率"
+      },
+      "epistle": {
+        "title": "自省书信",
+        "totalLetters": "写信总数",
+        "lastWritten": "最后书写"
+      }
+    }
+  }
+}
