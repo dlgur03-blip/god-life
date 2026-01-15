@@ -6,6 +6,8 @@ import { prisma } from '@/lib/prisma';
 import { getTodayStr } from '@/lib/date';
 import { getUserTimezone } from '@/lib/timezone';
 import { getTranslations } from 'next-intl/server';
+import WelcomeGuide from '@/components/guide/WelcomeGuide';
+import GuideButton from '@/components/guide/GuideButton';
 
 export const dynamic = 'force-dynamic'; // Ensure real-time status
 
@@ -112,12 +114,18 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen p-8 flex flex-col items-center gap-10">
+      {/* Welcome Guide Popup - Shows on first visit */}
+      <WelcomeGuide />
+
       <div className="w-full max-w-5xl flex justify-between items-center">
-        <div>
-          <h1 className="text-3xl font-bold text-[var(--foreground)] tracking-wide">
-            {t('title')}
-          </h1>
-          <div className="w-16 h-0.5 bg-[var(--color-secondary)] mt-2" />
+        <div className="flex items-center gap-4">
+          <div>
+            <h1 className="text-3xl font-bold text-[var(--foreground)] tracking-wide">
+              {t('title')}
+            </h1>
+            <div className="w-16 h-0.5 bg-[var(--color-secondary)] mt-2" />
+          </div>
+          <GuideButton />
         </div>
         <div className="flex items-center gap-4">
           <span className="text-sm text-[var(--foreground-muted)]">{t('welcome', {name: session.user.name || 'User'})}</span>

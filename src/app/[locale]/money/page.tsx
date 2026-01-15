@@ -4,6 +4,7 @@ import { authOptions } from '@/lib/auth';
 import { getTranslations, getLocale } from 'next-intl/server';
 import { getMonthTransactions, getMonthSummary } from '@/app/actions/money';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import GuideButton from '@/components/guide/GuideButton';
 import { Link } from '@/navigation';
 import TransactionList from '@/components/money/TransactionList';
 import AddTransactionButton from '@/components/money/AddTransactionButton';
@@ -61,9 +62,12 @@ export default async function MoneyPage({
             <ChevronLeft />
           </Link>
           <div className="text-center">
-            <h1 className="text-2xl font-bold tracking-widest text-[var(--color-secondary)]">
-              {t('title')}
-            </h1>
+            <div className="flex items-center justify-center gap-2">
+              <h1 className="text-2xl font-bold tracking-widest text-[var(--color-secondary)]">
+                {t('title')}
+              </h1>
+              <GuideButton />
+            </div>
             <p className="text-sm text-[var(--foreground-muted)] font-mono">{monthDisplay}</p>
           </div>
           <Link

@@ -31,7 +31,8 @@ export default function SuccessGrid({
   const getEntry = (idx: number) => entries.find(e => e.dayIndex === idx);
 
   const handleEntryClick = (idx: number) => {
-    if (idx > currentDayIndex) return;
+    // Only today's entry can be clicked
+    if (idx !== currentDayIndex) return;
 
     const entry = getEntry(idx);
     if (entry) {
@@ -58,22 +59,24 @@ export default function SuccessGrid({
             const entry = getEntry(idx);
             const isCompleted = entry?.isCompleted;
             const isToday = idx === currentDayIndex;
+            const isPast = idx < currentDayIndex;
             const isFuture = idx > currentDayIndex;
+            const isDisabled = !isToday; // Only today is interactive
 
             return (
               <button
                 key={idx}
                 onClick={() => handleEntryClick(idx)}
-                disabled={isFuture}
+                disabled={isDisabled}
                 className={cn(
                   "aspect-square rounded-md flex items-center justify-center text-xs font-bold transition-all duration-300 relative group border",
                   isCompleted
                     ? "bg-[var(--color-success)] text-white border-[var(--color-success)] shadow-md"
                     : isToday
                       ? "bg-[var(--color-warning)] text-white animate-pulse shadow-lg border-[var(--color-warning)]"
-                      : isFuture
-                        ? "bg-[var(--background-secondary)] text-[var(--foreground-muted)] cursor-not-allowed border-[var(--color-border)] opacity-50"
-                        : "bg-[var(--color-card-bg)] text-[var(--foreground)] hover:bg-[var(--color-card-hover)] border-[var(--color-border)] hover:border-[var(--color-border-hover)]"
+                      : isPast
+                        ? "bg-[var(--color-error)]/20 text-[var(--color-error)] cursor-not-allowed border-[var(--color-error)]/30 opacity-60"
+                        : "bg-[var(--background-secondary)] text-[var(--foreground-muted)] cursor-not-allowed border-[var(--color-border)] opacity-50"
                 )}
               >
                 {idx}

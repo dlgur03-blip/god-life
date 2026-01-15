@@ -35,13 +35,25 @@ model DestinyDay {
   date      String   // YYYY-MM-DD
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
-  // Goals
-  goalUltimate String?
-  goalLong     String?
-  goalMonth    String?
-  goalWeek     String?
-  goalToday    String?
+
+  // Long-term Perspective (장기관점) - 10 stages
+  goalUltimate   String?  // 궁극의 나
+  goal10Year     String?  // 10년 후의 나
+  goal5Year      String?  // 5년 후의 나
+  goal3Year      String?  // 3년 후의 나
+  goal1Year      String?  // 1년 후의 나
+  goal6Month     String?  // 6개월 후의 나
+  goal3Month     String?  // 3개월 후의 나
+  goal1Month     String?  // 1개월 후의 나
+  goal2Week      String?  // 2주 후의 나
+  goal1Week      String?  // 1주 후의 나
+  goalToday      String?  // 오늘의 목표
+  restTime       String?  // 휴식 시간 배정
+
+  // Legacy fields (keeping for migration compatibility)
+  goalLong       String?
+  goalMonth      String?
+  goalWeek       String?
 
   timeblocks DestinyTimeBlock[]
   events     DestinyEvent[] // Events linked to a day
@@ -169,11 +181,28 @@ model EpistleDay {
   id          String   @id @default(cuid())
   userId      String
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
+
   date        String   // YYYY-MM-DD
-  toYesterday String?  // Letter to yesterday
-  toTomorrow  String?  // Letter to tomorrow
+  toYesterday String?  // Letter to yesterday (legacy, free-form)
+  toTomorrow  String?  // Letter to tomorrow (legacy, free-form)
   mood        String?
+
+  // Fixed fields for toYesterday (어제의 나에게)
+  gratitude1    String?  // 고마운 일 1
+  gratitude2    String?  // 고마운 일 2
+  gratitude3    String?  // 고마운 일 3
+  important1    String?  // 중요한 일 1
+  important2    String?  // 중요한 일 2
+  important3    String?  // 중요한 일 3
+  anger         String?  // 분노하는 한가지
+  leisure1      String?  // 여가활동 1
+  leisure2      String?  // 여가활동 2
+  leisure3      String?  // 여가활동 3
+
+  // Fixed fields for toTomorrow (내일의 나에게)
+  reflection1   String?  // 반성하는 것 1
+  reflection2   String?  // 반성하는 것 2
+  reflection3   String?  // 반성하는 것 3
 
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

@@ -11,6 +11,7 @@ import { getTranslations, getLocale } from 'next-intl/server';
 import { isValidDateParam } from '@/lib/validateDate';
 import { getTodayStr } from '@/lib/date';
 import { getUserTimezone } from '@/lib/timezone';
+import GuideButton from '@/components/guide/GuideButton';
 
 type WeeklyPlan = { id: string; content: string };
 
@@ -58,9 +59,12 @@ export default async function DestinyDayPage({ params }: { params: Promise<{ dat
             <ChevronLeft />
           </Link>
           <div className="text-center">
-            <h1 className="text-2xl font-bold tracking-widest text-[var(--color-secondary)]">
-              {t('title')}
-            </h1>
+            <div className="flex items-center justify-center gap-2">
+              <h1 className="text-2xl font-bold tracking-widest text-[var(--color-secondary)]">
+                {t('title')}
+              </h1>
+              <GuideButton />
+            </div>
             <p className="text-sm text-[var(--foreground-muted)] font-mono">{date}</p>
           </div>
           <Link href={`/destiny/day/${nextStr}`} className="p-2 hover:bg-[var(--color-card-hover)] rounded-full text-[var(--foreground-muted)] hover:text-[var(--color-primary)] transition-colors">
@@ -68,14 +72,21 @@ export default async function DestinyDayPage({ params }: { params: Promise<{ dat
           </Link>
         </header>
 
-        {/* Core Objectives: 5-Level Goals */}
+        {/* Core Objectives: 10-Level Goals + Rest Time */}
         <DestinyNavigatorCard
           dayId={day.id}
           goalUltimate={day.goalUltimate}
-          goalLong={day.goalLong}
-          goalMonth={day.goalMonth}
-          goalWeek={day.goalWeek}
+          goal10Year={day.goal10Year}
+          goal5Year={day.goal5Year}
+          goal3Year={day.goal3Year}
+          goal1Year={day.goal1Year}
+          goal6Month={day.goal6Month}
+          goal3Month={day.goal3Month}
+          goal1Month={day.goal1Month}
+          goal2Week={day.goal2Week}
+          goal1Week={day.goal1Week}
           goalToday={day.goalToday}
+          restTime={day.restTime}
           weeklyPlans={weeklyPlans}
         />
 

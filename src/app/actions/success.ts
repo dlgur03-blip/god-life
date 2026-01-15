@@ -91,7 +91,37 @@ export async function updateSuccessEntry(
   dayIndex: number,
   content: string
 ) {
-  await getUser(); // Check auth
+  const user = await getUser();
+
+  // Get project to validate ownership and calculate current day
+  const project = await prisma.successProject.findUnique({
+    where: { id: projectId, userId: user.id },
+    select: { startDate: true }
+  });
+
+  if (!project) {
+    throw new Error("Project not found or unauthorized");
+  }
+
+  // Calculate current day index based on user's timezone
+  const { getUserTimezone } = await import('@/lib/timezone');
+  const timezone = await getUserTimezone();
+
+  const now = new Date();
+  const todayStr = now.toLocaleDateString('en-CA', { timeZone: timezone });
+  const today = new Date(todayStr + 'T00:00:00');
+
+  const startDateStr = project.startDate.toISOString().split('T')[0];
+  const startDate = new Date(startDateStr + 'T00:00:00');
+
+  const diffTime = today.getTime() - startDate.getTime();
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  const currentDayIndex = diffDays + 1;
+
+  // Only allow updating today's entry
+  if (dayIndex !== currentDayIndex) {
+    throw new Error("Only today's entry can be updated");
+  }
 
   await prisma.successEntry.update({
     where: {

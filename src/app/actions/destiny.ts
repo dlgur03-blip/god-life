@@ -58,10 +58,21 @@ export async function getOrCreateDestinyDay(date: string) {
 
 export async function updateDestinyGoals(dayId: string, goals: {
   ultimate?: string;
+  tenYear?: string;
+  fiveYear?: string;
+  threeYear?: string;
+  oneYear?: string;
+  sixMonth?: string;
+  threeMonth?: string;
+  oneMonth?: string;
+  twoWeek?: string;
+  oneWeek?: string;
+  today?: string;
+  restTime?: string;
+  // Legacy fields for compatibility
   long?: string;
   month?: string;
   week?: string;
-  today?: string;
 }) {
   await getUser(); // Auth check
 
@@ -69,10 +80,21 @@ export async function updateDestinyGoals(dayId: string, goals: {
     where: { id: dayId },
     data: {
       goalUltimate: goals.ultimate,
+      goal10Year: goals.tenYear,
+      goal5Year: goals.fiveYear,
+      goal3Year: goals.threeYear,
+      goal1Year: goals.oneYear,
+      goal6Month: goals.sixMonth,
+      goal3Month: goals.threeMonth,
+      goal1Month: goals.oneMonth,
+      goal2Week: goals.twoWeek,
+      goal1Week: goals.oneWeek,
+      goalToday: goals.today,
+      restTime: goals.restTime,
+      // Legacy fields
       goalLong: goals.long,
       goalMonth: goals.month,
       goalWeek: goals.week,
-      goalToday: goals.today,
     },
   });
 

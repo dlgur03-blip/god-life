@@ -95,14 +95,20 @@ export function getWeekOffsetDate(baseDate: string, weekOffset: number): string 
 }
 
 /**
- * Check if a date is accessible for writing (only today is accessible)
+ * Check if a date is accessible for writing (today and yesterday are accessible)
  * @param dateStr - Date string in YYYY-MM-DD format
  * @param timezone - User's timezone
- * @returns boolean - true only if the date is today
+ * @returns boolean - true if the date is today or yesterday
  */
 export function isDateAccessible(dateStr: string, timezone?: string): boolean {
   const today = getTodayStr(timezone);
-  return dateStr === today;
+
+  // Calculate yesterday
+  const todayDate = new Date(today + 'T00:00:00');
+  todayDate.setDate(todayDate.getDate() - 1);
+  const yesterday = todayDate.toISOString().split('T')[0];
+
+  return dateStr === today || dateStr === yesterday;
 }
 
 /**

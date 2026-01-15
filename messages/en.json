@@ -84,19 +84,39 @@
   },
   "Destiny": {
     "title": "DESTINY NAVIGATOR",
-    "coreObjectives": "Core Objectives",
+    "coreObjectives": "Long-term Perspective",
     "timeblocks": "24-Hour Timeblocks",
     "goals": {
-      "ultimate": "Ultimate Goal",
+      "ultimate": "Ultimate Self",
+      "tenYear": "Me in 10 Years",
+      "fiveYear": "Me in 5 Years",
+      "threeYear": "Me in 3 Years",
+      "oneYear": "Me in 1 Year",
+      "sixMonth": "Me in 6 Months",
+      "threeMonth": "Me in 3 Months",
+      "oneMonth": "Me in 1 Month",
+      "twoWeek": "Me in 2 Weeks",
+      "oneWeek": "Me in 1 Week",
+      "today": "Today's Goal",
+      "restTime": "Rest Time Allocation",
+      "ultimatePlaceholder": "Who do I ultimately want to become?",
+      "tenYearPlaceholder": "What will I look like in 10 years?",
+      "fiveYearPlaceholder": "What will I look like in 5 years?",
+      "threeYearPlaceholder": "What will I look like in 3 years?",
+      "oneYearPlaceholder": "What will I look like in 1 year?",
+      "sixMonthPlaceholder": "What will I look like in 6 months?",
+      "threeMonthPlaceholder": "What will I look like in 3 months?",
+      "oneMonthPlaceholder": "What will I look like in 1 month?",
+      "twoWeekPlaceholder": "What will I look like in 2 weeks?",
+      "oneWeekPlaceholder": "What will I look like in 1 week?",
+      "todayPlaceholder": "What must I do today?",
+      "restTimePlaceholder": "How much rest today?",
       "longTerm": "Long-term Goal",
       "month": "This Month",
       "week": "This Week",
-      "today": "Today",
-      "ultimatePlaceholder": "What is your life's ultimate goal?",
       "longTermPlaceholder": "What do you want to achieve long-term?",
       "monthPlaceholder": "What must you achieve this month?",
-      "weekPlaceholder": "What are you focusing on this week?",
-      "todayPlaceholder": "What must you do today?"
+      "weekPlaceholder": "What are you focusing on this week?"
     },
     "weeklyPlan": {
       "title": "Weekly Plan",
@@ -189,9 +209,21 @@
     "noLetterFromYesterday": "No letter from yesterday's self.",
     "receivedLetterFrom": "Letter received from {date}",
     "dateBlocked": "Date Locked",
-    "dateBlockedHint": "You can only write letters today.",
+    "dateBlockedHint": "You can only write letters for today and yesterday.",
     "readOnly": "Read Only",
-    "composeLetter": "Compose Letter"
+    "composeLetter": "Compose Letter",
+    "fixedFields": {
+      "gratitude": "Things I'm Grateful For",
+      "gratitudePlaceholder": "What was I grateful for today?",
+      "important": "Important Things",
+      "importantPlaceholder": "What was important today?",
+      "anger": "One Thing That Made Me Angry",
+      "angerPlaceholder": "What made me angry today?",
+      "leisure": "Leisure Activities",
+      "leisurePlaceholder": "What did I enjoy today?",
+      "reflection": "Things to Reflect On",
+      "reflectionPlaceholder": "What will I improve tomorrow?"
+    }
   },
   "Goals": {
     "title": "GOAL HIERARCHY",
@@ -653,6 +685,67 @@
       "facebook": "Facebook",
       "instagram": "Instagram",
       "other": "App"
+    }
+  },
+  "Guide": {
+    "title": "GOD LIFE MAKER Guide",
+    "viewGuide": "View Guide",
+    "dontShowAgain": "Don't show again",
+    "next": "Next",
+    "prev": "Previous",
+    "start": "Get Started",
+    "close": "Close",
+    "intro": {
+      "title": "What is GOD LIFE?",
+      "content1": "GOD LIFE MAKER has a philosophy behind the 'God Life.'",
+      "content2": "Whether you live the ultimate life or your own life is your freedom.",
+      "content3": "But if you want to live the God Life, you must visit this site every single morning as soon as you wake up.",
+      "content4": "Your life will surely change.",
+      "content5": "This tool is the most extreme, yet most compromised, and most realistic weapon.",
+      "content6": "There will be no further updates.",
+      "content7": "Remember.",
+      "content8": "The moment you fear failure, your dream disappears.",
+      "content9": "The stronger your dream becomes, the less you will fear failure.",
+      "content10": "If you are obsessed with your dream, you will act even knowing you might fail.",
+      "content11": "I believe living a life obsessed with such a dream is what [GOD LIFE] truly means."
+    },
+    "modules": {
+      "success": {
+        "title": "Success Code (100 Days)",
+        "subtitle": "The Compound Effect of Small Wins",
+        "description": "Success Code is a system for recording small wins daily over 100 days. Why exactly 100 days? This number has scientific backing.\n\nAccording to James Clear's bestseller 'Atomic Habits', the key to habit formation isn't repetition count but 'emotional encoding.' Our brain's basal ganglia automates repetitive behaviors, and emotions play a decisive catalytic role in this process. When you record small wins daily and feel that sense of achievement, your brain recognizes this behavior as 'rewarding' and progressively automates it.\n\nDr. BJ Fogg (Director of Stanford's Behavior Design Lab) found in his 'Tiny Habits' research that habits form when three elements converge: motivation, ability, and trigger. Success Code perfectly satisfies all three: a clear motivation of completing 100 days, a low barrier of just 1 minute daily, and a consistent trigger of recording at the same time each day.\n\nWhy 100 days? Dr. Phillippa Lally's research at UCL (University College London) shows that new habits take an average of 66 days to automate, but complex behaviors can require up to 254 days. 100 days is sufficient time for most habits to solidify.\n\nHow to Use:\n1. Set one goal you want to achieve daily for 100 days\n2. Record whether you practiced that goal each day\n3. Leave a short note about your feelings and learnings\n4. Start a new project when you complete 100 days\n\nThe key is 'consistency' not 'perfection.' Don't give up if you miss a day. Research shows missing one day doesn't significantly impact habit formation. What matters is starting again the next day.",
+        "source": "James Clear, Atomic Habits (2018) / BJ Fogg, Tiny Habits (2019) / Phillippa Lally, UCL Habit Formation Study (2009)"
+      },
+      "discipline": {
+        "title": "Discipline Mastery",
+        "subtitle": "Building the Willpower Muscle",
+        "description": "Discipline Mastery is a system for performing 'things you don't want to do but must do' daily. This isn't a simple checklist. It's training that physically changes your brain.\n\nProfessor Andrew Huberman (Stanford Neurobiology) shared groundbreaking research in his 2023 podcast. A brain region called the 'anterior mid-cingulate cortex (aMCC)' activates and grows when you 'do things you don't want to do.' This region is more developed in centenarians, extreme athletes, and people with strong willpower.\n\nThe remarkable finding is that this region can grow regardless of age. Performing slightly uncomfortable tasks daily physically enlarges the aMCC. Conversely, doing only comfortable things shrinks it. David Goggins' (former Navy SEAL, ultramarathon runner) advice to 'seek discomfort' was scientifically accurate.\n\nProfessor Roy Baumeister's (Florida State University) 'ego depletion' theory states that willpower is like a muscle. It fatigues temporarily when used but becomes stronger after recovery. Discipline Mastery leverages this principle.\n\nHow to Use:\n1. Set 5-13 rules to follow daily\n2. Maintain a difficulty level that's neither too easy nor too hard\n3. Must include 'things you don't want to do' (e.g., cold showers, morning exercise, digital device limits)\n4. Check daily and monitor your achievement rate\n5. Strengthen rules when 90%+ achievement becomes easy\n\nCaution: Don't set too many rules initially. Research shows attempting only 3 or fewer new habits at once is effective. Start small and gradually increase. The goal isn't 'doing everything perfectly' but 'becoming slightly better than yesterday.'",
+        "source": "Andrew Huberman, Huberman Lab Podcast (2023) / David Goggins, Can't Hurt Me (2018) / Roy Baumeister, Willpower (2011) / Anterior Mid-Cingulate Cortex Research, Nature Neuroscience"
+      },
+      "destiny": {
+        "title": "Destiny Navigator",
+        "subtitle": "Give Purpose to Your Time",
+        "description": "Destiny Navigator isn't just a scheduling tool. It's a life design system connecting 'your ultimate self' to 'today's goals.' It consists of 10-level long-term perspective and 24-hour time blocks.\n\nAccording to Professor Cal Newport's (Georgetown University Computer Science) 'Deep Work,' people who use time blocking accomplish twice as much high-quality work in the same time as those who don't. Why? The brain expends energy every time it makes a 'decision.' This is called 'decision fatigue.'\n\nRoy Baumeister's research shows people make approximately 35,000 decisions daily, each consuming mental energy. Planning your schedule in the morning effectively handles hundreds of 'what should I do now?' decisions at once.\n\nBenjamin Franklin, starting in 1726 (at age 21), would wake at 5 AM daily to plan 'what good shall I do this day?' and reflect each night on 'what good have I done today?' He maintained this habit for 58 years until age 84. His schedule is the prototype of modern time blocking.\n\nThe 10-Level Long-term Perspective System:\n1. Ultimate Self: Who do I want to become before I die?\n2. Me in 10 Years: Where will I be in 10 years?\n3. Me in 5 Years: What's the biggest goal to achieve in 5 years?\n4. 3 Years/1 Year/6 Months/3 Months/1 Month/2 Weeks/1 Week: Progressively concrete goals\n5. Today's Goal: What must I do today?\n\nThe core of this system is 'backward goal setting.' Starting from ultimate goals, you derive what to do today. This way, daily actions connect to life goals.\n\n24-Hour Time Block Usage:\n1. Plan in 30-minute units from wake time to bedtime\n2. Distinguish 'deep work' time (focused tasks) from 'shallow work' time (simple tasks)\n3. Always designate rest time as blocks too\n4. Compare with actual activities at day's end\n5. Analyze differences and apply to next day's planning",
+        "source": "Cal Newport, Deep Work (2016) / Benjamin Franklin, Autobiography (1791) / Roy Baumeister, Decision Fatigue Research / Stephen Covey, 7 Habits of Highly Effective People"
+      },
+      "epistle": {
+        "title": "Self Epistle",
+        "subtitle": "The Neuroscience of Gratitude and Reflection",
+        "description": "Self Epistle is a system for writing letters to 'yesterday's me' and 'tomorrow's me.' This isn't a simple diary. It's the most effective mental health tool proven by cutting-edge neuroscience.\n\nThe Neuroscience of Gratitude:\nUC Berkeley Greater Good Science Center research shows gratitude writing activates the prefrontal cortex and increases dopamine and serotonin release. Indiana University's 2017 fMRI study found that groups who wrote gratitude letters maintained elevated prefrontal activity even 3 months later.\n\nProfessor Robert Emmons' (UC Davis) 10-year research shows people who record daily gratitudes:\n- Feel 25% happier\n- Have stronger immunity\n- Experience better sleep quality\n- Show higher goal achievement rates\n\nThe Science of Reflection:\nHarvard Business School research shows employees who spent 15 minutes daily reflecting performed 23% better than those who didn't. Reflection strengthens the brain's 'metacognition' ability—the capacity to recognize and regulate your own thinking process.\n\nSelf Epistle Structure:\n\n[To Yesterday's Me] - Process the past\n- 3 Things Grateful For: What you appreciated today\n- 3 Important Things: Meaningful events that happened today\n- One Anger: What made you angry and why (emotional awareness)\n- 3 Leisure Activities: What you enjoyed today\n\n[To Tomorrow's Me] - Design the future\n- 3 Reflections: Things to improve tomorrow\n- Free Message: What you want to tell tomorrow's you\n\nWhy the 'Letter' Format?\nProfessor Pennebaker's (University of Texas) research shows expressing emotions in writing reduces cortisol (stress hormone) and improves immune function. The 'letter' format particularly induces deeper self-reflection than monologue. You must explain to 'another you' rather than just 'you.'\n\nWhy Only Today and Yesterday Are Writable:\nResearch shows emotions begin to distort in memory within 48 hours. Recording on the same day or next day enables accurate emotional documentation.",
+        "source": "Robert Emmons, Thanks! (2007) / UC Berkeley Greater Good Science Center / Indiana University fMRI Study (2017) / James Pennebaker, Writing to Heal / Harvard Business School Reflection Study (2014)"
+      },
+      "money": {
+        "title": "Money Flow",
+        "subtitle": "Redefine Your Relationship with Money",
+        "description": "Money Flow isn't a simple household ledger for recording income and expenses. It's a behavioral economics tool for understanding and improving your 'psychological relationship with money.'\n\nWhy Track Money?\nProfessor Dan Ariely's (Duke University Behavioral Economics) research shows humans systematically make irrational decisions about money. We fall into 'mental accounting' errors. For example, we treasure salary but spend bonuses easily, and we spend more with cards than cash.\n\nThe Power of Daily Recording:\nDuke University research shows merely recording expenses reduces spending by 15-20% on average. Why? This is the 'observer effect.' When we start measuring something, we become aware of it, and behavior naturally changes.\n\nProfessor Richard Thaler's (Nobel Prize in Economics winner) 'Nudge' theory states small environmental changes drive large behavioral changes. Daily expense tracking is a 'nudge to yourself.'\n\nThe Psychology of Money:\nBehavioral economics has revealed fascinating facts:\n\n1. Pain of Paying: The brain's pain regions activate when paying with cash. Cards dull this pain, inducing overspending.\n\n2. Anchoring: The first price seen becomes the reference point. A $50 shirt next to a $100 shirt feels 'cheap.'\n\n3. Present Bias: We value $100 now more than $1,000 in the future.\n\nHow to Use Money Flow:\n1. Record all income (salary, bonuses, side income, etc.)\n2. Record all expenses by category\n3. Check income-expense balance at month's end\n4. Analyze patterns: Where do you spend most? What's unnecessary?\n5. Set next month's budget\n\nThe Importance of Category Classification:\nCategorizing expenses helps avoid 'mental accounting' traps. Separating food, transportation, entertainment, etc. clarifies 'what I'm really spending money on.'\n\nWhat Wealthy People Have in Common:\nThomas Stanley's 'The Millionaire Next Door' research shows self-made millionaires' common trait wasn't 'frugality' but 'awareness.' They knew their financial situation precisely. Daily recording is the first step.",
+        "source": "Dan Ariely, Dollars and Sense (2017) / Richard Thaler, Nudge (2008) / Thomas Stanley, The Millionaire Next Door (1996) / Duke University Expense Tracking Study"
+      },
+      "bio": {
+        "title": "Bio Hacking",
+        "subtitle": "Optimize Your Biology",
+        "description": "Bio Hacking provides scientific protocols for sleep, exercise, nutrition, and mindset. This isn't a trendy fad. It's proven optimization methods based on cutting-edge neuroscience and physiology.\n\nSleep Optimization - The Foundation of Everything:\nAccording to Professor Matthew Walker (UC Berkeley, 'Why We Sleep' author), sleep isn't an 'optional luxury' but a 'biological necessity.' Less than 7 hours of sleep:\n- Reduces immunity by 70%\n- Decreases learning ability by 40%\n- Increases mortality risk by 24%\n\nProfessor Andrew Huberman's Sleep Protocol:\n1. Get sunlight within 30-60 minutes of waking (10-30 min). This triggers cortisol awakening response and schedules melatonin release 16 hours later.\n2. Block blue light 2 hours before bed. Blue light suppresses melatonin release.\n3. Keep bedroom temperature at 65-67°F (18-19°C). Body temperature drop induces sleep.\n4. Wake at the same time daily. Even weekends. Consistent wake times are the foundation of everything.\n\nThe Neuroscience of Exercise:\nProfessor John Ratey's (Harvard Medical School, 'Spark' author) research shows exercise physically changes the brain:\n- Increased BDNF (Brain-Derived Neurotrophic Factor): Creates new brain cells\n- Enlarged hippocampus: Improves memory\n- Activated prefrontal cortex: Enhances focus and decision-making\n\nMinimum Effective Exercise: 3 times weekly, 30 minutes, heart-rate-elevating cardio. This alone significantly improves brain function.\n\nNutrition Protocol:\nDr. Rhonda Patrick's (FoundMyFitness) research shows:\n- Intermittent fasting (16:8): Activates autophagy, promotes cellular regeneration\n- Omega-3: 70% of brain cell membranes are fat. Fish rich in DHA recommended\n- Gut microbiome: 90% of serotonin is produced in the gut. Consume probiotics and fiber\n\nMindset Optimization:\nProfessor Carol Dweck's (Stanford, 'Mindset' author) research shows people with 'growth mindset' accept challenges better and recover faster from failure than those with 'fixed mindset.'\n\nGrowth Mindset Training:\n- Change 'I can't' to 'I can't yet'\n- Focus on process, not outcomes\n- Redefine failure as learning opportunity\n\nThe Bio Hacking section provides columns summarizing these latest studies. Read, apply, and optimize your biology.",
+        "source": "Andrew Huberman, Huberman Lab Podcast / Matthew Walker, Why We Sleep (2017) / John Ratey, Spark (2008) / Rhonda Patrick, FoundMyFitness / Carol Dweck, Mindset (2006)"
+      }
     }
   },
   "MyPage": {

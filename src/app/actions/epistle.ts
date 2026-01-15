@@ -34,11 +34,26 @@ export async function upsertEpistle(date: string, data: {
   toYesterday?: string;
   toTomorrow?: string;
   mood?: string;
+  gratitude1?: string;
+  gratitude2?: string;
+  gratitude3?: string;
+  important1?: string;
+  important2?: string;
+  important3?: string;
+  anger?: string;
+  leisure1?: string;
+  leisure2?: string;
+  leisure3?: string;
+  reflection1?: string;
+  reflection2?: string;
+  reflection3?: string;
 }) {
   const user = await getUser();
 
-  // Validate date accessibility - only today can be written
-  if (!isDateAccessible(date)) {
+  // Validate date accessibility - today and yesterday can be written
+  const { getUserTimezone } = await import('@/lib/timezone');
+  const timezone = await getUserTimezone();
+  if (!isDateAccessible(date, timezone)) {
     throw new Error("dateNotAccessible");
   }
 

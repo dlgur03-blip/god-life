@@ -1,6 +1,7 @@
 import { getSuccessProjects } from '@/app/actions/success';
 import { Link } from '@/navigation';
 import { Plus, Trophy, Calendar } from 'lucide-react';
+import GuideButton from '@/components/guide/GuideButton';
 import { getTranslations, getLocale } from 'next-intl/server';
 import { formatDateDisplay } from '@/lib/date';
 
@@ -14,9 +15,12 @@ export default async function SuccessPage() {
       <div className="max-w-4xl mx-auto">
         <header className="flex justify-between items-center mb-10">
           <div>
-             <h1 className="text-3xl font-bold text-[var(--color-secondary)]">
-              {t('title')}
-            </h1>
+            <div className="flex items-center gap-2">
+              <h1 className="text-3xl font-bold text-[var(--color-secondary)]">
+                {t('title')}
+              </h1>
+              <GuideButton />
+            </div>
             <p className="text-[var(--foreground-muted)] text-sm">{t('subtitle')}</p>
           </div>
           <Link href="/success/projects/new" className="bg-[var(--color-primary)]/20 hover:bg-[var(--color-primary)]/30 text-[var(--color-primary)] px-4 py-2 rounded-lg flex items-center gap-2 transition-all border border-[var(--color-primary)]/50">

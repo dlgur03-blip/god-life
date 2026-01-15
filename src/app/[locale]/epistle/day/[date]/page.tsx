@@ -7,6 +7,7 @@ import { authOptions } from '@/lib/auth';
 import { Link } from '@/navigation';
 import { redirect } from 'next/navigation';
 import { ChevronLeft, ChevronRight, History } from 'lucide-react';
+import GuideButton from '@/components/guide/GuideButton';
 import { getTranslations, getLocale } from 'next-intl/server';
 import { isValidDateParam } from '@/lib/validateDate';
 import { getTodayStr } from '@/lib/date';
@@ -61,9 +62,12 @@ export default async function EpistleDayPage({ params }: { params: Promise<{ dat
             <ChevronLeft />
           </Link>
           <div className="text-center">
-            <h1 className="text-2xl font-bold tracking-widest text-[var(--color-accent)]">
-              {t('title')}
-            </h1>
+            <div className="flex items-center justify-center gap-2">
+              <h1 className="text-2xl font-bold tracking-widest text-[var(--color-accent)]">
+                {t('title')}
+              </h1>
+              <GuideButton />
+            </div>
             <p className="text-sm text-[var(--foreground-muted)] font-mono">{date}</p>
           </div>
           <div className="flex gap-2">
