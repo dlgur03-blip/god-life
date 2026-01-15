@@ -27,10 +27,10 @@ const notoSansKR = Noto_Sans_KR({
 
 export const metadata: Metadata = {
   title: "GOD LIFE MAKER - 갓생메이커",
-  description: "운명을 설계하고, 규율을 마스터하며, 바이오해킹으로 최적화하라. Design your destiny, master discipline, optimize with biohacking.",
+  description: "매일 아침, 반드시 들어오세요. 당신은 분명 갓생을 살게 될 것입니다.",
   openGraph: {
-    title: "GOD LIFE MAKER - 갓생메이커",
-    description: "운명 설계 · 100일 프로젝트 · 규율 마스터리 · 셀프 서신 · 바이오해킹",
+    title: "갓생메이커 | 당신의 인생이 바뀝니다",
+    description: "매일 아침, 반드시 들어오세요. 운명 설계 · 100일 프로젝트 · 규율 마스터리 · 셀프 서신",
     url: "https://god-life-six.vercel.app",
     siteName: "GOD LIFE MAKER",
     images: [
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "GOD LIFE MAKER - 통합 자기계발 플랫폼",
+        alt: "GOD LIFE MAKER - 갓생메이커",
       },
     ],
     locale: "ko_KR",
@@ -46,11 +46,14 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "GOD LIFE MAKER - 갓생메이커",
-    description: "운명 설계 · 100일 프로젝트 · 규율 마스터리 · 셀프 서신 · 바이오해킹",
+    title: "갓생메이커 | 당신의 인생이 바뀝니다",
+    description: "매일 아침, 반드시 들어오세요. 운명 설계 · 100일 프로젝트 · 규율 마스터리 · 셀프 서신",
     images: ["/og-image.png"],
   },
   metadataBase: new URL("https://god-life-six.vercel.app"),
+  other: {
+    "naver-site-verification": "",
+  },
 };
 
 export default async function LocaleLayout({
@@ -72,8 +75,11 @@ export default async function LocaleLayout({
           <Providers>
             <TimezoneDetector />
             <InAppBrowserGuard />
+            <div className="fixed top-0 left-0 right-0 z-[60] bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 text-white text-center py-2 px-4 text-sm font-medium">
+              매일 아침, 반드시 이 사이트에 들어오세요. 당신은 분명 갓생을 살게 될 것입니다.
+            </div>
             <HeaderWrapper />
-            <main className="pt-14 flex-1">
+            <main className="pt-24 flex-1">
               {children}
             </main>
             <FeedbackFooter />
