@@ -30,11 +30,16 @@ export default function HeaderWrapper() {
         </div>
 
         {/* Center - Motivational Text */}
-        <p className="text-[10px] md:text-xs text-[var(--foreground-muted)] tracking-wide">
-          <span className="text-[var(--color-primary)]">✦</span>
-          <span className="mx-1">매일 아침, 반드시 들어오세요</span>
-          <span className="text-[var(--color-primary)]">✦</span>
-        </p>
+        <div className="text-center">
+          <p className="text-[10px] md:text-xs text-[var(--foreground-muted)] tracking-wide">
+            <span className="text-[var(--color-primary)]">✦</span>
+            <span className="mx-1">매일 아침, 반드시 이 사이트에 들어오세요 | 당신은 분명 갓생을 살게 될 것입니다.</span>
+            <span className="text-[var(--color-primary)]">✦</span>
+          </p>
+          <p className="text-[9px] md:text-[10px] text-[var(--foreground-muted)]/70 tracking-wide mt-0.5">
+            이 복잡한 갓생 메이커를 쓸수록 역설적으로 당신의 삶은 단순해질 것입니다.
+          </p>
+        </div>
 
         {/* Right - Language & User */}
         <div className="flex items-center gap-1 w-20 justify-end">
