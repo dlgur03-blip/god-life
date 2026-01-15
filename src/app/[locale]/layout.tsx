@@ -75,20 +75,8 @@ export default async function LocaleLayout({
           <Providers>
             <TimezoneDetector />
             <InAppBrowserGuard />
-            <div className="fixed top-0 left-0 right-0 z-[60] bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white text-center py-2 px-4 border-b border-slate-700/50">
-              <p className="text-xs md:text-sm font-medium tracking-wide">
-                <span className="text-amber-400">✦</span>
-                <span className="mx-2">매일 아침, 반드시 이 사이트에 들어오세요.</span>
-                <span className="hidden sm:inline text-slate-400">|</span>
-                <span className="hidden sm:inline ml-2 text-amber-200/90">당신은 분명 갓생을 살게 될 것입니다.</span>
-                <span className="text-amber-400 ml-2">✦</span>
-              </p>
-              <p className="text-[10px] md:text-xs text-slate-400 mt-1">
-                이 복잡한 갓생 메이커를 쓸수록 역설적으로 당신의 삶은 단순해질 것입니다.
-              </p>
-            </div>
             <HeaderWrapper />
-            <main className="pt-[116px] flex-1">
+            <main className="pt-[72px] flex-1">
               {children}
             </main>
             <FeedbackFooter />

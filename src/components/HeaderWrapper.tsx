@@ -14,31 +14,45 @@ export default function HeaderWrapper() {
   const isMyPage = pathname === '/mypage';
 
   return (
-    <header className="fixed top-[60px] right-0 left-0 z-50 flex justify-between items-center px-4 py-3 bg-[var(--background)]/80 backdrop-blur-md border-b border-[var(--color-border)]">
-      <div className="flex items-center gap-2">
-        {!isHomePage && (
-          <Link
-            href="/"
-            aria-label={t('goToDashboard')}
-            className="p-2 rounded-md transition-colors text-[var(--foreground)] hover:text-[var(--color-secondary)] hover:bg-[var(--color-secondary)]/10"
-          >
-            <Home size={20} />
-          </Link>
-        )}
+    <header className="fixed top-0 right-0 left-0 z-50 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border-b border-slate-700/50">
+      {/* Motivational Banner */}
+      <div className="text-white text-center py-1.5 px-4 border-b border-slate-700/30">
+        <p className="text-[10px] md:text-xs font-medium tracking-wide">
+          <span className="text-amber-400">✦</span>
+          <span className="mx-1.5 md:mx-2">매일 아침, 반드시 이 사이트에 들어오세요.</span>
+          <span className="hidden sm:inline text-slate-500">|</span>
+          <span className="hidden sm:inline ml-1.5 text-amber-200/80">당신은 분명 갓생을 살게 될 것입니다.</span>
+          <span className="text-amber-400 ml-1.5">✦</span>
+        </p>
       </div>
 
-      <div className="flex items-center gap-2">
-        <LanguageSwitcher />
+      {/* Navigation */}
+      <div className="flex justify-between items-center px-4 py-2">
+        <div className="flex items-center gap-2">
+          {!isHomePage && (
+            <Link
+              href="/"
+              aria-label={t('goToDashboard')}
+              className="p-1.5 rounded-md transition-colors text-white/80 hover:text-amber-400 hover:bg-white/5"
+            >
+              <Home size={18} />
+            </Link>
+          )}
+        </div>
 
-        {session && !isMyPage && (
-          <Link
-            href="/mypage"
-            aria-label={t('myPage')}
-            className="p-2 rounded-md transition-colors text-[var(--foreground)] hover:text-[var(--color-secondary)] hover:bg-[var(--color-secondary)]/10"
-          >
-            <User size={20} />
-          </Link>
-        )}
+        <div className="flex items-center gap-1">
+          <LanguageSwitcher />
+
+          {session && !isMyPage && (
+            <Link
+              href="/mypage"
+              aria-label={t('myPage')}
+              className="p-1.5 rounded-md transition-colors text-white/80 hover:text-amber-400 hover:bg-white/5"
+            >
+              <User size={18} />
+            </Link>
+          )}
+        </div>
       </div>
     </header>
   );
