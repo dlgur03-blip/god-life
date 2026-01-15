@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils';
 
 interface WeeklyPlanGridProps {
   initialPlans: Array<{ id: string; content: string }>;
+  readOnly?: boolean;
 }
 
 interface PlanBoxProps {
@@ -16,9 +17,10 @@ interface PlanBoxProps {
   onSave: (index: number, content: string) => Promise<void>;
   onDelete: (index: number) => Promise<void>;
   placeholder: string;
+  readOnly?: boolean;
 }
 
-function PlanBox({ index, id, content, onSave, onDelete, placeholder }: PlanBoxProps) {
+function PlanBox({ index, id, content, onSave, onDelete, placeholder, readOnly = false }: PlanBoxProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [inputValue, setInputValue] = useState(content);
   const [isSaving, setIsSaving] = useState(false);
@@ -120,9 +122,10 @@ function PlanBox({ index, id, content, onSave, onDelete, placeholder }: PlanBoxP
           />
         ) : (
           <div
-            onClick={() => setIsEditing(true)}
+            onClick={() => !readOnly && setIsEditing(true)}
             className={cn(
-              "w-full h-full min-h-[80px] px-1 py-1 text-sm cursor-pointer whitespace-pre-wrap break-words",
+              "w-full h-full min-h-[80px] px-1 py-1 text-sm whitespace-pre-wrap break-words",
+              readOnly ? "cursor-default opacity-70" : "cursor-pointer",
               inputValue ? "text-[var(--foreground)]" : "text-[var(--foreground-muted)]"
             )}
           >
@@ -139,7 +142,7 @@ function PlanBox({ index, id, content, onSave, onDelete, placeholder }: PlanBoxP
   );
 }
 
-export default function WeeklyPlanGrid({ initialPlans }: WeeklyPlanGridProps) {
+export default function WeeklyPlanGrid({ initialPlans, readOnly = false }: WeeklyPlanGridProps) {
   const t = useTranslations('Destiny');
   const [plans, setPlans] = useState<Array<{ id: string | null; content: string }>>(
     // Ensure we always have 7 slots
@@ -197,6 +200,7 @@ export default function WeeklyPlanGrid({ initialPlans }: WeeklyPlanGridProps) {
             onSave={handleSave}
             onDelete={handleDelete}
             placeholder={t('weeklyPlan.freeformPlaceholder')}
+            readOnly={readOnly}
           />
         ))}
       </div>

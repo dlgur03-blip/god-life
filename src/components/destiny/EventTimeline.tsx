@@ -15,11 +15,13 @@ type Event = {
 export default function EventTimeline({
   dayId,
   events,
-  isToday = false
+  isToday = false,
+  canAddEvents = false
 }: {
   dayId: string,
   events: Event[],
-  isToday?: boolean
+  isToday?: boolean,
+  canAddEvents?: boolean
 }) {
   const t = useTranslations('Destiny');
   const locale = useLocale() as 'en' | 'ko' | 'ja';
@@ -129,24 +131,26 @@ export default function EventTimeline({
                   <p className="flex-1 text-[var(--foreground)] text-sm bg-[var(--color-card-bg)] p-2 rounded-lg border border-[var(--color-border)] group-hover:border-[var(--color-border-hover)] transition-colors">
                     {event.title}
                   </p>
-                  {/* Edit/Delete buttons - always visible on mobile, hover on desktop */}
-                  <div className="flex gap-1 opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity">
-                    <button
-                      onClick={() => handleStartEdit(event)}
-                      className="p-2 text-[var(--foreground-muted)] hover:text-[var(--color-primary)] hover:bg-[var(--color-card-hover)] rounded-lg transition-colors"
-                      title={t('edit')}
-                    >
-                      <Pencil className="w-4 h-4" />
-                    </button>
-                    <button
-                      onClick={() => handleDelete(event.id)}
-                      disabled={isUpdating}
-                      className="p-2 text-[var(--foreground-muted)] hover:text-red-500 hover:bg-red-500/10 rounded-lg transition-colors"
-                      title={t('delete')}
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
-                  </div>
+                  {/* Edit/Delete buttons - only show for today */}
+                  {isToday && (
+                    <div className="flex gap-1 opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity">
+                      <button
+                        onClick={() => handleStartEdit(event)}
+                        className="p-2 text-[var(--foreground-muted)] hover:text-[var(--color-primary)] hover:bg-[var(--color-card-hover)] rounded-lg transition-colors"
+                        title={t('edit')}
+                      >
+                        <Pencil className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => handleDelete(event.id)}
+                        disabled={isUpdating}
+                        className="p-2 text-[var(--foreground-muted)] hover:text-red-500 hover:bg-red-500/10 rounded-lg transition-colors"
+                        title={t('delete')}
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  )}
                 </div>
               )}
             </div>

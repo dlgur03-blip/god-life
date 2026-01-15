@@ -13,13 +13,23 @@ function DebouncedInput({
   value,
   onSave,
   placeholder,
-  className
+  className,
+  readOnly = false
 }: {
   value: string | null;
   onSave: (val: string) => void;
   placeholder?: string;
   className?: string;
+  readOnly?: boolean;
 }) {
+  if (readOnly) {
+    return (
+      <div className={cn("px-2 py-1 w-full text-sm text-[var(--foreground)] opacity-70", className)}>
+        {value || <span className="text-[var(--foreground-muted)]">{placeholder || '-'}</span>}
+      </div>
+    );
+  }
+
   return (
     <input
       type="text"
@@ -40,10 +50,17 @@ function DebouncedInput({
   );
 }
 
-export default function TimeblockCard({ block }: { block: Timeblock }) {
+export default function TimeblockCard({ block, isYesterday = false, isToday = false }: { block: Timeblock; isYesterday?: boolean; isToday?: boolean }) {
   const t = useTranslations('Destiny');
-  const [mode, setMode] = useState<'plan' | 'actual'>('plan');
+  // For yesterday, default to actual mode
+  const [mode, setMode] = useState<'plan' | 'actual'>(isYesterday ? 'actual' : 'plan');
   const [isEditingTime, setIsEditingTime] = useState(false);
+
+  // Editing permissions
+  const canEditPlan = isToday;
+  const canEditActual = isToday || isYesterday;
+  const canEditTime = isToday;
+  const canDelete = isToday;
 
   const handleUpdate = async (data: Partial<Timeblock>) => {
     await updateTimeblock(block.id, data);
@@ -59,7 +76,7 @@ export default function TimeblockCard({ block }: { block: Timeblock }) {
       {/* Header */}
       <div className="flex justify-between items-center mb-3 flex-wrap gap-2">
         <div className="flex items-center gap-2">
-          {isEditingTime ? (
+          {isEditingTime && canEditTime ? (
             <TimeRangeEditor
               blockId={block.id}
               startTime={block.startTime}
@@ -69,8 +86,9 @@ export default function TimeblockCard({ block }: { block: Timeblock }) {
             />
           ) : (
             <button
-              onClick={() => setIsEditingTime(true)}
-              className="flex items-center gap-2 group"
+              onClick={() => canEditTime && setIsEditingTime(true)}
+              className={cn("flex items-center gap-2 group", !canEditTime && "cursor-default")}
+              disabled={!canEditTime}
             >
               <span className="text-xl font-mono text-[var(--color-secondary)] font-bold">
                 {block.startTime}
@@ -78,10 +96,12 @@ export default function TimeblockCard({ block }: { block: Timeblock }) {
               <span className="text-xs text-[var(--foreground-muted)]">
                 {t('timeblock.timeTo', { time: block.endTime })}
               </span>
-              <Edit2
-                size={14}
-                className="text-[var(--foreground-muted)] opacity-0 group-hover:opacity-100 transition-opacity"
-              />
+              {canEditTime && (
+                <Edit2
+                  size={14}
+                  className="text-[var(--foreground-muted)] opacity-0 group-hover:opacity-100 transition-opacity"
+                />
+              )}
             </button>
           )}
         </div>
@@ -112,7 +132,7 @@ export default function TimeblockCard({ block }: { block: Timeblock }) {
             </button>
           </div>
 
-          <TimeblockDeleteButton blockId={block.id} />
+          {canDelete && <TimeblockDeleteButton blockId={block.id} />}
         </div>
       </div>
 
@@ -127,6 +147,7 @@ export default function TimeblockCard({ block }: { block: Timeblock }) {
                 value={block.planLocation}
                 onSave={(v) => handleUpdate({ planLocation: v })}
                 placeholder={t('timeblock.locationPlaceholder')}
+                readOnly={!canEditPlan}
               />
             </div>
             <div className="flex items-center gap-2">
@@ -137,6 +158,7 @@ export default function TimeblockCard({ block }: { block: Timeblock }) {
                 onSave={(v) => handleUpdate({ planText: v })}
                 placeholder={t('timeblock.planPlaceholder')}
                 className="font-medium"
+                readOnly={!canEditPlan}
               />
             </div>
           </>
@@ -150,17 +172,24 @@ export default function TimeblockCard({ block }: { block: Timeblock }) {
                 onSave={(v) => handleUpdate({ actualText: v })}
                 placeholder={t('timeblock.actualPlaceholder')}
                 className="font-medium"
+                readOnly={!canEditActual}
               />
             </div>
             <div className="flex items-center gap-2">
               <span className="text-xs text-[var(--foreground-muted)] w-12">{t('timeblock.scoreLabel')}</span>
-              <input
-                type="number"
-                min="0" max="10"
-                defaultValue={block.score ?? ''}
-                onBlur={(e) => handleUpdate({ score: parseInt(e.target.value) || 0 })}
-                className="bg-transparent border-b border-[var(--color-border)] focus:border-[var(--color-warning)] outline-none px-2 py-1 w-16 text-sm text-[var(--color-warning)] font-bold"
-              />
+              {canEditActual ? (
+                <input
+                  type="number"
+                  min="0" max="10"
+                  defaultValue={block.score ?? ''}
+                  onBlur={(e) => handleUpdate({ score: parseInt(e.target.value) || 0 })}
+                  className="bg-transparent border-b border-[var(--color-border)] focus:border-[var(--color-warning)] outline-none px-2 py-1 w-16 text-sm text-[var(--color-warning)] font-bold"
+                />
+              ) : (
+                <span className="px-2 py-1 text-sm text-[var(--color-warning)] font-bold opacity-70">
+                  {block.score ?? '-'}
+                </span>
+              )}
               <span className="text-xs text-[var(--foreground-muted)]">{t('timeblock.scoreSuffix')}</span>
             </div>
             <div className="flex items-center gap-2">
@@ -171,6 +200,7 @@ export default function TimeblockCard({ block }: { block: Timeblock }) {
                 onSave={(v) => handleUpdate({ feedback: v })}
                 placeholder={t('timeblock.feedbackPlaceholder')}
                 className="text-xs italic"
+                readOnly={!canEditActual}
               />
             </div>
           </>

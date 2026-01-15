@@ -1,6 +1,8 @@
 'use client';
 
+import { useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 import GoalEditor from './GoalEditor';
 import WeeklyPlanGrid from './WeeklyPlanGrid';
 import { updateDestinyGoals } from '@/app/actions/destiny';
@@ -22,6 +24,7 @@ interface DestinyNavigatorCardProps {
   habitToRemove: string | null;
   restTime: string | null;
   weeklyPlans: Array<{ id: string; content: string }>;
+  isEditable?: boolean;
 }
 
 export default function DestinyNavigatorCard({
@@ -41,10 +44,13 @@ export default function DestinyNavigatorCard({
   habitToRemove,
   restTime,
   weeklyPlans,
+  isEditable = true,
 }: DestinyNavigatorCardProps) {
   const t = useTranslations('Destiny');
+  const [isLongTermExpanded, setIsLongTermExpanded] = useState(false);
 
   const handleGoalSave = (field: string) => async (value: string) => {
+    if (!isEditable) return;
     await updateDestinyGoals(dayId, { [field]: value });
   };
 
@@ -54,100 +60,124 @@ export default function DestinyNavigatorCard({
         {t('coreObjectives')}
       </h2>
 
-      {/* Ultimate Goal */}
-      <GoalEditor
-        label={t('goals.ultimate')}
-        value={goalUltimate}
-        onSave={handleGoalSave('ultimate')}
-        placeholder={t('goals.ultimatePlaceholder')}
-        variant="ultimate"
-      />
+      {/* Collapsible Long-Term Goals - Hidden by default on mobile */}
+      <div className="md:contents">
+        <button
+          onClick={() => setIsLongTermExpanded(!isLongTermExpanded)}
+          className="md:hidden w-full flex items-center justify-between py-2 px-3 bg-[var(--background-secondary)] rounded-lg border border-[var(--color-border)] text-sm text-[var(--foreground-muted)]"
+        >
+          <span>{t('longTermGoals')}</span>
+          {isLongTermExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+        </button>
 
-      {/* 10 Year Goal */}
-      <GoalEditor
-        label={t('goals.tenYear')}
-        value={goal10Year}
-        onSave={handleGoalSave('tenYear')}
-        placeholder={t('goals.tenYearPlaceholder')}
-        variant="longTerm"
-      />
+        <div className={`space-y-6 ${isLongTermExpanded ? 'block' : 'hidden'} md:block`}>
+          {/* Ultimate Goal */}
+          <GoalEditor
+            label={t('goals.ultimate')}
+            value={goalUltimate}
+            onSave={handleGoalSave('ultimate')}
+            placeholder={t('goals.ultimatePlaceholder')}
+            variant="ultimate"
+            readOnly={!isEditable}
+          />
 
-      {/* 5 Year Goal */}
-      <GoalEditor
-        label={t('goals.fiveYear')}
-        value={goal5Year}
-        onSave={handleGoalSave('fiveYear')}
-        placeholder={t('goals.fiveYearPlaceholder')}
-        variant="longTerm"
-      />
+          {/* 10 Year Goal */}
+          <GoalEditor
+            label={t('goals.tenYear')}
+            value={goal10Year}
+            onSave={handleGoalSave('tenYear')}
+            placeholder={t('goals.tenYearPlaceholder')}
+            variant="longTerm"
+            readOnly={!isEditable}
+          />
 
-      {/* 3 Year Goal */}
-      <GoalEditor
-        label={t('goals.threeYear')}
-        value={goal3Year}
-        onSave={handleGoalSave('threeYear')}
-        placeholder={t('goals.threeYearPlaceholder')}
-        variant="longTerm"
-      />
+          {/* 5 Year Goal */}
+          <GoalEditor
+            label={t('goals.fiveYear')}
+            value={goal5Year}
+            onSave={handleGoalSave('fiveYear')}
+            placeholder={t('goals.fiveYearPlaceholder')}
+            variant="longTerm"
+            readOnly={!isEditable}
+          />
 
-      {/* 1 Year Goal */}
-      <GoalEditor
-        label={t('goals.oneYear')}
-        value={goal1Year}
-        onSave={handleGoalSave('oneYear')}
-        placeholder={t('goals.oneYearPlaceholder')}
-        variant="month"
-      />
+          {/* 3 Year Goal */}
+          <GoalEditor
+            label={t('goals.threeYear')}
+            value={goal3Year}
+            onSave={handleGoalSave('threeYear')}
+            placeholder={t('goals.threeYearPlaceholder')}
+            variant="longTerm"
+            readOnly={!isEditable}
+          />
 
-      {/* 6 Month Goal */}
-      <GoalEditor
-        label={t('goals.sixMonth')}
-        value={goal6Month}
-        onSave={handleGoalSave('sixMonth')}
-        placeholder={t('goals.sixMonthPlaceholder')}
-        variant="month"
-      />
+          {/* 1 Year Goal */}
+          <GoalEditor
+            label={t('goals.oneYear')}
+            value={goal1Year}
+            onSave={handleGoalSave('oneYear')}
+            placeholder={t('goals.oneYearPlaceholder')}
+            variant="month"
+            readOnly={!isEditable}
+          />
 
-      {/* 3 Month Goal */}
-      <GoalEditor
-        label={t('goals.threeMonth')}
-        value={goal3Month}
-        onSave={handleGoalSave('threeMonth')}
-        placeholder={t('goals.threeMonthPlaceholder')}
-        variant="month"
-      />
+          {/* 6 Month Goal */}
+          <GoalEditor
+            label={t('goals.sixMonth')}
+            value={goal6Month}
+            onSave={handleGoalSave('sixMonth')}
+            placeholder={t('goals.sixMonthPlaceholder')}
+            variant="month"
+            readOnly={!isEditable}
+          />
 
-      {/* 1 Month Goal */}
-      <GoalEditor
-        label={t('goals.oneMonth')}
-        value={goal1Month}
-        onSave={handleGoalSave('oneMonth')}
-        placeholder={t('goals.oneMonthPlaceholder')}
-        variant="week"
-      />
+          {/* 3 Month Goal */}
+          <GoalEditor
+            label={t('goals.threeMonth')}
+            value={goal3Month}
+            onSave={handleGoalSave('threeMonth')}
+            placeholder={t('goals.threeMonthPlaceholder')}
+            variant="month"
+            readOnly={!isEditable}
+          />
 
-      {/* 2 Week Goal */}
-      <GoalEditor
-        label={t('goals.twoWeek')}
-        value={goal2Week}
-        onSave={handleGoalSave('twoWeek')}
-        placeholder={t('goals.twoWeekPlaceholder')}
-        variant="week"
-      />
+          {/* 1 Month Goal */}
+          <GoalEditor
+            label={t('goals.oneMonth')}
+            value={goal1Month}
+            onSave={handleGoalSave('oneMonth')}
+            placeholder={t('goals.oneMonthPlaceholder')}
+            variant="week"
+            readOnly={!isEditable}
+          />
 
-      {/* 1 Week Goal */}
-      <GoalEditor
-        label={t('goals.oneWeek')}
-        value={goal1Week}
-        onSave={handleGoalSave('oneWeek')}
-        placeholder={t('goals.oneWeekPlaceholder')}
-        variant="week"
-      />
+          {/* 2 Week Goal */}
+          <GoalEditor
+            label={t('goals.twoWeek')}
+            value={goal2Week}
+            onSave={handleGoalSave('twoWeek')}
+            placeholder={t('goals.twoWeekPlaceholder')}
+            variant="week"
+            readOnly={!isEditable}
+          />
 
-      {/* Weekly Plan 7-Day Grid */}
-      <WeeklyPlanGrid
-        initialPlans={weeklyPlans}
-      />
+          {/* 1 Week Goal */}
+          <GoalEditor
+            label={t('goals.oneWeek')}
+            value={goal1Week}
+            onSave={handleGoalSave('oneWeek')}
+            placeholder={t('goals.oneWeekPlaceholder')}
+            variant="week"
+            readOnly={!isEditable}
+          />
+
+          {/* Weekly Plan 7-Day Grid */}
+          <WeeklyPlanGrid
+            initialPlans={weeklyPlans}
+            readOnly={!isEditable}
+          />
+        </div>
+      </div>
 
       {/* Today's Goal */}
       <GoalEditor
@@ -156,6 +186,7 @@ export default function DestinyNavigatorCard({
         onSave={handleGoalSave('today')}
         placeholder={t('goals.todayPlaceholder')}
         variant="today"
+        readOnly={!isEditable}
       />
 
       {/* Habit to Keep */}
@@ -165,6 +196,7 @@ export default function DestinyNavigatorCard({
         onSave={handleGoalSave('habitToKeep')}
         placeholder={t('goals.habitToKeepPlaceholder')}
         variant="habit"
+        readOnly={!isEditable}
       />
 
       {/* Habit to Remove */}
@@ -174,6 +206,7 @@ export default function DestinyNavigatorCard({
         onSave={handleGoalSave('habitToRemove')}
         placeholder={t('goals.habitToRemovePlaceholder')}
         variant="habit"
+        readOnly={!isEditable}
       />
 
       {/* Rest Time Allocation */}
@@ -183,6 +216,7 @@ export default function DestinyNavigatorCard({
         onSave={handleGoalSave('restTime')}
         placeholder={t('goals.restTimePlaceholder')}
         variant="today"
+        readOnly={!isEditable}
       />
     </section>
   );

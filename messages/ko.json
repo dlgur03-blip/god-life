@@ -85,6 +85,7 @@
   "Destiny": {
     "title": "DESTINY NAVIGATOR",
     "coreObjectives": "장기관점",
+    "longTermGoals": "장기 목표 펼치기/접기",
     "timeblocks": "24시간 타임블록",
     "calendar": "달력",
     "goToToday": "오늘로 이동",

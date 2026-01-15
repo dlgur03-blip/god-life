@@ -85,6 +85,7 @@
   "Destiny": {
     "title": "DESTINY NAVIGATOR",
     "coreObjectives": "Long-term Perspective",
+    "longTermGoals": "Expand/Collapse Long-term Goals",
     "timeblocks": "24-Hour Timeblocks",
     "calendar": "Calendar",
     "goToToday": "Go to Today",

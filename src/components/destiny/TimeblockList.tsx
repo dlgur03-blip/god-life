@@ -11,9 +11,11 @@ import type { Timeblock } from '@/types/destiny';
 type TimeblockListProps = {
   dayId: string;
   initialBlocks: Timeblock[];
+  isToday?: boolean;
+  isYesterday?: boolean;
 };
 
-export default function TimeblockList({ dayId, initialBlocks }: TimeblockListProps) {
+export default function TimeblockList({ dayId, initialBlocks, isToday = false, isYesterday = false }: TimeblockListProps) {
   const t = useTranslations('Destiny');
   const [blocks, setBlocks] = useState(initialBlocks);
   const [isCreatingAll, setIsCreatingAll] = useState(false);
@@ -86,18 +88,20 @@ export default function TimeblockList({ dayId, initialBlocks }: TimeblockListPro
       {blocks.length === 0 ? (
         <div className="text-center py-8 text-[#6b7280]">
           <p className="text-sm mb-4">{t('timeblock.noBlocks')}</p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
-            <button
-              onClick={handleCreateAll}
-              disabled={isCreatingAll}
-              className="flex items-center gap-2 px-4 py-2 bg-[var(--color-primary)]/20 hover:bg-[var(--color-primary)]/30 text-[var(--color-primary)] border border-[var(--color-primary)]/50 rounded-lg text-sm font-bold transition-all disabled:opacity-50"
-            >
-              <Calendar className="w-4 h-4" />
-              {isCreatingAll ? t('timeblock.creating') : t('timeblock.create24h')}
-            </button>
-            <span className="text-xs text-[var(--foreground-muted)]">{t('or')}</span>
-            <TimeblockAddButton dayId={dayId} variant="inline" />
-          </div>
+          {isToday && (
+            <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+              <button
+                onClick={handleCreateAll}
+                disabled={isCreatingAll}
+                className="flex items-center gap-2 px-4 py-2 bg-[var(--color-primary)]/20 hover:bg-[var(--color-primary)]/30 text-[var(--color-primary)] border border-[var(--color-primary)]/50 rounded-lg text-sm font-bold transition-all disabled:opacity-50"
+              >
+                <Calendar className="w-4 h-4" />
+                {isCreatingAll ? t('timeblock.creating') : t('timeblock.create24h')}
+              </button>
+              <span className="text-xs text-[var(--foreground-muted)]">{t('or')}</span>
+              <TimeblockAddButton dayId={dayId} variant="inline" />
+            </div>
+          )}
         </div>
       ) : (
         <>
@@ -107,12 +111,12 @@ export default function TimeblockList({ dayId, initialBlocks }: TimeblockListPro
           >
             {blocks.map((block) => (
               <div key={block.id} data-timeblock-card>
-                <TimeblockCard block={block} />
+                <TimeblockCard block={block} isYesterday={isYesterday} isToday={isToday} />
               </div>
             ))}
           </div>
 
-          <TimeblockAddButton dayId={dayId} variant="inline" />
+          {isToday && <TimeblockAddButton dayId={dayId} variant="inline" />}
         </>
       )}
     </section>

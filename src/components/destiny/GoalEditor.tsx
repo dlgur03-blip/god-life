@@ -20,9 +20,10 @@ interface GoalEditorProps {
   onSave: (value: string) => Promise<void>;
   placeholder?: string;
   variant?: GoalVariant;
+  readOnly?: boolean;
 }
 
-export default function GoalEditor({ label, value, onSave, placeholder, variant = 'week' }: GoalEditorProps) {
+export default function GoalEditor({ label, value, onSave, placeholder, variant = 'week', readOnly = false }: GoalEditorProps) {
   const colors = variantColors[variant];
   const [isEditing, setIsEditing] = useState(false);
   const [inputValue, setInputValue] = useState(value || '');
@@ -119,10 +120,10 @@ export default function GoalEditor({ label, value, onSave, placeholder, variant 
           />
         ) : (
           <div
-            onClick={() => setIsEditing(true)}
+            onClick={() => !readOnly && setIsEditing(true)}
             className={cn(
-              "flex-1 h-8 bg-[var(--background-secondary)] rounded border border-[var(--color-border)] flex items-center px-3 text-sm cursor-pointer transition-all",
-              "hover:border-[var(--color-border-hover)] hover:bg-[var(--color-card-hover)]",
+              "flex-1 h-8 bg-[var(--background-secondary)] rounded border border-[var(--color-border)] flex items-center px-3 text-sm transition-all",
+              readOnly ? "cursor-default opacity-70" : "cursor-pointer hover:border-[var(--color-border-hover)] hover:bg-[var(--color-card-hover)]",
               inputValue ? "text-[var(--foreground)]" : "text-[var(--foreground-muted)]"
             )}
           >

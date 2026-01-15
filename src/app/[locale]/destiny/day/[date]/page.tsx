@@ -47,8 +47,18 @@ export default async function DestinyDayPage({ params }: { params: Promise<{ dat
   const prevStr = prevDate.toISOString().split('T')[0];
   const nextStr = nextDate.toISOString().split('T')[0];
 
-  // Check if viewing today
+  // Check if viewing today or yesterday
   const isToday = date === todayStr;
+
+  // Calculate yesterday
+  const todayDate = new Date(todayStr + 'T00:00:00');
+  const yesterdayDate = new Date(todayDate);
+  yesterdayDate.setDate(yesterdayDate.getDate() - 1);
+  const yesterdayStr = yesterdayDate.toISOString().split('T')[0];
+  const isYesterday = date === yesterdayStr;
+
+  // Editing permissions: only today and yesterday can be edited
+  const isEditable = isToday || isYesterday;
 
   return (
     <main className="min-h-screen bg-[var(--background)] pb-20">
@@ -92,10 +102,16 @@ export default async function DestinyDayPage({ params }: { params: Promise<{ dat
           habitToRemove={day.habitToRemove}
           restTime={day.restTime}
           weeklyPlans={weeklyPlans}
+          isEditable={isToday}
         />
 
         {/* Timeblocks Grid - 24-Hour System */}
-        <TimeblockList dayId={day.id} initialBlocks={day.timeblocks} />
+        <TimeblockList
+          dayId={day.id}
+          initialBlocks={day.timeblocks}
+          isToday={isToday}
+          isYesterday={isYesterday}
+        />
 
         {/* M4: Event Timeline */}
         <EventTimeline
@@ -105,6 +121,7 @@ export default async function DestinyDayPage({ params }: { params: Promise<{ dat
             recordedAt: event.recordedAt.toISOString()
           }))}
           isToday={isToday}
+          canAddEvents={isToday}
         />
 
       </div>
