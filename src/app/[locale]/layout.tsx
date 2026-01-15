@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "갓생메이커 | 당신의 인생이 바뀝니다",
     description: "매일 아침, 반드시 들어오세요. 운명 설계 · 100일 프로젝트 · 규율 마스터리 · 셀프 서신",
-    url: "https://god-life-six.vercel.app",
+    url: "https://godlife.kr",
     siteName: "GOD LIFE MAKER",
     images: [
       {
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     description: "매일 아침, 반드시 들어오세요. 운명 설계 · 100일 프로젝트 · 규율 마스터리 · 셀프 서신",
     images: ["/og-image.png"],
   },
-  metadataBase: new URL("https://god-life-six.vercel.app"),
+  metadataBase: new URL("https://godlife.kr"),
   other: {
     "naver-site-verification": "",
   },
