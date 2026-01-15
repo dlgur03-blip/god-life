@@ -13,7 +13,7 @@ export default function GuideButton() {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-[var(--foreground-muted)] hover:text-[var(--color-primary)] bg-[var(--color-card-bg)] hover:bg-[var(--color-card-hover)] border border-[var(--color-border)] rounded-lg transition-all"
+        className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-[var(--foreground-muted)] hover:text-[var(--color-primary)] bg-[var(--color-card-bg)] hover:bg-[var(--color-card-hover)] border border-[var(--color-border)] rounded-lg transition-all print:hidden"
       >
         <HelpCircle className="w-3.5 h-3.5" />
         <span>{t('viewGuide')}</span>

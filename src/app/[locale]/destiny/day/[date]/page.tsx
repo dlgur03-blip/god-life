@@ -1,6 +1,8 @@
 import { getOrCreateDestinyDay, getWeeklyPlans } from '@/app/actions/destiny';
 import TimeblockList from '@/components/destiny/TimeblockList';
 import DestinyNavigatorCard from '@/components/destiny/DestinyNavigatorCard';
+import DestinyCalendar from '@/components/destiny/DestinyCalendar';
+import PrintButton from '@/components/common/PrintButton';
 import { Link } from '@/navigation';
 import { redirect } from 'next/navigation';
 import { getServerSession } from 'next-auth';
@@ -55,7 +57,7 @@ export default async function DestinyDayPage({ params }: { params: Promise<{ dat
 
         {/* Header Navigation */}
         <header className="flex items-center justify-between mb-8 sticky top-0 z-10 bg-[var(--background)]/80 backdrop-blur-md p-4 -mx-4 rounded-b-xl border-b border-[var(--color-border)]">
-          <Link href={`/destiny/day/${prevStr}`} className="p-2 hover:bg-[var(--color-card-hover)] rounded-full text-[var(--foreground-muted)] hover:text-[var(--color-primary)] transition-colors">
+          <Link href={`/destiny/day/${prevStr}`} className="p-2 hover:bg-[var(--color-card-hover)] rounded-full text-[var(--foreground-muted)] hover:text-[var(--color-primary)] transition-colors print:hidden">
             <ChevronLeft />
           </Link>
           <div className="text-center">
@@ -67,9 +69,13 @@ export default async function DestinyDayPage({ params }: { params: Promise<{ dat
             </div>
             <p className="text-sm text-[var(--foreground-muted)] font-mono">{date}</p>
           </div>
-          <Link href={`/destiny/day/${nextStr}`} className="p-2 hover:bg-[var(--color-card-hover)] rounded-full text-[var(--foreground-muted)] hover:text-[var(--color-primary)] transition-colors">
-            <ChevronRight />
-          </Link>
+          <div className="flex items-center gap-1">
+            <PrintButton />
+            <DestinyCalendar currentDate={date} />
+            <Link href={`/destiny/day/${nextStr}`} className="p-2 hover:bg-[var(--color-card-hover)] rounded-full text-[var(--foreground-muted)] hover:text-[var(--color-primary)] transition-colors print:hidden">
+              <ChevronRight />
+            </Link>
+          </div>
         </header>
 
         {/* Core Objectives: 10-Level Goals + Rest Time */}

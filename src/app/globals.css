@@ -225,3 +225,59 @@ input:focus, textarea:focus, select:focus {
   border-color: var(--color-primary);
   box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.2);
 }
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  /* Reset colors for print */
+  * {
+    color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  /* Hide interactive elements with Tailwind print:hidden class */
+  .print\:hidden {
+    display: none !important;
+  }
+
+  /* Hide navigation footer */
+  footer,
+  [role="navigation"] {
+    display: none !important;
+  }
+
+  /* Reset backgrounds for main content */
+  main {
+    background: white !important;
+  }
+
+  /* Page breaks */
+  .page-break-before {
+    page-break-before: always;
+  }
+
+  .page-break-after {
+    page-break-after: always;
+  }
+
+  .avoid-page-break {
+    page-break-inside: avoid;
+  }
+
+  /* Print margins */
+  @page {
+    margin: 1cm;
+    size: A4;
+  }
+
+  /* Timeblock specific print styles */
+  .timeblock-card {
+    page-break-inside: avoid;
+    margin-bottom: 8px;
+  }
+}
