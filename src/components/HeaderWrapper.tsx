@@ -27,13 +27,13 @@ export default function HeaderWrapper() {
       </div>
 
       {/* Navigation */}
-      <div className="flex justify-between items-center px-4 md:px-6 py-2 md:py-3">
+      <div className="flex justify-between items-center px-4 md:px-6 py-2 md:py-3 bg-[var(--background)]">
         <div className="flex items-center gap-2">
           {!isHomePage && (
             <Link
               href="/"
               aria-label={t('goToDashboard')}
-              className="p-1.5 md:p-2 rounded-md transition-colors text-white/80 hover:text-amber-400 hover:bg-white/5"
+              className="p-1.5 md:p-2 rounded-md transition-colors text-[var(--foreground-muted)] hover:text-[var(--color-primary)] hover:bg-[var(--color-card-hover)]"
             >
               <Home className="w-[18px] h-[18px] md:w-6 md:h-6" />
             </Link>
@@ -47,7 +47,7 @@ export default function HeaderWrapper() {
             <Link
               href="/mypage"
               aria-label={t('myPage')}
-              className="p-1.5 md:p-2 rounded-md transition-colors text-white/80 hover:text-amber-400 hover:bg-white/5"
+              className="p-1.5 md:p-2 rounded-md transition-colors text-[var(--foreground-muted)] hover:text-[var(--color-primary)] hover:bg-[var(--color-card-hover)]"
             >
               <User className="w-[18px] h-[18px] md:w-6 md:h-6" />
             </Link>
