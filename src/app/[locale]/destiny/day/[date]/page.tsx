@@ -33,11 +33,11 @@ export default async function DestinyDayPage({ params }: { params: Promise<{ dat
     redirect(`/${locale}/destiny/day/${todayStr}`);
   }
 
-  // Fetch Data
-  const day = await getOrCreateDestinyDay(date);
-
-  // Fetch weekly plans (7 free-form slots)
-  const weeklyPlans = await getWeeklyPlans();
+  // Fetch Data in parallel for better performance
+  const [day, weeklyPlans] = await Promise.all([
+    getOrCreateDestinyDay(date),
+    getWeeklyPlans()
+  ]);
 
   // Date Navigation Logic
   const currentDate = new Date(date + 'T00:00:00');
@@ -65,7 +65,7 @@ export default async function DestinyDayPage({ params }: { params: Promise<{ dat
       <div className="max-w-3xl mx-auto p-4 md:p-6">
 
         {/* Header Navigation */}
-        <header className="flex items-center justify-between mb-8 sticky top-[72px] z-10 bg-[var(--background)]/80 backdrop-blur-md p-4 -mx-4 rounded-b-xl border-b border-[var(--color-border)]">
+        <header className="flex items-center justify-between mb-8 sticky top-[72px] z-10 bg-[var(--background)]/95 p-4 -mx-4 rounded-b-xl border-b border-[var(--color-border)]">
           <Link href={`/destiny/day/${prevStr}`} className="p-2 hover:bg-[var(--color-card-hover)] rounded-full text-[var(--foreground-muted)] hover:text-[var(--color-primary)] transition-colors print:hidden">
             <ChevronLeft />
           </Link>

@@ -68,7 +68,7 @@ export default function TimeblockCard({ block, isYesterday = false, isToday = fa
 
   return (
     <div className={cn(
-      "relative p-4 rounded-xl border bg-[var(--color-card-bg)] backdrop-blur-sm transition-all duration-300",
+      "relative p-4 rounded-xl border bg-[var(--color-card-bg)] transition-colors duration-200",
       block.status === 'active'
         ? "border-[var(--color-secondary)] shadow-[var(--shadow-glow)]"
         : "border-[var(--color-border)] hover:border-[var(--color-border-hover)]"

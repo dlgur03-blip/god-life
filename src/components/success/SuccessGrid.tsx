@@ -69,11 +69,11 @@ export default function SuccessGrid({
                 onClick={() => handleEntryClick(idx)}
                 disabled={isDisabled}
                 className={cn(
-                  "aspect-square rounded-md flex items-center justify-center text-xs font-bold transition-all duration-300 relative group border",
+                  "aspect-square rounded-md flex items-center justify-center text-xs font-bold transition-colors duration-200 relative group border",
                   isCompleted
                     ? "bg-[var(--color-success)] text-white border-[var(--color-success)] shadow-md"
                     : isToday
-                      ? "bg-[var(--color-warning)] text-white animate-pulse shadow-lg border-[var(--color-warning)]"
+                      ? "bg-[var(--color-warning)] text-white shadow-lg border-[var(--color-warning)] ring-2 ring-[var(--color-warning)]/50"
                       : isPast
                         ? "bg-[var(--color-error)]/20 text-[var(--color-error)] cursor-not-allowed border-[var(--color-error)]/30 opacity-60"
                         : "bg-[var(--background-secondary)] text-[var(--foreground-muted)] cursor-not-allowed border-[var(--color-border)] opacity-50"
@@ -89,7 +89,7 @@ export default function SuccessGrid({
 
         {/* Detail Panel */}
         <div className={cn(
-          "lg:w-80 bg-[var(--color-card-bg)] backdrop-blur-md border border-[var(--color-border)] rounded-2xl p-6 h-fit sticky top-6 transition-all",
+          "lg:w-80 bg-[var(--color-card-bg)] border border-[var(--color-border)] rounded-2xl p-6 h-fit sticky top-[80px] transition-opacity duration-200",
           !selectedEntry ? "opacity-50 pointer-events-none" : "opacity-100"
         )}>
           <h3 className="text-xl font-bold text-[var(--foreground)] mb-1">

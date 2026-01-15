@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import { createContext, useContext, useEffect, useState, useMemo, useCallback, ReactNode } from 'react';
 
 export type ThemeName = 'cream' | 'cyber';
 
@@ -32,21 +32,25 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     }
   }, [theme, mounted]);
 
-  const setTheme = (newTheme: ThemeName) => {
+  const setTheme = useCallback((newTheme: ThemeName) => {
     setThemeState(newTheme);
-  };
+  }, []);
+
+  // Memoize context value to prevent unnecessary re-renders
+  const value = useMemo(() => ({ theme, setTheme }), [theme, setTheme]);
+  const defaultValue = useMemo(() => ({ theme: 'cream' as ThemeName, setTheme }), [setTheme]);
 
   // Prevent flash of wrong theme
   if (!mounted) {
     return (
-      <ThemeContext.Provider value={{ theme: 'cream', setTheme }}>
+      <ThemeContext.Provider value={defaultValue}>
         {children}
       </ThemeContext.Provider>
     );
   }
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
+    <ThemeContext.Provider value={value}>
       {children}
     </ThemeContext.Provider>
   );
