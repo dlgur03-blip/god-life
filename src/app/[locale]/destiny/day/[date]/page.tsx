@@ -13,7 +13,6 @@ import { getTranslations, getLocale } from 'next-intl/server';
 import { isValidDateParam } from '@/lib/validateDate';
 import { getTodayStr } from '@/lib/date';
 import { getUserTimezone } from '@/lib/timezone';
-import GuideButton from '@/components/guide/GuideButton';
 
 type WeeklyPlan = { id: string; content: string };
 
@@ -61,12 +60,9 @@ export default async function DestinyDayPage({ params }: { params: Promise<{ dat
             <ChevronLeft />
           </Link>
           <div className="text-center">
-            <div className="flex items-center justify-center gap-2">
-              <h1 className="text-2xl font-bold tracking-widest text-[var(--color-secondary)]">
-                {t('title')}
-              </h1>
-              <GuideButton />
-            </div>
+            <h1 className="text-2xl font-bold tracking-widest text-[var(--color-secondary)]">
+              {t('title')}
+            </h1>
             <p className="text-sm text-[var(--foreground-muted)] font-mono">{date}</p>
           </div>
           <div className="flex items-center gap-1">
