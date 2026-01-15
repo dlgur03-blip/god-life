@@ -56,7 +56,7 @@ export default async function EpistleDayPage({ params }: { params: Promise<{ dat
       <div className="max-w-5xl mx-auto">
 
         {/* Header */}
-        <header className="flex items-center justify-between mb-8 sticky top-0 z-10 bg-[var(--background)]/80 backdrop-blur-md p-4 -mx-4 rounded-b-xl border-b border-[var(--color-border)]">
+        <header className="flex items-center justify-between mb-8 sticky top-[72px] z-10 bg-[var(--background)]/80 backdrop-blur-md p-4 -mx-4 rounded-b-xl border-b border-[var(--color-border)]">
           <Link href={`/epistle/day/${prevStr}`} className="p-2 hover:bg-[var(--color-card-hover)] rounded-full text-[var(--foreground-muted)] hover:text-[var(--color-primary)] transition-colors">
             <ChevronLeft />
           </Link>
