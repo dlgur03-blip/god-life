@@ -76,7 +76,7 @@ export default async function LocaleLayout({
             <TimezoneDetector />
             <InAppBrowserGuard />
             <HeaderWrapper />
-            <main className="pt-[72px] md:pt-[120px] lg:pt-[130px] flex-1">
+            <main className="pt-[72px] md:pt-[80px] flex-1">
               {children}
             </main>
             <FeedbackFooter />

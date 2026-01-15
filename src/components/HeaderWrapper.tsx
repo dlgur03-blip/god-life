@@ -14,20 +14,14 @@ export default function HeaderWrapper() {
   const isMyPage = pathname === '/mypage';
 
   return (
-    <header className="fixed top-0 right-0 left-0 z-50 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border-b border-slate-700/50">
-      {/* Motivational Banner */}
-      <div className="text-white text-center py-1.5 md:py-3 lg:py-4 px-4 border-b border-slate-700/30">
-        <p className="text-[10px] md:text-sm lg:text-base font-medium tracking-wide">
-          <span className="text-amber-400">✦</span>
-          <span className="mx-1.5 md:mx-3 text-white">매일 아침, 반드시 이 사이트에 들어오세요.</span>
-          <span className="hidden sm:inline text-amber-400/60">|</span>
-          <span className="hidden sm:inline ml-1.5 md:ml-3 text-amber-300">당신은 분명 갓생을 살게 될 것입니다.</span>
-          <span className="text-amber-400 ml-1.5">✦</span>
-        </p>
-      </div>
+    <header className="fixed top-0 right-0 left-0 z-50 bg-[var(--background)] border-b border-[var(--color-border)]">
+      {/* Motivational Text */}
+      <p className="text-center py-1 md:py-1.5 text-[10px] md:text-xs text-[var(--foreground-muted)]">
+        매일 아침, 반드시 이 사이트에 들어오세요. <span className="hidden sm:inline">당신은 분명 갓생을 살게 될 것입니다.</span>
+      </p>
 
       {/* Navigation */}
-      <div className="flex justify-between items-center px-4 md:px-6 py-2 md:py-3 bg-[var(--background)]">
+      <div className="flex justify-between items-center px-4 md:px-6 py-2 md:py-2.5">
         <div className="flex items-center gap-2">
           {!isHomePage && (
             <Link
