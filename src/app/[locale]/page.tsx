@@ -71,18 +71,18 @@ export default async function Home() {
 
   if (!session || !session.user?.email) {
     return (
-      <main className="min-h-screen flex flex-col items-center justify-center text-center p-6">
-        <h1 className="text-5xl font-extrabold text-[var(--foreground)] tracking-wide mb-4">
+      <main className="min-h-screen flex flex-col items-center justify-center text-center px-4 py-8">
+        <h1 className="text-3xl sm:text-5xl font-extrabold text-[var(--foreground)] tracking-wide mb-4">
           GOD LIFE MAKER
         </h1>
-        <div className="w-24 h-1 bg-[var(--color-secondary)] mx-auto mb-8" />
-        <p className="text-[var(--foreground-muted)] mb-8 text-xl max-w-md leading-relaxed">
+        <div className="w-16 sm:w-24 h-1 bg-[var(--color-secondary)] mx-auto mb-6 sm:mb-8" />
+        <p className="text-[var(--foreground-muted)] mb-6 sm:mb-8 text-base sm:text-xl max-w-md leading-relaxed">
           {t('subtitle')}
         </p>
         {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
         <a
           href="/api/auth/signin"
-          className="px-8 py-3 border border-[var(--color-secondary)] text-[var(--foreground)] hover:bg-[var(--color-secondary)] hover:text-[var(--background)] transition-all duration-300 font-medium flex items-center gap-2 tracking-wider uppercase text-sm"
+          className="px-6 sm:px-8 py-3 border border-[var(--color-secondary)] text-[var(--foreground)] hover:bg-[var(--color-secondary)] hover:text-[var(--background)] transition-all duration-300 font-medium flex items-center gap-2 tracking-wider uppercase text-sm"
         >
           <LogIn className="w-4 h-4" />
           {t('enterSystem')}
@@ -113,46 +113,46 @@ export default async function Home() {
   ];
 
   return (
-    <main className="min-h-screen p-8 flex flex-col items-center gap-10">
+    <main className="min-h-screen px-4 py-6 md:p-8 flex flex-col items-center gap-6 md:gap-10">
       {/* Welcome Guide Popup - Shows on first visit */}
       <WelcomeGuide />
 
-      <div className="w-full max-w-5xl flex justify-between items-center">
-        <div className="flex items-center gap-4">
+      <div className="w-full max-w-5xl flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+        <div className="flex items-center justify-between sm:justify-start gap-3 sm:gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-[var(--foreground)] tracking-wide">
+            <h1 className="text-2xl sm:text-3xl font-bold text-[var(--foreground)] tracking-wide">
               {t('title')}
             </h1>
-            <div className="w-16 h-0.5 bg-[var(--color-secondary)] mt-2" />
+            <div className="w-12 sm:w-16 h-0.5 bg-[var(--color-secondary)] mt-2" />
           </div>
           <GuideButton />
         </div>
-        <div className="flex items-center gap-4">
-          <span className="text-sm text-[var(--foreground-muted)]">{t('welcome', {name: session.user.name || 'User'})}</span>
+        <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-4 text-sm">
+          <span className="text-[var(--foreground-muted)] truncate max-w-[200px]">{t('welcome', {name: session.user.name || 'User'})}</span>
           {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
           <a
             href="/api/auth/signout"
-            className="p-2 rounded-md hover:bg-[var(--color-border)] text-[var(--foreground-muted)] hover:text-[var(--foreground)] transition-colors"
+            className="p-2 rounded-md hover:bg-[var(--color-border)] text-[var(--foreground-muted)] hover:text-[var(--foreground)] transition-colors flex-shrink-0"
           >
             <LogOut className="w-5 h-5" />
           </a>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-5xl mt-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 w-full max-w-5xl mt-4 md:mt-8">
         {modules.map((m) => (
           <Link key={m.name} href={m.href}
-            className="card-hover border border-[var(--color-border)] p-8 flex flex-col items-center gap-4 text-center cursor-pointer group relative overflow-hidden"
+            className="card-hover border border-[var(--color-border)] p-5 sm:p-8 flex flex-col items-center gap-3 sm:gap-4 text-center cursor-pointer group relative overflow-hidden"
             style={{ borderRadius: 'var(--radius-lg)' }}
           >
             <m.icon
-              className="w-12 h-12 transition-colors duration-300"
+              className="w-10 h-10 sm:w-12 sm:h-12 transition-colors duration-300"
               style={{ color: m.moduleColor }}
             />
-            <h2 className="text-2xl font-bold text-[var(--foreground)] group-hover:text-[var(--color-secondary)] transition-colors duration-300">
+            <h2 className="text-xl sm:text-2xl font-bold text-[var(--foreground)] group-hover:text-[var(--color-secondary)] transition-colors duration-300">
               {m.name}
             </h2>
-            <p className="text-sm text-[var(--foreground-muted)]">{m.desc}</p>
+            <p className="text-xs sm:text-sm text-[var(--foreground-muted)]">{m.desc}</p>
 
             {/* Status Badge */}
             <div

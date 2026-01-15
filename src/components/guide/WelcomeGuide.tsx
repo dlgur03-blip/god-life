@@ -69,7 +69,7 @@ export default function WelcomeGuide({ forceOpen = false, onClose }: WelcomeGuid
   const isLastStep = currentStep === steps.length - 1;
 
   return (
-    <div className="fixed inset-0 z-50 bg-[var(--background)] flex flex-col">
+    <div className="fixed inset-0 z-[70] bg-[var(--background)] flex flex-col">
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-[var(--color-border)]">
         <div className="flex items-center gap-3">

@@ -75,11 +75,17 @@ export default async function LocaleLayout({
           <Providers>
             <TimezoneDetector />
             <InAppBrowserGuard />
-            <div className="fixed top-0 left-0 right-0 z-[60] bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 text-white text-center py-2 px-4 text-sm font-medium">
-              매일 아침, 반드시 이 사이트에 들어오세요. 당신은 분명 갓생을 살게 될 것입니다.
+            <div className="fixed top-0 left-0 right-0 z-[60] bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white text-center py-2.5 px-4 border-b border-slate-700/50">
+              <p className="text-sm md:text-base font-medium tracking-wide">
+                <span className="text-amber-400">✦</span>
+                <span className="mx-2 md:mx-3">매일 아침, 반드시 이 사이트에 들어오세요.</span>
+                <span className="hidden sm:inline text-slate-400">|</span>
+                <span className="hidden sm:inline ml-2 md:ml-3 text-amber-200/90">당신은 분명 갓생을 살게 될 것입니다.</span>
+                <span className="text-amber-400 ml-2 md:ml-3">✦</span>
+              </p>
             </div>
             <HeaderWrapper />
-            <main className="pt-24 flex-1">
+            <main className="pt-[100px] flex-1">
               {children}
             </main>
             <FeedbackFooter />

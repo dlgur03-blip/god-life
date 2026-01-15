@@ -14,7 +14,7 @@ export default function HeaderWrapper() {
   const isMyPage = pathname === '/mypage';
 
   return (
-    <header className="fixed top-9 right-0 left-0 z-50 flex justify-between items-center px-4 py-3 bg-[var(--background)]/80 backdrop-blur-md border-b border-[var(--color-border)]">
+    <header className="fixed top-[44px] right-0 left-0 z-50 flex justify-between items-center px-4 py-3 bg-[var(--background)]/80 backdrop-blur-md border-b border-[var(--color-border)]">
       <div className="flex items-center gap-2">
         {!isHomePage && (
           <Link
