@@ -16,13 +16,17 @@ export function getDateStatus(dateStr: string, timezone?: string): DateStatus {
   return 'future';
 }
 
-export type EpistleDateAccess = 'past' | 'today' | 'blocked';
+export type EpistleDateAccess = 'past' | 'yesterday' | 'today' | 'blocked';
 
 export function getEpistleDateAccess(dateStr: string, timezone?: string): EpistleDateAccess {
   const today = getTodayStr(timezone);
+  const yesterdayDate = new Date(today + 'T12:00:00');
+  yesterdayDate.setDate(yesterdayDate.getDate() - 1);
+  const yesterday = yesterdayDate.toISOString().split('T')[0];
 
   if (dateStr === today) return 'today';
-  if (dateStr < today) return 'past';
+  if (dateStr === yesterday) return 'yesterday';
+  if (dateStr < yesterday) return 'past';
   return 'blocked';
 }
 
