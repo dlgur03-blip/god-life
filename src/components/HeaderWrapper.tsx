@@ -30,13 +30,13 @@ export default function HeaderWrapper() {
         </div>
 
         {/* Center - Motivational Text */}
-        <div className="text-center">
-          <p className="text-[10px] md:text-sm text-[var(--foreground-muted)] tracking-wide">
+        <div className="flex-1 min-w-0 mx-2 text-center">
+          <p className="text-[10px] md:text-sm text-[var(--foreground-muted)] tracking-wide truncate">
             <span className="text-[var(--color-primary)]">✦</span>
             <span className="mx-1">{t('bannerMain')}</span>
             <span className="text-[var(--color-primary)]">✦</span>
           </p>
-          <p className="text-[9px] md:text-xs text-[var(--foreground-muted)]/70 tracking-wide mt-0.5">
+          <p className="hidden sm:block text-[9px] md:text-xs text-[var(--foreground-muted)]/70 tracking-wide mt-0.5 truncate">
             {t('bannerSub')}
           </p>
         </div>
