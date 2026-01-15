@@ -1,7 +1,9 @@
 {
   "Header": {
     "goToDashboard": "대시보드로 이동",
-    "myPage": "마이페이지"
+    "myPage": "마이페이지",
+    "bannerMain": "매일 아침, 반드시 이 사이트에 들어오세요 | 당신은 분명 갓생을 살게 될 것입니다.",
+    "bannerSub": "이 복잡한 갓생 메이커를 쓸수록 역설적으로 당신의 삶은 단순해질 것입니다."
   },
   "Home": {
     "title": "GOD LIFE MAKER",

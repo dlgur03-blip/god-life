@@ -1,7 +1,9 @@
 {
   "Header": {
-    "goToDashboard": "ダッシュボードへ移動",
-    "myPage": "マイページ"
+    "goToDashboard": "ダッシュボードへ",
+    "myPage": "マイページ",
+    "bannerMain": "毎朝、必ずこのサイトに来てください | あなたは間違いなく神ごとき人生（God Life）を送ることになるでしょう。",
+    "bannerSub": "この複雑なGod Life Makerを使えば使うほど、逆説的にあなたの人生はシンプルになるでしょう。"
   },
   "Home": {
     "title": "GOD LIFE MAKER",

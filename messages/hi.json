@@ -1,0 +1,813 @@
+{
+  "Header": {
+    "goToDashboard": "डैशबोर्ड पर जाएं",
+    "myPage": "मेरा पेज",
+    "bannerMain": "हर सुबह, इस साइट पर जरूर आएं | आप निश्चित रूप से गॉड लाइफ जिएंगे।",
+    "bannerSub": "जितना अधिक आप इस जटिल गॉड लाइफ मेकर का उपयोग करेंगे, विरोधाभासी रूप से, आपका जीवन उतना ही सरल हो जाएगा।"
+  },
+  "Home": {
+    "title": "GOD LIFE MAKER",
+    "subtitle": "अपने भाग्य का निर्माण करें। अपने अनुशासन में महारत हासिल करें। अपनी जीवविज्ञान को हैक करें।",
+    "enterSystem": "सिस्टम में प्रवेश करें",
+    "welcome": "स्वागत है, {name}",
+    "userError": "उपयोगकर्ता खाता नहीं मिला। कृपया पुनः साइन इन करें।",
+    "modules": {
+      "destiny": {
+        "name": "डेस्टिनी नेविगेटर",
+        "desc": "दैनिक लक्ष्य और टाइमब्लॉक"
+      },
+      "success": {
+        "name": "सफलता कोड",
+        "desc": "100 दिनों की परियोजनाएं"
+      },
+      "discipline": {
+        "name": "अनुशासन महारत",
+        "desc": "दैनिक नियम और जांच"
+      },
+      "epistle": {
+        "name": "स्वयं को पत्र",
+        "desc": "खुद को खत"
+      },
+      "bio": {
+        "name": "बायो हैकिंग",
+        "desc": "अनुकूलन कॉलम"
+      },
+      "money": {
+        "name": "मनी फ्लो",
+        "desc": "आय और व्यय ट्रैकिंग"
+      }
+    },
+    "status": {
+      "notStarted": "शुरू नहीं हुआ",
+      "inProgress": "प्रगति पर है",
+      "planned": "योजनाबद्ध",
+      "noRules": "कोई नियम नहीं",
+      "percentDone": "{percent}% हो गया",
+      "noActive": "कोई सक्रिय मिशन नहीं",
+      "activeCount": "{count} सक्रिय",
+      "sealed": "सीलबंद",
+      "pending": "लंबित",
+      "database": "डेटाबेस"
+    }
+  },
+  "Success": {
+    "title": "SUCCESS CODE",
+    "subtitle": "100 दिनों की निरंतरता",
+    "newProject": "नई परियोजना",
+    "dayCount": "दिन {current} / 100",
+    "started": "{date} को शुरू हुआ",
+    "noProjects": "कोई सक्रिय मिशन नहीं।",
+    "startJourney": "अपनी पहली 100-दिवसीय यात्रा शुरू करें",
+    "backToDashboard": "डैशबोर्ड पर वापस जाएं",
+    "backToList": "सूची पर वापस जाएं",
+    "currentDay": "वर्तमान दिन",
+    "start": "शुरू करें",
+    "reminder": "अनुस्मारक",
+    "form": {
+      "title": "प्रोटोकॉल शुरू करें",
+      "projectTitle": "परियोजना का शीर्षक",
+      "projectTitlePlaceholder": "जैसे: 100 Days of Code",
+      "startDate": "प्रारंभ तिथि",
+      "reminderTime": "अनुस्मारक",
+      "generateGrid": "100-दिवसीय ग्रिड बनाएं"
+    },
+    "day": "दिन",
+    "missionComplete": "मिशन पूरा हुआ",
+    "pendingVerification": "सत्यापन लंबित",
+    "logProgress": "अपनी प्रगति लॉग करें...",
+    "verifying": "सत्यापन हो रहा है...",
+    "confirmEntry": "प्रविष्टि की पुष्टि करें",
+    "projectNotFound": "परियोजना नहीं मिली",
+    "projectNotFoundMessage": "अनुरोधित परियोजना मौजूद नहीं है या हटा दी गई है।",
+    "deleteProject": "परियोजना हटाएं",
+    "deleteProjectConfirm": "क्या आप वाकई इस परियोजना को हटाना चाहते हैं?",
+    "deleteProjectWarning": "यह परियोजना और सभी 100 दिनों की प्रविष्टियों को स्थायी रूप से हटा देगा। यह कार्रवाई पूर्ववत नहीं की जा सकती।",
+    "deleting": "हटाया जा रहा है..."
+  },
+  "Destiny": {
+    "title": "DESTINY NAVIGATOR",
+    "coreObjectives": "दीर्घकालिक परिप्रेक्ष्य",
+    "longTermGoals": "दीर्घकालिक लक्ष्यों का विस्तार/संकुचन",
+    "timeblocks": "24-घंटे टाइमब्लॉक",
+    "calendar": "कैलेंडर",
+    "goToToday": "आज पर जाएं",
+    "goals": {
+      "ultimate": "परम स्व",
+      "tenYear": "10 साल में मैं",
+      "fiveYear": "5 साल में मैं",
+      "threeYear": "3 साल में मैं",
+      "oneYear": "1 साल में मैं",
+      "sixMonth": "6 महीने में मैं",
+      "threeMonth": "3 महीने में मैं",
+      "oneMonth": "1 महीने में मैं",
+      "twoWeek": "2 सप्ताह में मैं",
+      "oneWeek": "1 सप्ताह में मैं",
+      "today": "आज का लक्ष्य",
+      "habitToKeep": "बनाए रखने की आदत",
+      "habitToRemove": "छोड़ने की आदत",
+      "restTime": "विश्राम समय आवंटन",
+      "ultimatePlaceholder": "मैं अंततः कौन बनना चाहता हूं?",
+      "tenYearPlaceholder": "10 साल में मैं कैसा दिखूंगा?",
+      "fiveYearPlaceholder": "5 साल में मैं कैसा दिखूंगा?",
+      "threeYearPlaceholder": "3 साल में मैं कैसा दिखूंगा?",
+      "oneYearPlaceholder": "1 साल में मैं कैसा दिखूंगा?",
+      "sixMonthPlaceholder": "6 महीने में मैं कैसा दिखूंगा?",
+      "threeMonthPlaceholder": "3 महीने में मैं कैसा दिखूंगा?",
+      "oneMonthPlaceholder": "1 महीने में मैं कैसा दिखूंगा?",
+      "twoWeekPlaceholder": "2 सप्ताह में मैं कैसा दिखूंगा?",
+      "oneWeekPlaceholder": "1 सप्ताह में मैं कैसा दिखूंगा?",
+      "todayPlaceholder": "मुझे आज क्या करना चाहिए?",
+      "habitToKeepPlaceholder": "अपने लक्ष्य को प्राप्त करने के लिए एक आवश्यक आदत",
+      "habitToRemovePlaceholder": "एक आदत जिसे आपको खत्म करना होगा",
+      "restTimePlaceholder": "आज कितना आराम?",
+      "longTerm": "दीर्घकालिक लक्ष्य",
+      "month": "इस महीने",
+      "week": "इस सप्ताह",
+      "longTermPlaceholder": "आप दीर्घकालिक रूप से क्या हासिल करना चाहते हैं?",
+      "monthPlaceholder": "आपको इस महीने क्या हासिल करना है?",
+      "weekPlaceholder": "इस सप्ताह आप किस पर ध्यान केंद्रित कर रहे हैं?"
+    },
+    "weeklyPlan": {
+      "title": "साप्ताहिक योजना",
+      "freeformPlaceholder": "स्वतंत्र रूप से लिखें..."
+    },
+    "flowOfEvents": "घटनाओं का प्रवाह",
+    "noEventsRecorded": "अभी तक कोई महत्वपूर्ण घटना दर्ज नहीं की गई।",
+    "recordEvent": "घटना रिकॉर्ड करें",
+    "whatJustHappened": "अभी क्या हुआ?",
+    "recording": "रिकॉर्डिंग...",
+    "recordToTimeline": "टाइमलाइन पर रिकॉर्ड करें",
+    "or": "या",
+    "timeblock": {
+      "noBlocks": "अभी तक कोई टाइमब्लॉक नहीं। अपना पहला ब्लॉक जोड़ें।",
+      "create24h": "24h ब्लॉक बनाएं",
+      "creating": "बनाया जा रहा है...",
+      "timeTo": "{time} तक",
+      "planMode": "योजना",
+      "actualMode": "वास्तविक",
+      "whereLabel": "कहाँ",
+      "whatLabel": "क्या",
+      "locationPlaceholder": "स्थान...",
+      "planPlaceholder": "योजना विवरण...",
+      "actualPlaceholder": "वास्तव में क्या हुआ...",
+      "doneLabel": "पूर्ण",
+      "scoreLabel": "स्कोर",
+      "scoreSuffix": "/ 10",
+      "feedLabel": "फीडबैक",
+      "feedbackPlaceholder": "फीडबैक...",
+      "addBlock": "टाइमब्लॉक जोड़ें",
+      "adding": "जोड़ा जा रहा है...",
+      "deleteBlock": "ब्लॉक हटाएं",
+      "deleteBlockTitle": "टाइमब्लॉक हटाएं",
+      "deleteBlockConfirm": "क्या आप वाकई इस टाइमब्लॉक को हटाना चाहते हैं? यह कार्रवाई पूर्ववत नहीं की जा सकती।",
+      "editTime": "समय संपादित करें",
+      "endMustBeAfterStart": "समाप्ति समय प्रारंभ समय के बाद होना चाहिए।",
+      "timeOverlap": "समय सीमा दूसरे ब्लॉक के साथ ओवरलैप होती है।",
+      "invalidTimeFormat": "अमान्य समय प्रारूप। HH:MM का उपयोग करें।",
+      "fiveMinuteIncrement": "समय 5 मिनट की वृद्धि में होना चाहिए।"
+    },
+    "template": {
+      "save": "टेम्पलेट सहेजें",
+      "load": "टेम्पलेट लोड करें",
+      "saveTitle": "टेम्पलेट के रूप में सहेजें",
+      "saveDescription": "अपने वर्तमान टाइमब्लॉक संरचना को पुन: प्रयोज्य टेम्पलेट के रूप में सहेजें।",
+      "namePlaceholder": "टेम्पलेट नाम (जैसे, कार्यदिवस की दिनचर्या)",
+      "nameRequired": "टेम्पलेट नाम आवश्यक है",
+      "loadTitle": "टेम्पलेट लोड करें",
+      "loadDescription": "आज के शेड्यूल पर लागू करने के लिए एक टेम्पलेट चुनें।",
+      "loadWarningTitle": "वर्तमान टाइमब्लॉक बदलें?",
+      "loadWarningMessage": "यह सभी मौजूदा टाइमब्लॉक को हटा देगा और उन्हें टेम्पलेट से बदल देगा। यह कार्रवाई पूर्ववत नहीं की जा सकती।",
+      "confirmLoad": "टेम्पलेट लागू करें",
+      "noTemplates": "अभी तक कोई सहेजे गए टेम्पलेट नहीं।",
+      "blockCount": "{count} ब्लॉक",
+      "savedSuccess": "टेम्पलेट सफलतापूर्वक सहेजा गया",
+      "loadedSuccess": "टेम्पलेट सफलतापूर्वक लागू किया गया"
+    }
+  },
+  "Discipline": {
+    "title": "DISCIPLINE MASTERY",
+    "dailyCompletion": "दैनिक समापन",
+    "backToCheck": "वापस जांचें",
+    "insights": "अंतर्दृष्टि",
+    "masteryInsights": "महारत अंतर्दृष्टि",
+    "sevenDayRate": "7-दिवसीय दर",
+    "thirtyDayRate": "30-दिवसीय दर",
+    "noRulesInsight": "अपने प्रदर्शन के रुझान देखने के लिए नियम जोड़ें।",
+    "deleteRuleConfirm": "इस नियम को हटाएं?",
+    "noRulesDefined": "कोई नियम परिभाषित नहीं। महारत शुरू करने के लिए एक अनुशासन जोड़ें।",
+    "addNewDiscipline": "नया अनुशासन जोड़ें...",
+    "dateRestriction": {
+      "pastDateReadOnly": "पिछली तारीखें केवल पढ़ने के लिए हैं",
+      "futureDateLocked": "भविष्य की तारीखें लॉक हैं",
+      "todayOnly": "आप केवल आज के नियमों की जांच कर सकते हैं"
+    }
+  },
+  "Epistle": {
+    "title": "SELF EPISTLE",
+    "backToWriting": "लेखन पर वापस",
+    "timeline": "टाइमलाइन",
+    "archives": "अभिलेखागार",
+    "noLetters": "समय में कोई पत्र सील नहीं किया गया।",
+    "letterToYesterday": "कल के मेरे नाम पत्र",
+    "letterToTomorrow": "कल के मेरे नाम पत्र",
+    "reflectOnPassed": "जो बीत गया उस पर विचार करें...",
+    "manifestIntent": "अपना इरादा प्रकट करें...",
+    "sealing": "सील किया जा रहा है...",
+    "sealEpistle": "पत्र सील करें",
+    "receivedLetter": "प्राप्त पत्र",
+    "noLetterFromYesterday": "कल के खुद से कोई पत्र नहीं।",
+    "receivedLetterFrom": "{date} से पत्र प्राप्त हुआ",
+    "dateBlocked": "तारीख लॉक है",
+    "dateBlockedHint": "आप केवल आज और कल के लिए पत्र लिख सकते हैं।",
+    "readOnly": "केवल पढ़ने के लिए",
+    "composeLetter": "पत्र लिखें",
+    "fixedFields": {
+      "gratitude": "जिन चीजों के लिए मैं आभारी हूं",
+      "gratitudePlaceholder": "मैं आज किसलिए आभारी था?",
+      "important": "महत्वपूर्ण चीजें",
+      "importantPlaceholder": "आज क्या महत्वपूर्ण था?",
+      "anger": "एक चीज जिसने मुझे गुस्सा दिलाया",
+      "angerPlaceholder": "आज मुझे किस बात पर गुस्सा आया?",
+      "leisure": "अवकाश गतिविधियां",
+      "leisurePlaceholder": "आज मैंने क्या आनंद लिया?",
+      "reflection": "विचार करने योग्य बातें",
+      "reflectionPlaceholder": "मैं कल क्या सुधार करूंगा?"
+    }
+  },
+  "Goals": {
+    "title": "GOAL HIERARCHY",
+    "subtitle": "दीर्घकालिक से अल्पकालिक लक्ष्यों तक",
+    "hierarchy": "लक्ष्य पदानुक्रम",
+    "createGoal": "लक्ष्य बनाएं",
+    "editGoal": "लक्ष्य संपादित करें",
+    "deleteGoal": "लक्ष्य हटाएं",
+    "deleteGoalConfirm": "क्या आप वाकई इस लक्ष्य को हटाना चाहते हैं? बाल लक्ष्य कनेक्शन हटा दिए जाएंगे।",
+    "createFirstGoal": "अपना पहला लक्ष्य बनाएं",
+    "addChild": "उप-लक्ष्य जोड़ें",
+    "edit": "संपादित करें",
+    "delete": "हटाएं",
+    "goalType": "लक्ष्य प्रकार",
+    "titleLabel": "शीर्षक",
+    "titlePlaceholder": "लक्ष्य शीर्षक दर्ज करें...",
+    "description": "विवरण",
+    "descriptionPlaceholder": "इस लक्ष्य के लिए विवरण दर्ज करें (वैकल्पिक)",
+    "parentGoal": "मूल लक्ष्य",
+    "noParent": "कोई मूल लक्ष्य नहीं",
+    "statusLabel": "स्थिति",
+    "goalsCount": "लक्ष्य",
+    "noGoalsOfType": "इस प्रकार के कोई लक्ष्य नहीं।",
+    "goToHierarchy": "पदानुक्रम पर जाएं",
+    "types": {
+      "ultimate": "परम लक्ष्य",
+      "ten_year": "10 साल का लक्ष्य",
+      "five_year": "5 साल का लक्ष्य",
+      "one_year": "1 साल का लक्ष्य",
+      "six_month": "6 महीने का लक्ष्य",
+      "three_month": "3 महीने का लक्ष्य",
+      "one_month": "1 महीने का लक्ष्य",
+      "one_week": "1 सप्ताह का लक्ष्य"
+    },
+    "status": {
+      "active": "सक्रिय",
+      "completed": "पूर्ण",
+      "paused": "रुका हुआ",
+      "cancelled": "रद्द"
+    },
+    "emptyState": {
+      "title": "अभी तक कोई लक्ष्य नहीं",
+      "description": "अपने लक्ष्यों को व्यवस्थित रूप से सेट और प्रबंधित करें, परम आकांक्षाओं से लेकर साप्ताहिक लक्ष्यों तक।"
+    },
+    "validation": {
+      "titleRequired": "कृपया एक शीर्षक दर्ज करें।"
+    }
+  },
+  "Bio": {
+    "title": "BIO HACKING",
+    "subtitle": "अपने वेटवेयर को अनुकूलित करें।",
+    "backToDatabase": "डेटाबेस पर वापस",
+    "returnToDatabase": "डेटाबेस पर लौटें",
+    "readProtocol": "प्रोटोकॉल पढ़ें",
+    "protocolNotFound": "प्रोटोकॉल नहीं मिला।",
+    "protocolNotFoundMessage": "अनुरोधित प्रोटोकॉल हमारे डेटाबेस में मौजूद नहीं है।",
+    "updated": "अद्यतन",
+    "viewingIn": "{locale} में देख रहे हैं",
+    "translationUnavailable": "इस भाषा के लिए अनुवाद अनुपलब्ध है।",
+    "allCategories": "सभी",
+    "filterByCategory": "श्रेणी के अनुसार फ़िल्टर करें",
+    "postsCount": "{count} प्रोटोकॉल",
+    "noPostsInCategory": "इस श्रेणी में कोई प्रोटोकॉल नहीं।",
+    "categories": {
+      "Nutrition": "पोषण",
+      "Supplements": "पूरक",
+      "Recovery": "वसूली",
+      "Exercise": "व्यायाम",
+      "Mindset": "मानसिकता"
+    }
+  },
+  "Common": {
+    "language": "भाषा",
+    "loading": "लोड हो रहा है...",
+    "error": "एक त्रुटि हुई।",
+    "confirm": "पुष्टि करें",
+    "cancel": "रद्द करें",
+    "save": "सहेजें",
+    "delete": "हटाएं",
+    "back": "वापस",
+    "retry": "पुनः प्रयास करें",
+    "print": "प्रिंट",
+    "notFound": {
+      "title": "पृष्ठ नहीं मिला",
+      "message": "वह पृष्ठ जिसे आप ढूंढ रहे हैं वह मौजूद नहीं है या ले जाया गया है।",
+      "backHome": "घर वापस"
+    },
+    "errors": {
+      "unauthorized": "इस कार्रवाई को करने के लिए आपको लॉग इन करना होगा।",
+      "userNotFound": "उपयोगकर्ता खाता नहीं मिला।",
+      "missingFields": "कृपया सभी आवश्यक क्षेत्र भरें।",
+      "maxRulesReached": "नियमों की अधिकतम संख्या तक पहुंच गया (13)।",
+      "networkError": "नेटवर्क त्रुटि। कृपया अपना कनेक्शन जांचें।",
+      "serverError": "सर्वर त्रुटि। कृपया बाद में पुनः प्रयास करें।",
+      "unknown": "एक अप्रत्याशित त्रुटि हुई।",
+      "dateNotToday": "आप केवल आज के नियमों की जांच कर सकते हैं।",
+      "forbidden": "आपके पास इस कार्रवाई को करने की अनुमति नहीं है।",
+      "adminOnly": "यह सुविधा केवल व्यवस्थापकों के लिए उपलब्ध है।",
+      "slugTaken": "यह स्लग पहले से उपयोग में है।",
+      "invalidSlugFormat": "स्लग में केवल छोटे अक्षर, संख्याएं और हाइफ़न हो सकते हैं।",
+      "postNotFound": "पोस्ट नहीं मिली।",
+      "selfDeleteNotAllowed": "आप स्वयं को नहीं हटा सकते।",
+      "userNotFoundForDelete": "हटाने के लिए उपयोगकर्ता नहीं मिला।",
+      "errorLogNotFound": "त्रुटि लॉग नहीं मिला।",
+      "invalidDateRange": "अमान्य तिथि सीमा।",
+      "invalidBlockId": "अमान्य टाइमब्लॉक आईडी।",
+      "blockNotFound": "टाइमब्लॉक नहीं मिला।",
+      "invalidTimeRange": "अमान्य समय सीमा।",
+      "timeOverlap": "समय सीमा दूसरे ब्लॉक के साथ ओवरलैप होती है।",
+      "databaseError": "डेटाबेस त्रुटि हुई।",
+      "updateFailed": "टाइमब्लॉक अपडेट करने में विफल।",
+      "overlapCheckFailed": "समय ओवरलैप की जांच करने में विफल।",
+      "unexpectedError": "एक अप्रत्याशित त्रुटि हुई।",
+      "storageNotConfigured": "छवि भंडारण उपलब्ध नहीं है।",
+      "invalidUrl": "अमान्य URL प्रदान किया गया।",
+      "deleteFailed": "आइटम हटाने में विफल।",
+      "dateNotAccessible": "आप केवल आज की तारीख के लिए पत्र लिख सकते हैं।",
+      "goalNotFound": "लक्ष्य नहीं मिला।",
+      "goalCreateFailed": "लक्ष्य बनाने में विफल।",
+      "goalUpdateFailed": "लक्ष्य अपडेट करने में विफल।",
+      "goalDeleteFailed": "लक्ष्य हटाने में विफल।",
+      "invalidGoalParent": "अमान्य मूल लक्ष्य।",
+      "invalidGoalTypeHierarchy": "यह लक्ष्य प्रकार चयनित मूल का बाल नहीं हो सकता।"
+    },
+    "validation": {
+      "required": "यह क्षेत्र आवश्यक है।",
+      "invalidDate": "कृपया एक मान्य तिथि दर्ज करें।",
+      "maxLength": "अधिकतम {max} वर्णों की अनुमति है।",
+      "minLength": "न्यूनतम {min} वर्ण आवश्यक हैं।",
+      "invalidFormat": "अमान्य प्रारूप।"
+    },
+    "dialog": {
+      "confirmTitle": "कार्रवाई की पुष्टि करें",
+      "confirmDelete": "क्या आप वाकई इस आइटम को हटाना चाहते हैं?",
+      "confirmCancel": "असुरक्षित परिवर्तनों को त्यागें?"
+    },
+    "status": {
+      "saving": "सहेजा जा रहा है...",
+      "saved": "सफलतापूर्वक सहेजा गया।",
+      "deleting": "हटाया जा रहा है...",
+      "deleted": "सफलतापूर्वक हटाया गया।",
+      "updating": "अपडेट किया जा रहा है...",
+      "updated": "सफलतापूर्वक अपडेट किया गया।"
+    },
+    "dates": {
+      "today": "आज",
+      "yesterday": "कल (बीता हुआ)",
+      "tomorrow": "कल (आने वाला)"
+    },
+    "locales": {
+      "en": "English",
+      "ko": "Korean",
+      "ja": "Japanese",
+      "zh": "Chinese",
+      "hi": "Hindi"
+    }
+  },
+  "Admin": {
+    "title": "Admin Panel",
+    "accessDenied": {
+      "title": "Access Denied",
+      "message": "You do not have permission to access the admin area. Please contact an administrator if you believe this is an error.",
+      "backHome": "Back to Home"
+    },
+    "nav": {
+      "dashboard": "Dashboard",
+      "stats": "Statistics",
+      "users": "Users",
+      "bio": "Bio Posts",
+      "system": "System"
+    },
+    "dashboard": {
+      "title": "Dashboard"
+    },
+    "stats": {
+      "title": "Detailed Statistics",
+      "totalUsers": "Total Users",
+      "newUsersThisWeek": "New This Week",
+      "activeDaily": "Daily Active",
+      "activeWeekly": "Weekly Active",
+      "activeMonthly": "Monthly Active",
+      "noData": "No data available.",
+      "period": {
+        "week": "7 Days",
+        "month": "30 Days",
+        "quarter": "90 Days"
+      },
+      "charts": {
+        "userTrend": "Active Users Trend",
+        "moduleActivity": "Module Activity",
+        "disciplineTrend": "Discipline Achievement Trend",
+        "moduleSummary": "Module Summary",
+        "activeUsers": "Active Users",
+        "achievementRate": "Achievement Rate",
+        "average": "Avg",
+        "totalDays": "Total Days",
+        "avgRate": "Avg Rate",
+        "activeProjects": "Active Projects",
+        "totalLetters": "Total Letters"
+      },
+      "modules": {
+        "destiny": "Destiny",
+        "discipline": "Discipline",
+        "success": "Success",
+        "epistle": "Epistle"
+      },
+      "errors": {
+        "loadFailed": "Failed to load statistics."
+      }
+    },
+    "moduleUsage": "Module Usage",
+    "modules": {
+      "destiny": { "name": "Destiny Navigator", "desc": "Days tracked" },
+      "success": { "name": "Success Code", "desc": "Active projects" },
+      "discipline": { "name": "Discipline Mastery", "desc": "Rules created" },
+      "epistle": { "name": "Self Epistle", "desc": "Letters written" },
+      "bio": { "name": "Bio Hacking", "desc": "Posts published" }
+    },
+    "users": {
+      "title": "User Management",
+      "email": "Email",
+      "name": "Name",
+      "joined": "Joined",
+      "activity": "Activity",
+      "items": "items",
+      "searchPlaceholder": "Search by email or name...",
+      "noUsers": "No users registered.",
+      "noSearchResults": "No search results found.",
+      "viewDetail": "View Detail",
+      "userDetail": "User Detail",
+      "memberSince": "Member Since",
+      "lastUpdated": "Last Updated",
+      "moduleActivity": "Module Activity",
+      "deleteUser": "Delete User",
+      "deleteConfirm": "Are you sure you want to delete this user?",
+      "deleteWarning": "All user data will be permanently deleted. This action cannot be undone.",
+      "deleteWarningItems": "Data to be deleted:",
+      "deleting": "Deleting...",
+      "stats": {
+        "destinyDays": "Destiny Navigator",
+        "destinyEvents": "Events",
+        "destinyTemplates": "Templates",
+        "successProjects": "Success Code Projects",
+        "successEntries": "Success Entries",
+        "disciplineRules": "Discipline Rules",
+        "disciplineChecks": "Discipline Checks",
+        "epistleDays": "Self Epistle",
+        "weeklyPlans": "Weekly Plans"
+      }
+    },
+    "bio": {
+      "title": "Bio Post Management",
+      "newPost": "New Post",
+      "editPost": "Edit Post",
+      "slug": "Slug",
+      "category": "Category",
+      "translations": "Translations",
+      "created": "Created",
+      "updated": "Updated",
+      "noPosts": "No bio posts yet.",
+      "createFirst": "Create your first post to get started.",
+      "form": {
+        "slugPlaceholder": "url-friendly-slug",
+        "slugHint": "Unique identifier for the URL. Use lowercase letters, numbers, and hyphens only.",
+        "titlePlaceholder": "Post title",
+        "contentPlaceholder": "Write content in markdown...",
+        "selectCategory": "Select category",
+        "atLeastOneTranslation": "At least one language must have title and content."
+      },
+      "preview": "Preview",
+      "editor": "Editor",
+      "actions": {
+        "create": "Create Post",
+        "update": "Save Changes",
+        "delete": "Delete Post",
+        "cancel": "Cancel",
+        "creating": "Creating...",
+        "updating": "Saving...",
+        "deleting": "Deleting..."
+      },
+      "deleteConfirm": {
+        "title": "Delete Post",
+        "message": "Are you sure you want to delete this post and all its translations? This action cannot be undone."
+      },
+      "validation": {
+        "slugRequired": "Slug is required.",
+        "slugFormat": "Slug can only contain lowercase letters, numbers, and hyphens.",
+        "slugTaken": "This slug is already in use.",
+        "categoryRequired": "Please select a category.",
+        "translationRequired": "At least one language must have title and content."
+      },
+      "translationStatus": {
+        "complete": "Complete",
+        "incomplete": "Incomplete",
+        "empty": "Empty"
+      },
+      "markdown": {
+        "bold": "Bold",
+        "italic": "Italic",
+        "heading": "Heading",
+        "link": "Link",
+        "list": "List",
+        "code": "Code"
+      },
+      "categories": {
+        "Nutrition": "Nutrition",
+        "Supplements": "Supplements",
+        "Recovery": "Recovery",
+        "Exercise": "Exercise",
+        "Mindset": "Mindset"
+      }
+    },
+    "errors": {
+      "loadFailed": "Failed to load data. Please try again."
+    },
+    "system": {
+      "title": "System Management",
+      "overview": "System Overview",
+      "environment": {
+        "title": "Environment Variables",
+        "description": "List of configured environment variables",
+        "name": "Name",
+        "value": "Value",
+        "masked": "[SECURED]",
+        "notSet": "[NOT SET]",
+        "requiredMissing": "Required environment variables are missing"
+      },
+      "database": {
+        "title": "Database",
+        "description": "Database connection status",
+        "status": "Connection Status",
+        "connected": "Connected",
+        "disconnected": "Disconnected",
+        "responseTime": "Response Time",
+        "provider": "Provider",
+        "checkingConnection": "Checking connection...",
+        "refresh": "Refresh",
+        "refreshing": "Checking..."
+      },
+      "info": {
+        "title": "System Information",
+        "description": "Runtime and framework information",
+        "nodeVersion": "Node.js Version",
+        "nextVersion": "Next.js Version",
+        "reactVersion": "React Version",
+        "prismaVersion": "Prisma Version",
+        "platform": "Platform",
+        "timezone": "Timezone",
+        "locale": "Locale",
+        "environment": "Environment"
+      },
+      "status": {
+        "healthy": "Healthy",
+        "warning": "Warning",
+        "error": "Error"
+      },
+      "errorLog": {
+        "title": "Error Logs",
+        "description": "Application errors and warning logs",
+        "noLogs": "No error logs found.",
+        "systemHealthy": "System is running normally.",
+        "levels": {
+          "all": "All",
+          "error": "Error",
+          "warning": "Warning",
+          "info": "Info"
+        },
+        "summary": {
+          "totalErrors": "Total Errors",
+          "totalWarnings": "Total Warnings",
+          "totalInfo": "Total Info",
+          "recent24h": "Last 24 Hours"
+        },
+        "table": {
+          "level": "Level",
+          "message": "Message",
+          "requestUrl": "Request URL",
+          "createdAt": "Created At",
+          "user": "User",
+          "requestMethod": "Method"
+        },
+        "detail": {
+          "title": "Error Details",
+          "stackTrace": "Stack Trace",
+          "noStack": "No stack trace available",
+          "deleteLog": "Delete Log"
+        },
+        "bulkDelete": {
+          "button": "Bulk Delete",
+          "title": "Bulk Delete Error Logs",
+          "description": "Delete all error logs before the selected date.",
+          "options": {
+            "7days": "Older than 7 days",
+            "30days": "Older than 30 days",
+            "90days": "Older than 90 days"
+          },
+          "confirmMessage": "{count} logs will be deleted. This action cannot be undone.",
+          "success": "{count} logs have been deleted.",
+          "deleting": "Deleting..."
+        },
+        "pagination": {
+          "prev": "Previous",
+          "next": "Next",
+          "page": "Page {current} / {total}"
+        }
+      }
+    }
+  },
+  "Money": {
+    "title": "MONEY FLOW",
+    "subtitle": "अपनी आय और व्यय को ट्रैक करें",
+    "income": "आय",
+    "expense": "व्यय",
+    "balance": "शेष राशि",
+    "today": "आज",
+    "thisMonth": "इस महीने",
+    "category": "श्रेणी",
+    "amount": "राशि",
+    "memo": "मेमो",
+    "date": "दिनांक",
+    "addTransaction": "लेन-देन जोड़ें",
+    "noTransactions": "अभी तक कोई लेन-देन नहीं।",
+    "totalIncome": "कुल आय",
+    "totalExpense": "कुल व्यय",
+    "addIncome": "आय जोड़ें",
+    "addExpense": "व्यय जोड़ें",
+    "categories": {
+      "salary": "वेतन",
+      "investment": "निवेश",
+      "bonus": "बोनस",
+      "other_income": "अन्य आय",
+      "food": "भोजन",
+      "transport": "परिवहन",
+      "housing": "आवास",
+      "utilities": "उपयोगिताएँ",
+      "shopping": "खरीदारी",
+      "entertainment": "मनोरंजन",
+      "health": "स्वास्थ्य",
+      "education": "शिक्षा",
+      "other_expense": "अन्य व्यय"
+    },
+    "summary": "सारांश",
+    "transactions": "लेन-देन",
+    "deleteConfirm": "इस लेन-देन को हटाएं?",
+    "edit": "संपादित करें",
+    "delete": "हटाएं"
+  },
+  "Footer": {
+    "feedbackAndInquiries": "फीडबैक और पूछताछ"
+  },
+  "InAppBrowser": {
+    "title": "कृपया एक बाहरी ब्राउज़र में खोलें",
+    "description": "Google साइन-इन {browser} के अंतर्निहित ब्राउज़र में समर्थित नहीं है।",
+    "openChrome": "Chrome में खोलें",
+    "copyLink": "लिंक कॉपी करें",
+    "copied": "कॉपी किया गया!",
+    "iosInstruction": "कॉपी किए गए लिंक को Safari या Chrome में पेस्ट करें।",
+    "continueAnyway": "वैसे भी जारी रखें",
+    "browsers": {
+      "kakaotalk": "काकाओ टॉक",
+      "line": "लाइन",
+      "facebook": "फेसबुक",
+      "instagram": "इंस्टाग्राम",
+      "other": "ऐप"
+    }
+  },
+  "Guide": {
+    "title": "GOD LIFE MAKER गाइड",
+    "viewGuide": "गाइड देखें",
+    "dontShowAgain": "फिर से न दिखाएं",
+    "next": "अगला",
+    "prev": "पिछला",
+    "start": "शुरू करें",
+    "close": "बंद करें",
+    "intro": {
+      "title": "GOD LIFE क्या है?",
+      "content1": "GOD LIFE MAKER के पीछे 'गॉड लाइफ' का दर्शन है।",
+      "content2": "चाहे आप परम जीवन जिएं या अपना जीवन, यह आपकी स्वतंत्रता है।",
+      "content3": "लेकिन अगर आप गॉड लाइफ जीना चाहते हैं, तो आपको जागते ही हर सुबह इस साइट पर आना होगा।",
+      "content4": "आपका जीवन निश्चित रूप से बदल जाएगा।",
+      "content5": "यह उपकरण सबसे चरम, फिर भी सबसे समझौतापूर्ण, और सबसे यथार्थवादी हथियार है।",
+      "content6": "कोई और अपडेट नहीं होगा।",
+      "content7": "याद रखें।",
+      "content8": "जिस क्षण आप विफलता से डरते हैं, आपका सपना गायब हो जाता है।",
+      "content9": "आपका सपना जितना मजबूत होगा, आप विफलता से उतना ही कम डरेंगे।",
+      "content10": "यदि आप अपने सपने के प्रति जुनूनी हैं, तो आप यह जानते हुए भी कार्य करेंगे कि आप असफल हो सकते हैं।",
+      "content11": "मेरा मानना है कि ऐसे सपने के प्रति जुनूनी जीवन जीना ही [GOD LIFE] का सही अर्थ है।"
+    },
+    "modules": {
+      "success": {
+        "title": "सफलता कोड (100 दिन)",
+        "subtitle": "छोटी जीतों का यौगिक प्रभाव",
+        "description": "सफलता कोड 100 दिनों में दैनिक छोटी जीतों को रिकॉर्ड करने की एक प्रणाली है। ठीक 100 दिन क्यों? इस संख्या का वैज्ञानिक आधार है।\n\nजेम्स क्लियर की बेस्टसेलर 'एटॉमिक हैबिट्स' के अनुसार, आदत निर्माण की कुंजी पुनरावृत्ति की गिनती नहीं है, बल्कि 'भावनात्मक एन्कोडिंग' है। हमारे मस्तिष्क का बेसल गैन्ग्लिया दोहराए जाने वाले व्यवहारों को स्वचालित करता है, और भावनाएं इस प्रक्रिया में निर्णायक उत्प्रेरक की भूमिका निभाती हैं। जब आप दैनिक छोटी जीतों को रिकॉर्ड करते हैं और उस उपलब्धि की भावना को महसूस करते हैं, तो आपका मस्तिष्क इस व्यवहार को 'पुरस्कृत' के रूप में पहचानता है और इसे उत्तरोत्तर स्वचालित करता है।\n\nडॉ. बीजे फॉग (स्टैनफोर्ड के व्यवहार डिजाइन लैब के निदेशक) ने अपने 'टिनी हैबिट्स' शोध में पाया कि आदतें तब बनती हैं जब तीन तत्व मिलते हैं: प्रेरणा, क्षमता और ट्रिगर। सफलता कोड तीनों को पूरी तरह से संतुष्ट करता है: 100 दिनों को पूरा करने की स्पष्ट प्रेरणा, दैनिक केवल 1 मिनट की कम बाधा, और प्रत्येक दिन एक ही समय पर रिकॉर्डिंग का एक सुसंगत ट्रिगर।\n\n100 दिन क्यों? UCL (यूनिवर्सिटी कॉलेज लंदन) में डॉ. फिलिपा लैली के शोध से पता चलता है कि नई आदतों को स्वचालित होने में औसतन 66 दिन लगते हैं, लेकिन जटिल व्यवहारों के लिए 254 दिनों तक की आवश्यकता हो सकती है। 100 दिन अधिकांश आदतों के लिए ठोस होने के लिए पर्याप्त समय है।\n\nउपयोग कैसे करें:\n1. एक लक्ष्य निर्धारित करें जिसे आप 100 दिनों के लिए दैनिक प्राप्त करना चाहते हैं\n2. रिकॉर्ड करें कि क्या आपने प्रत्येक दिन उस लक्ष्य का अभ्यास किया\n3. अपनी भावनाओं और सीखों के बारे में एक छोटा नोट छोड़ें\n4. जब आप 100 दिन पूरे कर लें तो एक नई परियोजना शुरू करें\n\nकुंजी 'स्थिरता' है 'पूर्णता' नहीं। यदि आप एक दिन चूक जाते हैं तो हार न मानें। शोध से पता चलता है कि एक दिन चूकने से आदत निर्माण पर कोई महत्वपूर्ण प्रभाव नहीं पड़ता है। जो मायने रखता है वह है अगले दिन फिर से शुरू करना।",
+        "source": "James Clear, Atomic Habits (2018) / BJ Fogg, Tiny Habits (2019) / Phillippa Lally, UCL Habit Formation Study (2009)"
+      },
+      "discipline": {
+        "title": "अनुशासन महारत",
+        "subtitle": "इच्छाशक्ति की मांसपेशी का निर्माण",
+        "description": "अनुशासन महारत दैनिक 'वे चीजें जो आप नहीं करना चाहते लेकिन करनी चाहिए' करने की एक प्रणाली है। यह एक साधारण चेकलिस्ट नहीं है। यह प्रशिक्षण है जो आपके मस्तिष्क को शारीरिक रूप से बदलता है।\n\nप्रोफेसर एंड्रयू ह्यूबरमैन (स्टैनफोर्ड न्यूरोबायोलॉजी) ने अपने 2023 के पॉडकास्ट में अभूतपूर्व शोध साझा किया। मस्तिष्क का एक क्षेत्र जिसे 'एंटेरियर मिड-सिंगुलेट कॉर्टेक्स (aMCC)' कहा जाता है, सक्रिय होता है और बढ़ता है जब आप 'वे चीजें करते हैं जो आप नहीं करना चाहते'। यह क्षेत्र सौ वर्ष के लोगों, चरम एथलीटों और मजबूत इच्छाशक्ति वाले लोगों में अधिक विकसित होता है।\n\nउल्लेखनीय खोज यह है कि यह क्षेत्र उम्र की परवाह किए बिना बढ़ सकता है। दैनिक थोड़ा असहज कार्य करने से aMCC शारीरिक रूप से बड़ा हो जाता है। इसके विपरीत, केवल आरामदायक चीजें करने से यह सिकुड़ जाता है। डेविड गोगिन्स (पूर्व नेवी सील, अल्ट्रा मैराथन धावक) की 'असुविधा की तलाश' करने की सलाह वैज्ञानिक रूप से सटीक थी।\n\nप्रोफेसर रॉय बॉमिस्टर (फ्लोरिडा स्टेट यूनिवर्सिटी) का 'ईगो डिप्लेशन' सिद्धांत बताता है कि इच्छाशक्ति एक मांसपेशी की तरह है। उपयोग करने पर यह अस्थायी रूप से थक जाती है लेकिन वसूली के बाद मजबूत हो जाती है। अनुशासन महारत इस सिद्धांत का लाभ उठाती है।\n\nउपयोग कैसे करें:\n1. दैनिक पालन करने के लिए 5-13 नियम निर्धारित करें\n2. एक कठिनाई स्तर बनाए रखें जो न तो बहुत आसान हो और न ही बहुत कठिन\n3. 'वे चीजें जो आप नहीं करना चाहते' शामिल होनी चाहिए (जैसे, ठंडे पानी से नहाना, सुबह का व्यायाम, डिजिटल डिवाइस की सीमाएं)\n4. दैनिक जांच करें और अपनी उपलब्धि दर की निगरानी करें\n5. जब 90%+ उपलब्धि आसान हो जाए तो नियमों को मजबूत करें\n\nसावधानी: शुरू में बहुत अधिक नियम निर्धारित न करें। शोध से पता चलता है कि एक साथ केवल 3 या उससे कम नई आदतों का प्रयास करना प्रभावी है। छोटा शुरू करें और धीरे-धीरे बढ़ाएं। लक्ष्य 'सब कुछ पूरी तरह से करना' नहीं है बल्कि 'कल से थोड़ा बेहतर बनना' है।",
+        "source": "Andrew Huberman, Huberman Lab Podcast (2023) / David Goggins, Can't Hurt Me (2018) / Roy Baumeister, Willpower (2011) / Anterior Mid-Cingulate Cortex Research, Nature Neuroscience"
+      },
+      "destiny": {
+        "title": "डेस्टिनी नेविगेटर",
+        "subtitle": "अपने समय को उद्देश्य दें",
+        "description": "डेस्टिनी नेविगेटर केवल एक शेड्यूलिंग टूल नहीं है। यह 'अपने अंतिम स्व' को 'आज के लक्ष्यों' से जोड़ने वाली एक जीवन डिजाइन प्रणाली है। इसमें 10-स्तरीय दीर्घकालिक परिप्रेक्ष्य और 24-घंटे के समय ब्लॉक शामिल हैं।\n\nप्रोफेसर कैल न्यूपोर्ट (जॉर्जटाउन यूनिवर्सिटी कंप्यूटर साइंस) के 'डीप वर्क' के अनुसार, जो लोग टाइम ब्लॉकिंग का उपयोग करते हैं, वे उन लोगों की तुलना में उसी समय में दोगुना उच्च गुणवत्ता वाला काम पूरा करते हैं जो नहीं करते हैं। क्यों? मस्तिष्क हर बार 'निर्णय' लेने पर ऊर्जा खर्च करता है। इसे 'निर्णय थकान' कहा जाता है।\n\nरॉय बॉमिस्टर के शोध से पता चलता है कि लोग दैनिक लगभग 35,000 निर्णय लेते हैं, प्रत्येक मानसिक ऊर्जा का उपभोग करता है। सुबह अपनी अनुसूची की योजना बनाना प्रभावी रूप से सैकड़ों 'मुझे अब क्या करना चाहिए?' निर्णयों को एक साथ संभालता है।\n\nबेंजामिन फ्रैंकलिन, 1726 (21 वर्ष की आयु में) से शुरू होकर, 'मैं आज क्या अच्छा करूंगा?' की योजना बनाने के लिए रोजाना सुबह 5 बजे उठते थे और हर रात 'आज मैंने क्या अच्छा किया?' पर विचार करते थे। उन्होंने 84 वर्ष की आयु तक 58 वर्षों तक इस आदत को बनाए रखा। उनकी अनुसूची आधुनिक टाइम ब्लॉकिंग का प्रोटोटाइप है।\n\n10-स्तरीय दीर्घकालिक परिप्रेक्ष्य प्रणाली:\n1. परम स्व: मरने से पहले मैं कौन बनना चाहता हूं?\n2. 10 साल में मैं: 10 साल में मैं कहां रहूंगा?\n3. 5 साल में मैं: 5 साल में हासिल करने का सबसे बड़ा लक्ष्य क्या है?\n4. 3 साल/1 साल/6 महीने/3 महीने/1 महीने/2 सप्ताह/1 सप्ताह: उत्तरोत्तर ठोस लक्ष्य\n5. आज का लक्ष्य: मुझे आज क्या करना चाहिए?\n\nइस प्रणाली का मूल 'पिछड़ा लक्ष्य निर्धारण' है। अंतिम लक्ष्यों से शुरू करके, आप यह निकालते हैं कि आज क्या करना है। इस तरह, दैनिक क्रियाएं जीवन के लक्ष्यों से जुड़ती हैं।\n\n24-घंटे टाइम ब्लॉक का उपयोग:\n1. जागने के समय से सोने के समय तक 30 मिनट की इकाइयों में योजना बनाएं\n2. 'डीप वर्क' समय (केंद्रित कार्य) को 'शालो वर्क' समय (सरल कार्य) से अलग करें\n3. हमेशा आराम के समय को ब्लॉक के रूप में भी नामित करें\n4. दिन के अंत में वास्तविक गतिविधियों के साथ तुलना करें\n5. अंतर का विश्लेषण करें और अगले दिन की योजना पर लागू करें",
+        "source": "Cal Newport, Deep Work (2016) / Benjamin Franklin, Autobiography (1791) / Roy Baumeister, Decision Fatigue Research / Stephen Covey, 7 Habits of Highly Effective People"
+      },
+      "epistle": {
+        "title": "स्वयं को पत्र",
+        "subtitle": "कृतज्ञता और प्रतिबिंब का तंत्रिका विज्ञान",
+        "description": "स्वयं को पत्र 'कल के मुझे' और 'कल के मुझे' को पत्र लिखने की एक प्रणाली है। यह एक साधारण डायरी नहीं है। यह अत्याधुनिक तंत्रिका विज्ञान द्वारा सिद्ध सबसे प्रभावी मानसिक स्वास्थ्य उपकरण है।\n\nकृतज्ञता का तंत्रिका विज्ञान:\nUC बर्कले ग्रेटर गुड साइंस सेंटर के शोध से पता चलता है कि कृतज्ञता लेखन प्रीफ्रंटल कॉर्टेक्स को सक्रिय करता है और डोपामाइन और सेरोटोनिन रिलीज को बढ़ाता है। इंडियाना यूनिवर्सिटी के 2017 के fMRI अध्ययन में पाया गया कि जिन समूहों ने कृतज्ञता पत्र लिखे, उन्होंने 3 महीने बाद भी ऊंचा प्रीफ्रंटल गतिविधि बनाए रखी।\n\nप्रोफेसर रॉबर्ट इमोंस (UC डेविस) के 10 साल के शोध से पता चलता है कि जो लोग दैनिक कृतज्ञता रिकॉर्ड करते हैं:\n- 25% अधिक खुश महसूस करते हैं\n- मजबूत प्रतिरक्षा है\n- बेहतर नींद की गुणवत्ता का अनुभव करें\n- उच्च लक्ष्य उपलब्धि दर दिखाएं\n\nप्रतिबिंब का विज्ञान:\nहार्वर्ड बिजनेस स्कूल के शोध से पता चलता है कि जिन कर्मचारियों ने दैनिक 15 मिनट प्रतिबिंबित करने में बिताए, उन्होंने उन लोगों की तुलना में 23% बेहतर प्रदर्शन किया जो नहीं करते थे। प्रतिबिंब मस्तिष्क की 'मेटाकॉग्निशन' क्षमता को मजबूत करता है - अपनी खुद की सोच प्रक्रिया को पहचानने और विनियमित करने की क्षमता।\n\nस्वयं को पत्र संरचना:\n\n[कल के मुझे] - अतीत को संसाधित करें\n- 3 चीजें जिनके लिए मैं आभारी हूं: आपने आज क्या सराहा\n- 3 महत्वपूर्ण चीजें: सार्थक घटनाएं जो आज हुईं\n- एक गुस्सा: आपको किस बात पर गुस्सा आया और क्यों (भावनात्मक जागरूकता)\n- 3 अवकाश गतिविधियां: आज आपने क्या आनंद लिया\n\n[कल के मुझे] - भविष्य को डिजाइन करें\n- 3 प्रतिबिंब: कल सुधारने वाली चीजें\n- मुफ्त संदेश: आप कल के आपको क्या बताना चाहते हैं\n\n'पत्र' प्रारूप क्यों?\nप्रोफेसर पेनेबेकर (टेक्सास विश्वविद्यालय) के शोध से पता चलता है कि लिखित रूप में भावनाओं को व्यक्त करने से कोर्टिसोल (तनाव हार्मोन) कम हो जाता है और प्रतिरक्षा कार्य में सुधार होता है। 'पत्र' प्रारूप विशेष रूप से एकालाप की तुलना में गहरे आत्म-प्रतिबिंब को प्रेरित करता है। आपको केवल 'आप' के बजाय 'दूसरे आप' को समझाना होगा।\n\nकेवल आज और कल क्यों लिखने योग्य हैं:\nशोध से पता चलता है कि भावनाएं 48 घंटों के भीतर स्मृति में विकृत होने लगती हैं। उसी दिन या अगले दिन रिकॉर्ड करना सटीक भावनात्मक प्रलेखन सक्षम करता है।",
+        "source": "Robert Emmons, Thanks! (2007) / UC Berkeley Greater Good Science Center / Indiana University fMRI Study (2017) / James Pennebaker, Writing to Heal / Harvard Business School Reflection Study (2014)"
+      },
+      "money": {
+        "title": "मनी फ्लो",
+        "subtitle": "अपनी आय और व्यय को ट्रैक करें",
+        "description": "मनी फ्लो केवल एक घरेलू खाता बही नहीं है। यह 'पैसे की विशेषताओं' से अध्यक्ष किम सेउंग-हो के दर्शन पर आधारित एक धन डिजाइन प्रणाली है। यह पैसे को एक व्यक्ति की तरह मानने, पैसे के प्रवाह को समझने और वित्तीय स्वतंत्रता की ओर बढ़ने का एक उपकरण है।\n\nपैसे की विशेषताएं - अध्यक्ष किम सेउंग-हो का मूल दर्शन:\n\n"पैसा एक व्यक्ति की तरह है।" अध्यक्ष किम कहते हैं। पैसा ऐसे व्यवहार करता है जैसे कि उसमें भावनाएं हों। यह वहां रहता है जहां इसका सम्मान किया जाता है और वहां से चला जाता है जहां इसे नजरअंदाज किया जाता है। आप पैसे के साथ कैसा व्यवहार करते हैं यह निर्धारित करता है कि पैसा आपके पास कैसे आता है।\n\n10 मिलियन वॉन सिद्धांत:\nयह अध्यक्ष किम का सबसे प्रसिद्ध सिद्धांत है। "अपने पहले 10 मिलियन वॉन ($10,000) को बचाना सबसे कठिन है।" एक बार जब आपके पास 10 मिलियन होते हैं, तो यह 100 मिलियन हो जाता है; एक बार जब आपके पास 100 मिलियन होते हैं, तो यह 1 बिलियन हो जाता है। चक्रवृद्धि ब्याज का जादू एक निश्चित राशि से ऊपर काम करना शुरू कर देता है। इसलिए आपको अपनी सारी ऊर्जा उस पहले 10 मिलियन को बचाने पर केंद्रित करनी चाहिए।\n\nअकेले वेतन आपको अमीर नहीं बनाएगा:\n"वेतन आपको जीवित रखता है, लेकिन यह आपको अमीर नहीं बनाएगा।" अध्यक्ष किम जोर देते हैं। आपको अपने वेतन से परे आय के स्रोत बनाने होंगे। साइड हसल, निवेश, व्यवसाय—आपको 'पाइपलाइन' बनाने की जरूरत है। मनी फ्लो में आय रिकॉर्ड करते समय, जांचें कि क्या आपके पास वेतन से परे आय है।\n\nआय पर ध्यान दें, व्यय पर नहीं:\n"बचत करने की एक सीमा है, लेकिन कमाने की कोई सीमा नहीं है।" बेशक, अनावश्यक खर्च कम करना महत्वपूर्ण है। लेकिन प्रति माह $1,000 अधिक कमाने के तरीके खोजना प्रति माह $100 बचाने से अधिक प्रभावी है।\n\nपैसे पर अपना दृष्टिकोण बदलना:\nगरीब व्यक्ति का दृष्टिकोण: "यह कितना है?" → अमीर व्यक्ति का दृष्टिकोण: "इसका मूल्य क्या है?"\nगरीब व्यक्ति का दृष्टिकोण: "मैं इसे वहन नहीं कर सकता" → अमीर व्यक्ति का दृष्टिकोण: "मैं इसे अभी नहीं खरीदना चुनता हूं"\nगरीब व्यक्ति का दृष्टिकोण: "पैसा खर्च करने के लिए है" → अमीर व्यक्ति का दृष्टिकोण: "पैसा आपके लिए काम करने के लिए है"\n\nसंपत्ति को देनदारियों से अलग करना:\nजैसा कि रॉबर्ट कियोसाकी के 'रिच डैड पुअर डैड' में जोर दिया गया है, अध्यक्ष किम भी इस पर जोर देते हैं। संपत्ति आपकी जेब में पैसा डालती है, और देनदारियां आपकी जेब से पैसा निकालती हैं। कारें, लक्जरी बैग, नवीनतम इलेक्ट्रॉनिक्स संपत्ति नहीं हैं। वे देनदारियां हैं।\n\nमनी फ्लो उपयोग - पैसे की विशेषताएं संस्करण:\n\n1. सभी आय रिकॉर्ड करें\n- श्रम आय: वेतन, बोनस\n- व्यवसाय आय: साइड हसल, फ्रीलांस\n- निवेश आय: लाभांश, ब्याज, पूंजीगत लाभ\n- अन्य आय: उपहार, कर रिफंड, आदि\n\n2. व्यय को 'आवश्यक' और 'वैकल्पिक' में अलग करें\n- आवश्यक व्यय: आवास, भोजन, परिवहन, संचार\n- वैकल्पिक व्यय: अवकाश, खरीदारी, बाहर खाना\n- निवेश व्यय: शिक्षा, आत्म-विकास, स्वास्थ्य (यह भविष्य की आय बढ़ाने वाला खर्च है)\n\n3. महीने के अंत में जांच प्रश्न:\n- इस महीने बचत/निवेश राशि आय का कितना % है?\n- क्या वेतन से परे कोई आय थी?\n- अनावश्यक खर्च क्या थे?\n- क्या मेरी संपत्ति बढ़ रही है?\n\nवित्तीय स्वतंत्रता का सूत्र:\nअध्यक्ष किम सेउंग-हो कहते हैं कि वित्तीय स्वतंत्रता "बिना काम किए रहने की लागत का भुगतान करने की स्थिति" है। इसके लिए:\n\nमासिक रहने की लागत × 12 महीने × 25 साल = आवश्यक संपत्ति\n\nउदाहरण: यदि मासिक रहने की लागत 3 मिलियन वॉन है, तो 300 × 12 × 25 = 900 मिलियन\n\nयदि आप संपत्ति की इस राशि को जमा करते हैं, तो आप प्रति वर्ष 4% उपज के साथ मूलधन को बनाए रखते हुए रह सकते हैं।\n\nचक्रवृद्धि ब्याज का जादू:\n"अमीर चक्रवृद्धि ब्याज के साथ पैसा बढ़ाते हैं, और गरीब साधारण ब्याज के साथ पैसा उधार लेते हैं।"\n30 वर्षों के लिए 10% वार्षिक चक्रवृद्धि:\n- 1 मिलियन → 17.45 मिलियन (17 गुना)\n- 10 मिलियन → 174.5 मिलियन\n- 100 मिलियन → 1.745 बिलियन\n\nसमय को अपना पक्ष बनने दें। आप जितनी जल्दी शुरुआत करेंगे, आपको चक्रवृद्धि ब्याज का उतना ही अधिक लाभ मिलेगा।\n\nरिकॉर्डिंग की शक्ति:\n"यदि आप इसे मापते नहीं हैं, तो आप इसे प्रबंधित नहीं कर सकते।" दैनिक पैसे के प्रवाह को रिकॉर्ड करना पैसे का सम्मान करने का पहला कार्य है। जब आप जानते हैं कि आपका पैसा कहां से आता है और कहां जाता है, तभी आप वास्तव में पैसे को नियंत्रित कर सकते हैं।",
+        "source": "Kim Seung-ho, The Attributes of Money (2020) / Kim Seung-ho, CEO Studies (2018) / Robert Kiyosaki, Rich Dad Poor Dad (1997) / Morgan Housel, The Psychology of Money (2020)"
+      },
+      "bio": {
+        "title": "बायो हैकिंग",
+        "subtitle": "अपनी जीवविज्ञान को अनुकूलित करें",
+        "description": "बायो हैकिंग नींद, व्यायाम, पोषण और मानसिकता के लिए वैज्ञानिक प्रोटोकॉल प्रदान करता है। यह एक ट्रेंडी सनक नहीं है। यह अत्याधुनिक तंत्रिका विज्ञान और शरीर विज्ञान पर आधारित सिद्ध अनुकूलन विधियां हैं।\n\nनींद अनुकूलन - सब कुछ की नींव:\nप्रोफेसर मैथ्यू वॉकर (UC बर्कले, 'Why We Sleep' लेखक) के अनुसार, नींद एक 'वैकल्पिक विलासिता' नहीं है, बल्कि एक 'जैविक आवश्यकता' है। 7 घंटे से कम नींद:\n- प्रतिरक्षा को 70% कम करती है\n- सीखने की क्षमता को 40% कम करती है\n- मृत्यु दर के जोखिम को 24% बढ़ाती है\n\nप्रोफेसर एंड्रयू ह्यूबरमैन का नींद प्रोटोकॉल:\n1. जागने के 30-60 मिनट के भीतर धूप लें (10-30 मिनट)। यह कोर्टिसोल जागृति प्रतिक्रिया को ट्रिगर करता है और 16 घंटे बाद मेलाटोनिन रिलीज को शेड्यूल करता है।\n2. सोने से 2 घंटे पहले नीली रोशनी को अवरुद्ध करें। नीली रोशनी मेलाटोनिन रिलीज को दबा देती है।\n3. बेडरूम का तापमान 65-67°F (18-19°C) पर रखें। शरीर के तापमान में गिरावट नींद लाती है।\n4. रोजाना एक ही समय पर उठें। सप्ताहांत भी। लगातार जागने का समय सब कुछ की नींव है।\n\nव्यायाम का तंत्रिका विज्ञान:\nप्रोफेसर जॉन रेंटी (हार्वर्ड मेडिकल स्कूल, 'Spark' लेखक) के शोध से पता चलता है कि व्यायाम शारीरिक रूप से मस्तिष्क को बदलता है:\n- बढ़ा हुआ BDNF (मस्तिष्क-व्युत्पन्न न्यूरोट्रॉफिक कारक): नई मस्तिष्क कोशिकाओं का निर्माण करता है\n- बढ़ा हुआ हिप्पोकैम्पस: स्मृति में सुधार करता है\n- सक्रिय प्रीफ्रंटल कॉर्टेक्स: फोकस और निर्णय लेने में सुधार करता है\n\nन्यूनतम प्रभावी व्यायाम: सप्ताह में 3 बार, 30 मिनट, हृदय गति बढ़ाने वाला कार्डियो। यह अकेले मस्तिष्क के कार्य में काफी सुधार करता है।\n\nपोषण प्रोटोकॉल:\nडॉ. रोंडा पैट्रिक (FoundMyFitness) के शोध से पता चलता है:\n- आंतरायिक उपवास (16:8): ऑटोफैजी को सक्रिय करता है, सेलुलर पुनर्जनन को बढ़ावा देता है\n- ओमेगा-3: मस्तिष्क कोशिका झिल्ली का 70% वसा है। DHA से भरपूर मछली की सिफारिश की जाती है\n- आंत माइक्रोबायोम: 90% सेरोटोनिन आंत में निर्मित होता है। प्रोबायोटिक्स और फाइबर का सेवन करें\n\nमानसिकता अनुकूलन:\nप्रोफेसर कैरल ड्वेक (स्टैनफोर्ड, 'Mindset' लेखक) के शोध से पता चलता है कि 'विकास मानसिकता' वाले लोग चुनौतियों को बेहतर ढंग से स्वीकार करते हैं और विफलता से तेजी से उबरते हैं।\n\nविकास मानसिकता प्रशिक्षण:\n- "मैं नहीं कर सकता" को "मैं अभी नहीं कर सकता" में बदलें\n- परिणाम पर नहीं, प्रक्रिया पर ध्यान दें\n- विफलता को सीखने के अवसर के रूप में फिर से परिभाषित करें\n\nबायो हैकिंग अनुभाग इन नवीनतम शोधों को सारांशित करने वाले कॉलम प्रदान करता है। पढ़ें, लागू करें, और अपनी जीवविज्ञान को अनुकूलित करें।",
+        "source": "Andrew Huberman, Huberman Lab Podcast / Matthew Walker, Why We Sleep (2017) / John Ratey, Spark (2008) / Rhonda Patrick, FoundMyFitness / Carol Dweck, Mindset (2006)"
+      }
+    }
+  },
+  "MyPage": {
+    "title": "मेरा पेज",
+    "subtitle": "अपनी गतिविधियों और सेटिंग्स को प्रबंधित करें",
+    "signOut": "साइन आउट",
+    "profile": {
+      "anonymous": "उपयोगकर्ता",
+      "memberSince": "{date} से सदस्य"
+    },
+    "theme": {
+      "title": "थीम सेटिंग्स",
+      "options": {
+        "cream": {
+          "name": "क्रीम",
+          "description": "स्वच्छ और सुरुचिपूर्ण डिजाइन"
+        },
+        "cyber": {
+          "name": "साइबर",
+          "description": "भविष्यवादी तकनीक डिजाइन"
+        }
+      }
+    },
+    "stats": {
+      "title": "मेरे आँकड़े",
+      "destiny": {
+        "title": "डेस्टिनी नेविगेटर",
+        "totalDays": "ट्रैक किए गए दिन",
+        "timeblocks": "टाइमब्लॉक",
+        "completed": "पूर्ण",
+        "avgScore": "औसत स्कोर"
+      },
+      "success": {
+        "title": "सफलता कोड",
+        "projects": "कुल परियोजनाएं",
+        "active": "सक्रिय",
+        "daysLogged": "लॉग किए गए दिन"
+      },
+      "discipline": {
+        "title": "अनुशासन महारत",
+        "rules": "नियम",
+        "streak": "लगातार",
+        "last7Days": "7-दिवसीय दर",
+        "last30Days": "30-दिवसीय दर"
+      },
+      "epistle": {
+        "title": "स्वयं को पत्र",
+        "totalLetters": "लिखे गए पत्र",
+        "lastWritten": "अंतिम लिखित"
+      }
+    }
+  }
+}

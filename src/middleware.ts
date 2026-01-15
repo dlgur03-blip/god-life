@@ -20,5 +20,5 @@ export default function middleware(request: NextRequest) {
 
 export const config = {
   // Match all pathnames except API routes and static files
-  matcher: ['/', '/(ko|en|ja|zh)/:path*', '/((?!api|_next|.*\\..*).*)']
+  matcher: ['/', '/(ko|en|ja|zh|hi)/:path*', '/((?!api|_next|.*\\..*).*)']
 };

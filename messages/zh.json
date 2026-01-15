@@ -1,7 +1,9 @@
 {
   "Header": {
     "goToDashboard": "进入控制台",
-    "myPage": "个人主页"
+    "myPage": "个人主页",
+    "bannerMain": "每天早上，务必访问本网站 | 你终将过上大神般的生活。",
+    "bannerSub": "越是使用这个复杂的 God Life Maker，反常的是，你的生活将变得越简单。"
   },
   "Home": {
     "title": "GOD LIFE MAKER",
