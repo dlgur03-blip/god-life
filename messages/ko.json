@@ -39,6 +39,10 @@
       "met": {
         "name": "동기원형검사",
         "desc": "AI 심리검사로 나를 발견"
+      },
+      "chat": {
+        "name": "AI 갓생코치",
+        "desc": "대화로 모든 모듈을 채워요"
       }
     },
     "status": {
@@ -1038,6 +1042,44 @@
         "totalLetters": "작성 편지",
         "lastWritten": "마지막 작성"
       }
+    }
+  },
+  "Chat": {
+    "title": "AI 갓생코치",
+    "welcomeTitle": "갓생코치에 오신 걸 환영해요!",
+    "welcomeDesc": "오늘 하루에 대해 이야기해주세요. 대화를 통해 모듈을 자동으로 채워드릴게요.",
+    "placeholder": "오늘 어떤 하루였나요?",
+    "error": "죄송해요, 잠시 오류가 발생했어요. 다시 시도해주세요.",
+    "poweredBy": "Gemini AI 기반 갓생코치",
+    "sponsor": "갓생메이커 후원하기",
+    "quickEpistle": "오늘 하루 이야기 해줄래?",
+    "quickGoal": "이번 주 목표를 세우고 싶어",
+    "quickMoney": "오늘 쓴 돈 기록해줘",
+    "onboarding": {
+      "timeQuestion": "하루에 자기계발에 쓸 수 있는 시간은?",
+      "time15": "15분",
+      "time30": "30분",
+      "time1h": "1시간",
+      "time2h": "2시간 이상",
+      "habitQuestion": "습관 형성에 성공한 경험이 있나요?",
+      "habitNone": "아직 없어요",
+      "habitSome": "1~2개 있어요",
+      "habitMany": "여러 개 있어요",
+      "focusQuestion": "가장 개선하고 싶은 영역을 골라주세요",
+      "focusGoals": "목표 설정",
+      "focusHabits": "습관 형성",
+      "focusFinance": "재무 관리",
+      "focusHealth": "건강 관리",
+      "focusEmotion": "감정 관리",
+      "focusTime": "시간 관리",
+      "chronoQuestion": "아침형 vs 저녁형?",
+      "chronoMorning": "아침형 (일찍 일어나는 편)",
+      "chronoEvening": "저녁형 (밤에 집중하는 편)",
+      "styleQuestion": "어떤 방식이 편하세요?",
+      "styleAI": "AI가 대화로 채워줘요",
+      "styleSelf": "직접 입력할게요",
+      "next": "다음",
+      "saving": "저장 중..."
     }
   }
 }

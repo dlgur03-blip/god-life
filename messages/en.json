@@ -39,6 +39,10 @@
       "met": {
         "name": "Motivation Archetype",
         "desc": "Discover yourself with AI"
+      },
+      "chat": {
+        "name": "AI Life Coach",
+        "desc": "Fill all modules through chat"
       }
     },
     "status": {
@@ -1014,6 +1018,44 @@
         "totalLetters": "Letters Written",
         "lastWritten": "Last Written"
       }
+    }
+  },
+  "Chat": {
+    "title": "AI Life Coach",
+    "welcomeTitle": "Welcome to your Life Coach!",
+    "welcomeDesc": "Tell me about your day. I'll help fill your modules through conversation.",
+    "placeholder": "How was your day?",
+    "error": "Sorry, an error occurred. Please try again.",
+    "poweredBy": "Life Coach powered by Gemini AI",
+    "sponsor": "Support God Life Maker",
+    "quickEpistle": "Tell me about my day",
+    "quickGoal": "I want to set weekly goals",
+    "quickMoney": "Record today's spending",
+    "onboarding": {
+      "timeQuestion": "How much time can you spend on self-development daily?",
+      "time15": "15 minutes",
+      "time30": "30 minutes",
+      "time1h": "1 hour",
+      "time2h": "2+ hours",
+      "habitQuestion": "Have you successfully formed habits before?",
+      "habitNone": "Not yet",
+      "habitSome": "1-2 habits",
+      "habitMany": "Several habits",
+      "focusQuestion": "Which areas do you want to improve most?",
+      "focusGoals": "Goal setting",
+      "focusHabits": "Habit building",
+      "focusFinance": "Financial management",
+      "focusHealth": "Health management",
+      "focusEmotion": "Emotional management",
+      "focusTime": "Time management",
+      "chronoQuestion": "Morning person or night owl?",
+      "chronoMorning": "Morning person",
+      "chronoEvening": "Night owl",
+      "styleQuestion": "Which style do you prefer?",
+      "styleAI": "AI fills through conversation",
+      "styleSelf": "I'll input myself",
+      "next": "Next",
+      "saving": "Saving..."
     }
   }
 }

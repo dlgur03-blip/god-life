@@ -27,6 +27,8 @@ model User {
   errorLogs         ErrorLog[]
   goals             Goal[]
   transactions      MoneyTransaction[]
+  chatSessions      ChatSession[]
+  onboarding        UserOnboarding?
 }
 
 // M3: Destiny Navigator
@@ -346,6 +348,54 @@ model MetResult {
 
   @@index([createdAt])
   @@index([userId])
+}
+
+// AI Coach Chat
+model ChatSession {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  title     String   @default("New Chat")
+  messages  ChatMessage[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([userId, updatedAt])
+}
+
+model ChatMessage {
+  id        String      @id @default(cuid())
+  sessionId String
+  session   ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  role      String      // 'user' | 'assistant' | 'system'
+  content   String
+  action    Json?       // {module, type, data} — auto-fill action performed
+
+  createdAt DateTime    @default(now())
+
+  @@index([sessionId])
+}
+
+// User Onboarding (AI priority system)
+model UserOnboarding {
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  metResultId     String?  // link to MET result
+  availableTime   String?  // '15min' | '30min' | '1hour' | '2hour+'
+  habitExperience String?  // 'none' | 'some' | 'many'
+  focusAreas      Json?    // ['goals','habits','finance','health','emotion','time']
+  chronotype      String?  // 'morning' | 'evening'
+  preferredStyle  String?  // 'self' | 'ai-guided'
+  executionLevel  Int      @default(1) // 1-5
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
 
 // M10: Money Flow (가계부)

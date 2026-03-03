@@ -12,7 +12,7 @@ export async function analyzeWithGemini(
   const prompt = buildAnalysisPrompt(scores, answers, locale);
 
   const response = await genAI.models.generateContent({
-    model: 'gemini-2.0-flash',
+    model: 'gemini-2.5-flash-lite',
     contents: prompt,
     config: {
       temperature: 0.8,

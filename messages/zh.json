@@ -39,6 +39,10 @@
       "met": {
         "name": "动机原型测试",
         "desc": "AI心理测试发现自我"
+      },
+      "chat": {
+        "name": "AI生活教练",
+        "desc": "通过对话自动填写模块"
       }
     },
     "status": {
@@ -1015,6 +1019,44 @@
         "totalLetters": "写信总数",
         "lastWritten": "最后书写"
       }
+    }
+  },
+  "Chat": {
+    "title": "AI生活教练",
+    "welcomeTitle": "欢迎来到生活教练！",
+    "welcomeDesc": "告诉我你的一天。我会通过对话帮你自动填写模块。",
+    "placeholder": "今天过得怎么样？",
+    "error": "抱歉，发生了错误。请重试。",
+    "poweredBy": "Gemini AI驱动的生活教练",
+    "sponsor": "支持God Life Maker",
+    "quickEpistle": "想聊聊今天的事",
+    "quickGoal": "想设定本周目标",
+    "quickMoney": "记录今天的花费",
+    "onboarding": {
+      "timeQuestion": "每天能花多少时间在自我提升上？",
+      "time15": "15分钟",
+      "time30": "30分钟",
+      "time1h": "1小时",
+      "time2h": "2小时以上",
+      "habitQuestion": "你有成功养成习惯的经验吗？",
+      "habitNone": "还没有",
+      "habitSome": "有1-2个",
+      "habitMany": "有很多",
+      "focusQuestion": "你最想改善哪些方面？",
+      "focusGoals": "目标设定",
+      "focusHabits": "习惯养成",
+      "focusFinance": "财务管理",
+      "focusHealth": "健康管理",
+      "focusEmotion": "情绪管理",
+      "focusTime": "时间管理",
+      "chronoQuestion": "你是早起型还是夜猫型？",
+      "chronoMorning": "早起型",
+      "chronoEvening": "夜猫型",
+      "styleQuestion": "你更喜欢哪种方式？",
+      "styleAI": "AI通过对话帮我填写",
+      "styleSelf": "我自己输入",
+      "next": "下一步",
+      "saving": "保存中..."
     }
   }
 }

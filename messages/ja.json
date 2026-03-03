@@ -39,6 +39,10 @@
       "met": {
         "name": "動機原型検査",
         "desc": "AI心理検査で自分を発見"
+      },
+      "chat": {
+        "name": "AIライフコーチ",
+        "desc": "会話でモジュールを自動入力"
       }
     },
     "status": {
@@ -1014,6 +1018,44 @@
         "totalLetters": "手紙数",
         "lastWritten": "最終作成日"
       }
+    }
+  },
+  "Chat": {
+    "title": "AIライフコーチ",
+    "welcomeTitle": "ライフコーチへようこそ！",
+    "welcomeDesc": "今日の出来事を教えてください。会話を通じてモジュールを自動で入力します。",
+    "placeholder": "今日はどんな一日でしたか？",
+    "error": "エラーが発生しました。もう一度お試しください。",
+    "poweredBy": "Gemini AI搭載ライフコーチ",
+    "sponsor": "God Life Makerを応援する",
+    "quickEpistle": "今日の出来事を話したい",
+    "quickGoal": "今週の目標を立てたい",
+    "quickMoney": "今日の支出を記録して",
+    "onboarding": {
+      "timeQuestion": "1日に自己啓発に使える時間は？",
+      "time15": "15分",
+      "time30": "30分",
+      "time1h": "1時間",
+      "time2h": "2時間以上",
+      "habitQuestion": "習慣形成に成功した経験はありますか？",
+      "habitNone": "まだありません",
+      "habitSome": "1〜2個あります",
+      "habitMany": "たくさんあります",
+      "focusQuestion": "最も改善したい分野を選んでください",
+      "focusGoals": "目標設定",
+      "focusHabits": "習慣形成",
+      "focusFinance": "財務管理",
+      "focusHealth": "健康管理",
+      "focusEmotion": "感情管理",
+      "focusTime": "時間管理",
+      "chronoQuestion": "朝型 vs 夜型？",
+      "chronoMorning": "朝型（早起きタイプ）",
+      "chronoEvening": "夜型（夜に集中するタイプ）",
+      "styleQuestion": "どちらの方法が好みですか？",
+      "styleAI": "AIが会話で入力してくれる",
+      "styleSelf": "自分で入力する",
+      "next": "次へ",
+      "saving": "保存中..."
     }
   }
 }

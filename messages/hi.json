@@ -39,6 +39,10 @@
       "met": {
         "name": "प्रेरणा आर्किटाइप",
         "desc": "AI से अपने आप को जानें"
+      },
+      "chat": {
+        "name": "AI लाइफ कोच",
+        "desc": "बातचीत से मॉड्यूल भरें"
       }
     },
     "status": {
@@ -1016,6 +1020,44 @@
         "totalLetters": "Letters Written",
         "lastWritten": "Last Written"
       }
+    }
+  },
+  "Chat": {
+    "title": "AI लाइफ कोच",
+    "welcomeTitle": "लाइफ कोच में आपका स्वागत है!",
+    "welcomeDesc": "अपने दिन के बारे में बताएं। बातचीत के जरिए मॉड्यूल अपने आप भर जाएंगे।",
+    "placeholder": "आपका दिन कैसा रहा?",
+    "error": "क्षमा करें, एक त्रुटि हुई। कृपया पुनः प्रयास करें।",
+    "poweredBy": "Gemini AI संचालित लाइफ कोच",
+    "sponsor": "God Life Maker को सपोर्ट करें",
+    "quickEpistle": "आज के बारे में बात करना चाहता हूं",
+    "quickGoal": "इस हफ्ते के लक्ष्य तय करना चाहता हूं",
+    "quickMoney": "आज का खर्च रिकॉर्ड करो",
+    "onboarding": {
+      "timeQuestion": "आत्म-विकास के लिए प्रतिदिन कितना समय दे सकते हैं?",
+      "time15": "15 मिनट",
+      "time30": "30 मिनट",
+      "time1h": "1 घंटा",
+      "time2h": "2+ घंटे",
+      "habitQuestion": "क्या आपने पहले सफलतापूर्वक आदतें बनाई हैं?",
+      "habitNone": "अभी तक नहीं",
+      "habitSome": "1-2 आदतें",
+      "habitMany": "कई आदतें",
+      "focusQuestion": "आप किन क्षेत्रों में सबसे अधिक सुधार करना चाहते हैं?",
+      "focusGoals": "लक्ष्य निर्धारण",
+      "focusHabits": "आदत निर्माण",
+      "focusFinance": "वित्तीय प्रबंधन",
+      "focusHealth": "स्वास्थ्य प्रबंधन",
+      "focusEmotion": "भावनात्मक प्रबंधन",
+      "focusTime": "समय प्रबंधन",
+      "chronoQuestion": "सुबह का व्यक्ति या रात का उल्लू?",
+      "chronoMorning": "सुबह का व्यक्ति",
+      "chronoEvening": "रात का उल्लू",
+      "styleQuestion": "आप कौन सी शैली पसंद करते हैं?",
+      "styleAI": "AI बातचीत से भरे",
+      "styleSelf": "मैं खुद दर्ज करूंगा",
+      "next": "अगला",
+      "saving": "सहेजा जा रहा है..."
     }
   }
 }

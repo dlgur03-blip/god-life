@@ -1,5 +1,5 @@
 import { Link } from '@/navigation';
-import { Compass, Trophy, Activity, Mail, BookOpen, Wallet, Brain, LogIn, LogOut } from 'lucide-react';
+import { Compass, Trophy, Activity, Mail, BookOpen, Wallet, Brain, MessageCircle, LogIn, LogOut } from 'lucide-react';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
@@ -120,6 +120,7 @@ export default async function Home() {
     { name: t('modules.bio.name'), href: '/bio', icon: BookOpen, desc: t('modules.bio.desc'), status: { label: t('status.database'), color: 'success' }, moduleColor: 'var(--color-bio)' },
     { name: t('modules.money.name'), href: '/money', icon: Wallet, desc: t('modules.money.desc'), status: { label: t('status.database'), color: 'success' }, moduleColor: 'var(--color-money)' },
     { name: t('modules.met.name'), href: '/met', icon: Brain, desc: t('modules.met.desc'), status: { label: 'AI', color: 'secondary' }, moduleColor: 'var(--color-secondary)' },
+    { name: t('modules.chat.name'), href: '/chat', icon: MessageCircle, desc: t('modules.chat.desc'), status: { label: 'AI Coach', color: 'secondary' }, moduleColor: 'var(--color-secondary)' },
   ];
 
   return (
