@@ -8,6 +8,7 @@ import HeaderWrapper from '@/components/HeaderWrapper';
 import FeedbackFooter from '@/components/FeedbackFooter';
 import InAppBrowserGuard from '@/components/InAppBrowserGuard';
 import TimezoneDetector from '@/components/TimezoneDetector';
+import FloatingChat from '@/components/chat/FloatingChat';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -91,6 +92,7 @@ export default async function LocaleLayout({
             <main className="pt-[52px] md:pt-[56px] flex-1">
               {children}
             </main>
+            <FloatingChat locale={locale} />
             <FeedbackFooter />
           </Providers>
         </NextIntlClientProvider>

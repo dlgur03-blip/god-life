@@ -14,7 +14,7 @@ model User {
   email         String    @unique
   name          String?
   image         String?
-  credits       Int       @default(100) // 첫 가입 100크레딧 무료
+  credits       Float     @default(100) // 첫 가입 100크레딧 무료
   geminiApiKey  String?   // 개인 API 키 (BYOK)
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
@@ -359,8 +359,8 @@ model CreditLog {
   userId        String
   user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  amount        Int      // negative = used, positive = granted
-  balance       Int      // balance after this transaction
+  amount        Float    // negative = used, positive = granted
+  balance       Float    // balance after this transaction
   reason        String   // 'chat', 'met', 'signup_bonus', etc.
   inputTokens   Int?     // Gemini input tokens
   outputTokens  Int?     // Gemini output tokens

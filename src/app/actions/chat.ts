@@ -185,13 +185,18 @@ async function executeActions(userId: string, actions: ModuleAction[]) {
   return executed;
 }
 
+// Admin emails with unlimited credits
+const UNLIMITED_EMAILS = ['dlgur03@gmail.com'];
+
 // ── Send message (with credits) ──
 export async function sendChatMessage(sessionId: string, content: string, locale: string) {
   const user = await getUser();
+  const isUnlimited = UNLIMITED_EMAILS.includes(user.email);
   const useOwnKey = !!user.geminiApiKey;
+  const skipCredits = isUnlimited || useOwnKey;
 
-  // Check credits (skip if using own API key)
-  if (!useOwnKey && user.credits <= 0) {
+  // Check credits
+  if (!skipCredits && user.credits <= 0) {
     return {
       text: '',
       actions: [],
@@ -228,19 +233,17 @@ export async function sendChatMessage(sessionId: string, content: string, locale
     useOwnKey ? user.geminiApiKey : null
   );
 
-  // Calculate credit cost: 1 credit per call
-  const creditCost = useOwnKey ? 0 : 1;
+  // Credit cost: 0.1 per call (skip for admin/BYOK)
+  const creditCost = skipCredits ? 0 : 0.1;
   let newBalance = user.credits;
 
   if (creditCost > 0) {
-    // Deduct credits
     const updated = await prisma.user.update({
       where: { id: user.id },
       data: { credits: { decrement: creditCost } },
     });
     newBalance = updated.credits;
 
-    // Log credit usage
     await prisma.creditLog.create({
       data: {
         userId: user.id,
