@@ -19,36 +19,66 @@ async function getUser() {
   return user;
 }
 
+// ── Get user credit info ──
+export async function getUserCredits() {
+  const user = await getUser();
+  return {
+    credits: user.credits,
+    hasApiKey: !!user.geminiApiKey,
+  };
+}
+
+// ── Get credit usage history ──
+export async function getCreditHistory(limit = 20) {
+  const user = await getUser();
+  const logs = await prisma.creditLog.findMany({
+    where: { userId: user.id },
+    orderBy: { createdAt: 'desc' },
+    take: limit,
+  });
+  return logs.map((l) => ({
+    id: l.id,
+    amount: l.amount,
+    balance: l.balance,
+    reason: l.reason,
+    inputTokens: l.inputTokens,
+    outputTokens: l.outputTokens,
+    model: l.model,
+    createdAt: l.createdAt.toISOString(),
+  }));
+}
+
+// ── Save personal API key ──
+export async function saveApiKey(apiKey: string | null) {
+  const user = await getUser();
+  await prisma.user.update({
+    where: { id: user.id },
+    data: { geminiApiKey: apiKey || null },
+  });
+  revalidatePath('/chat');
+  return { success: true };
+}
+
 // ── Get or create today's chat session ──
 export async function getOrCreateChatSession() {
   const user = await getUser();
   const timezone = await getUserTimezone();
   const today = getTodayStr(timezone);
 
-  // Find today's session
   let session = await prisma.chatSession.findFirst({
     where: {
       userId: user.id,
-      createdAt: {
-        gte: new Date(`${today}T00:00:00`),
-      },
+      createdAt: { gte: new Date(`${today}T00:00:00`) },
     },
     include: {
-      messages: {
-        orderBy: { createdAt: 'asc' },
-      },
+      messages: { orderBy: { createdAt: 'asc' } },
     },
   });
 
   if (!session) {
     session = await prisma.chatSession.create({
-      data: {
-        userId: user.id,
-        title: today,
-      },
-      include: {
-        messages: true,
-      },
+      data: { userId: user.id, title: today },
+      include: { messages: true },
     });
   }
 
@@ -73,9 +103,6 @@ async function getChatContext(userId: string): Promise<ChatContextData> {
 
   const disciplineTotal = rules.length;
   const disciplineChecked = rules.filter((r) => r.checks.length > 0).length;
-  const epistleWritten = !!(epistle?.gratitude1 || epistle?.reflection1);
-  const destinyPlanned = !!(destinyDay?.goalToday);
-  const moneyLogged = !!moneyTx;
 
   return {
     onboarding: onboarding
@@ -88,11 +115,11 @@ async function getChatContext(userId: string): Promise<ChatContextData> {
         }
       : null,
     todayStatus: {
-      epistleWritten,
+      epistleWritten: !!(epistle?.gratitude1 || epistle?.reflection1),
       disciplineChecked,
       disciplineTotal,
-      destinyPlanned,
-      moneyLogged,
+      destinyPlanned: !!(destinyDay?.goalToday),
+      moneyLogged: !!moneyTx,
       successUpdated: false,
     },
     recentMessages: [],
@@ -113,28 +140,25 @@ async function executeActions(userId: string, actions: ModuleAction[]) {
           create: { userId, date: today, [action.data.field]: action.data.value },
           update: { [action.data.field]: action.data.value },
         });
-        executed.push(`셀프 서신: ${action.data.field} 기록됨`);
+        executed.push(`셀프 서신: ${action.data.field}`);
       }
-
       if (action.module === 'discipline' && action.type === 'create_rule') {
         const count = await prisma.disciplineRule.count({ where: { userId } });
         if (count < 13) {
           await prisma.disciplineRule.create({
             data: { userId, title: action.data.title, sortOrder: count },
           });
-          executed.push(`규율 추가: ${action.data.title}`);
+          executed.push(`규율: ${action.data.title}`);
         }
       }
-
       if (action.module === 'destiny' && action.type === 'set_goal') {
         await prisma.destinyDay.upsert({
           where: { userId_date: { userId, date: today } },
           create: { userId, date: today, [action.data.field]: action.data.value },
           update: { [action.data.field]: action.data.value },
         });
-        executed.push(`운명 네비게이터: ${action.data.field} 설정됨`);
+        executed.push(`운명: ${action.data.field}`);
       }
-
       if (action.module === 'money' && action.type === 'add_transaction') {
         await prisma.moneyTransaction.create({
           data: {
@@ -146,37 +170,43 @@ async function executeActions(userId: string, actions: ModuleAction[]) {
             date: today,
           },
         });
-        executed.push(`머니 플로우: ${action.data.memo || action.data.category} ${action.data.amount}원`);
+        executed.push(`머니: ${action.data.amount}원`);
       }
-
       if (action.module === 'success' && action.type === 'create_project') {
         await prisma.successProject.create({
-          data: {
-            userId,
-            title: action.data.title,
-            startDate: new Date(),
-          },
+          data: { userId, title: action.data.title, startDate: new Date() },
         });
-        executed.push(`성공 코드: "${action.data.title}" 프로젝트 생성`);
+        executed.push(`성공: ${action.data.title}`);
       }
     } catch (e) {
       console.error('Action execution failed:', action, e);
     }
   }
-
   return executed;
 }
 
-// ── Send message ──
+// ── Send message (with credits) ──
 export async function sendChatMessage(sessionId: string, content: string, locale: string) {
   const user = await getUser();
+  const useOwnKey = !!user.geminiApiKey;
+
+  // Check credits (skip if using own API key)
+  if (!useOwnKey && user.credits <= 0) {
+    return {
+      text: '',
+      actions: [],
+      executed: [],
+      usage: { inputTokens: 0, outputTokens: 0, creditUsed: 0, creditsRemaining: 0 },
+      error: 'NO_CREDITS',
+    };
+  }
 
   // Save user message
   await prisma.chatMessage.create({
     data: { sessionId, role: 'user', content },
   });
 
-  // Get conversation history
+  // Get history
   const history = await prisma.chatMessage.findMany({
     where: { sessionId },
     orderBy: { createdAt: 'asc' },
@@ -188,11 +218,41 @@ export async function sendChatMessage(sessionId: string, content: string, locale
     content: m.content,
   }));
 
-  // Get context
   const context = await getChatContext(user.id);
 
-  // Call AI
-  const response = await chatWithCoach(messages, context, locale);
+  // Call AI (with user's key or system key)
+  const response = await chatWithCoach(
+    messages,
+    context,
+    locale,
+    useOwnKey ? user.geminiApiKey : null
+  );
+
+  // Calculate credit cost: 1 credit per call
+  const creditCost = useOwnKey ? 0 : 1;
+  let newBalance = user.credits;
+
+  if (creditCost > 0) {
+    // Deduct credits
+    const updated = await prisma.user.update({
+      where: { id: user.id },
+      data: { credits: { decrement: creditCost } },
+    });
+    newBalance = updated.credits;
+
+    // Log credit usage
+    await prisma.creditLog.create({
+      data: {
+        userId: user.id,
+        amount: -creditCost,
+        balance: newBalance,
+        reason: 'chat',
+        inputTokens: response.usage.inputTokens,
+        outputTokens: response.usage.outputTokens,
+        model: response.usage.model,
+      },
+    });
+  }
 
   // Execute actions
   let executedSummary: string[] = [];
@@ -200,7 +260,7 @@ export async function sendChatMessage(sessionId: string, content: string, locale
     executedSummary = await executeActions(user.id, response.actions);
   }
 
-  // Save assistant message with actions
+  // Save assistant message
   await prisma.chatMessage.create({
     data: {
       sessionId,
@@ -216,6 +276,12 @@ export async function sendChatMessage(sessionId: string, content: string, locale
     text: response.text,
     actions: response.actions,
     executed: executedSummary,
+    usage: {
+      inputTokens: response.usage.inputTokens,
+      outputTokens: response.usage.outputTokens,
+      creditUsed: creditCost,
+      creditsRemaining: newBalance,
+    },
   };
 }
 
@@ -229,7 +295,6 @@ export async function saveOnboarding(data: {
   metResultId?: string;
 }) {
   const user = await getUser();
-
   await prisma.userOnboarding.upsert({
     where: { userId: user.id },
     create: {
@@ -242,7 +307,6 @@ export async function saveOnboarding(data: {
       executionLevel: data.habitExperience === 'many' ? 3 : data.habitExperience === 'some' ? 2 : 1,
     },
   });
-
   revalidatePath('/');
   return { success: true };
 }
@@ -250,8 +314,5 @@ export async function saveOnboarding(data: {
 // ── Get onboarding status ──
 export async function getOnboardingStatus() {
   const user = await getUser();
-  const onboarding = await prisma.userOnboarding.findUnique({
-    where: { userId: user.id },
-  });
-  return onboarding;
+  return prisma.userOnboarding.findUnique({ where: { userId: user.id } });
 }

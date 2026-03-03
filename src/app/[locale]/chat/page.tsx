@@ -2,7 +2,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
-import { getOrCreateChatSession, getOnboardingStatus } from '@/app/actions/chat';
+import { getOrCreateChatSession, getOnboardingStatus, getUserCredits } from '@/app/actions/chat';
 import ChatPageClient from './ChatPageClient';
 
 export const dynamic = 'force-dynamic';
@@ -19,8 +19,11 @@ export default async function ChatPage({ params }: { params: Promise<{ locale: s
   }
 
   const { locale } = await params;
-  const chatSession = await getOrCreateChatSession();
-  const onboarding = await getOnboardingStatus();
+  const [chatSession, onboarding, creditInfo] = await Promise.all([
+    getOrCreateChatSession(),
+    getOnboardingStatus(),
+    getUserCredits(),
+  ]);
 
   const messages = chatSession.messages.map((m) => ({
     id: m.id,
@@ -35,6 +38,8 @@ export default async function ChatPage({ params }: { params: Promise<{ locale: s
       initialMessages={messages}
       locale={locale}
       hasOnboarding={!!onboarding}
+      credits={creditInfo.credits}
+      hasApiKey={creditInfo.hasApiKey}
     />
   );
 }

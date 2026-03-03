@@ -9,9 +9,11 @@ interface ChatPageClientProps {
   initialMessages: { id: string; role: 'user' | 'assistant'; content: string; actions?: { module: string; type: string }[] }[];
   locale: string;
   hasOnboarding: boolean;
+  credits: number;
+  hasApiKey: boolean;
 }
 
-export default function ChatPageClient({ sessionId, initialMessages, locale, hasOnboarding }: ChatPageClientProps) {
+export default function ChatPageClient({ sessionId, initialMessages, locale, hasOnboarding, credits, hasApiKey }: ChatPageClientProps) {
   const [onboarded, setOnboarded] = useState(hasOnboarding);
 
   if (!onboarded) {
@@ -28,6 +30,8 @@ export default function ChatPageClient({ sessionId, initialMessages, locale, has
         sessionId={sessionId}
         initialMessages={initialMessages}
         locale={locale}
+        credits={credits}
+        hasApiKey={hasApiKey}
       />
     </div>
   );
