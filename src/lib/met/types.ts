@@ -59,7 +59,7 @@ export type Question =
 
 export interface Answer {
   questionId: string;
-  answer: string; // '1'-'7' for likert, 'A'|'B' for forced, 'A'-'D' for scenario/metaphor
+  answer: string; // '1'-'7' for likert, 'A'|'B' for forced, 'A'-'D' for scenario/metaphor, 'OTHER:text'
   value: number; // numeric value (1-7 for likert, 0/1 for others)
 }
 
@@ -70,10 +70,19 @@ export interface MetAnalysisResult {
   archetypeEmoji: string;
   summaryShort: string;
   summaryLong: string;
+  coreDesire: string;
+  coreFear: string;
   strengths: string[];
   blindSpots: string[];
+  thingsToDiscard: string[];
   motivationDNA: string;
+  hiddenPattern: string;
   idealEnvironment: string;
+  toxicEnvironment: string;
+  peopleToSeek: string;
+  peopleToAvoid: string;
+  godLifeStrategy: string;
+  bookRecommendations: string[];
   growthAdvice: string;
   mantra: string;
 }

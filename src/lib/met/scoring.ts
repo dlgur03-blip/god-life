@@ -32,6 +32,9 @@ export function calculateScores(answers: Answer[]): DimensionScores {
       applyWeights(rawScores, rawCounts, question.weights, normalized);
     } else {
       // Forced choice, scenario, metaphor
+      // Skip scoring for custom "OTHER:" answers — AI will interpret them directly
+      if (answer.answer.startsWith('OTHER:')) continue;
+
       const selectedOption = question.options.find(
         (o) => o.key === answer.answer
       );

@@ -704,6 +704,15 @@
     "motivationDNA": "동기 DNA",
     "idealEnvironment": "이상적 환경",
     "growthAdvice": "성장 조언",
+    "coreDesire": "근원적 욕망",
+    "coreFear": "근원적 두려움",
+    "thingsToDiscard": "버려야 할 것들",
+    "hiddenPattern": "숨겨진 패턴",
+    "toxicEnvironment": "피해야 할 환경",
+    "peopleToSeek": "찾아야 할 사람들",
+    "peopleToAvoid": "거리를 둬야 할 사람들",
+    "godLifeStrategy": "갓생메이커 활용 전략",
+    "bookRecommendations": "추천 도서",
     "mantra": "당신의 만트라",
     "shareResult": "결과 공유하기",
     "copyLink": "링크 복사",
@@ -735,6 +744,8 @@
       "6": "그렇다",
       "7": "매우 그렇다"
     },
+    "other": "직접 입력",
+    "otherPlaceholder": "나만의 답변을 적어주세요...",
     "questions": {
       "Q1": {
         "text": "새로운 도전이 눈앞에 있으면 가슴이 뛴다."
