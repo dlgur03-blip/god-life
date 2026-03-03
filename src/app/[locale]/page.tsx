@@ -1,5 +1,5 @@
 import { Link } from '@/navigation';
-import { Compass, Trophy, Activity, Mail, BookOpen, Wallet, LogIn, LogOut } from 'lucide-react';
+import { Compass, Trophy, Activity, Mail, BookOpen, Wallet, Brain, LogIn, LogOut } from 'lucide-react';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
@@ -79,14 +79,23 @@ export default async function Home() {
         <p className="text-[var(--foreground-muted)] mb-6 sm:mb-8 text-base sm:text-xl max-w-md leading-relaxed">
           {t('subtitle')}
         </p>
-        {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-        <a
-          href="/api/auth/signin"
-          className="px-6 sm:px-8 py-3 border border-[var(--color-secondary)] text-[var(--foreground)] hover:bg-[var(--color-secondary)] hover:text-[var(--background)] transition-all duration-300 font-medium flex items-center gap-2 tracking-wider uppercase text-sm"
-        >
-          <LogIn className="w-4 h-4" />
-          {t('enterSystem')}
-        </a>
+        <div className="flex flex-col sm:flex-row gap-3">
+          {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+          <a
+            href="/api/auth/signin"
+            className="px-6 sm:px-8 py-3 border border-[var(--color-secondary)] text-[var(--foreground)] hover:bg-[var(--color-secondary)] hover:text-[var(--background)] transition-all duration-300 font-medium flex items-center gap-2 tracking-wider uppercase text-sm"
+          >
+            <LogIn className="w-4 h-4" />
+            {t('enterSystem')}
+          </a>
+          <Link
+            href="/met"
+            className="px-6 sm:px-8 py-3 border border-[var(--color-border)] text-[var(--foreground-muted)] hover:border-[var(--color-secondary)] hover:text-[var(--foreground)] transition-all duration-300 font-medium flex items-center gap-2 tracking-wider uppercase text-sm"
+          >
+            <Brain className="w-4 h-4" />
+            {t('modules.met.name')}
+          </Link>
+        </div>
       </main>
     );
   }
@@ -110,6 +119,7 @@ export default async function Home() {
     { name: t('modules.epistle.name'), href: `/epistle/day/${todayStr}`, icon: Mail, desc: t('modules.epistle.desc'), status: stats.epistleStatus, moduleColor: 'var(--color-epistle)' },
     { name: t('modules.bio.name'), href: '/bio', icon: BookOpen, desc: t('modules.bio.desc'), status: { label: t('status.database'), color: 'success' }, moduleColor: 'var(--color-bio)' },
     { name: t('modules.money.name'), href: '/money', icon: Wallet, desc: t('modules.money.desc'), status: { label: t('status.database'), color: 'success' }, moduleColor: 'var(--color-money)' },
+    { name: t('modules.met.name'), href: '/met', icon: Brain, desc: t('modules.met.desc'), status: { label: 'AI', color: 'secondary' }, moduleColor: 'var(--color-secondary)' },
   ];
 
   return (

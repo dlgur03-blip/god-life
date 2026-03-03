@@ -322,6 +322,32 @@ model Goal {
   @@index([parentId])
 }
 
+// MET: Motivation Engine Type (동기원형검사)
+model MetResult {
+  id               String   @id @default(cuid())
+  locale           String
+  answers          Json     // [{questionId, answer, value}]
+  result           Json     // Gemini full response
+  archetypeName    String   // e.g. "고요한 건축가"
+  archetypeEmoji   String   // OG card emoji
+  summaryShort     String   // 1-line summary (OG card)
+  scoreApproach    Int      @default(50)
+  scoreAvoidance   Int      @default(50)
+  scoreIntrinsic   Int      @default(50)
+  scoreExtrinsic   Int      @default(50)
+  scoreAchievement Int      @default(50)
+  scoreAffiliation Int      @default(50)
+  scorePower       Int      @default(50)
+  scoreAutonomy    Int      @default(50)
+  scoreCompetence  Int      @default(50)
+  userId           String?  // optional logged-in user
+  ipHash           String?  // rate limit hash
+  createdAt        DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([userId])
+}
+
 // M10: Money Flow (가계부)
 model MoneyTransaction {
   id        String   @id @default(cuid())

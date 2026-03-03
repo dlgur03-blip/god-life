@@ -35,6 +35,10 @@
       "money": {
         "name": "Money Flow",
         "desc": "Income & Expense Tracking"
+      },
+      "met": {
+        "name": "Motivation Archetype",
+        "desc": "Discover yourself with AI"
       }
     },
     "status": {
@@ -677,6 +681,199 @@
     "deleteConfirm": "Delete this transaction?",
     "edit": "Edit",
     "delete": "Delete"
+  },
+  "Met": {
+    "title": "MET Motivation Archetype Test",
+    "subtitle": "Discover what truly drives you",
+    "description": "A 30-question psychology-based test where AI analyzes your unique motivation archetype",
+    "startTest": "Start Test",
+    "timeEstimate": "About 5-7 minutes",
+    "free": "Free",
+    "noLogin": "No login required",
+    "progress": "{current} / {total}",
+    "next": "Next",
+    "prev": "Previous",
+    "submit": "See Results",
+    "analyzing": "AI is analyzing your motivation archetype...",
+    "analyzingTip": "Generating personalized results based on psychological frameworks",
+    "resultTitle": "Your Motivation Archetype",
+    "yourArchetype": "You are",
+    "dimensionScores": "Dimension Scores",
+    "strengths": "Core Strengths",
+    "blindSpots": "Blind Spots",
+    "motivationDNA": "Motivation DNA",
+    "idealEnvironment": "Ideal Environment",
+    "growthAdvice": "Growth Advice",
+    "mantra": "Your Mantra",
+    "shareResult": "Share Result",
+    "copyLink": "Copy Link",
+    "copied": "Copied!",
+    "shareTwitter": "Share on X",
+    "shareKakao": "Share on KakaoTalk",
+    "retakeTest": "Retake Test",
+    "backToHome": "Home",
+    "errorAnalysis": "An error occurred during analysis. Please try again.",
+    "rateLimited": "Too many requests. Please try again later.",
+    "ogDescription": "{name} - {summary}",
+    "dimensions": {
+      "approach": "Approach",
+      "avoidance": "Avoidance",
+      "intrinsic": "Intrinsic",
+      "extrinsic": "Extrinsic",
+      "achievement": "Achievement",
+      "affiliation": "Affiliation",
+      "power": "Power",
+      "autonomy": "Autonomy",
+      "competence": "Competence"
+    },
+    "likertLabels": {
+      "1": "Strongly disagree",
+      "2": "Disagree",
+      "3": "Slightly disagree",
+      "4": "Neutral",
+      "5": "Slightly agree",
+      "6": "Agree",
+      "7": "Strongly agree"
+    },
+    "questions": {
+      "Q1": { "text": "My heart races when a new challenge appears before me." },
+      "Q2": { "text": "I hesitate to start if there's a chance of failure." },
+      "Q3": { "text": "I can immerse myself in interesting work even without rewards." },
+      "Q4": { "text": "Recognition and rewards from others strongly motivate me." },
+      "Q5": { "text": "I feel the greatest satisfaction when achieving difficult goals." },
+      "Q6": { "text": "Harmony and bonds with people around me are important." },
+      "Q7": { "text": "I feel energized when I exert influence on others." },
+      "Q8": { "text": "I'm most comfortable when I can work my own way." },
+      "Q9": { "text": "Learning new skills or knowledge itself is enjoyable." },
+      "Q10": { "text": "Even if I fail, I find meaning in the challenge itself." },
+      "Q11": { "text": "In conflict situations, I choose to preserve the relationship." },
+      "Q12": { "text": "I work harder when there's a concrete reward system for results." },
+      "Q13": {
+        "text": "Your ideal weekend?",
+        "A": "Trying new experiences (travel, exploring hobbies)",
+        "B": "Recharging with a stable routine (home, familiar places)"
+      },
+      "Q14": {
+        "text": "Why do you start a project?",
+        "A": "Because I genuinely want to do it",
+        "B": "Because I expect good results and rewards"
+      },
+      "Q15": {
+        "text": "Your preferred working style?",
+        "A": "Working freely on my own",
+        "B": "Collaborating with a team"
+      },
+      "Q16": {
+        "text": "Which compliment makes you happier?",
+        "A": "\"Your skills are truly exceptional\"",
+        "B": "\"The team you lead does amazing work\""
+      },
+      "Q17": {
+        "text": "A new project offer arrives. You choose?",
+        "A": "Challenging but would bring great growth if successful",
+        "B": "Stable and something I can execute well"
+      },
+      "Q18": {
+        "text": "Your definition of success?",
+        "A": "Achieving what others said was impossible",
+        "B": "Spending happy times with loved ones"
+      },
+      "Q19": {
+        "text": "Which learning approach appeals to you more?",
+        "A": "Deep expertise in a specialized field",
+        "B": "Practical knowledge I can use immediately"
+      },
+      "Q20": {
+        "text": "Your leadership style?",
+        "A": "Respecting everyone's autonomy while guiding",
+        "B": "Providing clear direction and making decisive calls"
+      },
+      "Q21": {
+        "text": "You've been offered to lead an important project at work. Your first reaction?",
+        "A": "Awesome! A chance to prove my abilities",
+        "B": "Pressure, but let's do well together with the team",
+        "C": "What matters most is whether I can do it my way",
+        "D": "I want to know how much influence it has on the org"
+      },
+      "Q22": {
+        "text": "A close friend achieves major success before you. Your honest feeling?",
+        "A": "A bit anxious, but our relationship matters more",
+        "B": "Inspired! I need to work harder too",
+        "C": "Envious. I want to be in that position too",
+        "D": "Good motivation. I'll keep going my own path"
+      },
+      "Q23": {
+        "text": "If you had a completely free year?",
+        "A": "Immerse in nothing but my interests",
+        "B": "Get certifications or degrees to boost my career",
+        "C": "Train to become an expert in one field",
+        "D": "Travel the world meeting diverse people"
+      },
+      "Q24": {
+        "text": "Serious disagreement in a team project. Your approach?",
+        "A": "Push my opinion through if I'm right",
+        "B": "Listen to everyone and find a harmonious solution",
+        "C": "Use data and logic to find the best answer",
+        "D": "Avoid conflict and go with the flow"
+      },
+      "Q25": {
+        "text": "The biggest reason you'd consider changing jobs?",
+        "A": "Nothing left to learn here",
+        "B": "Higher salary and position available elsewhere",
+        "C": "An environment where I can work autonomously",
+        "D": "Better colleagues and culture elsewhere"
+      },
+      "Q26": {
+        "text": "The most memorable moments in life are when you...",
+        "A": "Achieved a major goal",
+        "B": "Safely overcame a crisis",
+        "C": "Were purely immersed in something",
+        "D": "Were recognized and rewarded"
+      },
+      "Q27": {
+        "text": "Which image best represents your inner self?",
+        "A": "🚀 Rocket — Full speed toward the goal",
+        "B": "🌊 Ocean — Deep, wide waves of connection",
+        "C": "🏔️ Mountain — Solitary but free at the summit",
+        "D": "👑 Crown — Power to impact the world"
+      },
+      "Q28": {
+        "text": "If you were a tree, which one?",
+        "A": "🌳 Oak — Deep roots growing expertise",
+        "B": "🌲 Pine — Delivering results in any environment",
+        "C": "🌸 Cherry — Drawing people together",
+        "D": "🎋 Bamboo — Flexible but unbreakable"
+      },
+      "Q29": {
+        "text": "What's your energy source most like?",
+        "A": "☀️ Sun — Passion rising from within",
+        "B": "💎 Diamond — Value forged under pressure",
+        "C": "🔥 Flame — A presence that illuminates surroundings",
+        "D": "🌱 Sprout — Warm growth together"
+      },
+      "Q30": {
+        "text": "Your play style in the game of life?",
+        "A": "🎯 Main Quest Focus — Goal achievement is priority",
+        "B": "🤝 Guild Master — The journey together is the meaning",
+        "C": "⚔️ Conqueror — Expanding territory and influence",
+        "D": "🗺️ Explorer — Freely exploring uncharted worlds"
+      }
+    },
+    "landing": {
+      "badge": "AI Psychology Test",
+      "heroTitle": "Discover What\nTruly Drives You",
+      "heroDescription": "30 questions based on 3 psychology theories — AI analyzes your unique motivation archetype",
+      "features": {
+        "science": "SDT + McClelland + Regulatory Focus",
+        "ai": "Gemini AI Personalized Analysis",
+        "time": "5-7 minutes",
+        "share": "Shareable Results"
+      }
+    },
+    "home": {
+      "name": "Motivation Archetype",
+      "desc": "Discover yourself with AI"
+    }
   },
   "Footer": {
     "feedbackAndInquiries": "Feedback & Inquiries"
