@@ -26,9 +26,6 @@ export default function FloatingChat({ locale }: FloatingChatProps) {
   const [loading, setLoading] = useState(false);
   const [autoOpened, setAutoOpened] = useState(false);
 
-  // Don't render for unauthenticated users
-  if (!session?.user) return null;
-
   const loadChat = useCallback(async () => {
     if (data) return;
     setLoading(true);
@@ -47,11 +44,10 @@ export default function FloatingChat({ locale }: FloatingChatProps) {
 
   // Auto-open for first-time users (no chat history)
   useEffect(() => {
-    if (autoOpened) return;
+    if (!session?.user || autoOpened) return;
     const seen = localStorage.getItem('godlife-chat-seen');
-    if (!seen && session?.user) {
+    if (!seen) {
       setAutoOpened(true);
-      // Small delay so page renders first
       const timer = setTimeout(() => {
         setOpen(true);
         loadChat();
@@ -59,6 +55,9 @@ export default function FloatingChat({ locale }: FloatingChatProps) {
       return () => clearTimeout(timer);
     }
   }, [session, autoOpened, loadChat]);
+
+  // Don't render for unauthenticated users
+  if (!session?.user) return null;
 
   const handleOpen = () => {
     setOpen(true);
