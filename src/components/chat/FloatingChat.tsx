@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { MessageCircle, X, Minimize2 } from 'lucide-react';
 import { useSession } from 'next-auth/react';
+import { useTranslations } from 'next-intl';
 import ChatInterface from './ChatInterface';
-import OnboardingSurvey from './OnboardingSurvey';
 
 interface FloatingChatProps {
   locale: string;
@@ -20,34 +20,54 @@ interface ChatData {
 
 export default function FloatingChat({ locale }: FloatingChatProps) {
   const { data: session } = useSession();
+  const t = useTranslations('Chat');
   const [open, setOpen] = useState(false);
   const [data, setData] = useState<ChatData | null>(null);
   const [loading, setLoading] = useState(false);
-  const [onboarded, setOnboarded] = useState(true);
+  const [autoOpened, setAutoOpened] = useState(false);
 
   // Don't render for unauthenticated users
   if (!session?.user) return null;
 
-  const loadChat = async () => {
-    if (data) return; // already loaded
+  const loadChat = useCallback(async () => {
+    if (data) return;
     setLoading(true);
     try {
       const res = await fetch(`/${locale}/chat/api`);
       if (res.ok) {
         const chatData = await res.json();
         setData(chatData);
-        setOnboarded(chatData.hasOnboarding);
       }
     } catch {
-      // Fallback: try server action
+      // silently fail
     } finally {
       setLoading(false);
     }
-  };
+  }, [data, locale]);
+
+  // Auto-open for first-time users (no chat history)
+  useEffect(() => {
+    if (autoOpened) return;
+    const seen = localStorage.getItem('godlife-chat-seen');
+    if (!seen && session?.user) {
+      setAutoOpened(true);
+      // Small delay so page renders first
+      const timer = setTimeout(() => {
+        setOpen(true);
+        loadChat();
+      }, 1500);
+      return () => clearTimeout(timer);
+    }
+  }, [session, autoOpened, loadChat]);
 
   const handleOpen = () => {
     setOpen(true);
     loadChat();
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    localStorage.setItem('godlife-chat-seen', 'true');
   };
 
   return (
@@ -67,13 +87,8 @@ export default function FloatingChat({ locale }: FloatingChatProps) {
       {/* Chat Overlay */}
       {open && (
         <div className="fixed inset-0 z-50 flex items-end sm:items-end sm:justify-end">
-          {/* Backdrop (mobile full, desktop partial) */}
-          <div
-            className="absolute inset-0 bg-black/30 sm:bg-transparent"
-            onClick={() => setOpen(false)}
-          />
+          <div className="absolute inset-0 bg-black/30 sm:bg-transparent" onClick={handleClose} />
 
-          {/* Chat Panel */}
           <div
             className="relative z-10 w-full h-[85vh] sm:w-[420px] sm:h-[600px] sm:m-6 bg-[var(--background)] border border-[var(--color-border)] shadow-2xl flex flex-col overflow-hidden"
             style={{ borderRadius: 'var(--radius-lg)' }}
@@ -85,21 +100,15 @@ export default function FloatingChat({ locale }: FloatingChatProps) {
                   <MessageCircle className="w-4 h-4 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-[var(--foreground)]">AI 갓생코치</h3>
-                  <p className="text-[10px] text-[var(--foreground-muted)]">하루를 함께 기록해요</p>
+                  <h3 className="text-sm font-bold text-[var(--foreground)]">{t('title')}</h3>
+                  <p className="text-[10px] text-[var(--foreground-muted)]">{t('floatingSubtitle')}</p>
                 </div>
               </div>
               <div className="flex items-center gap-1">
-                <button
-                  onClick={() => setOpen(false)}
-                  className="p-1.5 text-[var(--foreground-muted)] hover:text-[var(--foreground)] transition-colors"
-                >
+                <button onClick={handleClose} className="p-1.5 text-[var(--foreground-muted)] hover:text-[var(--foreground)] transition-colors">
                   <Minimize2 className="w-4 h-4" />
                 </button>
-                <button
-                  onClick={() => setOpen(false)}
-                  className="p-1.5 text-[var(--foreground-muted)] hover:text-[var(--foreground)] transition-colors"
-                >
+                <button onClick={handleClose} className="p-1.5 text-[var(--foreground-muted)] hover:text-[var(--foreground)] transition-colors">
                   <X className="w-4 h-4" />
                 </button>
               </div>
@@ -113,13 +122,7 @@ export default function FloatingChat({ locale }: FloatingChatProps) {
                 </div>
               )}
 
-              {!loading && data && !onboarded && (
-                <div className="h-full overflow-y-auto">
-                  <OnboardingSurvey onComplete={() => setOnboarded(true)} />
-                </div>
-              )}
-
-              {!loading && data && onboarded && (
+              {!loading && data && (
                 <ChatInterface
                   sessionId={data.sessionId}
                   initialMessages={data.messages}

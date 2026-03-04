@@ -1023,6 +1023,7 @@
   },
   "Chat": {
     "title": "AI生活教练",
+    "floatingSubtitle": "通过对话记录你的一天",
     "welcomeTitle": "欢迎来到生活教练！",
     "welcomeDesc": "告诉我你的一天。我会通过对话帮你自动填写模块。",
     "placeholder": "今天过得怎么样？",

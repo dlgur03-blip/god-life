@@ -1022,6 +1022,7 @@
   },
   "Chat": {
     "title": "AIライフコーチ",
+    "floatingSubtitle": "会話で一日を記録しよう",
     "welcomeTitle": "ライフコーチへようこそ！",
     "welcomeDesc": "今日の出来事を教えてください。会話を通じてモジュールを自動で入力します。",
     "placeholder": "今日はどんな一日でしたか？",

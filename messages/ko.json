@@ -1046,6 +1046,7 @@
   },
   "Chat": {
     "title": "AI 갓생코치",
+    "floatingSubtitle": "대화로 하루를 기록해요",
     "welcomeTitle": "갓생코치에 오신 걸 환영해요!",
     "welcomeDesc": "오늘 하루에 대해 이야기해주세요. 대화를 통해 모듈을 자동으로 채워드릴게요.",
     "placeholder": "오늘 어떤 하루였나요?",

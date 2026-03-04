@@ -1022,6 +1022,7 @@
   },
   "Chat": {
     "title": "AI Life Coach",
+    "floatingSubtitle": "Record your day through conversation",
     "welcomeTitle": "Welcome to your Life Coach!",
     "welcomeDesc": "Tell me about your day. I'll help fill your modules through conversation.",
     "placeholder": "How was your day?",
