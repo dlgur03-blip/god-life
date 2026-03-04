@@ -1,6 +1,6 @@
 'use client';
 
-import { LayoutDashboard, Users, FileText, Server } from 'lucide-react';
+import { LayoutDashboard, Users, Server } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Link, usePathname } from '@/navigation';
 import { cn } from '@/lib/utils';
@@ -8,7 +8,6 @@ import { cn } from '@/lib/utils';
 const navItems = [
   { href: '/admin', icon: LayoutDashboard, labelKey: 'nav.dashboard' },
   { href: '/admin/users', icon: Users, labelKey: 'nav.users' },
-  { href: '/admin/bio', icon: FileText, labelKey: 'nav.bio' },
   { href: '/admin/system', icon: Server, labelKey: 'nav.system' },
 ];
 
