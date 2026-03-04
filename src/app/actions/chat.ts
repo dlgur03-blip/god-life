@@ -90,7 +90,13 @@ async function getChatContext(userId: string): Promise<ChatContextData> {
   const timezone = await getUserTimezone();
   const today = getTodayStr(timezone);
 
-  const [onboarding, epistle, rules, destinyDay, moneyTx] = await Promise.all([
+  // Calculate yesterday
+  const todayDate = new Date(today + 'T00:00:00');
+  const yesterdayDate = new Date(todayDate);
+  yesterdayDate.setDate(yesterdayDate.getDate() - 1);
+  const yesterday = yesterdayDate.toISOString().split('T')[0];
+
+  const [onboarding, epistle, rules, destinyToday, destinyYesterday, moneyTx] = await Promise.all([
     prisma.userOnboarding.findUnique({ where: { userId } }),
     prisma.epistleDay.findUnique({ where: { userId_date: { userId, date: today } } }),
     prisma.disciplineRule.findMany({
@@ -98,11 +104,20 @@ async function getChatContext(userId: string): Promise<ChatContextData> {
       include: { checks: { where: { date: today } } },
     }),
     prisma.destinyDay.findUnique({ where: { userId_date: { userId, date: today } } }),
+    prisma.destinyDay.findUnique({ where: { userId_date: { userId, date: yesterday } } }),
     prisma.moneyTransaction.findFirst({ where: { userId, date: today } }),
   ]);
 
   const disciplineTotal = rules.length;
   const disciplineChecked = rules.filter((r) => r.checks.length > 0).length;
+
+  const pickDestiny = (d: typeof destinyToday) => d ? {
+    goalToday: d.goalToday, goal1Week: d.goal1Week, goal2Week: d.goal2Week,
+    goal1Month: d.goal1Month, goal3Month: d.goal3Month, goal6Month: d.goal6Month,
+    goal1Year: d.goal1Year, goal3Year: d.goal3Year, goal5Year: d.goal5Year,
+    goal10Year: d.goal10Year, goalUltimate: d.goalUltimate,
+    habitToKeep: d.habitToKeep, habitToRemove: d.habitToRemove, restTime: d.restTime,
+  } : null;
 
   return {
     onboarding: onboarding
@@ -118,10 +133,12 @@ async function getChatContext(userId: string): Promise<ChatContextData> {
       epistleWritten: !!(epistle?.gratitude1 || epistle?.reflection1),
       disciplineChecked,
       disciplineTotal,
-      destinyPlanned: !!(destinyDay?.goalToday),
+      destinyPlanned: !!(destinyToday?.goalToday),
       moneyLogged: !!moneyTx,
       successUpdated: false,
     },
+    destinyToday: pickDestiny(destinyToday),
+    destinyYesterday: pickDestiny(destinyYesterday),
     recentMessages: [],
   };
 }

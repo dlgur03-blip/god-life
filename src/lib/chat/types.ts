@@ -13,7 +13,7 @@ export interface EpistleFillData {
 }
 
 export interface DestinyGoalData {
-  field: 'goalUltimate' | 'goal10Year' | 'goal5Year' | 'goal3Year' | 'goal1Year' | 'goal6Month' | 'goal3Month' | 'goal1Month' | 'goal2Week' | 'goal1Week' | 'goalToday' | 'habitToKeep' | 'habitToRemove';
+  field: 'goalUltimate' | 'goal10Year' | 'goal5Year' | 'goal3Year' | 'goal1Year' | 'goal6Month' | 'goal3Month' | 'goal1Month' | 'goal2Week' | 'goal1Week' | 'goalToday' | 'habitToKeep' | 'habitToRemove' | 'restTime';
   value: string;
 }
 
@@ -22,6 +22,23 @@ export interface MoneyTransactionData {
   category: string;
   amount: number;
   memo?: string;
+}
+
+export interface DestinySnapshot {
+  goalToday?: string | null;
+  goal1Week?: string | null;
+  goal2Week?: string | null;
+  goal1Month?: string | null;
+  goal3Month?: string | null;
+  goal6Month?: string | null;
+  goal1Year?: string | null;
+  goal3Year?: string | null;
+  goal5Year?: string | null;
+  goal10Year?: string | null;
+  goalUltimate?: string | null;
+  habitToKeep?: string | null;
+  habitToRemove?: string | null;
+  restTime?: string | null;
 }
 
 export interface ChatContextData {
@@ -40,5 +57,7 @@ export interface ChatContextData {
     moneyLogged: boolean;
     successUpdated: boolean;
   };
+  destinyToday: DestinySnapshot | null;
+  destinyYesterday: DestinySnapshot | null;
   recentMessages: { role: string; content: string }[];
 }
