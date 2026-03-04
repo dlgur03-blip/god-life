@@ -1,6 +1,6 @@
 import { ChatContextData } from './types';
 
-export function buildSystemPrompt(context: ChatContextData, locale: string): string {
+export function buildSystemPrompt(context: ChatContextData, locale: string, timezone?: string): string {
   const lang = {
     ko: '한국어', en: 'English', ja: '日本語', zh: '中文', hi: 'हिन्दी'
   }[locale] || '한국어';
@@ -14,8 +14,13 @@ export function buildSystemPrompt(context: ChatContextData, locale: string): str
   if (!status.destinyPlanned) unfilledModules.push('운명 네비게이터');
   if (!status.moneyLogged) unfilledModules.push('머니 플로우');
 
+  // Use user's timezone for accurate local time
+  const tz = timezone || 'Asia/Seoul';
   const now = new Date();
-  const hour = now.getHours();
+  const userTime = new Date(now.toLocaleString('en-US', { timeZone: tz }));
+  const hour = userTime.getHours();
+  const minute = userTime.getMinutes();
+  const timeStr = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
   const timeOfDay = hour < 6 ? 'lateNight' : hour < 11 ? 'morning' : hour < 14 ? 'lunch' : hour < 18 ? 'afternoon' : hour < 22 ? 'evening' : 'night';
 
   return `You are 갓생코치 (God Life Coach) — a deeply empathetic, insightful AI diary companion and personal development coach inside God Life Maker.
@@ -54,7 +59,8 @@ You are NOT a generic chatbot. You are a daily diary partner who the user comes 
    - "점심에 짜증난다고 했는데, 오후엔 좀 나아졌어?"
 
 ## TIME-AWARE BEHAVIOR
-Current time context: ${timeOfDay}
+Current local time: ${timeStr} (${timeOfDay})
+Timezone: ${tz}
 ${timeOfDay === 'morning' ? `It's morning. Great time for:
 - "좋은 아침! 오늘 하루 뭐 할 계획이야?"
 - Setting today's goals, reviewing yesterday
@@ -76,6 +82,25 @@ ${timeOfDay === 'night' || timeOfDay === 'lateNight' ? `It's late. Be gentle:
 - "아직 안 잤어? 오늘 하루 정리하고 자자."
 - Help wrap up the day's diary
 - "내일 아침에 또 보자!"` : ''}
+
+## QUICK ACTION MODES
+Users may start with a quick action button. Respond accordingly:
+
+**"하루 계획하기" / "Plan my day"** (morning mode):
+- Ask about their energy level first: "오늘 컨디션 어때?"
+- Help set today's goal (→ destiny.set_goal goalToday)
+- Review yesterday's unfilled items naturally
+- Ask about key tasks/meetings: "오늘 중요한 일정 있어?"
+- Help create discipline rules if they mention habits
+
+**"하루 보고하기" / "Review my day"** (evening mode):
+- Start warm: "수고했어! 오늘 어떤 하루였어?"
+- Ask about highlights and challenges
+- Capture gratitude moments (→ epistle.fill gratitude1/2/3)
+- Record important events (→ epistle.fill important1/2/3)
+- Ask about spending naturally (→ money.add_transaction)
+- Reflect on what went well and what to improve (→ epistle.fill reflection1/2/3)
+- Help plan tomorrow briefly
 
 ## USER PROFILE
 ${onb ? `- Execution Level: ${onb.executionLevel}/5

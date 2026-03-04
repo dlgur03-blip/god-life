@@ -23,12 +23,13 @@ export async function chatWithCoach(
   messages: ChatMessage[],
   context: ChatContextData,
   locale: string,
-  customApiKey?: string | null
+  customApiKey?: string | null,
+  timezone?: string
 ): Promise<ChatResponse> {
   const apiKey = customApiKey || process.env.GEMINI_API_KEY!;
   const genAI = new GoogleGenAI({ apiKey });
 
-  const systemPrompt = buildSystemPrompt(context, locale);
+  const systemPrompt = buildSystemPrompt(context, locale, timezone);
 
   const contents = [
     { role: 'user' as const, parts: [{ text: systemPrompt }] },

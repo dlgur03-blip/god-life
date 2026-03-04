@@ -1052,6 +1052,8 @@
       "keyActive": "Key active",
       "removeKey": "Remove"
     },
+    "quickPlan": "Plan my day",
+    "quickReport": "Review my day",
     "quickEpistle": "Tell me about my day",
     "quickGoal": "I want to set weekly goals",
     "quickMoney": "Record today's spending",

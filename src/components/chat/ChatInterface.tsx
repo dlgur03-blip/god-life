@@ -22,14 +22,16 @@ interface ChatInterfaceProps {
   locale: string;
   credits: number;
   hasApiKey: boolean;
+  initialPrompt?: string;
 }
 
-export default function ChatInterface({ sessionId, initialMessages, locale, credits: initCredits, hasApiKey }: ChatInterfaceProps) {
+export default function ChatInterface({ sessionId, initialMessages, locale, credits: initCredits, hasApiKey, initialPrompt }: ChatInterfaceProps) {
   const t = useTranslations('Chat');
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [credits, setCredits] = useState(initCredits);
+  const [promptSent, setPromptSent] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
@@ -43,8 +45,7 @@ export default function ChatInterface({ sessionId, initialMessages, locale, cred
 
   const noCredits = !hasApiKey && credits <= 0;
 
-  const handleSend = async () => {
-    const text = input.trim();
+  const sendMessage = async (text: string) => {
     if (!text || loading || noCredits) return;
 
     const userMsg: Message = { id: `user-${Date.now()}`, role: 'user', content: text };
@@ -85,6 +86,17 @@ export default function ChatInterface({ sessionId, initialMessages, locale, cred
       setLoading(false);
     }
   };
+
+  const handleSend = () => sendMessage(input.trim());
+
+  // Auto-send initialPrompt when provided (e.g. from quick action buttons)
+  useEffect(() => {
+    if (initialPrompt && !promptSent && !loading && messages.length === 0) {
+      setPromptSent(true);
+      sendMessage(initialPrompt);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialPrompt, promptSent, loading]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {

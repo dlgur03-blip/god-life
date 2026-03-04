@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { MessageCircle, X, Minimize2 } from 'lucide-react';
+import { MessageCircle, X, Minimize2, Sunrise, Moon } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import ChatInterface from './ChatInterface';
@@ -25,6 +25,10 @@ export default function FloatingChat({ locale }: FloatingChatProps) {
   const [data, setData] = useState<ChatData | null>(null);
   const [loading, setLoading] = useState(false);
   const [autoOpened, setAutoOpened] = useState(false);
+  const [initialPrompt, setInitialPrompt] = useState<string | undefined>();
+
+  const hour = new Date().getHours();
+  const isMorning = hour >= 5 && hour < 14;
 
   const loadChat = useCallback(async () => {
     if (data) return;
@@ -59,7 +63,8 @@ export default function FloatingChat({ locale }: FloatingChatProps) {
   // Don't render for unauthenticated users
   if (!session?.user) return null;
 
-  const handleOpen = () => {
+  const handleOpen = (prompt?: string) => {
+    setInitialPrompt(prompt);
     setOpen(true);
     loadChat();
   };
@@ -71,16 +76,28 @@ export default function FloatingChat({ locale }: FloatingChatProps) {
 
   return (
     <>
-      {/* FAB Button */}
+      {/* FAB Button + Quick Actions */}
       {!open && (
-        <button
-          onClick={handleOpen}
-          className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-[var(--color-secondary)] text-white shadow-lg hover:scale-105 active:scale-95 transition-transform flex items-center justify-center"
-          style={{ borderRadius: '50%' }}
-          aria-label="AI Coach"
-        >
-          <MessageCircle className="w-6 h-6" />
-        </button>
+        <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
+          {/* Quick action button - time-based */}
+          <button
+            onClick={() => handleOpen(isMorning ? t('quickPlan') : t('quickReport'))}
+            className="flex items-center gap-2 px-3 py-2 bg-[var(--color-card-bg)] border border-[var(--color-border)] text-[var(--foreground)] shadow-lg hover:border-[var(--color-secondary)] hover:text-[var(--color-secondary)] transition-colors text-xs"
+            style={{ borderRadius: 'var(--radius-lg)' }}
+          >
+            {isMorning ? <Sunrise className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            {isMorning ? t('quickPlan') : t('quickReport')}
+          </button>
+          {/* Main FAB */}
+          <button
+            onClick={() => handleOpen()}
+            className="w-14 h-14 bg-[var(--color-secondary)] text-white shadow-lg hover:scale-105 active:scale-95 transition-transform flex items-center justify-center"
+            style={{ borderRadius: '50%' }}
+            aria-label="AI Coach"
+          >
+            <MessageCircle className="w-6 h-6" />
+          </button>
+        </div>
       )}
 
       {/* Chat Overlay */}
@@ -128,6 +145,7 @@ export default function FloatingChat({ locale }: FloatingChatProps) {
                   locale={locale}
                   credits={data.credits}
                   hasApiKey={data.hasApiKey}
+                  initialPrompt={initialPrompt}
                 />
               )}
             </div>

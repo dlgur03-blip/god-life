@@ -224,13 +224,15 @@ export async function sendChatMessage(sessionId: string, content: string, locale
   }));
 
   const context = await getChatContext(user.id);
+  const timezone = await getUserTimezone();
 
   // Call AI (with user's key or system key)
   const response = await chatWithCoach(
     messages,
     context,
     locale,
-    useOwnKey ? user.geminiApiKey : null
+    useOwnKey ? user.geminiApiKey : null,
+    timezone
   );
 
   // Credit cost: 0.1 per call (skip for admin/BYOK)
