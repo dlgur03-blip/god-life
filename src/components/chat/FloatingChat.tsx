@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { MessageCircle, X, Minimize2, Sunrise, Moon } from 'lucide-react';
+import { MessageCircle, X, Minimize2, Sunrise, Moon, StickyNote } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import ChatInterface from './ChatInterface';
@@ -26,9 +26,7 @@ export default function FloatingChat({ locale }: FloatingChatProps) {
   const [loading, setLoading] = useState(false);
   const [autoOpened, setAutoOpened] = useState(false);
   const [initialPrompt, setInitialPrompt] = useState<string | undefined>();
-
-  const hour = new Date().getHours();
-  const isMorning = hour >= 5 && hour < 14;
+  const [showActions, setShowActions] = useState(false);
 
   const loadChat = useCallback(async () => {
     if (data) return;
@@ -66,6 +64,7 @@ export default function FloatingChat({ locale }: FloatingChatProps) {
   const handleOpen = (prompt?: string) => {
     setInitialPrompt(prompt);
     setOpen(true);
+    setShowActions(false);
     loadChat();
   };
 
@@ -74,30 +73,50 @@ export default function FloatingChat({ locale }: FloatingChatProps) {
     localStorage.setItem('godlife-chat-seen', 'true');
   };
 
+  const quickActions = [
+    { key: 'quickPlan', icon: Sunrise, color: 'var(--color-destiny)' },
+    { key: 'quickReport', icon: Moon, color: 'var(--color-epistle)' },
+    { key: 'quickMemo', icon: StickyNote, color: 'var(--color-secondary)' },
+  ] as const;
+
   return (
     <>
-      {/* FAB Button + Quick Actions */}
+      {/* FAB + Quick Actions */}
       {!open && (
         <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
-          {/* Quick action button - time-based */}
-          <button
-            onClick={() => handleOpen(isMorning ? t('quickPlan') : t('quickReport'))}
-            className="flex items-center gap-2 px-3 py-2 bg-[var(--color-card-bg)] border border-[var(--color-border)] text-[var(--foreground)] shadow-lg hover:border-[var(--color-secondary)] hover:text-[var(--color-secondary)] transition-colors text-xs"
-            style={{ borderRadius: 'var(--radius-lg)' }}
-          >
-            {isMorning ? <Sunrise className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-            {isMorning ? t('quickPlan') : t('quickReport')}
-          </button>
+          {/* Quick action buttons - always 3 */}
+          {showActions && quickActions.map(({ key, icon: Icon, color }) => (
+            <button
+              key={key}
+              onClick={() => handleOpen(t(key))}
+              className="flex items-center gap-2 px-3 py-2 bg-[var(--color-card-bg)] border border-[var(--color-border)] text-[var(--foreground)] shadow-lg hover:shadow-xl transition-all text-xs animate-in fade-in slide-in-from-bottom-2"
+              style={{ borderRadius: 'var(--radius-lg)' }}
+            >
+              <Icon className="w-4 h-4" style={{ color }} />
+              {t(key)}
+            </button>
+          ))}
           {/* Main FAB */}
           <button
-            onClick={() => handleOpen()}
+            onClick={() => {
+              if (showActions) {
+                handleOpen();
+              } else {
+                setShowActions(true);
+              }
+            }}
             className="w-14 h-14 bg-[var(--color-secondary)] text-white shadow-lg hover:scale-105 active:scale-95 transition-transform flex items-center justify-center"
             style={{ borderRadius: '50%' }}
             aria-label="AI Coach"
           >
-            <MessageCircle className="w-6 h-6" />
+            {showActions ? <MessageCircle className="w-6 h-6" /> : <MessageCircle className="w-6 h-6" />}
           </button>
         </div>
+      )}
+
+      {/* Backdrop to close actions */}
+      {!open && showActions && (
+        <div className="fixed inset-0 z-40" onClick={() => setShowActions(false)} />
       )}
 
       {/* Chat Overlay */}

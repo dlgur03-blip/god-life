@@ -96,7 +96,7 @@ async function getChatContext(userId: string): Promise<ChatContextData> {
   yesterdayDate.setDate(yesterdayDate.getDate() - 1);
   const yesterday = yesterdayDate.toISOString().split('T')[0];
 
-  const [onboarding, epistle, rules, destinyToday, destinyYesterday, moneyTx] = await Promise.all([
+  const [onboarding, epistle, rules, destinyToday, destinyYesterday, moneyTx, memos] = await Promise.all([
     prisma.userOnboarding.findUnique({ where: { userId } }),
     prisma.epistleDay.findUnique({ where: { userId_date: { userId, date: today } } }),
     prisma.disciplineRule.findMany({
@@ -106,6 +106,7 @@ async function getChatContext(userId: string): Promise<ChatContextData> {
     prisma.destinyDay.findUnique({ where: { userId_date: { userId, date: today } } }),
     prisma.destinyDay.findUnique({ where: { userId_date: { userId, date: yesterday } } }),
     prisma.moneyTransaction.findFirst({ where: { userId, date: today } }),
+    prisma.memo.findMany({ where: { userId, date: today }, orderBy: { createdAt: 'asc' } }),
   ]);
 
   const disciplineTotal = rules.length;
@@ -139,6 +140,12 @@ async function getChatContext(userId: string): Promise<ChatContextData> {
     },
     destinyToday: pickDestiny(destinyToday),
     destinyYesterday: pickDestiny(destinyYesterday),
+    todayMemos: memos.map(m => ({
+      content: m.content,
+      tags: (m.tags as string[]) || [],
+      time: m.time,
+      reviewed: m.reviewed,
+    })),
     recentMessages: [],
   };
 }
@@ -194,6 +201,21 @@ async function executeActions(userId: string, actions: ModuleAction[]) {
           data: { userId, title: action.data.title, startDate: new Date() },
         });
         executed.push(`성공: ${action.data.title}`);
+      }
+      if (action.module === 'memo' && action.type === 'save') {
+        const now = new Date();
+        const userTime = new Date(now.toLocaleString('en-US', { timeZone: timezone }));
+        const time = `${userTime.getHours().toString().padStart(2, '0')}:${userTime.getMinutes().toString().padStart(2, '0')}`;
+        await prisma.memo.create({
+          data: {
+            userId,
+            content: action.data.content,
+            tags: action.data.tags || [],
+            date: today,
+            time,
+          },
+        });
+        executed.push(`메모: ${action.data.content.substring(0, 20)}...`);
       }
     } catch (e) {
       console.error('Action execution failed:', action, e);
@@ -337,4 +359,38 @@ export async function saveOnboarding(data: {
 export async function getOnboardingStatus() {
   const user = await getUser();
   return prisma.userOnboarding.findUnique({ where: { userId: user.id } });
+}
+
+// ── Memo functions ──
+export async function saveMemo(content: string, tags: string[]) {
+  const user = await getUser();
+  const timezone = await getUserTimezone();
+  const date = getTodayStr(timezone);
+  const now = new Date();
+  const userTime = new Date(now.toLocaleString('en-US', { timeZone: timezone }));
+  const time = `${userTime.getHours().toString().padStart(2, '0')}:${userTime.getMinutes().toString().padStart(2, '0')}`;
+
+  const memo = await prisma.memo.create({
+    data: { userId: user.id, content, tags, date, time },
+  });
+  return { id: memo.id, time };
+}
+
+export async function getTodayMemos() {
+  const user = await getUser();
+  const timezone = await getUserTimezone();
+  const date = getTodayStr(timezone);
+
+  return prisma.memo.findMany({
+    where: { userId: user.id, date },
+    orderBy: { createdAt: 'asc' },
+  });
+}
+
+export async function markMemosReviewed(memoIds: string[]) {
+  const user = await getUser();
+  await prisma.memo.updateMany({
+    where: { id: { in: memoIds }, userId: user.id },
+    data: { reviewed: true },
+  });
 }

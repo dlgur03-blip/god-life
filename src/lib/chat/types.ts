@@ -5,6 +5,7 @@ export type ModuleAction =
   | { module: 'destiny'; type: 'set_goal'; data: DestinyGoalData }
   | { module: 'money'; type: 'add_transaction'; data: MoneyTransactionData }
   | { module: 'success'; type: 'create_project'; data: { title: string } }
+  | { module: 'memo'; type: 'save'; data: { content: string; tags: string[] } }
   | { module: 'nudge'; type: 'suggest'; data: { targetModule: string; message: string } };
 
 export interface EpistleFillData {
@@ -59,5 +60,6 @@ export interface ChatContextData {
   };
   destinyToday: DestinySnapshot | null;
   destinyYesterday: DestinySnapshot | null;
+  todayMemos: { content: string; tags: string[]; time: string; reviewed: boolean }[];
   recentMessages: { role: string; content: string }[];
 }

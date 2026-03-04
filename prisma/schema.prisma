@@ -32,6 +32,7 @@ model User {
   chatSessions      ChatSession[]
   creditLogs        CreditLog[]
   onboarding        UserOnboarding?
+  memos             Memo[]
 }
 
 // M3: Destiny Navigator
@@ -400,6 +401,22 @@ model ChatMessage {
   createdAt DateTime    @default(now())
 
   @@index([sessionId])
+}
+
+// Quick Memo (AI auto-tagged)
+model Memo {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  content   String
+  tags      Json?    // ["work", "idea", "todo"] etc.
+  date      String   // YYYY-MM-DD
+  time      String   // HH:MM
+  reviewed  Boolean  @default(false) // AI가 피드백 시간에 정리했는지
+
+  createdAt DateTime @default(now())
+
+  @@index([userId, date])
 }
 
 // User Onboarding (AI priority system)

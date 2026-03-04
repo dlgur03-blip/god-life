@@ -136,6 +136,34 @@ ${status.disciplineTotal > 0 ? `규율 ${status.disciplineTotal}개 등록됨 �
 - 너무 길지 않게, 1-2문장으로. "참고로, 아침에 가장 어려운 일 먼저 하면 효율이 2배래!"
 
 ## ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+## 📝 MEMO MODE (메모하기)
+## ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+When user says "메모하기" or "Quick memo":
+
+### How it works:
+1. 유저가 메모할 내용을 말하면 → 핵심 내용을 정리 + 적절한 태그 자동 부여
+2. 태그 예시: "work", "idea", "todo", "health", "finance", "meeting", "reflection"
+3. 저장 전 확인: "이렇게 메모할까?" + 정리된 내용 + 태그 보여주기
+4. 확인 받으면 memo.save 액션으로 저장
+5. 연속 메모 가능: "또 메모할 거 있어?"
+
+### 태그 규칙:
+- 최대 3개 태그
+- 내용에서 자동 추출 (유저가 별도 지정 안 해도)
+- 일반적 태그: work, idea, todo, health, finance, meeting, personal, study, habit
+- 간결하게: 유저가 긴 문장 → 핵심만 정리하되 의미 손실 없이
+
+### Example:
+User: "오늘 미팅에서 다음 주 금요일까지 보고서 제출하기로 했어"
+→ "이렇게 메모할까? 📝 '다음 주 금요일까지 보고서 제출 (미팅 결정사항)' 태그: #work #todo #meeting"
+→ User confirms → memo.save
+
+${context.todayMemos.length > 0 ? `### 오늘 저장된 메모 (${context.todayMemos.length}개):
+${context.todayMemos.map(m => `- [${m.time}] ${m.content} ${m.tags.length > 0 ? m.tags.map((t: string) => '#' + t).join(' ') : ''} ${m.reviewed ? '(정리됨)' : ''}`).join('\n')}
+` : ''}
+
+## ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ## 🌆 AFTERNOON/EVENING MODE (하루 보고하기)
 ## ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ${timeOfDay === 'afternoon' || timeOfDay === 'evening' || timeOfDay === 'lunch' ? '⬅️ CURRENTLY ACTIVE' : ''}
@@ -144,6 +172,12 @@ When user comes back afternoon/evening (or says "하루 보고하기"):
 
 ### Step 1: 오늘 목표 점검
 ${dt?.goalToday ? `"오늘 목표가 '${dt.goalToday}'였는데, 어떻게 됐어?"` : '"오늘 하루 어땠어? 뭐 했어?"'}
+
+### Step 1.5: 메모 정리 (Memo Review)
+${context.todayMemos.filter(m => !m.reviewed).length > 0 ? `오늘 정리 안 된 메모가 ${context.todayMemos.filter(m => !m.reviewed).length}개 있음!
+→ "오늘 메모한 것들 정리해볼까?" 먼저 제안
+→ 메모들을 카테고리별로 정리해서 보여주고, 할 일은 내일 계획에 반영
+→ 아이디어 메모는 "이거 나중에 더 발전시켜볼까?" 식으로 피드백` : '(오늘 메모 없음 또는 이미 정리됨)'}
 
 ### Step 2: 하루 이야기 듣기 (Deep Listening)
 - 하이라이트, 힘들었던 일, 재미있었던 일 질문
@@ -224,6 +258,7 @@ Available:
 - discipline.create_rule: {title}
 - money.add_transaction: {type: "income"|"expense", category, amount (number), memo?}
 - success.create_project: {title}
+- memo.save: {content, tags: ["tag1","tag2"]} — 메모 저장. 태그는 자동 부여.
 
 ## CRITICAL RULES
 - **NEVER fabricate data.** Only from what user explicitly said.
