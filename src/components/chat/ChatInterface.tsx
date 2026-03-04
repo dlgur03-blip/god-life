@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
-import { Send, Bot, User, Zap, Loader2, Coins, Info } from 'lucide-react';
+import { Send, Bot, User, Zap, Loader2, Coins, Info, CheckCircle2, RefreshCw } from 'lucide-react';
 import { sendChatMessage } from '@/app/actions/chat';
 import ChatActionBadge from './ChatActionBadge';
 import CreditBar from './CreditBar';
@@ -32,6 +32,8 @@ export default function ChatInterface({ sessionId, initialMessages, locale, cred
   const [loading, setLoading] = useState(false);
   const [credits, setCredits] = useState(initCredits);
   const [promptSent, setPromptSent] = useState(false);
+  const [syncStatus, setSyncStatus] = useState<'idle' | 'syncing' | 'done'>('idle');
+  const [lastSynced, setLastSynced] = useState<string[]>([]);
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
@@ -42,6 +44,14 @@ export default function ChatInterface({ sessionId, initialMessages, locale, cred
   useEffect(() => {
     if (!loading) inputRef.current?.focus();
   }, [loading]);
+
+  // Auto-hide sync done after 3s
+  useEffect(() => {
+    if (syncStatus === 'done') {
+      const timer = setTimeout(() => setSyncStatus('idle'), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [syncStatus]);
 
   const noCredits = !hasApiKey && credits <= 0;
 
@@ -62,6 +72,14 @@ export default function ChatInterface({ sessionId, initialMessages, locale, cred
         }]);
         setCredits(0);
         return;
+      }
+
+      // Show sync status if actions were executed
+      if (res.executed && res.executed.length > 0) {
+        setSyncStatus('syncing');
+        setLastSynced(res.executed);
+        // Brief delay to show syncing state
+        setTimeout(() => setSyncStatus('done'), 800);
       }
 
       const assistantMsg: Message = {
@@ -89,7 +107,7 @@ export default function ChatInterface({ sessionId, initialMessages, locale, cred
 
   const handleSend = () => sendMessage(input.trim());
 
-  // Auto-send initialPrompt when provided (e.g. from quick action buttons)
+  // Auto-send initialPrompt when provided
   useEffect(() => {
     if (initialPrompt && !promptSent && !loading && messages.length === 0) {
       setPromptSent(true);
@@ -109,6 +127,29 @@ export default function ChatInterface({ sessionId, initialMessages, locale, cred
     <div className="flex flex-col h-full">
       {/* Credit Bar */}
       <CreditBar credits={credits} hasApiKey={hasApiKey} />
+
+      {/* Sync Status Bar */}
+      {syncStatus !== 'idle' && (
+        <div
+          className={`px-3 py-1.5 flex items-center justify-center gap-2 text-xs font-medium transition-all ${
+            syncStatus === 'syncing'
+              ? 'bg-[var(--color-secondary)] bg-opacity-10 text-[var(--color-secondary)]'
+              : 'bg-[var(--color-success)] bg-opacity-10 text-[var(--color-success)]'
+          }`}
+        >
+          {syncStatus === 'syncing' ? (
+            <>
+              <RefreshCw className="w-3 h-3 animate-spin" />
+              {t('syncApplying')}
+            </>
+          ) : (
+            <>
+              <CheckCircle2 className="w-3 h-3" />
+              {t('syncDone')} — {lastSynced.join(', ')}
+            </>
+          )}
+        </div>
+      )}
 
       {/* Messages */}
       <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
@@ -152,15 +193,19 @@ export default function ChatInterface({ sessionId, initialMessages, locale, cred
               >
                 {msg.content}
               </div>
-              {/* Action badges */}
+              {/* Action badges - executed items */}
               {msg.executed && msg.executed.length > 0 && (
-                <div className="flex flex-wrap gap-1">
+                <div className="flex flex-wrap gap-1 mt-0.5">
+                  <span className="text-[10px] text-[var(--color-success)] font-medium flex items-center gap-0.5">
+                    <CheckCircle2 className="w-3 h-3" />
+                    {t('syncApplied')}
+                  </span>
                   {msg.executed.map((ex, i) => (
                     <ChatActionBadge key={i} text={ex} />
                   ))}
                 </div>
               )}
-              {/* Token usage (transparent) */}
+              {/* Token usage */}
               {msg.usage && (
                 <div className="flex items-center gap-2 text-[10px] text-[var(--foreground-muted)] mt-0.5">
                   <Info className="w-3 h-3" />

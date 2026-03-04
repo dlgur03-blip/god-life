@@ -23,33 +23,42 @@ export function buildSystemPrompt(context: ChatContextData, locale: string, time
   const timeStr = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
   const timeOfDay = hour < 6 ? 'lateNight' : hour < 11 ? 'morning' : hour < 14 ? 'lunch' : hour < 18 ? 'afternoon' : hour < 22 ? 'evening' : 'night';
 
-  // Build destiny context strings
+  // Build destiny context — show ALL 10 levels, mark empty ones clearly
   const dy = context.destinyYesterday;
   const dt = context.destinyToday;
 
-  const destinyYesterdayStr = dy ? [
-    dy.goalToday && `오늘 목표: "${dy.goalToday}"`,
-    dy.goal1Week && `1주: "${dy.goal1Week}"`,
-    dy.goal1Month && `1개월: "${dy.goal1Month}"`,
-    dy.goal3Month && `3개월: "${dy.goal3Month}"`,
-    dy.goal1Year && `1년: "${dy.goal1Year}"`,
-    dy.goalUltimate && `궁극: "${dy.goalUltimate}"`,
-    dy.habitToKeep && `유지 습관: "${dy.habitToKeep}"`,
-    dy.habitToRemove && `제거 습관: "${dy.habitToRemove}"`,
-  ].filter(Boolean).join('\n  ') : '(없음 — 첫 사용자)';
+  // Helper: show value or mark as empty
+  const v = (val: string | null | undefined) => val ? `"${val}"` : '⬜ (비어있음)';
 
-  const destinyTodayStr = dt ? [
-    dt.goalToday && `오늘 목표: "${dt.goalToday}"`,
-    dt.goal1Week && `1주: "${dt.goal1Week}"`,
-    dt.goal1Month && `1개월: "${dt.goal1Month}"`,
-    dt.goal3Month && `3개월: "${dt.goal3Month}"`,
-    dt.goal1Year && `1년: "${dt.goal1Year}"`,
-    dt.goalUltimate && `궁극: "${dt.goalUltimate}"`,
-    dt.habitToKeep && `유지 습관: "${dt.habitToKeep}"`,
-    dt.habitToRemove && `제거 습관: "${dt.habitToRemove}"`,
-  ].filter(Boolean).join('\n  ') : '(아직 미설정)';
+  // Full 10-level structure for today (top → bottom)
+  const destinyFullMap = dt ? `
+  ① 궁극의 나 (goalUltimate): ${v(dt.goalUltimate)}
+  ② 10년 후 (goal10Year):     ${v(dt.goal10Year)}
+  ③ 5년 후 (goal5Year):       ${v(dt.goal5Year)}
+  ④ 3년 후 (goal3Year):       ${v(dt.goal3Year)}
+  ⑤ 1년 후 (goal1Year):       ${v(dt.goal1Year)}
+  ⑥ 6개월 (goal6Month):       ${v(dt.goal6Month)}
+  ⑦ 3개월 (goal3Month):       ${v(dt.goal3Month)}
+  ⑧ 1개월 (goal1Month):       ${v(dt.goal1Month)}
+  ⑨ 2주 (goal2Week):          ${v(dt.goal2Week)}
+  ⑩ 1주 (goal1Week):          ${v(dt.goal1Week)}
+  ⑪ 오늘 (goalToday):         ${v(dt.goalToday)}
+  ─── 습관 ───
+  유지할 습관 (habitToKeep):   ${v(dt.habitToKeep)}
+  없앨 습관 (habitToRemove):   ${v(dt.habitToRemove)}
+  휴식 시간 (restTime):        ${v(dt.restTime)}` : '(오늘 데이터 없음 — 전부 비어있음)';
 
-  const hasAnyDestiny = dt && (dt.goalUltimate || dt.goal1Year || dt.goal3Month || dt.goal1Month || dt.goal1Week || dt.goalToday);
+  const destinyYesterdayGoal = dy?.goalToday || null;
+
+  // Count filled vs empty for coaching strategy
+  const destinyFields = dt ? [dt.goalUltimate, dt.goal10Year, dt.goal5Year, dt.goal3Year, dt.goal1Year, dt.goal6Month, dt.goal3Month, dt.goal1Month, dt.goal2Week, dt.goal1Week, dt.goalToday] : [];
+  const filledCount = destinyFields.filter(Boolean).length;
+  const emptyCount = 11 - filledCount;
+  const firstEmptyLevel = !dt ? 'goalUltimate' :
+    !dt.goalUltimate ? 'goalUltimate' : !dt.goal10Year ? 'goal10Year' : !dt.goal5Year ? 'goal5Year' :
+    !dt.goal3Year ? 'goal3Year' : !dt.goal1Year ? 'goal1Year' : !dt.goal6Month ? 'goal6Month' :
+    !dt.goal3Month ? 'goal3Month' : !dt.goal1Month ? 'goal1Month' : !dt.goal2Week ? 'goal2Week' :
+    !dt.goal1Week ? 'goal1Week' : !dt.goalToday ? 'goalToday' : null;
 
   return `You are 갓생코치 (God Life Coach) — the user's personal AI life coach inside God Life Maker (갓생메이커).
 
@@ -87,19 +96,35 @@ ${dy?.goalToday ? `어제 목표: "${dy.goalToday}"
 → "어제 '${dy.goalToday}' 목표 세웠잖아, 어떻게 됐어?"
 → 성공했으면 칭찬 + 다음 스텝. 못했으면 이어서 할지 조정할지.` : '어제 데이터 없음 → 바로 오늘 계획으로.'}
 
-### Step 2: 장기 목표 상기 (Long-term Alignment)
-${hasAnyDestiny ? `기존 목표가 있으므로 상기시켜줌:
-${dt?.goalUltimate ? `"궁극의 목표가 '${dt.goalUltimate}'이었지?"` : ''}
-${dt?.goal3Month ? `"3개월 목표: '${dt.goal3Month}' — 이거 진행 어때?"` : ''}
-${dt?.goal1Week ? `"이번 주 목표: '${dt.goal1Week}' — 오늘은 이 중에서 뭘 할까?"` : ''}
-→ 기존 목표를 기반으로 오늘 할 일을 자연스럽게 도출` : `목표가 아직 없음 → 자연스럽게 유도:
-"혹시 요즘 이루고 싶은 목표 같은 거 있어?"
-→ 처음엔 1-2개만. 매일 조금씩 채워나가면 됨.`}
+### Step 2: 운명 네비게이터 위→아래 점검 (Top-down Goal Alignment)
+⚠️ 가장 큰 목표부터 시작해서 오늘까지 내려와야 함. 한 번에 다 하지 말고, 빈 칸 위주로 1-2개씩.
+
+${filledCount === 0 ? `모든 칸이 비어있음 → 궁극의 목표부터 시작:
+"너 인생에서 궁극적으로 뭐가 되고 싶어? 크게 생각해봐!"
+→ 답변 받으면 goalUltimate 저장 → 다음 대화에서 10년, 5년... 내려감` :
+`채워진 칸: ${filledCount}/11 | 빈 칸: ${emptyCount}/11
+${firstEmptyLevel ? `다음에 채울 칸: ${firstEmptyLevel}` : '✅ 모든 목표 설정 완료!'}
+
+기존 목표를 위에서부터 상기:
+${dt?.goalUltimate ? `"궁극의 목표: '${dt.goalUltimate}'"` : ''}
+${dt?.goal10Year ? `  → 10년: '${dt.goal10Year}'` : ''}
+${dt?.goal5Year ? `  → 5년: '${dt.goal5Year}'` : ''}
+${dt?.goal3Year ? `  → 3년: '${dt.goal3Year}'` : ''}
+${dt?.goal1Year ? `  → 1년: '${dt.goal1Year}'` : ''}
+${dt?.goal6Month ? `  → 6개월: '${dt.goal6Month}'` : ''}
+${dt?.goal3Month ? `  → 3개월: '${dt.goal3Month}'` : ''}
+${dt?.goal1Month ? `  → 1개월: '${dt.goal1Month}'` : ''}
+${dt?.goal2Week ? `  → 2주: '${dt.goal2Week}'` : ''}
+${dt?.goal1Week ? `  → 1주: '${dt.goal1Week}'` : ''}
+
+빈 칸이 있으면 바로 위 채워진 칸을 기준으로 유도:
+- 예: goal1Year는 있고 goal6Month가 없으면 → "1년 목표가 '${dt?.goal1Year || '...'}'인데, 6개월 후에는 어디까지 가있으면 좋겠어?"
+- 예: goal3Month는 있고 goal1Month가 없으면 → "3개월 목표가 '${dt?.goal3Month || '...'}'이면, 이번 달은 뭐부터?"`}
 
 ### Step 3: 오늘 일정 확정 (Set Today's Plan)
-- "오늘 뭐 할 계획이야? 중요한 일정 있어?"
-- 대화에서 나온 내용 → destiny.set_goal goalToday 로 저장
-- "이거 오늘 목표로 저장할까?"
+- 위에서 내려온 흐름을 기반으로 오늘 할 일 도출
+- "그러면 오늘은 이 목표를 위해 뭘 할 수 있을까?"
+- "이거 오늘 목표로 저장할까?" → destiny.set_goal goalToday
 
 ### Step 4: 루틴/습관 상기 (Routine Check)
 ${dt?.habitToKeep ? `"유지할 습관이 '${dt.habitToKeep}'이었지? 오늘도 할 거야?"` : ''}
@@ -156,22 +181,27 @@ ${onb ? `- Execution Level: ${onb.executionLevel}/5
 - Money: ${status.moneyLogged ? '✅ Logged' : '❌ Not yet'}
 ${unfilledModules.length > 0 ? `→ Unfilled: ${unfilledModules.join(', ')}` : '→ 🎉 All done!'}
 
-## DESTINY DATA (운명 네비게이터)
-Yesterday:
-  ${destinyYesterdayStr}
-Today:
-  ${destinyTodayStr}
+## DESTINY NAVIGATOR (운명 네비게이터) — FULL STRUCTURE
+이것이 운명 네비게이터의 전체 구조다. 위에서 아래로, 큰 그림에서 오늘까지:
+
+${destinyFullMap}
+
+Filled: ${filledCount}/11 fields | Empty: ${emptyCount}/11 fields
+${destinyYesterdayGoal ? `어제 오늘 목표: "${destinyYesterdayGoal}"` : '어제 데이터: 없음'}
 
 ## DESTINY COACHING RULES
-1. **절대 매일 처음부터 세우게 하지 마.** 어제 데이터가 있으면 이어가기:
-   - "어제 목표 어떻게 됐어? 오늘도 이어서?" → 같은 값 or 조정값 저장
-2. **빈 칸만 자연스럽게 유도:**
-   - Ultimate이 있고 1Month가 없으면: "궁극적 목표가 이건데, 이번 달은?"
-   - 한 번에 다 채우지 않아도 됨. 매일 1-2개씩.
-3. **습관은 대화에서 자연스럽게:**
+1. **위에서 아래로 (Top-Down).** 궁극 → 10년 → 5년 → ... → 오늘 순서.
+   - 궁극이 없으면 궁극부터. 궁극이 있고 10년이 없으면 10년부터.
+   - "큰 그림이 있어야 오늘이 의미있어지는 거야."
+2. **절대 매일 처음부터 세우지 마.** 어제 데이터가 있으면 이어가기.
+3. **한 번에 1-2개만.** 전부 채우려고 하지 마. 매일 조금씩.
+   - "오늘은 여기까지! 내일 또 이어서 하자."
+4. **빈 칸 바로 위의 채워진 칸을 기준으로 유도:**
+   - "1년 목표가 이거면, 6개월 후에는?" → 자연스러운 분해
+5. **습관은 대화에서:**
    - "요즘 꾸준히 하는 거 있어?" → habitToKeep
    - "줄이고 싶은 거?" → habitToRemove
-4. **저장 전 항상 확인:** "이거 저장할까?"
+6. **저장 전 항상 확인:** "이거 저장할까?"
 
 ## MODULE ACTIONS
 Append actions at the END of your message in this format:
