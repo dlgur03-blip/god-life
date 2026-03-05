@@ -96,7 +96,7 @@ async function getChatContext(userId: string): Promise<ChatContextData> {
   yesterdayDate.setDate(yesterdayDate.getDate() - 1);
   const yesterday = yesterdayDate.toISOString().split('T')[0];
 
-  const [onboarding, epistle, rules, destinyToday, destinyYesterday, moneyTx, memos, tasks] = await Promise.all([
+  const [onboarding, epistle, rules, destinyToday, destinyYesterday, moneyTx, memos, tasks, recentlyCompleted] = await Promise.all([
     prisma.userOnboarding.findUnique({ where: { userId } }),
     prisma.epistleDay.findUnique({ where: { userId_date: { userId, date: today } } }),
     prisma.disciplineRule.findMany({
@@ -107,7 +107,8 @@ async function getChatContext(userId: string): Promise<ChatContextData> {
     prisma.destinyDay.findUnique({ where: { userId_date: { userId, date: yesterday } } }),
     prisma.moneyTransaction.findFirst({ where: { userId, date: today } }),
     prisma.memo.findMany({ where: { userId, date: today }, orderBy: { createdAt: 'asc' } }),
-    prisma.userTask.findMany({ where: { userId, status: { not: 'completed' } }, orderBy: { createdAt: 'asc' }, take: 20 }),
+    prisma.userTask.findMany({ where: { userId, status: { in: ['not_started', 'in_progress'] } }, orderBy: { createdAt: 'asc' }, take: 20 }),
+    prisma.userTask.findMany({ where: { userId, status: 'completed', completedAt: { gte: new Date(yesterday + 'T00:00:00') } }, orderBy: { completedAt: 'desc' }, take: 10 }),
   ]);
 
   const disciplineTotal = rules.length;
@@ -153,6 +154,10 @@ async function getChatContext(userId: string): Promise<ChatContextData> {
       description: t.description,
       status: t.status,
       category: t.category,
+    })),
+    recentlyCompletedTasks: recentlyCompleted.map(t => ({
+      title: t.title,
+      completedAt: t.completedAt?.toISOString() ?? null,
     })),
     recentMessages: [],
   };

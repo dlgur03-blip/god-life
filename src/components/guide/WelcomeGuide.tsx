@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { X, ChevronLeft, ChevronRight, BookOpen, Target, Clock, Mail, DollarSign, Activity, Sparkles } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, BookOpen, Target, Clock, Mail, DollarSign, Activity, MessageCircle, ClipboardList } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 const GUIDE_SEEN_KEY = 'godlife-guide-seen';
@@ -19,12 +19,13 @@ export default function WelcomeGuide({ forceOpen = false, onClose }: WelcomeGuid
 
   const steps = [
     { key: 'intro', icon: BookOpen },
-    { key: 'success', icon: Target },
-    { key: 'discipline', icon: Activity },
+    { key: 'aiCoach', icon: MessageCircle },
     { key: 'destiny', icon: Clock },
+    { key: 'taskBoard', icon: ClipboardList },
     { key: 'epistle', icon: Mail },
+    { key: 'discipline', icon: Activity },
+    { key: 'success', icon: Target },
     { key: 'money', icon: DollarSign },
-    { key: 'bio', icon: Sparkles },
   ];
 
   useEffect(() => {

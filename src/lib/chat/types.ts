@@ -64,5 +64,6 @@ export interface ChatContextData {
   destinyYesterday: DestinySnapshot | null;
   todayMemos: { content: string; tags: string[]; time: string; reviewed: boolean }[];
   tasks: { id: string; title: string; description?: string | null; status: string; category?: string | null }[];
+  recentlyCompletedTasks: { title: string; completedAt?: string | null }[];
   recentMessages: { role: string; content: string }[];
 }

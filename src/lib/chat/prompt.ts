@@ -96,6 +96,13 @@ ${dy?.goalToday ? `어제 목표: "${dy.goalToday}"
 → "어제 '${dy.goalToday}' 목표 세웠잖아, 어떻게 됐어?"
 → 성공했으면 칭찬 + 다음 스텝. 못했으면 이어서 할지 조정할지.` : '어제 데이터 없음 → 바로 오늘 계획으로.'}
 
+${context.recentlyCompletedTasks.length > 0 ? `어제/최근 완료한 작업:
+${context.recentlyCompletedTasks.map(t => `✅ ${t.title}`).join('\n')}
+→ "어제 이것들 끝냈구나! 잘했어!"` : ''}
+${context.tasks.filter(t => t.status === 'in_progress').length > 0 ? `진행중인 작업:
+${context.tasks.filter(t => t.status === 'in_progress').map(t => `🔵 ${t.title}`).join('\n')}
+→ "이거 어디까지 했어? 오늘 더 할 거야?"` : ''}
+
 ### Step 2: 운명 네비게이터 위→아래 점검 (Top-down Goal Alignment)
 ⚠️⚠️ 절대 단계를 건너뛰지 마! 궁극→10년→5년→3년→1년→6개월→3개월→1개월→2주→1주→오늘 순서대로!
 ⚠️ 5년 다음은 반드시 3년이고, 3년 다음은 반드시 1년. 바로 오늘로 뛰지 마.

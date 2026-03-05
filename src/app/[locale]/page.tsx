@@ -1,5 +1,5 @@
 import { Link } from '@/navigation';
-import { Compass, Trophy, Activity, Mail, Wallet, Brain, MessageCircle, LogIn, LogOut } from 'lucide-react';
+import { Compass, Trophy, Activity, Mail, Wallet, Brain, MessageCircle, LogIn, LogOut, ClipboardList } from 'lucide-react';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
@@ -14,7 +14,7 @@ export const dynamic = 'force-dynamic'; // Ensure real-time status
 async function getDashboardStats(userId: string, today: string, t: (key: string, values?: Record<string, string | number>) => string) {
 
   // Parallel Fetch
-  const [destinyDay, disciplineRules, successProjects, epistleDay] = await Promise.all([
+  const [destinyDay, disciplineRules, successProjects, epistleDay, taskCount] = await Promise.all([
     prisma.destinyDay.findUnique({
       where: { userId_date: { userId, date: today } },
       include: { timeblocks: true }
@@ -28,6 +28,9 @@ async function getDashboardStats(userId: string, today: string, t: (key: string,
     }),
     prisma.epistleDay.findUnique({
       where: { userId_date: { userId, date: today } }
+    }),
+    prisma.userTask.count({
+      where: { userId, status: { not: 'completed' } }
     })
   ]);
 
@@ -53,7 +56,11 @@ async function getDashboardStats(userId: string, today: string, t: (key: string,
     ? { label: t('status.sealed'), color: 'success' }
     : { label: t('status.pending'), color: 'muted' };
 
-  return { destinyStatus, discStatus, successStatus, epistleStatus };
+  const taskStatus = taskCount === 0
+    ? { label: t('status.noTasks'), color: 'muted' }
+    : { label: t('status.taskCount', {count: taskCount}), color: 'primary' };
+
+  return { destinyStatus, discStatus, successStatus, epistleStatus, taskStatus };
 }
 
 const statusColorMap: Record<string, string> = {
@@ -114,6 +121,7 @@ export default async function Home() {
 
   const modules = [
     { name: t('modules.destiny.name'), href: `/destiny/day/${todayStr}`, icon: Compass, desc: t('modules.destiny.desc'), status: stats.destinyStatus, moduleColor: 'var(--color-destiny)' },
+    { name: t('modules.taskBoard.name'), href: '/chat', icon: ClipboardList, desc: t('modules.taskBoard.desc'), status: stats.taskStatus, moduleColor: 'var(--color-primary)' },
     { name: t('modules.success.name'), href: '/success', icon: Trophy, desc: t('modules.success.desc'), status: stats.successStatus, moduleColor: 'var(--color-success-module)' },
     { name: t('modules.discipline.name'), href: `/discipline/day/${todayStr}`, icon: Activity, desc: t('modules.discipline.desc'), status: stats.discStatus, moduleColor: 'var(--color-discipline)' },
     { name: t('modules.epistle.name'), href: `/epistle/day/${todayStr}`, icon: Mail, desc: t('modules.epistle.desc'), status: stats.epistleStatus, moduleColor: 'var(--color-epistle)' },
