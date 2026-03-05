@@ -33,6 +33,7 @@ model User {
   creditLogs        CreditLog[]
   onboarding        UserOnboarding?
   memos             Memo[]
+  tasks             UserTask[]
 }
 
 // M3: Destiny Navigator
@@ -417,6 +418,25 @@ model Memo {
   createdAt DateTime @default(now())
 
   @@index([userId, date])
+}
+
+// Task Board (작업 보드) — 시작 전 / 진행중 / 완료
+model UserTask {
+  id          String    @id @default(cuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  title       String
+  description String?
+  status      String    @default("not_started") // not_started, in_progress, completed
+  category    String?   // optional grouping tag
+  completedAt DateTime?
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([userId])
+  @@index([userId, status])
 }
 
 // User Onboarding (AI priority system)

@@ -96,7 +96,7 @@ async function getChatContext(userId: string): Promise<ChatContextData> {
   yesterdayDate.setDate(yesterdayDate.getDate() - 1);
   const yesterday = yesterdayDate.toISOString().split('T')[0];
 
-  const [onboarding, epistle, rules, destinyToday, destinyYesterday, moneyTx, memos] = await Promise.all([
+  const [onboarding, epistle, rules, destinyToday, destinyYesterday, moneyTx, memos, tasks] = await Promise.all([
     prisma.userOnboarding.findUnique({ where: { userId } }),
     prisma.epistleDay.findUnique({ where: { userId_date: { userId, date: today } } }),
     prisma.disciplineRule.findMany({
@@ -107,6 +107,7 @@ async function getChatContext(userId: string): Promise<ChatContextData> {
     prisma.destinyDay.findUnique({ where: { userId_date: { userId, date: yesterday } } }),
     prisma.moneyTransaction.findFirst({ where: { userId, date: today } }),
     prisma.memo.findMany({ where: { userId, date: today }, orderBy: { createdAt: 'asc' } }),
+    prisma.userTask.findMany({ where: { userId, status: { not: 'completed' } }, orderBy: { createdAt: 'asc' }, take: 20 }),
   ]);
 
   const disciplineTotal = rules.length;
@@ -145,6 +146,13 @@ async function getChatContext(userId: string): Promise<ChatContextData> {
       tags: (m.tags as string[]) || [],
       time: m.time,
       reviewed: m.reviewed,
+    })),
+    tasks: tasks.map(t => ({
+      id: t.id,
+      title: t.title,
+      description: t.description,
+      status: t.status,
+      category: t.category,
     })),
     recentMessages: [],
   };
@@ -216,6 +224,48 @@ async function executeActions(userId: string, actions: ModuleAction[]) {
           },
         });
         executed.push(`메모: ${action.data.content.substring(0, 20)}...`);
+      }
+      if (action.module === 'task' && action.type === 'create') {
+        await prisma.userTask.create({
+          data: {
+            userId,
+            title: action.data.title,
+            description: action.data.description ?? null,
+            category: action.data.category ?? null,
+          },
+        });
+        executed.push(`작업: ${action.data.title}`);
+      }
+      if (action.module === 'task' && action.type === 'update_status') {
+        const updateData: { status: string; completedAt?: Date | null } = { status: action.data.status };
+        if (action.data.status === 'completed') {
+          updateData.completedAt = new Date();
+        } else {
+          updateData.completedAt = null;
+        }
+        const task = await prisma.userTask.update({
+          where: { id: action.data.taskId, userId },
+          data: updateData,
+        });
+        // Organic connection: completed task → auto-append to destiny goalToday
+        if (action.data.status === 'completed') {
+          const destinyDay = await prisma.destinyDay.findUnique({
+            where: { userId_date: { userId, date: today } },
+          });
+          const currentGoalToday = destinyDay?.goalToday || '';
+          const newGoalToday = currentGoalToday
+            ? `${currentGoalToday} / ✅ ${task.title}`
+            : `✅ ${task.title}`;
+          await prisma.destinyDay.upsert({
+            where: { userId_date: { userId, date: today } },
+            create: { userId, date: today, goalToday: newGoalToday },
+            update: { goalToday: newGoalToday },
+          });
+          executed.push(`작업 완료→운명: ${task.title}`);
+        } else {
+          const statusLabel = action.data.status === 'in_progress' ? '진행중' : '시작 전';
+          executed.push(`작업 ${statusLabel}: ${task.title}`);
+        }
       }
     } catch (e) {
       console.error('Action execution failed:', action, e);
