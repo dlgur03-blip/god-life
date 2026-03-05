@@ -154,6 +154,7 @@ async function getChatContext(userId: string): Promise<ChatContextData> {
       description: t.description,
       status: t.status,
       category: t.category,
+      scheduledTime: t.scheduledTime,
     })),
     recentlyCompletedTasks: recentlyCompleted.map(t => ({
       title: t.title,
@@ -237,9 +238,11 @@ async function executeActions(userId: string, actions: ModuleAction[]) {
             title: action.data.title,
             description: action.data.description ?? null,
             category: action.data.category ?? null,
+            scheduledTime: action.data.scheduledTime ?? null,
           },
         });
-        executed.push(`작업: ${action.data.title}`);
+        const timeLabel = action.data.scheduledTime ? ` (${action.data.scheduledTime})` : '';
+        executed.push(`작업: ${action.data.title}${timeLabel}`);
       }
       if (action.module === 'task' && action.type === 'update_status') {
         const updateData: { status: string; completedAt?: Date | null } = { status: action.data.status };

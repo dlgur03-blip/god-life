@@ -1,5 +1,5 @@
 import { Link } from '@/navigation';
-import { Compass, Trophy, Activity, Mail, Wallet, Brain, MessageCircle, LogIn, LogOut, ClipboardList } from 'lucide-react';
+import { Brain, LogIn, LogOut } from 'lucide-react';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
@@ -8,6 +8,9 @@ import { getUserTimezone } from '@/lib/timezone';
 import { getTranslations } from 'next-intl/server';
 import WelcomeGuide from '@/components/guide/WelcomeGuide';
 import GuideButton from '@/components/guide/GuideButton';
+import DashboardModules from '@/components/dashboard/DashboardModules';
+import type { ModuleCardData } from '@/components/dashboard/DashboardModules';
+import PrintButton from '@/components/dashboard/PrintButton';
 
 export const dynamic = 'force-dynamic'; // Ensure real-time status
 
@@ -63,14 +66,7 @@ async function getDashboardStats(userId: string, today: string, t: (key: string,
   return { destinyStatus, discStatus, successStatus, epistleStatus, taskStatus };
 }
 
-const statusColorMap: Record<string, string> = {
-  muted: 'text-[var(--foreground-muted)]',
-  primary: 'text-[var(--color-primary)]',
-  secondary: 'text-[var(--color-secondary)]',
-  accent: 'text-[var(--color-accent)]',
-  success: 'text-[var(--color-success)]',
-  info: 'text-[var(--color-info)]',
-};
+// statusColorMap moved to DashboardModules component
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -119,15 +115,15 @@ export default async function Home() {
   const todayStr = getTodayStr(timezone);
   const stats = await getDashboardStats(user.id, todayStr, t);
 
-  const modules = [
-    { name: t('modules.destiny.name'), href: `/destiny/day/${todayStr}`, icon: Compass, desc: t('modules.destiny.desc'), status: stats.destinyStatus, moduleColor: 'var(--color-destiny)' },
-    { name: t('modules.taskBoard.name'), href: '/chat', icon: ClipboardList, desc: t('modules.taskBoard.desc'), status: stats.taskStatus, moduleColor: 'var(--color-primary)' },
-    { name: t('modules.success.name'), href: '/success', icon: Trophy, desc: t('modules.success.desc'), status: stats.successStatus, moduleColor: 'var(--color-success-module)' },
-    { name: t('modules.discipline.name'), href: `/discipline/day/${todayStr}`, icon: Activity, desc: t('modules.discipline.desc'), status: stats.discStatus, moduleColor: 'var(--color-discipline)' },
-    { name: t('modules.epistle.name'), href: `/epistle/day/${todayStr}`, icon: Mail, desc: t('modules.epistle.desc'), status: stats.epistleStatus, moduleColor: 'var(--color-epistle)' },
-    { name: t('modules.money.name'), href: '/money', icon: Wallet, desc: t('modules.money.desc'), status: { label: t('status.database'), color: 'success' }, moduleColor: 'var(--color-money)' },
-    { name: t('modules.met.name'), href: '/met', icon: Brain, desc: t('modules.met.desc'), status: { label: 'AI', color: 'secondary' }, moduleColor: 'var(--color-secondary)' },
-    { name: t('modules.chat.name'), href: '/chat', icon: MessageCircle, desc: t('modules.chat.desc'), status: { label: 'AI Coach', color: 'secondary' }, moduleColor: 'var(--color-secondary)' },
+  const modules: ModuleCardData[] = [
+    { name: t('modules.destiny.name'), href: `/destiny/day/${todayStr}`, iconKey: 'compass', desc: t('modules.destiny.desc'), status: stats.destinyStatus, moduleColor: 'var(--color-destiny)', aiPrompt: t('modules.destiny.aiPrompt') },
+    { name: t('modules.taskBoard.name'), href: '/chat', iconKey: 'clipboardList', desc: t('modules.taskBoard.desc'), status: stats.taskStatus, moduleColor: 'var(--color-primary)', aiPrompt: t('modules.taskBoard.aiPrompt') },
+    { name: t('modules.success.name'), href: '/success', iconKey: 'trophy', desc: t('modules.success.desc'), status: stats.successStatus, moduleColor: 'var(--color-success-module)', aiPrompt: t('modules.success.aiPrompt') },
+    { name: t('modules.discipline.name'), href: `/discipline/day/${todayStr}`, iconKey: 'activity', desc: t('modules.discipline.desc'), status: stats.discStatus, moduleColor: 'var(--color-discipline)', aiPrompt: t('modules.discipline.aiPrompt') },
+    { name: t('modules.epistle.name'), href: `/epistle/day/${todayStr}`, iconKey: 'mail', desc: t('modules.epistle.desc'), status: stats.epistleStatus, moduleColor: 'var(--color-epistle)', aiPrompt: t('modules.epistle.aiPrompt') },
+    { name: t('modules.money.name'), href: '/money', iconKey: 'wallet', desc: t('modules.money.desc'), status: { label: t('status.database'), color: 'success' }, moduleColor: 'var(--color-money)', aiPrompt: t('modules.money.aiPrompt') },
+    { name: t('modules.met.name'), href: '/met', iconKey: 'brain', desc: t('modules.met.desc'), status: { label: 'AI', color: 'secondary' }, moduleColor: 'var(--color-secondary)' },
+    { name: t('modules.chat.name'), href: '/chat', iconKey: 'messageCircle', desc: t('modules.chat.desc'), status: { label: 'AI Coach', color: 'secondary' }, moduleColor: 'var(--color-secondary)' },
   ];
 
   return (
@@ -146,6 +142,7 @@ export default async function Home() {
           <GuideButton />
         </div>
         <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-4 text-sm">
+          <PrintButton />
           <span className="text-[var(--foreground-muted)] truncate max-w-[200px]">{t('welcome', {name: session.user.name || 'User'})}</span>
           {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
           <a
@@ -157,31 +154,7 @@ export default async function Home() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 w-full max-w-5xl mt-4 md:mt-8">
-        {modules.map((m) => (
-          <Link key={m.name} href={m.href}
-            className="card-hover border border-[var(--color-border)] p-5 sm:p-8 flex flex-col items-center gap-3 sm:gap-4 text-center cursor-pointer group relative overflow-hidden"
-            style={{ borderRadius: 'var(--radius-lg)' }}
-          >
-            <m.icon
-              className="w-10 h-10 sm:w-12 sm:h-12 transition-colors duration-300"
-              style={{ color: m.moduleColor }}
-            />
-            <h2 className="text-xl sm:text-2xl font-bold text-[var(--foreground)] group-hover:text-[var(--color-secondary)] transition-colors duration-300">
-              {m.name}
-            </h2>
-            <p className="text-xs sm:text-sm text-[var(--foreground-muted)]">{m.desc}</p>
-
-            {/* Status Badge */}
-            <div
-              className={`mt-2 px-3 py-1 text-xs font-medium border border-[var(--color-border)] ${statusColorMap[m.status.color] || statusColorMap.muted}`}
-              style={{ borderRadius: 'var(--radius-sm)', backgroundColor: 'var(--color-card-bg)' }}
-            >
-              {m.status.label}
-            </div>
-          </Link>
-        ))}
-      </div>
+      <DashboardModules modules={modules} />
     </main>
   );
 }

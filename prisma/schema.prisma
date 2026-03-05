@@ -426,11 +426,12 @@ model UserTask {
   userId      String
   user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  title       String
-  description String?
-  status      String    @default("not_started") // not_started, in_progress, completed
-  category    String?   // optional grouping tag
-  completedAt DateTime?
+  title         String
+  description   String?
+  status        String    @default("not_started") // not_started, in_progress, completed
+  category      String?   // optional grouping tag
+  scheduledTime String?   // HH:MM format — 예정 시간
+  completedAt   DateTime?
 
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt

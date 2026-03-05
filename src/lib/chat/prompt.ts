@@ -263,11 +263,15 @@ ${destinyYesterdayGoal ? `어제 오늘 목표: "${destinyYesterdayGoal}"` : '�
 ${context.tasks.length > 0 ? `현재 작업 목록:
 ${context.tasks.map(t => {
   const statusIcon = t.status === 'in_progress' ? '🔵 진행중' : '⬜ 시작 전';
-  return `- [${statusIcon}] ${t.title}${t.category ? ` (${t.category})` : ''} — ID: ${t.id}`;
+  const timeLabel = t.scheduledTime ? ` ⏰${t.scheduledTime}` : '';
+  return `- [${statusIcon}] ${t.title}${timeLabel}${t.category ? ` (${t.category})` : ''} — ID: ${t.id}`;
 }).join('\n')}` : '(등록된 작업 없음)'}
 
 ### 작업 관리 규칙:
 - 유저가 "이거 해야 돼", "할 일이 있어" → task.create로 작업 생성
+- ⏰ **작업 추가 시 반드시 시간을 물어봐!** "몇 시에 할 거야?" / "몇 시로 추가할까?" → scheduledTime에 "HH:MM" 형식으로 저장
+  - 유저가 시간을 말하기 전까지 절대 task.create를 실행하지 마!
+  - 예: "보고서 써야 돼" → "알겠어! 몇 시에 할 거야?" → "2시" → task.create with scheduledTime: "14:00"
 - "이거 시작했어", "진행중이야" → task.update_status → in_progress
 - "이거 끝났어", "완료했어" → task.update_status → completed
 - ⭐ **작업 완료 시 자동으로 운명 네비게이터 오늘 기록에 "✅ 작업명"이 추가됨!**
@@ -296,7 +300,7 @@ Available:
 - money.add_transaction: {type: "income"|"expense", category, amount (number), memo?}
 - success.create_project: {title}
 - memo.save: {content, tags: ["tag1","tag2"]} — 메모 저장. 태그는 자동 부여.
-- task.create: {title, description?, category?} — 작업 생성
+- task.create: {title, description?, category?, scheduledTime?: "HH:MM"} — 작업 생성. ⚠️ 반드시 시간을 먼저 물어본 후 저장!
 - task.update_status: {taskId: "cuid", status: "not_started"|"in_progress"|"completed"} — 작업 상태 변경. 완료 시 운명 네비게이터에 자동 기록!
 
 ## CRITICAL RULES

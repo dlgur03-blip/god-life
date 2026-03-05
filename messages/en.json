@@ -14,23 +14,28 @@
     "modules": {
       "destiny": {
         "name": "Destiny Navigator",
-        "desc": "Daily Goals & Timeblocks"
+        "desc": "Daily Goals & Timeblocks",
+        "aiPrompt": "Let's fill the Destiny Navigator! Help me set goals from long-term to today."
       },
       "taskBoard": {
         "name": "Task Board",
-        "desc": "Manage ongoing tasks"
+        "desc": "Manage ongoing tasks",
+        "aiPrompt": "Let's organize today's tasks. I have things to add to the board."
       },
       "success": {
         "name": "Success Code",
-        "desc": "100 Days Projects"
+        "desc": "100 Days Projects",
+        "aiPrompt": "I want to start a 100-day project. What topic would be good?"
       },
       "discipline": {
         "name": "Discipline Mastery",
-        "desc": "Daily Rules & Check"
+        "desc": "Daily Rules & Check",
+        "aiPrompt": "I want to set daily disciplines. What habits should I build?"
       },
       "epistle": {
         "name": "Self Epistle",
-        "desc": "Letters to Self"
+        "desc": "Letters to Self",
+        "aiPrompt": "Let's write a self-epistle. Help me reflect on today."
       },
       "bio": {
         "name": "Bio Hacking",
@@ -38,7 +43,8 @@
       },
       "money": {
         "name": "Money Flow",
-        "desc": "Income & Expense Tracking"
+        "desc": "Income & Expense Tracking",
+        "aiPrompt": "I want to record today's spending. Help me organize my expenses."
       },
       "met": {
         "name": "Motivation Archetype",
@@ -49,6 +55,8 @@
         "desc": "Fill all modules through chat"
       }
     },
+    "aiAssist": "Fill with AI",
+    "print": "Print",
     "status": {
       "notStarted": "Not Started",
       "inProgress": "In Progress",

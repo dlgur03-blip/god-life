@@ -58,6 +58,19 @@ export default function FloatingChat({ locale }: FloatingChatProps) {
     }
   }, [session, autoOpened, loadChat]);
 
+  // Listen for custom event from module cards
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent).detail;
+      if (detail?.prompt) {
+        handleOpen(detail.prompt);
+      }
+    };
+    window.addEventListener('open-ai-chat', handler);
+    return () => window.removeEventListener('open-ai-chat', handler);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // Don't render for unauthenticated users
   if (!session?.user) return null;
 
