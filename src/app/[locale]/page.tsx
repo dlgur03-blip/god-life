@@ -11,6 +11,8 @@ import GuideButton from '@/components/guide/GuideButton';
 import DashboardModules from '@/components/dashboard/DashboardModules';
 import type { ModuleCardData } from '@/components/dashboard/DashboardModules';
 import PrintButton from '@/components/dashboard/PrintButton';
+import DashboardRings from '@/components/dashboard/DashboardRings';
+import { getUserStreak } from '@/app/actions/streak';
 
 export const dynamic = 'force-dynamic'; // Ensure real-time status
 
@@ -63,7 +65,17 @@ async function getDashboardStats(userId: string, today: string, t: (key: string,
     ? { label: t('status.noTasks'), color: 'muted' }
     : { label: t('status.taskCount', {count: taskCount}), color: 'primary' };
 
-  return { destinyStatus, discStatus, successStatus, epistleStatus, taskStatus };
+  // Ring data for dashboard progress rings
+  const destinyBlocks = destinyDay?.timeblocks.length || 0;
+  const destinyScored = destinyDay?.timeblocks.filter(b => b.score && b.score > 0).length || 0;
+  const rings = {
+    destiny: destinyBlocks > 0 ? Math.round((destinyScored / destinyBlocks) * 100) : (destinyDay ? 10 : 0),
+    discipline: discTotal > 0 ? Math.round((discChecked / discTotal) * 100) : 0,
+    epistle: epistleDay ? 100 : 0,
+    tasks: taskCount > 0 ? 0 : 100, // 0 remaining = 100% done
+  };
+
+  return { destinyStatus, discStatus, successStatus, epistleStatus, taskStatus, rings };
 }
 
 // statusColorMap moved to DashboardModules component
@@ -74,7 +86,13 @@ export default async function Home() {
 
   if (!session || !session.user?.email) {
     return (
-      <main className="min-h-screen flex flex-col items-center justify-center text-center px-4 py-8">
+      <main className="min-h-screen flex flex-col items-center justify-center text-center px-4 py-8 relative overflow-hidden">
+        {/* Animated background for landing */}
+        <div className="animated-bg" aria-hidden="true">
+          <div className="blob blob-1" />
+          <div className="blob blob-2" />
+          <div className="blob blob-3" />
+        </div>
         {/* Nike-style hero */}
         <div className="animate-fade-in-up">
           <h1
@@ -124,7 +142,10 @@ export default async function Home() {
 
   const timezone = await getUserTimezone();
   const todayStr = getTodayStr(timezone);
-  const stats = await getDashboardStats(user.id, todayStr, t);
+  const [stats, streak] = await Promise.all([
+    getDashboardStats(user.id, todayStr, t),
+    getUserStreak(),
+  ]);
 
   const modules: ModuleCardData[] = [
     { name: t('modules.destiny.name'), href: `/destiny/day/${todayStr}`, iconKey: 'compass', desc: t('modules.destiny.desc'), status: stats.destinyStatus, moduleColor: 'var(--color-destiny)', aiPrompt: t('modules.destiny.aiPrompt') },
@@ -173,6 +194,8 @@ export default async function Home() {
           </div>
         </div>
       </div>
+
+      <DashboardRings rings={stats.rings} streakDays={streak.current} />
 
       <DashboardModules modules={modules} />
     </main>

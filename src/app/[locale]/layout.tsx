@@ -10,6 +10,7 @@ import InAppBrowserGuard from '@/components/InAppBrowserGuard';
 import TimezoneDetector from '@/components/TimezoneDetector';
 import FloatingChat from '@/components/chat/FloatingChat';
 import BottomTabBar from '@/components/BottomTabBar';
+import AnimatedBackground from '@/components/AnimatedBackground';
 
 const inter = Inter({
   variable: "--font-inter",
@@ -86,6 +87,7 @@ export default async function LocaleLayout({
       >
         <NextIntlClientProvider messages={messages}>
           <Providers>
+            <AnimatedBackground />
             <TimezoneDetector />
             <InAppBrowserGuard />
             <HeaderWrapper />

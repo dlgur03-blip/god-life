@@ -63,6 +63,7 @@
       }
     },
     "aiAssist": "AI填写",
+    "streak": "连续",
     "print": "打印",
     "status": {
       "notStarted": "未开始",

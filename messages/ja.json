@@ -63,6 +63,7 @@
       }
     },
     "aiAssist": "AIで記入",
+    "streak": "連続",
     "print": "印刷",
     "status": {
       "notStarted": "未着手",

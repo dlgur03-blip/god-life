@@ -63,6 +63,7 @@
       }
     },
     "aiAssist": "AI로 채우기",
+    "streak": "연속",
     "print": "인쇄",
     "status": {
       "notStarted": "시작 전",

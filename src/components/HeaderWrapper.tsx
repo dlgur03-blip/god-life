@@ -6,6 +6,7 @@ import { Link, usePathname } from '@/navigation';
 import LanguageSwitcher from './LanguageSwitcher';
 import { useSession } from 'next-auth/react';
 import { useTheme } from '@/contexts/ThemeContext';
+import StreakBadge from './StreakBadge';
 
 export default function HeaderWrapper() {
   const pathname = usePathname();
@@ -35,8 +36,9 @@ export default function HeaderWrapper() {
           </span>
         </Link>
 
-        {/* Right — Theme Toggle + Language + User */}
+        {/* Right — Streak + Theme Toggle + Language + User */}
         <div className="flex items-center gap-1">
+          <StreakBadge />
           {/* Theme Toggle */}
           <button
             onClick={toggleTheme}
