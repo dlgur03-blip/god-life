@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useTransition } from 'react';
-import { Clock, CalendarDays, Trash2, ChevronDown, ChevronUp, Sparkles, FolderOpen, Plus, FolderPlus } from 'lucide-react';
+import { Clock, CalendarDays, Trash2, ChevronDown, ChevronUp, Sparkles, FolderOpen, Plus, FolderPlus, ArrowRightLeft } from 'lucide-react';
 import { updateTaskStatus, deleteTask, createTaskProject, deleteTaskProject, moveTaskToProject } from '@/app/actions/tasks';
 import { useRouter } from 'next/navigation';
 
@@ -66,6 +66,7 @@ export default function TaskBoard({
   const [showNewProject, setShowNewProject] = useState(false);
   const [newProjectName, setNewProjectName] = useState('');
   const [newProjectEmoji, setNewProjectEmoji] = useState('📁');
+  const [movingTask, setMovingTask] = useState<string | null>(null);
 
   const activeTasks = tasks.filter(t => t.status !== 'completed');
   const completedTasks = tasks.filter(t => t.status === 'completed');
@@ -123,6 +124,25 @@ export default function TaskBoard({
   const handleDeleteProject = async (projectId: string) => {
     await deleteTaskProject(projectId);
     startTransition(() => router.refresh());
+  };
+
+  const handleMoveToProject = async (taskId: string, projectId: string | null) => {
+    setTasks(prev => prev.map(t =>
+      t.id === taskId ? {
+        ...t,
+        projectId,
+        projectName: projectId ? projects.find(p => p.id === projectId)?.name ?? null : null,
+        projectEmoji: projectId ? projects.find(p => p.id === projectId)?.emoji ?? null : null,
+        projectColor: projectId ? projects.find(p => p.id === projectId)?.color ?? null : null,
+      } : t
+    ));
+    setMovingTask(null);
+    try {
+      await moveTaskToProject(taskId, projectId);
+      startTransition(() => router.refresh());
+    } catch {
+      setTasks(initialTasks);
+    }
   };
 
   const handleAiAdd = () => {
@@ -190,7 +210,7 @@ export default function TaskBoard({
         </div>
 
         {task.status !== 'completed' && (
-          <div className="flex items-center gap-2 pl-5 mt-1">
+          <div className="flex items-center gap-2 pl-5 mt-1 relative">
             {task.status === 'not_started' && (
               <button
                 onClick={() => handleStatusChange(task.id, 'in_progress')}
@@ -211,6 +231,15 @@ export default function TaskBoard({
                 {labels.completed}
               </button>
             )}
+            {projects.length > 0 && (
+              <button
+                onClick={() => setMovingTask(movingTask === task.id ? null : task.id)}
+                className="text-[10px] px-1.5 py-0.5 text-[var(--foreground-muted)] hover:text-[var(--color-taskboard)] transition-colors"
+                title="Move to project"
+              >
+                <ArrowRightLeft className="w-3 h-3" />
+              </button>
+            )}
             <button
               onClick={() => handleDelete(task.id)}
               disabled={!!updating}
@@ -218,6 +247,34 @@ export default function TaskBoard({
             >
               <Trash2 className="w-3 h-3" />
             </button>
+
+            {/* Move to project dropdown */}
+            {movingTask === task.id && (
+              <div
+                className="absolute left-5 top-full mt-1 z-20 border border-[var(--color-border)] shadow-lg py-1 min-w-[160px] animate-scale-in"
+                style={{ borderRadius: 'var(--radius-md)', backgroundColor: 'var(--color-card-bg)' }}
+              >
+                {task.projectId && (
+                  <button
+                    onClick={() => handleMoveToProject(task.id, null)}
+                    className="w-full text-left px-3 py-1.5 text-xs hover:bg-[var(--color-card-hover)] transition-colors flex items-center gap-2 text-[var(--foreground-muted)]"
+                  >
+                    <FolderOpen className="w-3 h-3" />
+                    {labels.uncategorized}
+                  </button>
+                )}
+                {projects.filter(p => p.id !== task.projectId).map(p => (
+                  <button
+                    key={p.id}
+                    onClick={() => handleMoveToProject(task.id, p.id)}
+                    className="w-full text-left px-3 py-1.5 text-xs hover:bg-[var(--color-card-hover)] transition-colors flex items-center gap-2 text-[var(--foreground)]"
+                  >
+                    <span>{p.emoji}</span>
+                    {p.name}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         )}
       </div>

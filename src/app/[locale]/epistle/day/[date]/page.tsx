@@ -6,7 +6,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { Link } from '@/navigation';
 import { redirect } from 'next/navigation';
-import { ChevronLeft, ChevronRight, History } from 'lucide-react';
+import { ChevronLeft, ChevronRight, History, Mail } from 'lucide-react';
 import { getTranslations, getLocale } from 'next-intl/server';
 import { isValidDateParam } from '@/lib/validateDate';
 import { getTodayStr } from '@/lib/date';
@@ -56,15 +56,18 @@ export default async function EpistleDayPage({ params }: { params: Promise<{ dat
       <div className="max-w-5xl mx-auto">
 
         {/* Header */}
-        <header className="flex items-center justify-between mb-8 sticky top-[52px] md:top-[56px] z-10 bg-[var(--background)]/95 p-4 -mx-4 rounded-b-xl border-b border-[var(--color-border)]">
-          <Link href={`/epistle/day/${prevStr}`} className="p-2 hover:bg-[var(--color-card-hover)] rounded-full text-[var(--foreground-muted)] hover:text-[var(--color-primary)] transition-colors">
+        <header className="module-header flex items-center justify-between mb-8 sticky top-[52px] md:top-[56px] z-10 bg-[var(--background)]/95 p-4 pt-6 -mx-4 rounded-b-xl border-b border-[var(--color-border)]" style={{ '--module-accent': 'var(--gradient-epistle)' } as React.CSSProperties}>
+          <Link href={`/epistle/day/${prevStr}`} className="p-2 hover:bg-[var(--color-card-hover)] rounded-full text-[var(--foreground-muted)] hover:text-[var(--color-epistle)] transition-colors">
             <ChevronLeft />
           </Link>
-          <div className="text-center">
-            <h1 className="text-2xl font-bold tracking-widest text-[var(--color-accent)]">
-              {t('title')}
-            </h1>
-            <p className="text-sm text-[var(--foreground-muted)] font-mono">{date}</p>
+          <div className="text-center flex items-center gap-2">
+            <Mail className="w-5 h-5 text-[var(--color-epistle)]" />
+            <div>
+              <h1 className="text-2xl font-bold tracking-widest text-[var(--foreground)]" style={{ fontFamily: 'var(--font-display)' }}>
+                {t('title')}
+              </h1>
+              <p className="text-xs text-[var(--foreground-muted)] font-mono">{date}</p>
+            </div>
           </div>
           <div className="flex gap-2">
             <Link href="/epistle/timeline" className="p-2 hover:bg-[var(--color-card-hover)] rounded-full text-[var(--foreground-muted)] hover:text-[var(--color-primary)] transition-colors" title={t('timeline')}>

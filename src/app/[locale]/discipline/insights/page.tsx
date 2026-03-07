@@ -14,12 +14,12 @@ export default async function DisciplineInsightsPage() {
   return (
     <main className="min-h-screen bg-[var(--background)] p-6 pb-20">
       <div className="max-w-3xl mx-auto">
-        <header className="mb-10 flex items-center justify-between">
+        <header className="module-header mb-10 flex items-center justify-between p-4 pt-6 -mx-4 rounded-b-xl border-b border-[var(--color-border)]" style={{ '--module-accent': 'var(--gradient-discipline)' } as React.CSSProperties}>
            <Link href={`/discipline/day/${todayStr}`} className="text-[var(--foreground-muted)] hover:text-[var(--foreground)] flex items-center gap-2 text-sm w-fit transition-colors">
             <ArrowLeft className="w-4 h-4" /> {t('backToCheck')}
           </Link>
-          <h1 className="text-2xl font-bold text-[var(--foreground)] flex items-center gap-2">
-            <TrendingUp className="text-[var(--color-secondary)]" />
+          <h1 className="text-2xl font-bold text-[var(--foreground)] flex items-center gap-2" style={{ fontFamily: 'var(--font-display)' }}>
+            <TrendingUp className="text-[var(--color-discipline)]" />
             {t('masteryInsights')}
           </h1>
         </header>

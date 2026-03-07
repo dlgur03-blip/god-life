@@ -14,11 +14,14 @@ export default async function EpistleTimelinePage() {
   return (
     <main className="min-h-screen bg-[var(--background)] p-6 pb-20">
       <div className="max-w-3xl mx-auto">
-        <header className="mb-10 flex items-center justify-between">
+        <header className="module-header mb-10 flex items-center justify-between p-4 pt-6 -mx-4 rounded-b-xl border-b border-[var(--color-border)]" style={{ '--module-accent': 'var(--gradient-epistle)' } as React.CSSProperties}>
            <Link href={`/epistle/day/${todayStr}`} className="text-[var(--foreground-muted)] hover:text-[var(--foreground)] flex items-center gap-2 text-sm w-fit transition-colors">
             <ArrowLeft className="w-4 h-4" /> {t('backToWriting')}
           </Link>
-          <h1 className="text-2xl font-bold text-[var(--foreground)]">{t('archives')}</h1>
+          <h1 className="text-2xl font-bold text-[var(--foreground)] flex items-center gap-2" style={{ fontFamily: 'var(--font-display)' }}>
+            <Mail className="w-5 h-5 text-[var(--color-epistle)]" />
+            {t('archives')}
+          </h1>
         </header>
 
         <div className="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-[var(--color-border)] before:to-transparent">

@@ -3,7 +3,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { getTranslations, getLocale } from 'next-intl/server';
 import { getMonthTransactions, getMonthSummary } from '@/app/actions/money';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Wallet } from 'lucide-react';
 import { Link } from '@/navigation';
 import TransactionList from '@/components/money/TransactionList';
 import AddTransactionButton from '@/components/money/AddTransactionButton';
@@ -53,18 +53,21 @@ export default async function MoneyPage({
     <main className="min-h-screen bg-[var(--background)] pb-20">
       <div className="max-w-3xl mx-auto p-4 md:p-6">
         {/* Header */}
-        <header className="flex items-center justify-between mb-8 sticky top-[52px] md:top-[56px] z-10 bg-[var(--background)]/95 p-4 -mx-4 rounded-b-xl border-b border-[var(--color-border)]">
+        <header className="module-header flex items-center justify-between mb-8 sticky top-[52px] md:top-[56px] z-10 bg-[var(--background)]/95 p-4 pt-6 -mx-4 rounded-b-xl border-b border-[var(--color-border)]" style={{ '--module-accent': 'var(--gradient-money)' } as React.CSSProperties}>
           <Link
             href={`/money?month=${prevMonth}`}
-            className="p-2 hover:bg-[var(--color-card-hover)] rounded-full text-[var(--foreground-muted)] hover:text-[var(--color-primary)] transition-colors"
+            className="p-2 hover:bg-[var(--color-card-hover)] rounded-full text-[var(--foreground-muted)] hover:text-[var(--color-money)] transition-colors"
           >
             <ChevronLeft />
           </Link>
-          <div className="text-center">
-            <h1 className="text-2xl font-bold tracking-widest text-[var(--color-secondary)]">
-              {t('title')}
-            </h1>
-            <p className="text-sm text-[var(--foreground-muted)] font-mono">{monthDisplay}</p>
+          <div className="text-center flex items-center gap-2">
+            <Wallet className="w-5 h-5 text-[var(--color-money)]" />
+            <div>
+              <h1 className="text-2xl font-bold tracking-widest text-[var(--foreground)]" style={{ fontFamily: 'var(--font-display)' }}>
+                {t('title')}
+              </h1>
+              <p className="text-xs text-[var(--foreground-muted)] font-mono">{monthDisplay}</p>
+            </div>
           </div>
           <Link
             href={`/money?month=${nextMonth}`}

@@ -484,6 +484,22 @@ input:focus, textarea:focus, select:focus {
   }
 }
 
+/* ===== MODULE PAGE HEADER ===== */
+.module-header {
+  position: relative;
+  overflow: hidden;
+}
+
+.module-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--module-accent, var(--gradient-destiny));
+}
+
 /* ===== PRINT STYLES ===== */
 @media print {
   * {

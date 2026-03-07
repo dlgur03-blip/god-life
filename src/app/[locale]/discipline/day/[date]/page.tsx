@@ -44,15 +44,18 @@ export default async function DisciplinePage({ params }: { params: Promise<{ dat
       <div className="max-w-2xl mx-auto">
 
         {/* Header */}
-        <header className="flex items-center justify-between mb-8 sticky top-[52px] md:top-[56px] z-10 bg-[var(--background)]/95 p-4 -mx-4 rounded-b-xl border-b border-[var(--color-border)]">
-          <Link href={`/discipline/day/${prevStr}`} className="p-2 hover:bg-[var(--color-card-hover)] rounded-full text-[var(--foreground-muted)] hover:text-[var(--color-primary)] transition-colors">
+        <header className="module-header flex items-center justify-between mb-8 sticky top-[52px] md:top-[56px] z-10 bg-[var(--background)]/95 p-4 pt-6 -mx-4 rounded-b-xl border-b border-[var(--color-border)]" style={{ '--module-accent': 'var(--gradient-discipline)' } as React.CSSProperties}>
+          <Link href={`/discipline/day/${prevStr}`} className="p-2 hover:bg-[var(--color-card-hover)] rounded-full text-[var(--foreground-muted)] hover:text-[var(--color-discipline)] transition-colors">
             <ChevronLeft />
           </Link>
-          <div className="text-center">
-            <h1 className="text-2xl font-bold tracking-widest text-[var(--color-secondary)]">
-              {t('title')}
-            </h1>
-            <p className="text-sm text-[var(--foreground-muted)] font-mono">{date}</p>
+          <div className="text-center flex items-center gap-2">
+            <Activity className="w-5 h-5 text-[var(--color-discipline)]" />
+            <div>
+              <h1 className="text-2xl font-bold tracking-widest text-[var(--foreground)]" style={{ fontFamily: 'var(--font-display)' }}>
+                {t('title')}
+              </h1>
+              <p className="text-xs text-[var(--foreground-muted)] font-mono">{date}</p>
+            </div>
           </div>
           <div className="flex gap-2">
             <Link href="/discipline/insights" className="p-2 hover:bg-[var(--color-card-hover)] rounded-full text-[var(--foreground-muted)] hover:text-[var(--color-secondary)] transition-colors" title={t('insights')}>

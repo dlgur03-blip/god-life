@@ -16,7 +16,7 @@ export default async function TasksPage() {
   return (
     <main className="min-h-screen bg-[var(--background)] p-4 sm:p-6 pb-20">
       <div className="max-w-5xl mx-auto">
-        <header className="flex items-center gap-3 mb-8">
+        <header className="module-header flex items-center gap-3 mb-8 p-4 pt-6 -mx-4 rounded-b-xl border-b border-[var(--color-border)]" style={{ '--module-accent': 'var(--gradient-taskboard)' } as React.CSSProperties}>
           <Link
             href="/"
             className="p-2 text-[var(--foreground-muted)] hover:text-[var(--foreground)] transition-colors"
@@ -24,9 +24,9 @@ export default async function TasksPage() {
             <ArrowLeft className="w-5 h-5" />
           </Link>
           <div className="flex items-center gap-3">
-            <ClipboardList className="w-7 h-7 text-[var(--color-primary)]" />
+            <ClipboardList className="w-6 h-6 text-[var(--color-taskboard)]" />
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-[var(--foreground)]">
+              <h1 className="text-2xl sm:text-3xl font-bold text-[var(--foreground)]" style={{ fontFamily: 'var(--font-display)' }}>
                 {t('title')}
               </h1>
               <p className="text-xs sm:text-sm text-[var(--foreground-muted)]">{t('subtitle')}</p>

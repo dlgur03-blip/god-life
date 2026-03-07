@@ -12,12 +12,15 @@ export default async function SuccessPage() {
   return (
     <main className="min-h-screen bg-[var(--background)] p-6 pb-20">
       <div className="max-w-4xl mx-auto">
-        <header className="flex justify-between items-center mb-10">
-          <div>
-            <h1 className="text-3xl font-bold text-[var(--color-secondary)]">
-              {t('title')}
-            </h1>
-            <p className="text-[var(--foreground-muted)] text-sm">{t('subtitle')}</p>
+        <header className="module-header flex justify-between items-center mb-10 p-4 pt-6 -mx-4 rounded-b-xl border-b border-[var(--color-border)]" style={{ '--module-accent': 'var(--gradient-success)' } as React.CSSProperties}>
+          <div className="flex items-center gap-3">
+            <Trophy className="w-6 h-6 text-[var(--color-success-module)]" />
+            <div>
+              <h1 className="text-3xl font-bold text-[var(--foreground)]" style={{ fontFamily: 'var(--font-display)' }}>
+                {t('title')}
+              </h1>
+              <p className="text-[var(--foreground-muted)] text-sm">{t('subtitle')}</p>
+            </div>
           </div>
           <Link href="/success/projects/new" className="bg-[var(--color-primary)]/20 hover:bg-[var(--color-primary)]/30 text-[var(--color-primary)] px-4 py-2 rounded-lg flex items-center gap-2 transition-all border border-[var(--color-primary)]/50">
             <Plus className="w-4 h-4" />
