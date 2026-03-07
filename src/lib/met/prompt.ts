@@ -61,7 +61,7 @@ ${customAnswers ? `## Custom Free-Text Answers (MOST IMPORTANT — these reveal 
 4. Analyze the INTERACTION between dimensions, not each in isolation
 5. If avoidance is high, explicitly address whether their "success drive" comes from fear or desire
 6. For "thingsToDiscard": be concrete — name specific behaviors, habits, thought patterns to eliminate
-7. For "godLifeStrategy": reference the specific God Life Maker modules (Destiny Navigator for timeblocking, Success Code for 100-day projects, Discipline Mastery for daily rules, Self Epistle for reflection, Money Flow for financial tracking) and explain HOW this person should use each based on their motivation profile
+7. For "godLifeStrategy": reference the specific God Life AI modules (Destiny Navigator for timeblocking, Success Code for 100-day projects, Discipline Mastery for daily rules, Self Epistle for reflection, Money Flow for financial tracking) and explain HOW this person should use each based on their motivation profile
 8. For "bookRecommendations": pick 3 books that specifically match this person's motivation pattern, with 1-sentence reason each
 9. For "hiddenPattern": reveal something about their motivation they probably don't realize about themselves
 
@@ -82,7 +82,7 @@ Respond in the following JSON format exactly:
   "toxicEnvironment": "string (environments that will drain or destroy this person's motivation)",
   "peopleToSeek": "string (types of people who will energize and grow this person, with concrete traits)",
   "peopleToAvoid": "string (types of people who will drain this person, with concrete patterns to watch for)",
-  "godLifeStrategy": "string (2-3 paragraphs: specific strategy for using God Life Maker modules — Destiny Navigator, Success Code, Discipline Mastery, Self Epistle, Money Flow — tailored to this person's motivation type)",
+  "godLifeStrategy": "string (2-3 paragraphs: specific strategy for using God Life AI modules — Destiny Navigator, Success Code, Discipline Mastery, Self Epistle, Money Flow — tailored to this person's motivation type)",
   "bookRecommendations": ["string (Book Title by Author — 1-sentence why)", "string", "string"],
   "growthAdvice": "string (2 paragraph personalized growth roadmap)",
   "mantra": "string (personal mantra that captures their core identity, 1 powerful sentence)"

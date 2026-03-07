@@ -1,81 +1,96 @@
 @import "tailwindcss";
 
-/* ===== CREAM THEME (Default) ===== */
+/* ===== CREAM THEME — "Athlete's Rest" (Lululemon + New Balance) ===== */
 :root,
 [data-theme="cream"] {
-  /* Core Colors - Cream Elegance */
-  --background: #faf9f7;
-  --background-secondary: #f5f3f0;
+  /* Core Colors - Warm Premium White */
+  --background: #faf8f5;
+  --background-secondary: #f3f0eb;
   --background-card: #ffffff;
-  --foreground: #1a1a1a;
-  --foreground-muted: #5c5c5c;
+  --foreground: #111111;
+  --foreground-muted: #6b7280;
 
   /* Brand Colors */
-  --color-primary: #1a1a1a;
+  --color-primary: #111111;
   --color-primary-hover: #000000;
-  --color-secondary: #a08050;
-  --color-accent: #8b7355;
+  --color-secondary: #c4983f;
+  --color-accent: #b8860b;
 
   /* UI Colors */
-  --color-border: #d4cfc6;
-  --color-border-hover: #a08050;
+  --color-border: #e5e1d8;
+  --color-border-hover: #c4983f;
   --color-input-bg: #ffffff;
   --color-card-bg: #ffffff;
-  --color-card-hover: #f8f6f3;
+  --color-card-hover: #f8f6f1;
 
   /* Status Colors */
-  --color-success: #3d7a35;
-  --color-warning: #a07818;
-  --color-error: #a83232;
-  --color-info: #2a6090;
+  --color-success: #16a34a;
+  --color-warning: #d97706;
+  --color-error: #dc2626;
+  --color-info: #2563eb;
 
-  /* Module Colors - More vibrant for light bg */
-  --color-destiny: #2c2c2c;
-  --color-success-module: #a08050;
-  --color-discipline: #8b6b5a;
-  --color-epistle: #5a5a5a;
+  /* Module Colors — Vivid, distinct */
+  --color-destiny: #111111;
+  --color-taskboard: #2563eb;
+  --color-success-module: #c4983f;
+  --color-discipline: #9333ea;
+  --color-epistle: #059669;
   --color-bio: #4a7a42;
-  --color-money: #c49a6c;
+  --color-money: #d97706;
+  --color-met: #7c3aed;
 
-  /* Typography - Sans-serif (Gulim style) */
-  --font-sans: "Noto Sans KR", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-display: "Noto Sans KR", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  /* Module Gradients */
+  --gradient-destiny: linear-gradient(135deg, #111111, #333333);
+  --gradient-taskboard: linear-gradient(135deg, #2563eb, #3b82f6);
+  --gradient-success: linear-gradient(135deg, #c4983f, #d4a84f);
+  --gradient-discipline: linear-gradient(135deg, #9333ea, #a855f7);
+  --gradient-epistle: linear-gradient(135deg, #059669, #10b981);
+  --gradient-money: linear-gradient(135deg, #d97706, #f59e0b);
+  --gradient-met: linear-gradient(135deg, #7c3aed, #8b5cf6);
 
-  /* Effects */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
-  --shadow-glow: 0 4px 20px rgba(160, 128, 80, 0.15);
-  --shadow-glow-gold: 0 4px 20px rgba(160, 128, 80, 0.25);
+  /* Typography */
+  --font-sans: var(--font-noto-sans-kr, "Noto Sans KR"), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-inter, "Inter"), var(--font-noto-sans-kr, "Noto Sans KR"), ui-sans-serif, system-ui, -apple-system, sans-serif;
 
-  /* Border Radius */
-  --radius-sm: 2px;
-  --radius-md: 4px;
-  --radius-lg: 8px;
+  /* Effects — 4-level depth system */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 25px -3px rgba(0, 0, 0, 0.08), 0 4px 10px -4px rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-card-hover: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+  --shadow-glow: 0 4px 20px rgba(196, 152, 63, 0.15);
+  --shadow-glow-gold: 0 4px 20px rgba(196, 152, 63, 0.25);
+
+  /* Border Radius — Modern */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
   --radius-full: 9999px;
 }
 
-/* ===== CYBER THEME (Original) ===== */
+/* ===== CYBER THEME — "Mission Control" (Under Armour + Marvel) ===== */
 [data-theme="cyber"] {
-  /* Core Colors - Tech/Cyber */
-  --background: #050b14;
-  --background-secondary: #0a1628;
-  --background-card: rgba(255, 255, 255, 0.05);
+  /* Core Colors - Deep Navy */
+  --background: #0a0e17;
+  --background-secondary: #111827;
+  --background-card: rgba(255, 255, 255, 0.04);
   --foreground: #e2e8f0;
   --foreground-muted: #94a3b8;
 
   /* Brand Colors */
-  --color-primary: #06b6d4;
-  --color-primary-hover: #22d3ee;
+  --color-primary: #3b82f6;
+  --color-primary-hover: #60a5fa;
   --color-secondary: #f59e0b;
-  --color-accent: #ffd700;
+  --color-accent: #fbbf24;
 
   /* UI Colors */
-  --color-border: rgba(255, 255, 255, 0.1);
-  --color-border-hover: rgba(6, 182, 212, 0.5);
-  --color-input-bg: rgba(255, 255, 255, 0.05);
-  --color-card-bg: rgba(255, 255, 255, 0.05);
-  --color-card-hover: rgba(255, 255, 255, 0.1);
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-hover: rgba(59, 130, 246, 0.5);
+  --color-input-bg: rgba(255, 255, 255, 0.04);
+  --color-card-bg: rgba(255, 255, 255, 0.04);
+  --color-card-hover: rgba(255, 255, 255, 0.08);
 
   /* Status Colors */
   --color-success: #22c55e;
@@ -83,29 +98,44 @@
   --color-error: #ef4444;
   --color-info: #3b82f6;
 
-  /* Module Colors */
-  --color-destiny: #06b6d4;
-  --color-success-module: #ffd700;
+  /* Module Colors — Neon */
+  --color-destiny: #3b82f6;
+  --color-taskboard: #06b6d4;
+  --color-success-module: #f59e0b;
   --color-discipline: #a855f7;
   --color-epistle: #22c55e;
   --color-bio: #f97316;
   --color-money: #fbbf24;
+  --color-met: #8b5cf6;
+
+  /* Module Gradients — Neon */
+  --gradient-destiny: linear-gradient(135deg, #3b82f6, #60a5fa);
+  --gradient-taskboard: linear-gradient(135deg, #06b6d4, #22d3ee);
+  --gradient-success: linear-gradient(135deg, #f59e0b, #fbbf24);
+  --gradient-discipline: linear-gradient(135deg, #a855f7, #c084fc);
+  --gradient-epistle: linear-gradient(135deg, #22c55e, #4ade80);
+  --gradient-money: linear-gradient(135deg, #fbbf24, #fcd34d);
+  --gradient-met: linear-gradient(135deg, #8b5cf6, #a78bfa);
 
   /* Typography */
   --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-display: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-inter, "Inter"), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
-  /* Effects */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  /* Effects — Enhanced glow */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.5);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 15px rgba(6, 182, 212, 0.5);
-  --shadow-glow-gold: 0 0 15px rgba(255, 215, 0, 0.5);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.03);
+  --shadow-card-hover: 0 8px 25px rgba(59, 130, 246, 0.15), 0 0 0 1px rgba(59, 130, 246, 0.1);
+  --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.4);
+  --shadow-glow-gold: 0 0 20px rgba(245, 158, 11, 0.4);
 
-  /* Border Radius */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 16px;
+  /* Border Radius — Modern */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
   --radius-full: 9999px;
 }
 
@@ -123,6 +153,65 @@
   --shadow-glow-gold: var(--shadow-glow-gold);
 }
 
+/* ===== ANIMATION KEYFRAMES ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease-out both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out both;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.3s ease-out both;
+}
+
+.animate-pulse-dot {
+  animation: pulseDot 1.5s ease-in-out infinite;
+}
+
+/* Stagger delays for dashboard cards */
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+.stagger-5 { animation-delay: 0.25s; }
+.stagger-6 { animation-delay: 0.3s; }
+.stagger-7 { animation-delay: 0.35s; }
+.stagger-8 { animation-delay: 0.4s; }
+
 /* ===== BASE STYLES ===== */
 body {
   background-color: var(--background);
@@ -131,23 +220,51 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* ===== MODULE CARD ===== */
+.module-card {
+  position: relative;
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.module-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--module-gradient, var(--gradient-destiny));
+  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+}
+
+.module-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: var(--color-border-hover);
+}
+
 /* ===== CARD STYLES ===== */
 .card-hover {
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   background-color: var(--color-card-bg);
   border-color: var(--color-border);
+  box-shadow: var(--shadow-card);
 }
 
 .card-hover:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-glow);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
   border-color: var(--color-border-hover);
   background-color: var(--color-card-hover);
 }
 
 /* ===== CREAM SPECIFIC STYLES ===== */
 [data-theme="cream"] {
-  /* Elegant underline effect for links */
   a:not([class]) {
     text-decoration: none;
     border-bottom: 1px solid var(--color-secondary);
@@ -158,7 +275,6 @@ body {
     border-color: var(--color-primary);
   }
 
-  /* Clean button styling */
   button, .btn {
     letter-spacing: 0.05em;
   }
@@ -166,12 +282,15 @@ body {
 
 /* ===== CYBER SPECIFIC STYLES ===== */
 [data-theme="cyber"] {
-  /* Grid background */
   .bg-grid {
     background-image:
-      linear-gradient(rgba(6, 182, 212, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(6, 182, 212, 0.03) 1px, transparent 1px);
+      linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
     background-size: 50px 50px;
+  }
+
+  .module-card:hover {
+    box-shadow: var(--shadow-glow);
   }
 }
 
@@ -216,19 +335,39 @@ input, textarea, select {
 input:focus, textarea:focus, select:focus {
   border-color: var(--color-secondary);
   outline: none;
-  box-shadow: 0 0 0 2px rgba(201, 169, 110, 0.1);
+  box-shadow: 0 0 0 2px rgba(196, 152, 63, 0.1);
 }
 
 [data-theme="cyber"] input:focus,
 [data-theme="cyber"] textarea:focus,
 [data-theme="cyber"] select:focus {
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.2);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+/* ===== TOUCH DEVICE OPTIMIZATIONS ===== */
+@media (hover: none) {
+  .card-hover:hover,
+  .module-card:hover {
+    transform: none;
+    box-shadow: var(--shadow-card);
+  }
+
+  .card-hover:active,
+  .module-card:active {
+    transform: scale(0.98);
+    transition-duration: 0.1s;
+  }
+
+  /* Ensure minimum touch targets */
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
 }
 
 /* ===== PRINT STYLES ===== */
 @media print {
-  /* Reset colors for print */
   * {
     color-adjust: exact !important;
     -webkit-print-color-adjust: exact !important;
@@ -240,23 +379,19 @@ input:focus, textarea:focus, select:focus {
     color: black !important;
   }
 
-  /* Hide interactive elements with Tailwind print:hidden class */
   .print\:hidden {
     display: none !important;
   }
 
-  /* Hide navigation footer */
   footer,
   [role="navigation"] {
     display: none !important;
   }
 
-  /* Reset backgrounds for main content */
   main {
     background: white !important;
   }
 
-  /* Page breaks */
   .page-break-before {
     page-break-before: always;
   }
@@ -269,13 +404,11 @@ input:focus, textarea:focus, select:focus {
     page-break-inside: avoid;
   }
 
-  /* Print margins */
   @page {
     margin: 1cm;
     size: A4;
   }
 
-  /* Timeblock specific print styles */
   .timeblock-card {
     page-break-inside: avoid;
     margin-bottom: 8px;

@@ -60,10 +60,10 @@ export function buildSystemPrompt(context: ChatContextData, locale: string, time
     !dt.goal3Month ? 'goal3Month' : !dt.goal1Month ? 'goal1Month' : !dt.goal2Week ? 'goal2Week' :
     !dt.goal1Week ? 'goal1Week' : !dt.goalToday ? 'goalToday' : null;
 
-  return `You are 갓생코치 (God Life Coach) — the user's personal AI life coach inside God Life Maker (갓생메이커).
+  return `You are 갓생코치 (God Life Coach) — the user's personal AI life coach inside God Life AI (갓생AI).
 
 ## CORE PHILOSOPHY
-갓생메이커는 "AI와 대화하면서 하루를 설계하고 기록하는" 서비스다.
+갓생AI는 "AI와 대화하면서 하루를 설계하고 기록하는" 서비스다.
 - **아침**: AI와 대화 → 장기 목표 점검 → 오늘 일정 확정 → 루틴/프로젝트 상기 → 꿀팁
 - **오후/저녁**: AI와 대화 → 하루 피드백 → 셀프 서신 작성 → 감사/반성 기록 → 지출 기록
 

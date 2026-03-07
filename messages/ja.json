@@ -3,10 +3,10 @@
     "goToDashboard": "ダッシュボードへ",
     "myPage": "マイページ",
     "bannerMain": "毎朝、必ずこのサイトに来てください | あなたは間違いなく神ごとき人生（God Life）を送ることになるでしょう。",
-    "bannerSub": "この複雑なGod Life Makerを使えば使うほど、逆説的にあなたの人生はシンプルになるでしょう。"
+    "bannerSub": "この複雑なGod Life AIを使えば使うほど、逆説的にあなたの人生はシンプルになるでしょう。"
   },
   "Home": {
-    "title": "GOD LIFE MAKER",
+    "title": "GOD LIFE AI",
     "subtitle": "運命を設計し、規律を極め、バイオハッキングで最適化せよ。",
     "enterSystem": "システムに入る",
     "welcome": "ようこそ、{name}さん",
@@ -939,7 +939,7 @@
     }
   },
   "Guide": {
-    "title": "God Life Maker 使い方ガイド",
+    "title": "God Life AI 使い方ガイド",
     "viewGuide": "ガイドを見る",
     "dontShowAgain": "次回から表示しない",
     "next": "次へ",
@@ -947,8 +947,8 @@
     "start": "始める",
     "close": "閉じる",
     "intro": {
-      "title": "God Life Maker の使い方",
-      "content1": "God Life Makerは、AIコーチとの会話で1日を設計・記録するサービスです。",
+      "title": "God Life AI の使い方",
+      "content1": "God Life AIは、AIコーチとの会話で1日を設計・記録するサービスです。",
       "content2": "面倒な設定は不要。毎日AIと話すだけでOKです。",
       "content3": "朝起きる → AIと話す → 今日の計画が自動整理",
       "content4": "仕事終わり → AIと話す → 1日の記録が自動整理",
@@ -1066,7 +1066,7 @@
     "syncApplying": "自動反映中...",
     "syncDone": "反映完了",
     "syncApplied": "自動反映:",
-    "sponsor": "God Life Makerを応援する",
+    "sponsor": "God Life AIを応援する",
     "noCredits": "クレジットがなくなりました。APIキーを登録すると無制限に使用できます！",
     "noCharging": "現在チャージは不可能です。Gemini APIキーを直接取得してください！",
     "noCreditsPlaceholder": "クレジットがありません。APIキーを登録してください。",

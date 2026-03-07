@@ -157,7 +157,7 @@ export default async function Image({ params }: Props) {
             textTransform: 'uppercase',
           }}
         >
-          MET · GOD LIFE MAKER
+          MET · GOD LIFE AI
         </div>
       </div>
     ),

@@ -537,7 +537,7 @@ Modern life overstimulates dopamine receptors, leading to low motivation.
 **적용법**:
 - 알람을 끄면 자동으로 "아침 루틴" 체크리스트가 뜨게 설정
 - 급여일에 자동으로 저축 이체 (opt-out 방식)
-- 갓생메이커가 매일 아침 AI 코치를 자동으로 열어주는 것도 디폴트 효과
+- 갓생AI가 매일 아침 AI 코치를 자동으로 열어주는 것도 디폴트 효과
 
 **과학적 근거**: 장기기증 동의율 — opt-in 국가(독일 12%) vs opt-out 국가(오스트리아 99.98%). 기본값의 힘은 압도적입니다.
 
@@ -550,7 +550,7 @@ Modern life overstimulates dopamine receptors, leading to low motivation.
 - 핸드폰 첫 화면에 SNS 대신 독서/명상 앱 배치
 - 물컵을 책상 위에 항상 채워두기
 
-**갓생 팁**: 갓생메이커의 모듈 순서도 선택 설계입니다. 셀프 서신 → 규율 마스터리 → 운명 네비게이터 순서로 "감정 → 행동 → 목표"의 자연스러운 흐름을 만듭니다.
+**갓생 팁**: 갓생AI의 모듈 순서도 선택 설계입니다. 셀프 서신 → 규율 마스터리 → 운명 네비게이터 순서로 "감정 → 행동 → 목표"의 자연스러운 흐름을 만듭니다.
 
 ### 3. 사회적 증거 (Social Proof)
 **원리**: 다른 사람들이 하고 있으면 나도 하고 싶어진다.
@@ -581,7 +581,7 @@ Modern life overstimulates dopamine receptors, leading to low motivation.
 - ❌ "아직 3개 안 했어요" → ✅ "벌써 4개나 완료했어요!"
 - ❌ "절약해야 해요" → ✅ "미래의 나에게 선물하기"
 
-**갓생메이커의 프레이밍**: AI 코치는 "안 했다"고 지적하지 않습니다. "오늘 뭐 했어?"라고 자연스럽게 물어보고, 대화 속에서 기록이 자동으로 채워집니다. 이것이 넛지입니다.
+**갓생AI의 프레이밍**: AI 코치는 "안 했다"고 지적하지 않습니다. "오늘 뭐 했어?"라고 자연스럽게 물어보고, 대화 속에서 기록이 자동으로 채워집니다. 이것이 넛지입니다.
 
 ## 넛지 vs 의지력: 왜 환경이 이기는가
 
@@ -601,7 +601,7 @@ Modern life overstimulates dopamine receptors, leading to low motivation.
 1. **알람 → 자동 체크리스트** (디폴트 효과)
 2. **물컵을 침대 옆에** (마찰 제거)
 3. **커튼을 반만 열고 자기** (자연광 = 코르티솔 각성)
-4. **갓생메이커 열기** (AI 코치가 "좋은 아침!" 인사)
+4. **갓생AI 열기** (AI 코치가 "좋은 아침!" 인사)
 
 ### Evening Nudge Stack
 1. **9시에 자동 야간 모드** (블루라이트 차단)
@@ -609,9 +609,9 @@ Modern life overstimulates dopamine receptors, leading to low motivation.
 3. **내일 옷 미리 꺼놓기** (아침 결정 피로 제거)
 4. **AI 코치와 하루 정리** (반성이 아닌, 대화로 기록)
 
-## 갓생메이커가 넛지인 이유
+## 갓생AI가 넛지인 이유
 
-갓생메이커 자체가 하나의 거대한 넛지 시스템입니다:
+갓생AI 자체가 하나의 거대한 넛지 시스템입니다:
 
 - **AI 코치 자동 팝업** = 디폴트 효과 (대화를 시작하게 만듦)
 - **대화형 기록** = 마찰 제거 (양식 작성이 아닌, 수다)
@@ -619,7 +619,7 @@ Modern life overstimulates dopamine receptors, leading to low motivation.
 - **시간대별 인사** = 프레이밍 (아침엔 활기, 밤엔 차분)
 - **MET 검사 공유** = 사회적 증거 (친구도 하게 만듦)
 
-> **핵심**: 의지력에 의존하지 마세요. 환경을 설계하세요. 당신이 해야 할 일은 딱 하나 — **갓생메이커를 여는 것**. 나머지는 넛지가 합니다.
+> **핵심**: 의지력에 의존하지 마세요. 환경을 설계하세요. 당신이 해야 할 일은 딱 하나 — **갓생AI를 여는 것**. 나머지는 넛지가 합니다.
 
 ---
 
@@ -650,7 +650,7 @@ The core principle is simple: **Humans are not rational.** We make bad choices w
 **Application**:
 - Set morning routine checklists to appear automatically when you dismiss your alarm
 - Auto-transfer savings on payday (opt-out model)
-- God Life Maker auto-opening the AI coach each morning is a default effect
+- God Life AI auto-opening the AI coach each morning is a default effect
 
 **Evidence**: Organ donation consent rates — opt-in countries (Germany 12%) vs opt-out countries (Austria 99.98%). The power of defaults is overwhelming.
 
@@ -710,7 +710,7 @@ A 2019 meta-analysis in the European Journal of Social Psychology found that **n
 1. **Alarm → Auto checklist** (Default Effect)
 2. **Water glass by the bed** (Friction removal)
 3. **Sleep with curtains half-open** (Natural light = cortisol awakening)
-4. **Open God Life Maker** (AI coach says "Good morning!")
+4. **Open God Life AI** (AI coach says "Good morning!")
 
 ### Evening Nudge Stack
 1. **Auto night mode at 9pm** (Blue light blocking)
@@ -718,7 +718,7 @@ A 2019 meta-analysis in the European Journal of Social Psychology found that **n
 3. **Prepare tomorrow's outfit** (Remove morning decision fatigue)
 4. **Chat with AI coach to review the day** (Not reflection, conversation)
 
-> **Key takeaway**: Don't rely on willpower. Design your environment. You only need to do one thing — **open God Life Maker**. Nudge does the rest.
+> **Key takeaway**: Don't rely on willpower. Design your environment. You only need to do one thing — **open God Life AI**. Nudge does the rest.
 
 ---
 
@@ -749,7 +749,7 @@ A 2019 meta-analysis in the European Journal of Social Psychology found that **n
 **応用**：
 - アラームを消すと自動的に朝のルーティンチェックリストを表示
 - 給料日に自動貯蓄振替（オプトアウト方式）
-- God Life Makerが毎朝AIコーチを自動で開くのもデフォルト効果
+- God Life AIが毎朝AIコーチを自動で開くのもデフォルト効果
 
 **科学的根拠**：臓器提供同意率 — オプトイン国（ドイツ12%）vsオプトアウト国（オーストリア99.98%）。デフォルトの力は圧倒的です。
 
@@ -796,7 +796,7 @@ A 2019 meta-analysis in the European Journal of Social Psychology found that **n
 | 「毎日日記を書こう」 | AIコーチが会話で自動記録 |
 | 成功率: ~8%（新年の決意） | 成功率: ~65%（環境設計） |
 
-> **キーポイント**：意志力に頼らないでください。環境を設計しましょう。やるべきことはたった一つ — **God Life Makerを開くこと。** あとはナッジがやります。
+> **キーポイント**：意志力に頼らないでください。環境を設計しましょう。やるべきことはたった一つ — **God Life AIを開くこと。** あとはナッジがやります。
 
 ---
 

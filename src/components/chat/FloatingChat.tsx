@@ -97,19 +97,19 @@ export default function FloatingChat({ locale }: FloatingChatProps) {
       {/* FAB + Quick Actions */}
       {!open && (
         <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
-          {/* Quick action buttons - always 3 */}
+          {/* Quick action buttons */}
           {showActions && quickActions.map(({ key, icon: Icon, color }) => (
             <button
               key={key}
               onClick={() => handleOpen(t(key))}
-              className="flex items-center gap-2 px-3 py-2 bg-[var(--color-card-bg)] border border-[var(--color-border)] text-[var(--foreground)] shadow-lg hover:shadow-xl transition-all text-xs animate-in fade-in slide-in-from-bottom-2"
+              className="flex items-center gap-2 px-4 py-2.5 bg-[var(--color-card-bg)] border border-[var(--color-border)] text-[var(--foreground)] shadow-lg hover:shadow-xl transition-all text-xs font-medium animate-scale-in"
               style={{ borderRadius: 'var(--radius-lg)' }}
             >
               <Icon className="w-4 h-4" style={{ color }} />
               {t(key)}
             </button>
           ))}
-          {/* Main FAB */}
+          {/* Main FAB — Gradient background */}
           <button
             onClick={() => {
               if (showActions) {
@@ -118,11 +118,14 @@ export default function FloatingChat({ locale }: FloatingChatProps) {
                 setShowActions(true);
               }
             }}
-            className="w-14 h-14 bg-[var(--color-secondary)] text-white shadow-lg hover:scale-105 active:scale-95 transition-transform flex items-center justify-center"
-            style={{ borderRadius: '50%' }}
+            className="w-14 h-14 text-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all flex items-center justify-center"
+            style={{
+              borderRadius: '50%',
+              background: 'linear-gradient(135deg, var(--color-secondary), var(--color-accent))',
+            }}
             aria-label="AI Coach"
           >
-            {showActions ? <MessageCircle className="w-6 h-6" /> : <MessageCircle className="w-6 h-6" />}
+            <MessageCircle className="w-6 h-6" />
           </button>
         </div>
       )}
@@ -138,48 +141,62 @@ export default function FloatingChat({ locale }: FloatingChatProps) {
           <div className="absolute inset-0 bg-black/30 sm:bg-transparent" onClick={handleClose} />
 
           <div
-            className="relative z-10 w-full h-[85vh] sm:w-[420px] sm:h-[600px] sm:m-6 bg-[var(--background)] border border-[var(--color-border)] shadow-2xl flex flex-col overflow-hidden"
-            style={{ borderRadius: 'var(--radius-lg)' }}
+            className="relative z-10 w-full h-[100dvh] sm:w-[420px] sm:h-[600px] sm:m-6 bg-[var(--background)] border border-[var(--color-border)] shadow-2xl flex flex-col overflow-hidden animate-scale-in"
+            style={{ borderRadius: '0 0 0 0', ['--tw-shadow' as string]: 'var(--shadow-lg)' }}
           >
-            {/* Header */}
-            <div className="flex items-center justify-between px-4 py-3 border-b border-[var(--color-border)] bg-[var(--color-card-bg)]">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-[var(--color-secondary)] flex items-center justify-center">
-                  <MessageCircle className="w-4 h-4 text-white" />
+            {/* Use border-radius only on desktop */}
+            <style>{`
+              @media (min-width: 640px) {
+                .chat-panel { border-radius: var(--radius-xl) !important; }
+              }
+            `}</style>
+            <div className="chat-panel relative z-10 w-full h-full flex flex-col overflow-hidden">
+              {/* Header */}
+              <div className="flex items-center justify-between px-4 py-3 border-b border-[var(--color-border)] bg-[var(--color-card-bg)]">
+                <div className="flex items-center gap-3">
+                  <div
+                    className="w-9 h-9 flex items-center justify-center text-white"
+                    style={{
+                      borderRadius: 'var(--radius-md)',
+                      background: 'linear-gradient(135deg, var(--color-secondary), var(--color-accent))',
+                    }}
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-bold text-[var(--foreground)]" style={{ fontFamily: 'var(--font-display)' }}>{t('title')}</h3>
+                    <p className="text-[10px] text-[var(--foreground-muted)]">{t('floatingSubtitle')}</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-sm font-bold text-[var(--foreground)]">{t('title')}</h3>
-                  <p className="text-[10px] text-[var(--foreground-muted)]">{t('floatingSubtitle')}</p>
+                <div className="flex items-center gap-1">
+                  <button onClick={handleClose} className="p-1.5 text-[var(--foreground-muted)] hover:text-[var(--foreground)] transition-colors">
+                    <Minimize2 className="w-4 h-4" />
+                  </button>
+                  <button onClick={handleClose} className="p-1.5 text-[var(--foreground-muted)] hover:text-[var(--foreground)] transition-colors">
+                    <X className="w-4 h-4" />
+                  </button>
                 </div>
               </div>
-              <div className="flex items-center gap-1">
-                <button onClick={handleClose} className="p-1.5 text-[var(--foreground-muted)] hover:text-[var(--foreground)] transition-colors">
-                  <Minimize2 className="w-4 h-4" />
-                </button>
-                <button onClick={handleClose} className="p-1.5 text-[var(--foreground-muted)] hover:text-[var(--foreground)] transition-colors">
-                  <X className="w-4 h-4" />
-                </button>
+
+              {/* Content */}
+              <div className="flex-1 overflow-hidden">
+                {loading && (
+                  <div className="flex items-center justify-center h-full">
+                    <div className="w-8 h-8 border-2 border-[var(--color-secondary)] border-t-transparent rounded-full animate-spin" />
+                  </div>
+                )}
+
+                {!loading && data && (
+                  <ChatInterface
+                    sessionId={data.sessionId}
+                    initialMessages={data.messages}
+                    locale={locale}
+                    credits={data.credits}
+                    hasApiKey={data.hasApiKey}
+                    initialPrompt={initialPrompt}
+                  />
+                )}
               </div>
-            </div>
-
-            {/* Content */}
-            <div className="flex-1 overflow-hidden">
-              {loading && (
-                <div className="flex items-center justify-center h-full">
-                  <div className="w-8 h-8 border-2 border-[var(--color-secondary)] border-t-transparent rounded-full animate-spin" />
-                </div>
-              )}
-
-              {!loading && data && (
-                <ChatInterface
-                  sessionId={data.sessionId}
-                  initialMessages={data.messages}
-                  locale={locale}
-                  credits={data.credits}
-                  hasApiKey={data.hasApiKey}
-                  initialPrompt={initialPrompt}
-                />
-              )}
             </div>
           </div>
         </div>

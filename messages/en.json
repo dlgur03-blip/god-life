@@ -3,10 +3,10 @@
     "goToDashboard": "Go to Dashboard",
     "myPage": "My Page",
     "bannerMain": "Visit this site every morning without fail | You will surely live the God Life.",
-    "bannerSub": "The more you use this complex God Life Maker, paradoxically, the simpler your life will become."
+    "bannerSub": "The more you use this complex God Life AI, paradoxically, the simpler your life will become."
   },
   "Home": {
-    "title": "GOD LIFE MAKER",
+    "title": "GOD LIFE AI",
     "subtitle": "Architect your destiny. Master your discipline. Hack your biology.",
     "enterSystem": "Enter System",
     "welcome": "Welcome, {name}",
@@ -939,7 +939,7 @@
     }
   },
   "Guide": {
-    "title": "God Life Maker Practical Guide",
+    "title": "God Life AI Practical Guide",
     "viewGuide": "View Guide",
     "dontShowAgain": "Don't show again",
     "next": "Next",
@@ -947,8 +947,8 @@
     "start": "Get Started",
     "close": "Close",
     "intro": {
-      "title": "How to Use God Life Maker",
-      "content1": "God Life Maker is a service where you design and record your day through conversations with an AI coach.",
+      "title": "How to Use God Life AI",
+      "content1": "God Life AI is a service where you design and record your day through conversations with an AI coach.",
       "content2": "No complex setup needed. Just talk to the AI every day.",
       "content3": "Wake up → Talk to AI → Today's plan auto-organized",
       "content4": "After work → Talk to AI → Daily record auto-organized",
@@ -1066,7 +1066,7 @@
     "syncApplying": "Auto-applying...",
     "syncDone": "Applied",
     "syncApplied": "Auto-applied:",
-    "sponsor": "Support God Life Maker",
+    "sponsor": "Support God Life AI",
     "noCredits": "You've run out of credits. Register your own API key for unlimited use!",
     "noCharging": "Charging is currently unavailable. Please get your own Gemini API key!",
     "noCreditsPlaceholder": "No credits left. Please register an API key.",

@@ -3,10 +3,10 @@
     "goToDashboard": "进入控制台",
     "myPage": "个人主页",
     "bannerMain": "每天早上，务必访问本网站 | 你终将过上大神般的生活。",
-    "bannerSub": "越是使用这个复杂的 God Life Maker，反常的是，你的生活将变得越简单。"
+    "bannerSub": "越是使用这个复杂的 God Life AI，反常的是，你的生活将变得越简单。"
   },
   "Home": {
-    "title": "GOD LIFE MAKER",
+    "title": "GOD LIFE AI",
     "subtitle": "规划你的命运。掌控你的自律。优化你的生物系统。",
     "enterSystem": "进入系统",
     "welcome": "欢迎，{name}",
@@ -940,7 +940,7 @@
     }
   },
   "Guide": {
-    "title": "God Life Maker 使用指南",
+    "title": "God Life AI 使用指南",
     "viewGuide": "查看指南",
     "dontShowAgain": "不再显示",
     "next": "下一步",
@@ -948,8 +948,8 @@
     "start": "开始",
     "close": "关闭",
     "intro": {
-      "title": "如何使用 God Life Maker",
-      "content1": "God Life Maker 是一个通过与AI教练对话来规划和记录你每一天的服务。",
+      "title": "如何使用 God Life AI",
+      "content1": "God Life AI 是一个通过与AI教练对话来规划和记录你每一天的服务。",
       "content2": "无需复杂设置。每天和AI聊聊就行。",
       "content3": "早上起床 → 和AI对话 → 今日计划自动整理",
       "content4": "下班后 → 和AI对话 → 每日记录自动整理",
@@ -1067,7 +1067,7 @@
     "syncApplying": "自动同步中...",
     "syncDone": "已同步",
     "syncApplied": "已自动同步:",
-    "sponsor": "支持God Life Maker",
+    "sponsor": "支持God Life AI",
     "noCredits": "积分已用完。注册您的API密钥即可无限使用！",
     "noCharging": "目前无法充值。请自行获取Gemini API密钥！",
     "noCreditsPlaceholder": "没有积分了。请注册API密钥。",

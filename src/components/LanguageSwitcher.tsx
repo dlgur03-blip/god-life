@@ -39,7 +39,7 @@ export default function LanguageSwitcher() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
-        className="flex items-center gap-2 px-3 py-1.5 rounded-md transition-colors text-[#e2e8f0] hover:text-[#06b6d4] hover:bg-[rgba(6,182,212,0.1)] focus:outline-none focus:ring-2 focus:ring-[#06b6d4]/50 cursor-pointer"
+        className="flex items-center gap-2 p-2 rounded-md transition-colors text-[var(--foreground-muted)] hover:text-[var(--color-secondary)] hover:bg-[var(--color-card-hover)] focus:outline-none cursor-pointer"
         aria-label={t('language')}
       >
         {/* Mobile: Show current flag only */}
@@ -52,7 +52,8 @@ export default function LanguageSwitcher() {
 
       <DropdownMenuContent
         align="end"
-        className="min-w-[140px] bg-[#050b14] border border-[rgba(255,255,255,0.1)] rounded-md shadow-lg"
+        className="min-w-[140px] bg-[var(--background)] border border-[var(--color-border)] shadow-lg"
+        style={{ borderRadius: 'var(--radius-md)' }}
       >
         {localeOptions.map((option) => (
           <DropdownMenuItem
@@ -60,8 +61,8 @@ export default function LanguageSwitcher() {
             onClick={() => handleLocaleChange(option.code)}
             className={`flex items-center gap-2 px-3 py-2 text-sm cursor-pointer transition-colors ${
               locale === option.code
-                ? 'text-[#06b6d4] bg-[rgba(6,182,212,0.1)]'
-                : 'text-[#e2e8f0] hover:text-[#06b6d4] hover:bg-[rgba(6,182,212,0.1)]'
+                ? 'text-[var(--color-secondary)] bg-[var(--color-card-hover)]'
+                : 'text-[var(--foreground)] hover:text-[var(--color-secondary)] hover:bg-[var(--color-card-hover)]'
             }`}
           >
             <span className="text-base">{option.flag}</span>

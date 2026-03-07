@@ -75,25 +75,36 @@ export default async function Home() {
   if (!session || !session.user?.email) {
     return (
       <main className="min-h-screen flex flex-col items-center justify-center text-center px-4 py-8">
-        <h1 className="text-3xl sm:text-5xl font-extrabold text-[var(--foreground)] tracking-wide mb-4">
-          GOD LIFE MAKER
-        </h1>
-        <div className="w-16 sm:w-24 h-1 bg-[var(--color-secondary)] mx-auto mb-6 sm:mb-8" />
-        <p className="text-[var(--foreground-muted)] mb-6 sm:mb-8 text-base sm:text-xl max-w-md leading-relaxed">
-          {t('subtitle')}
-        </p>
-        <div className="flex flex-col sm:flex-row gap-3">
+        {/* Nike-style hero */}
+        <div className="animate-fade-in-up">
+          <h1
+            className="text-5xl sm:text-7xl md:text-8xl font-black text-[var(--foreground)] tracking-tighter leading-none mb-4"
+            style={{ fontFamily: 'var(--font-display)' }}
+          >
+            GOD LIFE AI
+          </h1>
+          <div className="w-16 sm:w-24 h-1 bg-[var(--color-secondary)] mx-auto mb-6 sm:mb-8" />
+          <p className="text-xs sm:text-sm font-bold tracking-[0.3em] uppercase text-[var(--color-secondary)] mb-4">
+            TRAIN. TRACK. TRANSFORM.
+          </p>
+          <p className="text-[var(--foreground-muted)] mb-8 sm:mb-10 text-base sm:text-lg max-w-md leading-relaxed mx-auto">
+            {t('subtitle')}
+          </p>
+        </div>
+        <div className="flex flex-col sm:flex-row gap-3 animate-fade-in-up stagger-2">
           {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
           <a
             href="/api/auth/signin"
-            className="px-6 sm:px-8 py-3 border border-[var(--color-secondary)] text-[var(--foreground)] hover:bg-[var(--color-secondary)] hover:text-[var(--background)] transition-all duration-300 font-medium flex items-center gap-2 tracking-wider uppercase text-sm"
+            className="px-8 sm:px-10 py-3.5 bg-[var(--foreground)] text-[var(--background)] hover:bg-[var(--color-secondary)] transition-all duration-300 font-bold flex items-center justify-center gap-2 tracking-wider uppercase text-sm"
+            style={{ borderRadius: 'var(--radius-md)' }}
           >
             <LogIn className="w-4 h-4" />
             {t('enterSystem')}
           </a>
           <Link
             href="/met"
-            className="px-6 sm:px-8 py-3 border border-[var(--color-border)] text-[var(--foreground-muted)] hover:border-[var(--color-secondary)] hover:text-[var(--foreground)] transition-all duration-300 font-medium flex items-center gap-2 tracking-wider uppercase text-sm"
+            className="px-8 sm:px-10 py-3.5 border-2 border-[var(--color-border)] text-[var(--foreground-muted)] hover:border-[var(--color-secondary)] hover:text-[var(--foreground)] transition-all duration-300 font-bold flex items-center justify-center gap-2 tracking-wider uppercase text-sm"
+            style={{ borderRadius: 'var(--radius-md)' }}
           >
             <Brain className="w-4 h-4" />
             {t('modules.met.name')}
@@ -126,31 +137,40 @@ export default async function Home() {
     { name: t('modules.chat.name'), href: '/chat', iconKey: 'messageCircle', desc: t('modules.chat.desc'), status: { label: 'AI Coach', color: 'secondary' }, moduleColor: 'var(--color-secondary)' },
   ];
 
+  // Get today's date for hero display
+  const today = new Date();
+  const dateOptions: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  const dateStr = today.toLocaleDateString(undefined, dateOptions);
+
   return (
-    <main className="min-h-screen px-4 py-6 md:p-8 flex flex-col items-center gap-6 md:gap-10">
+    <main className="min-h-screen px-4 py-6 md:p-8 flex flex-col items-center gap-6 md:gap-8">
       {/* Welcome Guide Popup - Shows on first visit */}
       <WelcomeGuide />
 
-      <div className="w-full max-w-5xl flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
-        <div className="flex items-center justify-between sm:justify-start gap-3 sm:gap-4">
-          <div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-[var(--foreground)] tracking-wide">
-              {t('title')}
+      {/* Hero Section */}
+      <div className="w-full max-w-5xl">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4 mb-2">
+          <div className="animate-fade-in-up">
+            <p className="text-xs sm:text-sm text-[var(--foreground-muted)] mb-1">{dateStr}</p>
+            <h1
+              className="text-2xl sm:text-3xl font-extrabold text-[var(--foreground)] tracking-tight"
+              style={{ fontFamily: 'var(--font-display)' }}
+            >
+              {t('welcome', {name: session.user.name || 'User'})}
             </h1>
-            <div className="w-12 sm:w-16 h-0.5 bg-[var(--color-secondary)] mt-2" />
           </div>
-          <GuideButton />
-        </div>
-        <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-4 text-sm">
-          <PrintButton />
-          <span className="text-[var(--foreground-muted)] truncate max-w-[200px]">{t('welcome', {name: session.user.name || 'User'})}</span>
-          {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-          <a
-            href="/api/auth/signout"
-            className="p-2 rounded-md hover:bg-[var(--color-border)] text-[var(--foreground-muted)] hover:text-[var(--foreground)] transition-colors flex-shrink-0"
-          >
-            <LogOut className="w-5 h-5" />
-          </a>
+          <div className="flex items-center gap-3 text-sm animate-fade-in-up stagger-2">
+            <GuideButton />
+            <PrintButton />
+            {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+            <a
+              href="/api/auth/signout"
+              className="p-2 rounded-md hover:bg-[var(--color-card-hover)] text-[var(--foreground-muted)] hover:text-[var(--foreground)] transition-colors flex-shrink-0"
+              style={{ borderRadius: 'var(--radius-sm)' }}
+            >
+              <LogOut className="w-5 h-5" />
+            </a>
+          </div>
         </div>
       </div>
 

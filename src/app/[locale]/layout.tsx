@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Noto_Sans_KR, Noto_Sans_SC, Noto_Sans_Devanagari } from "next/font/google";
+import { Inter, Geist, Geist_Mono, Noto_Sans_KR, Noto_Sans_SC, Noto_Sans_Devanagari } from "next/font/google";
 import "../globals.css";
 import Providers from "../providers";
 import { NextIntlClientProvider } from "next-intl";
@@ -9,6 +9,12 @@ import FeedbackFooter from '@/components/FeedbackFooter';
 import InAppBrowserGuard from '@/components/InAppBrowserGuard';
 import TimezoneDetector from '@/components/TimezoneDetector';
 import FloatingChat from '@/components/chat/FloatingChat';
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,29 +45,20 @@ const notoSansDevanagari = Noto_Sans_Devanagari({
 });
 
 export const metadata: Metadata = {
-  title: "GOD LIFE MAKER - 갓생메이커",
+  title: "GOD LIFE AI - 갓생AI",
   description: "매일 아침, 반드시 들어오세요. 당신은 분명 갓생을 살게 될 것입니다.",
   openGraph: {
-    title: "갓생메이커 | 당신의 인생이 바뀝니다",
+    title: "갓생AI | 당신의 인생이 바뀝니다",
     description: "매일 아침, 반드시 들어오세요. 운명 설계 · 100일 프로젝트 · 규율 마스터리 · 셀프 서신",
     url: "https://godlife.kr",
-    siteName: "GOD LIFE MAKER",
-    images: [
-      {
-        url: "https://godlife.kr/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "GOD LIFE MAKER - 갓생메이커",
-      },
-    ],
+    siteName: "GOD LIFE AI",
     locale: "ko_KR",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "갓생메이커 | 당신의 인생이 바뀝니다",
+    title: "갓생AI | 당신의 인생이 바뀝니다",
     description: "매일 아침, 반드시 들어오세요. 운명 설계 · 100일 프로젝트 · 규율 마스터리 · 셀프 서신",
-    images: ["https://godlife.kr/og-image.png"],
   },
   metadataBase: new URL("https://godlife.kr"),
   other: {
@@ -82,14 +79,14 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${notoSansKR.variable} ${notoSansSC.variable} ${notoSansDevanagari.variable} antialiased min-h-screen flex flex-col`}
+        className={`${inter.variable} ${geistSans.variable} ${geistMono.variable} ${notoSansKR.variable} ${notoSansSC.variable} ${notoSansDevanagari.variable} antialiased min-h-screen flex flex-col`}
       >
         <NextIntlClientProvider messages={messages}>
           <Providers>
             <TimezoneDetector />
             <InAppBrowserGuard />
             <HeaderWrapper />
-            <main className="pt-[52px] md:pt-[56px] flex-1">
+            <main className="pt-12 flex-1">
               {children}
             </main>
             <FloatingChat locale={locale} />

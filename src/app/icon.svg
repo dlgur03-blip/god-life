@@ -1,20 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
-  <!-- Background: Dark Hexagon -->
-  <path d="M50 5 L93.3 30 V80 L50 105 L6.7 80 V30 Z" fill="#0f172a" stroke="#06b6d4" stroke-width="2" />
-  
-  <!-- Outer Glow Ring -->
-  <circle cx="50" cy="55" r="35" stroke="#06b6d4" stroke-width="2" stroke-opacity="0.5" stroke-dasharray="4 4" />
-  
+  <!-- Background: Premium Black Circle -->
+  <circle cx="50" cy="50" r="48" fill="#111111" />
+
+  <!-- Gold Accent Ring -->
+  <circle cx="50" cy="50" r="44" stroke="#c4983f" stroke-width="2" fill="none" />
+
   <!-- Core Symbol: Star/Spark (Gold) -->
-  <path d="M50 25 L58 45 L80 55 L58 65 L50 85 L42 65 L20 55 L42 45 Z" fill="#fbbf24" filter="url(#glow)" />
-  
-  <!-- Inner Detail (Cyan) -->
-  <circle cx="50" cy="55" r="5" fill="#06b6d4" />
+  <path d="M50 18 L57 42 L80 50 L57 58 L50 82 L43 58 L20 50 L43 42 Z" fill="#c4983f" filter="url(#glow)" />
+
+  <!-- Inner Detail (White) -->
+  <circle cx="50" cy="50" r="5" fill="#ffffff" />
 
   <!-- Filters for Glow Effect -->
   <defs>
     <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
       <feMerge>
         <feMergeNode in="coloredBlur"/>
         <feMergeNode in="SourceGraphic"/>
