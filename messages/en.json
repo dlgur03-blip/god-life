@@ -1,4 +1,11 @@
 {
+  "Nav": {
+    "destiny": "Destiny",
+    "tasks": "Tasks",
+    "home": "Home",
+    "discipline": "Discipline",
+    "mypage": "My"
+  },
   "Header": {
     "goToDashboard": "Go to Dashboard",
     "myPage": "My Page",

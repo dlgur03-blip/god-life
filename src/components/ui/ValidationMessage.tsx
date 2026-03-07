@@ -27,7 +27,7 @@ export default function ValidationMessage({
   return (
     <p className={cn(
       'text-xs mt-1',
-      'text-[#ef4444]',
+      'text-[var(--color-error)]',
       className
     )}>
       {displayMessage}

@@ -8,6 +8,7 @@ export const metadata: Metadata = {
     description: "운명 설계 · 100일 프로젝트 · 규율 마스터리 · 셀프 서신 · 바이오해킹",
     url: "https://godlife.kr",
     siteName: "GOD LIFE AI",
+    images: [{ url: "https://godlife.kr/og-image.png", width: 1200, height: 630, alt: "GOD LIFE AI" }],
     locale: "ko_KR",
     type: "website",
   },
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "GOD LIFE AI - 갓생AI",
     description: "운명 설계 · 100일 프로젝트 · 규율 마스터리 · 셀프 서신 · 바이오해킹",
+    images: ["https://godlife.kr/og-image.png"],
   },
   metadataBase: new URL("https://godlife.kr"),
 };

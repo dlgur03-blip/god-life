@@ -51,7 +51,7 @@ const DropdownMenuItem = React.forwardRef<
     ref={ref}
     className={cn(
       'relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none',
-      'focus:bg-[rgba(6,182,212,0.1)] focus:text-[#06b6d4]',
+      'focus:bg-[var(--color-card-hover)] focus:text-[var(--color-secondary)]',
       'data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
       inset && 'pl-8',
       className
@@ -85,7 +85,7 @@ const DropdownMenuSeparator = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DropdownMenuPrimitive.Separator
     ref={ref}
-    className={cn('-mx-1 my-1 h-px bg-[rgba(255,255,255,0.1)]', className)}
+    className={cn('-mx-1 my-1 h-px bg-[var(--color-border)]', className)}
     {...props}
   />
 ));

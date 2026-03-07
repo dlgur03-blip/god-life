@@ -1,4 +1,11 @@
 {
+  "Nav": {
+    "destiny": "भाग्य",
+    "tasks": "कार्य",
+    "home": "होम",
+    "discipline": "अनुशासन",
+    "mypage": "माई"
+  },
   "Header": {
     "goToDashboard": "डैशबोर्ड पर जाएं",
     "myPage": "मेरा पेज",

@@ -26,18 +26,18 @@ export default function ErrorAlert({ error, message, onDismiss, className }: Err
 
   return (
     <div className={cn(
-      'flex items-center gap-3 p-4 rounded-xl',
-      'bg-[rgba(239,68,68,0.1)]',
-      'border border-[rgba(239,68,68,0.3)]',
-      'text-[#ef4444]',
+      'flex items-center gap-3 p-4',
+      'bg-[color-mix(in_srgb,var(--color-error)_10%,transparent)]',
+      'border border-[color-mix(in_srgb,var(--color-error)_30%,transparent)]',
+      'text-[var(--color-error)]',
       className
-    )}>
+    )} style={{ borderRadius: 'var(--radius-lg)' }}>
       <AlertCircle className="w-5 h-5 flex-shrink-0" />
       <p className="text-sm flex-1">{displayMessage}</p>
       {onDismiss && (
         <button
           onClick={onDismiss}
-          className="text-[#ef4444] hover:text-white transition-colors"
+          className="text-[var(--color-error)] hover:text-[var(--foreground)] transition-colors"
         >
           <X className="w-4 h-4" />
         </button>

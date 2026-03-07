@@ -1,4 +1,11 @@
 {
+  "Nav": {
+    "destiny": "운명",
+    "tasks": "작업",
+    "home": "홈",
+    "discipline": "규율",
+    "mypage": "마이"
+  },
   "Header": {
     "goToDashboard": "대시보드로 이동",
     "myPage": "마이페이지",

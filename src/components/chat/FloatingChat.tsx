@@ -96,7 +96,7 @@ export default function FloatingChat({ locale }: FloatingChatProps) {
     <>
       {/* FAB + Quick Actions */}
       {!open && (
-        <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
+        <div className="fixed bottom-20 sm:bottom-6 right-6 z-50 flex flex-col items-end gap-2">
           {/* Quick action buttons */}
           {showActions && quickActions.map(({ key, icon: Icon, color }) => (
             <button

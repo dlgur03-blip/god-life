@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 import { Clock, CalendarDays, Trash2, ChevronDown, ChevronUp, Sparkles, FolderOpen } from 'lucide-react';
 import { updateTaskStatus, deleteTask } from '@/app/actions/tasks';
 import { useRouter } from 'next/navigation';
@@ -31,7 +31,7 @@ interface Labels {
 
 const statusConfig = {
   not_started: { color: 'var(--foreground-muted)', bg: 'var(--color-border)' },
-  in_progress: { color: 'var(--color-primary)', bg: 'var(--color-primary)' },
+  in_progress: { color: 'var(--color-taskboard)', bg: 'var(--color-taskboard)' },
   completed: { color: 'var(--color-success)', bg: 'var(--color-success)' },
 };
 
@@ -45,11 +45,13 @@ export default function TaskBoard({
   labels: Labels;
 }) {
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+  const [tasks, setTasks] = useState(initialTasks);
   const [showCompleted, setShowCompleted] = useState(false);
   const [updating, setUpdating] = useState<string | null>(null);
 
-  const activeTasks = initialTasks.filter(t => t.status !== 'completed');
-  const completedTasks = initialTasks.filter(t => t.status === 'completed');
+  const activeTasks = tasks.filter(t => t.status !== 'completed');
+  const completedTasks = tasks.filter(t => t.status === 'completed');
 
   // Group active tasks by category
   const activeGrouped: Record<string, Task[]> = {};
@@ -60,22 +62,28 @@ export default function TaskBoard({
   });
 
   const handleStatusChange = async (taskId: string, newStatus: string) => {
+    // Optimistic update
+    setTasks(prev => prev.map(t =>
+      t.id === taskId ? { ...t, status: newStatus, completedAt: newStatus === 'completed' ? new Date().toISOString() : t.completedAt } : t
+    ));
     setUpdating(taskId);
     try {
       await updateTaskStatus(taskId, newStatus);
-      router.refresh();
+      startTransition(() => router.refresh());
     } finally {
       setUpdating(null);
     }
   };
 
   const handleDelete = async (taskId: string) => {
-    setUpdating(taskId);
+    // Optimistic update
+    setTasks(prev => prev.filter(t => t.id !== taskId));
     try {
       await deleteTask(taskId);
-      router.refresh();
-    } finally {
-      setUpdating(null);
+      startTransition(() => router.refresh());
+    } catch {
+      // Revert on error
+      setTasks(initialTasks);
     }
   };
 

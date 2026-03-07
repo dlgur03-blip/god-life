@@ -31,16 +31,16 @@ export default function ConfirmDialog({
 
   const variantStyles = {
     danger: {
-      icon: 'text-[#ef4444]',
-      button: 'bg-[#ef4444] hover:bg-[#dc2626] text-white'
+      icon: 'text-[var(--color-error)]',
+      button: 'bg-[var(--color-error)] hover:opacity-90 text-white'
     },
     warning: {
-      icon: 'text-[#f59e0b]',
-      button: 'bg-[#f59e0b] hover:bg-[#d97706] text-black'
+      icon: 'text-[var(--color-warning)]',
+      button: 'bg-[var(--color-warning)] hover:opacity-90 text-white'
     },
     default: {
-      icon: 'text-[#06b6d4]',
-      button: 'bg-[#06b6d4] hover:bg-[#0891b2] text-black'
+      icon: 'text-[var(--color-secondary)]',
+      button: 'bg-[var(--color-secondary)] hover:opacity-90 text-white'
     }
   };
 
@@ -50,26 +50,25 @@ export default function ConfirmDialog({
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
         onClick={onCancel}
       />
 
       {/* Dialog */}
       <div className={cn(
         'relative z-10 w-full max-w-md mx-4',
-        'bg-[#050b14] border border-[rgba(255,255,255,0.1)]',
-        'rounded-2xl p-6 shadow-2xl',
-        'animate-in fade-in zoom-in-95 duration-200'
-      )}>
+        'bg-[var(--color-card-bg)] border border-[var(--color-border)]',
+        'p-6 shadow-2xl animate-scale-in'
+      )} style={{ borderRadius: 'var(--radius-xl)' }}>
         <div className="flex items-start gap-4">
-          <div className={cn('p-2 rounded-full bg-white/5', styles.icon)}>
+          <div className={cn('p-2 rounded-full bg-[var(--color-card-hover)]', styles.icon)}>
             <AlertTriangle className="w-6 h-6" />
           </div>
           <div className="flex-1">
-            <h3 className="text-lg font-bold text-[#e2e8f0] mb-2">
+            <h3 className="text-lg font-bold text-[var(--foreground)] mb-2">
               {title || t('dialog.confirmTitle')}
             </h3>
-            <p className="text-sm text-[#9ca3af]">{message}</p>
+            <p className="text-sm text-[var(--foreground-muted)]">{message}</p>
           </div>
         </div>
 
@@ -77,21 +76,23 @@ export default function ConfirmDialog({
           <button
             onClick={onCancel}
             className={cn(
-              'px-4 py-2 rounded-xl text-sm font-medium',
-              'bg-white/5 hover:bg-white/10 text-[#e2e8f0]',
-              'border border-[rgba(255,255,255,0.1)]',
+              'px-4 py-2 text-sm font-medium',
+              'bg-[var(--color-card-hover)] hover:opacity-80 text-[var(--foreground)]',
+              'border border-[var(--color-border)]',
               'transition-colors'
             )}
+            style={{ borderRadius: 'var(--radius-md)' }}
           >
             {cancelLabel || t('cancel')}
           </button>
           <button
             onClick={onConfirm}
             className={cn(
-              'px-4 py-2 rounded-xl text-sm font-bold',
+              'px-4 py-2 text-sm font-bold',
               'transition-colors',
               styles.button
             )}
+            style={{ borderRadius: 'var(--radius-md)' }}
           >
             {confirmLabel || t('confirm')}
           </button>

@@ -1,4 +1,11 @@
 {
+  "Nav": {
+    "destiny": "運命",
+    "tasks": "タスク",
+    "home": "ホーム",
+    "discipline": "規律",
+    "mypage": "マイ"
+  },
   "Header": {
     "goToDashboard": "ダッシュボードへ",
     "myPage": "マイページ",

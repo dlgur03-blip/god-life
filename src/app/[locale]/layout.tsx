@@ -9,6 +9,7 @@ import FeedbackFooter from '@/components/FeedbackFooter';
 import InAppBrowserGuard from '@/components/InAppBrowserGuard';
 import TimezoneDetector from '@/components/TimezoneDetector';
 import FloatingChat from '@/components/chat/FloatingChat';
+import BottomTabBar from '@/components/BottomTabBar';
 
 const inter = Inter({
   variable: "--font-inter",
@@ -52,6 +53,7 @@ export const metadata: Metadata = {
     description: "매일 아침, 반드시 들어오세요. 운명 설계 · 100일 프로젝트 · 규율 마스터리 · 셀프 서신",
     url: "https://godlife.kr",
     siteName: "GOD LIFE AI",
+    images: [{ url: "https://godlife.kr/og-image.png", width: 1200, height: 630, alt: "GOD LIFE AI" }],
     locale: "ko_KR",
     type: "website",
   },
@@ -59,6 +61,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "갓생AI | 당신의 인생이 바뀝니다",
     description: "매일 아침, 반드시 들어오세요. 운명 설계 · 100일 프로젝트 · 규율 마스터리 · 셀프 서신",
+    images: ["https://godlife.kr/og-image.png"],
   },
   metadataBase: new URL("https://godlife.kr"),
   other: {
@@ -86,10 +89,11 @@ export default async function LocaleLayout({
             <TimezoneDetector />
             <InAppBrowserGuard />
             <HeaderWrapper />
-            <main className="pt-12 flex-1">
+            <main className="pt-12 pb-14 sm:pb-0 flex-1">
               {children}
             </main>
             <FloatingChat locale={locale} />
+            <BottomTabBar />
             <FeedbackFooter />
           </Providers>
         </NextIntlClientProvider>

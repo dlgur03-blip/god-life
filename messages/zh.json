@@ -1,4 +1,11 @@
 {
+  "Nav": {
+    "destiny": "命运",
+    "tasks": "任务",
+    "home": "首页",
+    "discipline": "纪律",
+    "mypage": "我的"
+  },
   "Header": {
     "goToDashboard": "进入控制台",
     "myPage": "个人主页",

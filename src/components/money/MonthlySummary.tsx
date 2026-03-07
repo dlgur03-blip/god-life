@@ -21,10 +21,10 @@ export default function MonthlySummary({ income, expense, balance }: Props) {
       {/* Income */}
       <div className="bg-[var(--color-card-bg)] border border-[var(--color-border)] rounded-xl p-4 text-center">
         <div className="flex items-center justify-center gap-1 mb-2">
-          <TrendingUp className="w-4 h-4 text-green-500" />
+          <TrendingUp className="w-4 h-4 text-[var(--color-success)]" />
           <span className="text-xs text-[var(--foreground-muted)]">{t('income')}</span>
         </div>
-        <p className="text-lg font-bold text-green-500">
+        <p className="text-lg font-bold text-[var(--color-success)]">
           +{formatAmount(income)}
         </p>
       </div>
@@ -32,10 +32,10 @@ export default function MonthlySummary({ income, expense, balance }: Props) {
       {/* Expense */}
       <div className="bg-[var(--color-card-bg)] border border-[var(--color-border)] rounded-xl p-4 text-center">
         <div className="flex items-center justify-center gap-1 mb-2">
-          <TrendingDown className="w-4 h-4 text-red-500" />
+          <TrendingDown className="w-4 h-4 text-[var(--color-error)]" />
           <span className="text-xs text-[var(--foreground-muted)]">{t('expense')}</span>
         </div>
-        <p className="text-lg font-bold text-red-500">
+        <p className="text-lg font-bold text-[var(--color-error)]">
           -{formatAmount(expense)}
         </p>
       </div>
@@ -46,7 +46,7 @@ export default function MonthlySummary({ income, expense, balance }: Props) {
           <Wallet className="w-4 h-4 text-[var(--color-primary)]" />
           <span className="text-xs text-[var(--foreground-muted)]">{t('balance')}</span>
         </div>
-        <p className={`text-lg font-bold ${balance >= 0 ? 'text-[var(--color-primary)]' : 'text-red-500'}`}>
+        <p className={`text-lg font-bold ${balance >= 0 ? 'text-[var(--color-primary)]' : 'text-[var(--color-error)]'}`}>
           {balance >= 0 ? '+' : ''}{formatAmount(balance)}
         </p>
       </div>
