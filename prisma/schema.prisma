@@ -34,6 +34,7 @@ model User {
   onboarding        UserOnboarding?
   memos             Memo[]
   tasks             UserTask[]
+  taskProjects      TaskProject[]
 }
 
 // M3: Destiny Navigator
@@ -420,6 +421,25 @@ model Memo {
   @@index([userId, date])
 }
 
+// Task Project (프로젝트 폴더)
+model TaskProject {
+  id          String    @id @default(cuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  name        String
+  emoji       String    @default("📁")
+  color       String    @default("#2563eb") // hex color
+  sortOrder   Int       @default(0)
+
+  tasks       UserTask[]
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([userId])
+}
+
 // Task Board (작업 보드) — 시작 전 / 진행중 / 완료
 model UserTask {
   id          String    @id @default(cuid())
@@ -429,7 +449,9 @@ model UserTask {
   title         String
   description   String?
   status        String    @default("not_started") // not_started, in_progress, completed
-  category      String?   // optional grouping tag (project name)
+  category      String?   // legacy grouping tag
+  projectId     String?   // link to TaskProject
+  project       TaskProject? @relation(fields: [projectId], references: [id], onDelete: SetNull)
   scheduledTime String?   // HH:MM format — 예정 시간
   dueDate       String?   // YYYY-MM-DD — 마감일
   completedAt   DateTime?
@@ -439,6 +461,7 @@ model UserTask {
 
   @@index([userId])
   @@index([userId, status])
+  @@index([projectId])
 }
 
 // User Onboarding (AI priority system)

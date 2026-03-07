@@ -1,4 +1,4 @@
-import { getUserTasks } from '@/app/actions/tasks';
+import { getUserTasks, getTaskProjects } from '@/app/actions/tasks';
 import { getTranslations } from 'next-intl/server';
 import { ClipboardList, ArrowLeft } from 'lucide-react';
 import { Link } from '@/navigation';
@@ -8,15 +8,10 @@ export const dynamic = 'force-dynamic';
 
 export default async function TasksPage() {
   const t = await getTranslations('Tasks');
-  const tasks = await getUserTasks();
-
-  // Group by category
-  const grouped: Record<string, typeof tasks> = {};
-  tasks.forEach(t => {
-    const key = t.category || '';
-    if (!grouped[key]) grouped[key] = [];
-    grouped[key].push(t);
-  });
+  const [tasks, projects] = await Promise.all([
+    getUserTasks(),
+    getTaskProjects(),
+  ]);
 
   return (
     <main className="min-h-screen bg-[var(--background)] p-4 sm:p-6 pb-20">
@@ -41,7 +36,7 @@ export default async function TasksPage() {
 
         <TaskBoard
           tasks={tasks}
-          grouped={grouped}
+          projects={projects}
           labels={{
             notStarted: t('status.notStarted'),
             inProgress: t('status.inProgress'),
