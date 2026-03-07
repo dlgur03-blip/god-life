@@ -72,6 +72,21 @@
       "noTasks": "タスクなし"
     }
   },
+  "Tasks": {
+    "title": "タスクボード",
+    "subtitle": "プロジェクトとタスクを管理",
+    "status": {
+      "notStarted": "未着手",
+      "inProgress": "進行中",
+      "completed": "完了"
+    },
+    "noTasks": "タスクがまだありません。AIコーチと話して追加しましょう！",
+    "due": "期限",
+    "at": "予定",
+    "addViaAi": "AIコーチでタスク追加",
+    "delete": "削除",
+    "uncategorized": "その他"
+  },
   "Success": {
     "title": "SUCCESS CODE",
     "subtitle": "100日一貫性の法則",

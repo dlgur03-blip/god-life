@@ -72,6 +72,21 @@
       "noTasks": "No Tasks"
     }
   },
+  "Tasks": {
+    "title": "Task Board",
+    "subtitle": "Manage your projects and tasks",
+    "status": {
+      "notStarted": "Not Started",
+      "inProgress": "In Progress",
+      "completed": "Completed"
+    },
+    "noTasks": "No tasks yet. Chat with AI Coach to add some!",
+    "due": "Due",
+    "at": "At",
+    "addViaAi": "Add tasks via AI Coach",
+    "delete": "Delete",
+    "uncategorized": "Other"
+  },
   "Success": {
     "title": "SUCCESS CODE",
     "subtitle": "100 Days of Consistency",

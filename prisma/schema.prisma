@@ -429,8 +429,9 @@ model UserTask {
   title         String
   description   String?
   status        String    @default("not_started") // not_started, in_progress, completed
-  category      String?   // optional grouping tag
+  category      String?   // optional grouping tag (project name)
   scheduledTime String?   // HH:MM format — 예정 시간
+  dueDate       String?   // YYYY-MM-DD — 마감일
   completedAt   DateTime?
 
   createdAt   DateTime  @default(now())

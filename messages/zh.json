@@ -72,6 +72,21 @@
       "noTasks": "无任务"
     }
   },
+  "Tasks": {
+    "title": "任务板",
+    "subtitle": "管理你的项目和任务",
+    "status": {
+      "notStarted": "未开始",
+      "inProgress": "进行中",
+      "completed": "已完成"
+    },
+    "noTasks": "还没有任务。和AI教练对话来添加吧！",
+    "due": "截止",
+    "at": "预定",
+    "addViaAi": "通过AI教练添加任务",
+    "delete": "删除",
+    "uncategorized": "其他"
+  },
   "Success": {
     "title": "SUCCESS CODE",
     "subtitle": "100天的坚持",

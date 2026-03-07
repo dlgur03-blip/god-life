@@ -6,7 +6,7 @@ export type ModuleAction =
   | { module: 'money'; type: 'add_transaction'; data: MoneyTransactionData }
   | { module: 'success'; type: 'create_project'; data: { title: string } }
   | { module: 'memo'; type: 'save'; data: { content: string; tags: string[] } }
-  | { module: 'task'; type: 'create'; data: { title: string; description?: string; category?: string; scheduledTime?: string } }
+  | { module: 'task'; type: 'create'; data: { title: string; description?: string; category?: string; scheduledTime?: string; dueDate?: string } }
   | { module: 'task'; type: 'update_status'; data: { taskId: string; status: 'not_started' | 'in_progress' | 'completed' } }
   | { module: 'nudge'; type: 'suggest'; data: { targetModule: string; message: string } };
 
@@ -63,7 +63,7 @@ export interface ChatContextData {
   destinyToday: DestinySnapshot | null;
   destinyYesterday: DestinySnapshot | null;
   todayMemos: { content: string; tags: string[]; time: string; reviewed: boolean }[];
-  tasks: { id: string; title: string; description?: string | null; status: string; category?: string | null; scheduledTime?: string | null }[];
+  tasks: { id: string; title: string; description?: string | null; status: string; category?: string | null; scheduledTime?: string | null; dueDate?: string | null }[];
   recentlyCompletedTasks: { title: string; completedAt?: string | null }[];
   recentMessages: { role: string; content: string }[];
 }

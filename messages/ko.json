@@ -72,6 +72,21 @@
       "noTasks": "작업 없음"
     }
   },
+  "Tasks": {
+    "title": "작업 보드",
+    "subtitle": "프로젝트와 할 일을 관리하세요",
+    "status": {
+      "notStarted": "시작 전",
+      "inProgress": "진행중",
+      "completed": "완료"
+    },
+    "noTasks": "등록된 작업이 없습니다. AI 코치와 대화해서 추가해보세요!",
+    "due": "마감",
+    "at": "예정",
+    "addViaAi": "AI 코치로 작업 추가하기",
+    "delete": "삭제",
+    "uncategorized": "기타"
+  },
   "Success": {
     "title": "SUCCESS CODE",
     "subtitle": "100일 일관성의 법칙",

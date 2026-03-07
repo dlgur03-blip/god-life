@@ -72,6 +72,21 @@
       "noTasks": "कोई कार्य नहीं"
     }
   },
+  "Tasks": {
+    "title": "कार्य बोर्ड",
+    "subtitle": "अपनी परियोजनाओं और कार्यों को प्रबंधित करें",
+    "status": {
+      "notStarted": "शुरू नहीं",
+      "inProgress": "प्रगति में",
+      "completed": "पूर्ण"
+    },
+    "noTasks": "अभी कोई कार्य नहीं। AI कोच से बात करके जोड़ें!",
+    "due": "अंतिम तिथि",
+    "at": "समय",
+    "addViaAi": "AI कोच से कार्य जोड़ें",
+    "delete": "हटाएं",
+    "uncategorized": "अन्य"
+  },
   "Success": {
     "title": "SUCCESS CODE",
     "subtitle": "100 दिनों की निरंतरता",

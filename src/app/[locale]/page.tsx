@@ -117,7 +117,7 @@ export default async function Home() {
 
   const modules: ModuleCardData[] = [
     { name: t('modules.destiny.name'), href: `/destiny/day/${todayStr}`, iconKey: 'compass', desc: t('modules.destiny.desc'), status: stats.destinyStatus, moduleColor: 'var(--color-destiny)', aiPrompt: t('modules.destiny.aiPrompt') },
-    { name: t('modules.taskBoard.name'), href: '/chat', iconKey: 'clipboardList', desc: t('modules.taskBoard.desc'), status: stats.taskStatus, moduleColor: 'var(--color-primary)', aiPrompt: t('modules.taskBoard.aiPrompt') },
+    { name: t('modules.taskBoard.name'), href: '/tasks', iconKey: 'clipboardList', desc: t('modules.taskBoard.desc'), status: stats.taskStatus, moduleColor: 'var(--color-primary)', aiPrompt: t('modules.taskBoard.aiPrompt') },
     { name: t('modules.success.name'), href: '/success', iconKey: 'trophy', desc: t('modules.success.desc'), status: stats.successStatus, moduleColor: 'var(--color-success-module)', aiPrompt: t('modules.success.aiPrompt') },
     { name: t('modules.discipline.name'), href: `/discipline/day/${todayStr}`, iconKey: 'activity', desc: t('modules.discipline.desc'), status: stats.discStatus, moduleColor: 'var(--color-discipline)', aiPrompt: t('modules.discipline.aiPrompt') },
     { name: t('modules.epistle.name'), href: `/epistle/day/${todayStr}`, iconKey: 'mail', desc: t('modules.epistle.desc'), status: stats.epistleStatus, moduleColor: 'var(--color-epistle)', aiPrompt: t('modules.epistle.aiPrompt') },
