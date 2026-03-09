@@ -82,7 +82,7 @@ export default function WelcomeGuide({ forceOpen = false, onClose }: WelcomeGuid
   const accentColor = moduleColors[currentStepData.key] || 'var(--color-secondary)';
 
   return (
-    <div className="fixed inset-0 z-[60] bg-[var(--background)] flex flex-col animate-fade-in">
+    <div className="fixed inset-0 z-[100] bg-[var(--background)] flex flex-col animate-fade-in">
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-[var(--color-border)]">
         <div className="flex items-center gap-3">

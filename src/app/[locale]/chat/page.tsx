@@ -12,13 +12,14 @@ export async function generateMetadata() {
   return { title: t('title') };
 }
 
-export default async function ChatPage({ params }: { params: Promise<{ locale: string }> }) {
+export default async function ChatPage({ params, searchParams }: { params: Promise<{ locale: string }>; searchParams: Promise<{ prompt?: string }> }) {
   const session = await getServerSession(authOptions);
   if (!session?.user?.email) {
     redirect('/api/auth/signin');
   }
 
   const { locale } = await params;
+  const { prompt } = await searchParams;
   const [chatSession, onboarding, creditInfo] = await Promise.all([
     getOrCreateChatSession(),
     getOnboardingStatus(),
@@ -40,6 +41,7 @@ export default async function ChatPage({ params }: { params: Promise<{ locale: s
       hasOnboarding={!!onboarding}
       credits={creditInfo.credits}
       hasApiKey={creditInfo.hasApiKey}
+      initialPrompt={prompt}
     />
   );
 }

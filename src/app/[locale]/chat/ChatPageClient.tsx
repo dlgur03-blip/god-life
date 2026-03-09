@@ -11,9 +11,10 @@ interface ChatPageClientProps {
   hasOnboarding: boolean;
   credits: number;
   hasApiKey: boolean;
+  initialPrompt?: string;
 }
 
-export default function ChatPageClient({ sessionId, initialMessages, locale, hasOnboarding, credits, hasApiKey }: ChatPageClientProps) {
+export default function ChatPageClient({ sessionId, initialMessages, locale, hasOnboarding, credits, hasApiKey, initialPrompt }: ChatPageClientProps) {
   const [onboarded, setOnboarded] = useState(hasOnboarding);
 
   if (!onboarded) {
@@ -32,6 +33,7 @@ export default function ChatPageClient({ sessionId, initialMessages, locale, has
         locale={locale}
         credits={credits}
         hasApiKey={hasApiKey}
+        initialPrompt={initialPrompt}
       />
     </div>
   );

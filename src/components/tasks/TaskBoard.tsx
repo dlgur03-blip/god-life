@@ -146,9 +146,7 @@ export default function TaskBoard({
   };
 
   const handleAiAdd = () => {
-    window.dispatchEvent(new CustomEvent('open-ai-chat', {
-      detail: { prompt: labels.addViaAi },
-    }));
+    router.push(`/chat?prompt=${encodeURIComponent(labels.addViaAi)}`);
   };
 
   const isDueSoon = (dueDate: string | null) => {

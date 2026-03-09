@@ -54,7 +54,7 @@ export default function DashboardModules({ modules }: { modules: ModuleCardData[
 
   const handleAiChat = (prompt: string, e: React.MouseEvent) => {
     e.stopPropagation();
-    window.dispatchEvent(new CustomEvent('open-ai-chat', { detail: { prompt } }));
+    router.push(`/chat?prompt=${encodeURIComponent(prompt)}`);
   };
 
   return (
