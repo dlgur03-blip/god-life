@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useTransition } from 'react';
-import { Clock, CalendarDays, Trash2, ChevronDown, ChevronUp, Sparkles, FolderOpen, Plus, FolderPlus, ArrowRightLeft } from 'lucide-react';
+import { useState, useTransition, useCallback } from 'react';
+import { Clock, CalendarDays, Trash2, ChevronDown, ChevronUp, Sparkles, FolderOpen, Plus, FolderPlus, ArrowRightLeft, GripVertical } from 'lucide-react';
 import { updateTaskStatus, deleteTask, createTaskProject, deleteTaskProject, moveTaskToProject } from '@/app/actions/tasks';
 import { useRouter } from 'next/navigation';
+import { DndContext, DragOverlay, useDraggable, useDroppable, PointerSensor, TouchSensor, useSensor, useSensors, type DragStartEvent, type DragOverEvent, type DragEndEvent } from '@dnd-kit/core';
 
 interface Task {
   id: string;
@@ -47,6 +48,77 @@ const statusConfig = {
   completed: { color: 'var(--color-success)', bg: 'var(--color-success)' },
 };
 
+const STATUS_ORDER = ['not_started', 'in_progress', 'completed'] as const;
+
+function DraggableTask({ task, children }: { task: Task; children: React.ReactNode }) {
+  const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
+    id: task.id,
+    data: { task },
+  });
+
+  return (
+    <div
+      ref={setNodeRef}
+      style={{ opacity: isDragging ? 0.3 : 1, transition: 'opacity 150ms' }}
+    >
+      <div className="flex items-stretch">
+        <button
+          {...listeners}
+          {...attributes}
+          className="flex items-center px-1 cursor-grab active:cursor-grabbing text-[var(--foreground-muted)] hover:text-[var(--foreground)] touch-none"
+          style={{ borderRadius: 'var(--radius-md) 0 0 var(--radius-md)' }}
+        >
+          <GripVertical className="w-3.5 h-3.5" />
+        </button>
+        <div className="flex-1 min-w-0">{children}</div>
+      </div>
+    </div>
+  );
+}
+
+function DroppableColumn({ id, label, statusKey, taskCount, isOver }: {
+  id: string; label: string; statusKey: string; taskCount: number; isOver: boolean;
+}) {
+  const { setNodeRef, isOver: hovering } = useDroppable({ id });
+  const config = statusConfig[statusKey as keyof typeof statusConfig] || statusConfig.not_started;
+  const active = isOver || hovering;
+
+  return (
+    <div
+      ref={setNodeRef}
+      className="flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium transition-all"
+      style={{
+        borderRadius: 'var(--radius-full)',
+        backgroundColor: active ? config.bg : 'transparent',
+        color: active ? 'white' : config.bg,
+        border: `1.5px solid ${config.bg}`,
+        opacity: active ? 1 : 0.6,
+        transform: active ? 'scale(1.05)' : 'scale(1)',
+      }}
+    >
+      <div className="w-2 h-2 rounded-full" style={{ backgroundColor: active ? 'white' : config.bg }} />
+      {label} ({taskCount})
+    </div>
+  );
+}
+
+function DroppableProjectHeader({ projectId, children }: { projectId: string; children: React.ReactNode }) {
+  const { setNodeRef, isOver } = useDroppable({ id: `project:${projectId}` });
+  return (
+    <div
+      ref={setNodeRef}
+      style={{
+        borderRadius: 'var(--radius-md)',
+        outline: isOver ? '2px dashed var(--color-taskboard)' : '2px dashed transparent',
+        outlineOffset: '2px',
+        transition: 'outline-color 150ms',
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
 export default function TaskBoard({
   tasks: initialTasks,
   projects: initialProjects,
@@ -67,6 +139,57 @@ export default function TaskBoard({
   const [newProjectName, setNewProjectName] = useState('');
   const [newProjectEmoji, setNewProjectEmoji] = useState('📁');
   const [movingTask, setMovingTask] = useState<string | null>(null);
+  const [activeId, setActiveId] = useState<string | null>(null);
+  const [overColumn, setOverColumn] = useState<string | null>(null);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
+    useSensor(TouchSensor, { activationConstraint: { delay: 200, tolerance: 5 } }),
+  );
+
+  const handleDragStart = useCallback((event: DragStartEvent) => {
+    setActiveId(event.active.id as string);
+  }, []);
+
+  const handleDragOver = useCallback((event: DragOverEvent) => {
+    const overId = event.over?.id as string | null;
+    if (overId && STATUS_ORDER.includes(overId as typeof STATUS_ORDER[number])) {
+      setOverColumn(overId);
+    } else {
+      setOverColumn(null);
+    }
+  }, []);
+
+  const handleDragEnd = useCallback((event: DragEndEvent) => {
+    const { active, over } = event;
+    setActiveId(null);
+    setOverColumn(null);
+
+    if (!over) return;
+
+    const taskId = active.id as string;
+    const dropTarget = over.id as string;
+
+    // Dropped on a status column
+    if (STATUS_ORDER.includes(dropTarget as typeof STATUS_ORDER[number])) {
+      const task = tasks.find(t => t.id === taskId);
+      if (task && task.status !== dropTarget) {
+        handleStatusChange(taskId, dropTarget);
+      }
+      return;
+    }
+
+    // Dropped on a project zone (prefixed with "project:")
+    if (dropTarget.startsWith('project:')) {
+      const projectId = dropTarget.replace('project:', '') || null;
+      const task = tasks.find(t => t.id === taskId);
+      if (task && task.projectId !== projectId) {
+        handleMoveToProject(taskId, projectId);
+      }
+    }
+  }, [tasks]);
+
+  const draggedTask = activeId ? tasks.find(t => t.id === activeId) : null;
 
   const activeTasks = tasks.filter(t => t.status !== 'completed');
   const completedTasks = tasks.filter(t => t.status === 'completed');
@@ -161,14 +284,13 @@ export default function TaskBoard({
     return new Date(dueDate + 'T23:59:59') < new Date();
   };
 
-  const renderTask = (task: Task) => {
+  const renderTaskCard = (task: Task) => {
     const config = statusConfig[task.status as keyof typeof statusConfig] || statusConfig.not_started;
     const overdue = task.status !== 'completed' && isOverdue(task.dueDate);
     const dueSoon = task.status !== 'completed' && !overdue && isDueSoon(task.dueDate);
 
     return (
       <div
-        key={task.id}
         className={`border p-3 sm:p-4 flex flex-col gap-2 transition-all ${
           overdue ? 'border-[var(--color-error)]/40' : 'border-[var(--color-border)]'
         } ${updating === task.id ? 'opacity-50' : ''}`}
@@ -279,6 +401,17 @@ export default function TaskBoard({
     );
   };
 
+  const renderTask = (task: Task) => {
+    if (task.status === 'completed') {
+      return <div key={task.id}>{renderTaskCard(task)}</div>;
+    }
+    return (
+      <DraggableTask key={task.id} task={task}>
+        {renderTaskCard(task)}
+      </DraggableTask>
+    );
+  };
+
   const renderProjectSection = (projectId: string, projectTasks: Task[]) => {
     const project = projects.find(p => p.id === projectId);
     const isCollapsed = collapsedProjects.has(projectId);
@@ -292,7 +425,8 @@ export default function TaskBoard({
 
     return (
       <div key={projectId || 'uncategorized'} className="animate-fade-in-up">
-        {/* Project Header */}
+        {/* Project Header — droppable for moving tasks between projects */}
+        <DroppableProjectHeader projectId={projectId || ''}>
         <div
           className="flex items-center gap-2 mb-3 cursor-pointer group"
           onClick={() => toggleCollapse(projectId || 'uncategorized')}
@@ -343,6 +477,7 @@ export default function TaskBoard({
             </button>
           )}
         </div>
+        </DroppableProjectHeader>
 
         {/* Tasks Grid */}
         {!isCollapsed && (
@@ -355,6 +490,7 @@ export default function TaskBoard({
   };
 
   return (
+    <DndContext sensors={sensors} onDragStart={handleDragStart} onDragOver={handleDragOver} onDragEnd={handleDragEnd}>
     <div className="space-y-6">
       {/* Top Actions */}
       <div className="flex gap-3">
@@ -417,6 +553,29 @@ export default function TaskBoard({
         </div>
       )}
 
+      {/* Status Drop Zones — visible when dragging */}
+      {activeId && (
+        <div
+          className="flex items-center justify-center gap-3 py-3 px-4 border border-dashed border-[var(--color-border)] animate-scale-in"
+          style={{ borderRadius: 'var(--radius-lg)', backgroundColor: 'var(--color-card-bg)' }}
+        >
+          {STATUS_ORDER.map(status => {
+            const statusLabel = status === 'not_started' ? labels.notStarted : status === 'in_progress' ? labels.inProgress : labels.completed;
+            const count = tasks.filter(t => t.status === status).length;
+            return (
+              <DroppableColumn
+                key={status}
+                id={status}
+                label={statusLabel}
+                statusKey={status}
+                taskCount={count}
+                isOver={overColumn === status}
+              />
+            );
+          })}
+        </div>
+      )}
+
       {/* Empty State */}
       {activeTasks.length === 0 && completedTasks.length === 0 && (
         <div className="flex flex-col items-center justify-center py-16 text-[var(--foreground-muted)] animate-fade-in-up">
@@ -449,5 +608,15 @@ export default function TaskBoard({
         </div>
       )}
     </div>
+
+    {/* Drag Overlay — ghost card while dragging */}
+    <DragOverlay dropAnimation={{ duration: 200, easing: 'ease' }}>
+      {draggedTask ? (
+        <div style={{ width: 300, opacity: 0.9, transform: 'rotate(2deg)' }}>
+          {renderTaskCard(draggedTask)}
+        </div>
+      ) : null}
+    </DragOverlay>
+    </DndContext>
   );
 }

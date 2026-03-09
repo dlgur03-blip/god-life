@@ -19,6 +19,13 @@ export const metadata: Metadata = {
     images: ["https://godlife.kr/og-image.png"],
   },
   metadataBase: new URL("https://godlife.kr"),
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png", sizes: "512x512" },
+    ],
+    apple: { url: "/icon.png", type: "image/png", sizes: "512x512" },
+  },
 };
 
 export default function RootLayout({
