@@ -21,6 +21,7 @@ interface Props {
   availableDates: string[];
   currentDate: string;
   locale: string;
+  isAdmin: boolean;
 }
 
 function RegionBadge({ code }: { code: string }) {
@@ -189,6 +190,7 @@ export default function SignalPageClient({
   availableDates,
   currentDate,
   locale,
+  isAdmin,
 }: Props) {
   const router = useRouter();
   const [activeFolder, setActiveFolder] = useState<string>('news');
@@ -231,16 +233,18 @@ export default function SignalPageClient({
           <p className="text-sm text-white/50">
             6개국 뉴스에서 겹치는 핵심만
           </p>
-          <button
-            onClick={() => router.push(`/${locale}/signal/report`)}
-            className="mt-3 inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-purple-600/20 border border-purple-500/30 text-purple-300 text-sm font-medium hover:bg-purple-600/30 transition-colors"
-          >
-            📊 데일리 리포트 보기
-          </button>
+          {isAdmin && (
+            <button
+              onClick={() => router.push(`/${locale}/signal/report`)}
+              className="mt-3 inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-purple-600/20 border border-purple-500/30 text-purple-300 text-sm font-medium hover:bg-purple-600/30 transition-colors"
+            >
+              📊 데일리 리포트 보기
+            </button>
+          )}
         </header>
 
-        {/* Generate buttons */}
-        <GenerateButtons locale={locale} onComplete={() => router.refresh()} />
+        {/* Generate buttons - admin only */}
+        {isAdmin && <GenerateButtons locale={locale} onComplete={() => router.refresh()} />}
 
         {/* Folder tabs */}
         <div className="flex gap-1 mb-4 bg-white/5 rounded-xl p-1">
