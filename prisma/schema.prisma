@@ -482,6 +482,50 @@ model UserOnboarding {
   updatedAt       DateTime @updatedAt
 }
 
+// M11: Tomorrow Signal (투모로우시그널)
+model NewsSignal {
+  id          String   @id @default(cuid())
+  date        String   // YYYY-MM-DD (수집 날짜)
+  category    String   // global_economy, tech_ai, geopolitics, energy, industry, health_bio, real_estate, life_trends + stock_*
+  title       String   // AI 요약 제목
+  summary     String   // AI 요약 본문
+  regions     Json     // ["KR","US","CN","JP","GB","ME"] 보도된 지역 목록
+  regionCount Int      // 몇 개 지역에서 보도됐는지
+  sources     Json     // [{region, title, url}] 원본 뉴스 소스
+  importance  Int      @default(0) // 0-10 중요도 (AI 평가)
+
+  createdAt   DateTime @default(now())
+
+  @@unique([date, category, title])
+  @@index([date])
+  @@index([date, category])
+}
+
+// Tomorrow Signal - Daily Report (4-step pipeline output)
+model SignalReport {
+  id          String   @id @default(cuid())
+  date        String   @unique // YYYY-MM-DD
+  step        Int      // 1=뉴스수집, 2=지표분석, 3=투자자분석, 4=칼럼
+
+  // Step 1: 글로벌 뉴스 수집 결과
+  newsData    Json?    // 10개 지역 기사 + 실시간 이슈 20개
+
+  // Step 2: 경제 지표 + 투자 심리
+  indicators  Json?    // 일/주/월/분기 지표 + 공포/탐욕/지루함 지수
+
+  // Step 3: 6명 투자자 관점 분석
+  analysis    Json?    // 투자자별 분석 결과
+
+  // Step 4: 최종 칼럼
+  column      String?  // 마크다운 칼럼 본문 (10,000~20,000자)
+  columnTitle String?  // 칼럼 제목
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([date])
+}
+
 // M10: Money Flow (가계부)
 model MoneyTransaction {
   id        String   @id @default(cuid())
