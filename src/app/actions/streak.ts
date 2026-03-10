@@ -1,14 +1,19 @@
 'use server';
 
 import { prisma } from '@/lib/prisma';
-import { getDefaultUser } from '@/lib/default-user';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 
 /**
  * Calculate the user's "godlife streak" — consecutive days with at least one activity.
  * Activities: DestinyDay, DisciplineCheck, EpistleDay, or completed UserTask.
  */
 export async function getUserStreak(): Promise<{ current: number; best: number }> {
-  const user = await getDefaultUser();
+  const session = await getServerSession(authOptions);
+  if (!session?.user?.email) return { current: 0, best: 0 };
+
+  const user = await prisma.user.findUnique({ where: { email: session.user.email } });
+  if (!user) return { current: 0, best: 0 };
 
   // Collect all activity dates from multiple modules
   const [destinyDays, disciplineChecks, epistleDays, completedTasks] = await Promise.all([

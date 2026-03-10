@@ -1,3 +1,7 @@
+import { Link } from '@/navigation';
+import { Brain, LogIn, LogOut } from 'lucide-react';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { getTodayStr } from '@/lib/date';
 import { getUserTimezone } from '@/lib/timezone';
@@ -9,7 +13,6 @@ import type { ModuleCardData } from '@/components/dashboard/DashboardModules';
 import PrintButton from '@/components/dashboard/PrintButton';
 import DashboardRings from '@/components/dashboard/DashboardRings';
 import { getUserStreak } from '@/app/actions/streak';
-import { getDefaultUser } from '@/lib/default-user';
 
 export const dynamic = 'force-dynamic'; // Ensure real-time status
 
@@ -78,8 +81,64 @@ async function getDashboardStats(userId: string, today: string, t: (key: string,
 // statusColorMap moved to DashboardModules component
 
 export default async function Home() {
+  const session = await getServerSession(authOptions);
   const t = await getTranslations('Home');
-  const user = await getDefaultUser();
+
+  if (!session || !session.user?.email) {
+    return (
+      <main className="min-h-screen flex flex-col items-center justify-center text-center px-4 py-8 relative overflow-hidden">
+        {/* Animated background for landing */}
+        <div className="animated-bg" aria-hidden="true">
+          <div className="blob blob-1" />
+          <div className="blob blob-2" />
+          <div className="blob blob-3" />
+        </div>
+        {/* Nike-style hero */}
+        <div className="animate-fade-in-up">
+          <h1
+            className="text-5xl sm:text-7xl md:text-8xl font-black text-[var(--foreground)] tracking-tighter leading-none mb-4"
+            style={{ fontFamily: 'var(--font-display)' }}
+          >
+            GOD LIFE AI
+          </h1>
+          <div className="w-16 sm:w-24 h-1 bg-[var(--color-secondary)] mx-auto mb-6 sm:mb-8" />
+          <p className="text-xs sm:text-sm font-bold tracking-[0.3em] uppercase text-[var(--color-secondary)] mb-4">
+            TRAIN. TRACK. TRANSFORM.
+          </p>
+          <p className="text-[var(--foreground-muted)] mb-8 sm:mb-10 text-base sm:text-lg max-w-md leading-relaxed mx-auto">
+            {t('subtitle')}
+          </p>
+        </div>
+        <div className="flex flex-col sm:flex-row gap-3 animate-fade-in-up stagger-2">
+          {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+          <a
+            href="/api/auth/signin"
+            className="px-8 sm:px-10 py-3.5 bg-[var(--foreground)] text-[var(--background)] hover:bg-[var(--color-secondary)] transition-all duration-300 font-bold flex items-center justify-center gap-2 tracking-wider uppercase text-sm"
+            style={{ borderRadius: 'var(--radius-md)' }}
+          >
+            <LogIn className="w-4 h-4" />
+            {t('enterSystem')}
+          </a>
+          <Link
+            href="/met"
+            className="px-8 sm:px-10 py-3.5 border-2 border-[var(--color-border)] text-[var(--foreground-muted)] hover:border-[var(--color-secondary)] hover:text-[var(--foreground)] transition-all duration-300 font-bold flex items-center justify-center gap-2 tracking-wider uppercase text-sm"
+            style={{ borderRadius: 'var(--radius-md)' }}
+          >
+            <Brain className="w-4 h-4" />
+            {t('modules.met.name')}
+          </Link>
+        </div>
+      </main>
+    );
+  }
+
+  // Fetch Real Data
+  const user = await prisma.user.findUnique({ where: { email: session.user.email } });
+  if (!user) return (
+    <div className="min-h-screen flex items-center justify-center">
+      <p className="text-[var(--foreground-muted)]">{t('userError')}</p>
+    </div>
+  );
 
   const timezone = await getUserTimezone();
   const todayStr = getTodayStr(timezone);
@@ -97,7 +156,6 @@ export default async function Home() {
     { name: t('modules.money.name'), href: '/money', iconKey: 'wallet', desc: t('modules.money.desc'), status: { label: t('status.database'), color: 'success' }, moduleColor: 'var(--color-money)', aiPrompt: t('modules.money.aiPrompt') },
     { name: t('modules.met.name'), href: '/met', iconKey: 'brain', desc: t('modules.met.desc'), status: { label: 'AI', color: 'secondary' }, moduleColor: 'var(--color-secondary)' },
     { name: t('modules.chat.name'), href: '/chat', iconKey: 'messageCircle', desc: t('modules.chat.desc'), status: { label: 'AI Coach', color: 'secondary' }, moduleColor: 'var(--color-secondary)' },
-    { name: 'FOX학개론', href: '/videos', iconKey: 'play', desc: 'ONE LOVE EDU 영상 강의', status: { label: '35 videos', color: 'accent' }, moduleColor: 'var(--color-secondary)' },
   ];
 
   // Get today's date for hero display
@@ -119,12 +177,20 @@ export default async function Home() {
               className="text-2xl sm:text-3xl font-extrabold text-[var(--foreground)] tracking-tight"
               style={{ fontFamily: 'var(--font-display)' }}
             >
-              {t('welcome', {name: user.name || 'User'})}
+              {t('welcome', {name: session.user.name || 'User'})}
             </h1>
           </div>
           <div className="flex items-center gap-3 text-sm animate-fade-in-up stagger-2">
             <GuideButton />
             <PrintButton />
+            {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+            <a
+              href="/api/auth/signout"
+              className="p-2 rounded-md hover:bg-[var(--color-card-hover)] text-[var(--foreground-muted)] hover:text-[var(--foreground)] transition-colors flex-shrink-0"
+              style={{ borderRadius: 'var(--radius-sm)' }}
+            >
+              <LogOut className="w-5 h-5" />
+            </a>
           </div>
         </div>
       </div>

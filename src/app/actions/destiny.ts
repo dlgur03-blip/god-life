@@ -2,7 +2,21 @@
 
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
-import { getDefaultUser as getUser } from "@/lib/default-user";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+
+// Helper to get current user
+async function getUser() {
+  const session = await getServerSession(authOptions);
+  if (!session?.user?.email) throw new Error("Unauthorized");
+  
+  const user = await prisma.user.findUnique({
+    where: { email: session.user.email },
+  });
+  
+  if (!user) throw new Error("User not found");
+  return user;
+}
 
 export async function getOrCreateDestinyDay(date: string) {
   const user = await getUser();

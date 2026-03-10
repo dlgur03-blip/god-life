@@ -1,3 +1,6 @@
+import { redirect } from 'next/navigation';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 import { getTranslations, getLocale } from 'next-intl/server';
 import { getMonthTransactions, getMonthSummary } from '@/app/actions/money';
 import { ChevronLeft, ChevronRight, Wallet } from 'lucide-react';
@@ -13,6 +16,11 @@ export default async function MoneyPage({
 }) {
   const t = await getTranslations('Money');
   const locale = await getLocale();
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    redirect(`/${locale}`);
+  }
 
   const params = await searchParams;
 

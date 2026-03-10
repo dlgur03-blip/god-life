@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import {
-  Compass, ClipboardList, Trophy, Activity, Mail, Wallet, Brain, MessageCircle, Sparkles, Play,
+  Compass, ClipboardList, Trophy, Activity, Mail, Wallet, Brain, MessageCircle, Sparkles,
 } from 'lucide-react';
 import type { ComponentType } from 'react';
 
@@ -16,7 +16,6 @@ const iconMap: Record<string, ComponentType<{ className?: string; style?: React.
   wallet: Wallet,
   brain: Brain,
   messageCircle: MessageCircle,
-  play: Play,
 };
 
 const statusColorMap: Record<string, string> = {

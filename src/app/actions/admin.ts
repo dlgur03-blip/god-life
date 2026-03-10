@@ -1,14 +1,17 @@
 'use server';
 
 import { prisma } from '@/lib/prisma';
+import { getServerSession } from 'next-auth';
+import { authOptions, isAdmin } from '@/lib/auth';
 import { ActionResult, success, error } from '@/lib/errors';
 import { readFileSync } from 'fs';
 import { join } from 'path';
-import { getDefaultUser } from '@/lib/default-user';
 
 async function verifyAdmin() {
-  const user = await getDefaultUser();
-  return user.email;
+  const session = await getServerSession(authOptions);
+  if (!session?.user?.email) throw new Error('Unauthorized');
+  if (!isAdmin(session.user.email)) throw new Error('Forbidden');
+  return session.user.email;
 }
 
 // System Status Types
