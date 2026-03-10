@@ -3,6 +3,8 @@
 // No auto-cron. 이혁이 버튼 눌러서 실행.
 
 import { NextRequest, NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
+import { authOptions, isAdmin } from '@/lib/auth';
 import { GoogleGenAI } from '@google/genai';
 import { prisma } from '@/lib/prisma';
 import { fetchAllNews } from '@/lib/signal/fetch-news';
@@ -159,6 +161,12 @@ async function runDaytrader() {
 
 // ── POST /api/cron/signal?mode=standard|daytrader ──
 export async function POST(request: NextRequest) {
+  // Admin only
+  const session = await getServerSession(authOptions);
+  if (!session?.user?.email || !isAdmin(session.user.email)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   const { searchParams } = new URL(request.url);
   const mode = searchParams.get('mode') ?? 'standard';
 
