@@ -1,6 +1,3 @@
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
-import { redirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import { getOrCreateChatSession, getOnboardingStatus, getUserCredits } from '@/app/actions/chat';
 import ChatPageClient from './ChatPageClient';
@@ -13,10 +10,6 @@ export async function generateMetadata() {
 }
 
 export default async function ChatPage({ params, searchParams }: { params: Promise<{ locale: string }>; searchParams: Promise<{ prompt?: string }> }) {
-  const session = await getServerSession(authOptions);
-  if (!session?.user?.email) {
-    redirect('/api/auth/signin');
-  }
 
   const { locale } = await params;
   const { prompt } = await searchParams;

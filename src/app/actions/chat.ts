@@ -1,23 +1,12 @@
 'use server';
 
 import { prisma } from '@/lib/prisma';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
 import { revalidatePath } from 'next/cache';
 import { chatWithCoach } from '@/lib/chat/gemini';
 import { ChatContextData, ModuleAction } from '@/lib/chat/types';
 import { getTodayStr } from '@/lib/date';
 import { getUserTimezone } from '@/lib/timezone';
-
-async function getUser() {
-  const session = await getServerSession(authOptions);
-  if (!session?.user?.email) throw new Error('Unauthorized');
-  const user = await prisma.user.findUnique({
-    where: { email: session.user.email },
-  });
-  if (!user) throw new Error('User not found');
-  return user;
-}
+import { getDefaultUser as getUser } from '@/lib/default-user';
 
 // ── Get user credit info ──
 export async function getUserCredits() {
@@ -96,7 +85,7 @@ async function getChatContext(userId: string): Promise<ChatContextData> {
   yesterdayDate.setDate(yesterdayDate.getDate() - 1);
   const yesterday = yesterdayDate.toISOString().split('T')[0];
 
-  const [onboarding, epistle, rules, destinyToday, destinyYesterday, moneyTx, memos, tasks, recentlyCompleted] = await Promise.all([
+  const [onboarding, epistle, rules, destinyToday, destinyYesterday, moneyTx, memos, tasks, recentlyCompleted, successProjects] = await Promise.all([
     prisma.userOnboarding.findUnique({ where: { userId } }),
     prisma.epistleDay.findUnique({ where: { userId_date: { userId, date: today } } }),
     prisma.disciplineRule.findMany({
@@ -109,10 +98,26 @@ async function getChatContext(userId: string): Promise<ChatContextData> {
     prisma.memo.findMany({ where: { userId, date: today }, orderBy: { createdAt: 'asc' } }),
     prisma.userTask.findMany({ where: { userId, status: { in: ['not_started', 'in_progress'] } }, orderBy: { createdAt: 'asc' }, take: 20 }),
     prisma.userTask.findMany({ where: { userId, status: 'completed', completedAt: { gte: new Date(yesterday + 'T00:00:00') } }, orderBy: { completedAt: 'desc' }, take: 10 }),
+    prisma.successProject.findMany({ where: { userId, enabled: true }, orderBy: { startDate: 'asc' }, take: 10 }),
   ]);
 
   const disciplineTotal = rules.length;
   const disciplineChecked = rules.filter((r) => r.checks.length > 0).length;
+
+  // Fetch MET result if user has one linked via onboarding
+  let metResult: { name: string; emoji: string; summary: string; strategy?: string } | null = null;
+  if (onboarding?.metResultId) {
+    const met = await prisma.metResult.findUnique({ where: { id: onboarding.metResultId } });
+    if (met) {
+      const fullResult = met.result as Record<string, string> | null;
+      metResult = {
+        name: met.archetypeName,
+        emoji: met.archetypeEmoji,
+        summary: met.summaryShort,
+        strategy: fullResult?.godLifeStrategy ?? undefined,
+      };
+    }
+  }
 
   const pickDestiny = (d: typeof destinyToday) => d ? {
     goalToday: d.goalToday, goal1Week: d.goal1Week, goal2Week: d.goal2Week,
@@ -162,6 +167,15 @@ async function getChatContext(userId: string): Promise<ChatContextData> {
       completedAt: t.completedAt?.toISOString() ?? null,
     })),
     recentMessages: [],
+    metResult,
+    disciplineRules: rules.map(r => ({
+      title: r.title,
+      checked: r.checks.length > 0,
+    })),
+    successProjects: successProjects.map(p => ({
+      title: p.title,
+      dayCount: Math.floor((Date.now() - p.startDate.getTime()) / (1000 * 60 * 60 * 24)) + 1,
+    })),
   };
 }
 
@@ -280,6 +294,7 @@ async function executeActions(userId: string, actions: ModuleAction[]) {
       }
     } catch (e) {
       console.error('Action execution failed:', action, e);
+      executed.push(`⚠️ 실패: ${action.module}.${action.type}`);
     }
   }
   return executed;

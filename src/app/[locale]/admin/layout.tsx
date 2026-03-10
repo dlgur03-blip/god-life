@@ -1,6 +1,3 @@
-import { getServerSession } from 'next-auth';
-import { authOptions, isAdmin } from '@/lib/auth';
-import AccessDenied from '@/components/admin/AccessDenied';
 import AdminSidebar from '@/components/admin/AdminSidebar';
 import AdminMobileNav from '@/components/admin/AdminMobileNav';
 
@@ -9,11 +6,6 @@ export default async function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession(authOptions);
-
-  if (!session?.user?.email || !isAdmin(session.user.email)) {
-    return <AccessDenied />;
-  }
 
   return (
     <div className="min-h-screen bg-[#050b14]">

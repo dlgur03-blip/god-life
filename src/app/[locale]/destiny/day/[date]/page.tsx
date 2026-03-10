@@ -5,8 +5,6 @@ import DestinyCalendar from '@/components/destiny/DestinyCalendar';
 import PrintButton from '@/components/common/PrintButton';
 import { Link } from '@/navigation';
 import { redirect } from 'next/navigation';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
 import { ChevronLeft, ChevronRight, Compass } from 'lucide-react';
 import EventTimeline from '@/components/destiny/EventTimeline';
 import { getTranslations, getLocale } from 'next-intl/server';
@@ -20,11 +18,6 @@ export default async function DestinyDayPage({ params }: { params: Promise<{ dat
   const t = await getTranslations('Destiny');
   const locale = await getLocale();
   const { date } = await params;
-  const session = await getServerSession(authOptions);
-
-  if (!session) {
-    redirect(`/${locale}`);
-  }
 
   const timezone = await getUserTimezone();
   const todayStr = getTodayStr(timezone);

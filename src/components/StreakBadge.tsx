@@ -2,18 +2,15 @@
 
 import { useEffect, useState } from 'react';
 import { getUserStreak } from '@/app/actions/streak';
-import { useSession } from 'next-auth/react';
 
 export default function StreakBadge() {
-  const { data: session } = useSession();
   const [streak, setStreak] = useState(0);
 
   useEffect(() => {
-    if (!session?.user) return;
     getUserStreak().then(s => setStreak(s.current));
-  }, [session]);
+  }, []);
 
-  if (!session?.user || streak === 0) return null;
+  if (streak === 0) return null;
 
   const level = streak >= 100 ? 3 : streak >= 30 ? 2 : streak >= 7 ? 1 : 0;
   const fireClass = level >= 2 ? 'animate-fire' : '';

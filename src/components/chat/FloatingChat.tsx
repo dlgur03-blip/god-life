@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { MessageCircle, X, Minimize2, Sunrise, Moon, StickyNote } from 'lucide-react';
-import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import ChatInterface from './ChatInterface';
 
@@ -19,7 +18,6 @@ interface ChatData {
 }
 
 export default function FloatingChat({ locale }: FloatingChatProps) {
-  const { data: session } = useSession();
   const t = useTranslations('Chat');
   const [open, setOpen] = useState(false);
   const [data, setData] = useState<ChatData | null>(null);
@@ -46,7 +44,7 @@ export default function FloatingChat({ locale }: FloatingChatProps) {
 
   // Auto-open for first-time users (no chat history)
   useEffect(() => {
-    if (!session?.user || autoOpened) return;
+    if (autoOpened) return;
     const seen = localStorage.getItem('godlife-chat-seen');
     if (!seen) {
       setAutoOpened(true);
@@ -56,7 +54,7 @@ export default function FloatingChat({ locale }: FloatingChatProps) {
       }, 1500);
       return () => clearTimeout(timer);
     }
-  }, [session, autoOpened, loadChat]);
+  }, [autoOpened, loadChat]);
 
   // Listen for custom event from module cards
   useEffect(() => {
@@ -70,9 +68,6 @@ export default function FloatingChat({ locale }: FloatingChatProps) {
     return () => window.removeEventListener('open-ai-chat', handler);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // Don't render for unauthenticated users
-  if (!session?.user) return null;
 
   const handleOpen = (prompt?: string) => {
     setInitialPrompt(prompt);

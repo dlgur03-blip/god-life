@@ -3,8 +3,6 @@ import DisciplineList from '@/components/discipline/DisciplineList';
 import AddRuleForm from '@/components/discipline/AddRuleForm';
 import { Link } from '@/navigation';
 import { redirect } from 'next/navigation';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
 import { ChevronLeft, ChevronRight, Activity, TrendingUp } from 'lucide-react';
 import { getTranslations, getLocale } from 'next-intl/server';
 import { isValidDateParam } from '@/lib/validateDate';
@@ -14,9 +12,6 @@ export default async function DisciplinePage({ params }: { params: Promise<{ dat
   const t = await getTranslations('Discipline');
   const locale = await getLocale();
   const { date } = await params;
-  const session = await getServerSession(authOptions);
-
-  if (!session) redirect(`/${locale}`);
 
   const { getUserTimezone } = await import('@/lib/timezone');
   const timezone = await getUserTimezone();

@@ -2,8 +2,6 @@ import { getEpistle, getYesterdayLetter } from '@/app/actions/epistle';
 import EpistleForm from '@/components/epistle/EpistleForm';
 import ReceivedLetterCard from '@/components/epistle/ReceivedLetterCard';
 import DateAccessGuard from '@/components/epistle/DateAccessGuard';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
 import { Link } from '@/navigation';
 import { redirect } from 'next/navigation';
 import { ChevronLeft, ChevronRight, History, Mail } from 'lucide-react';
@@ -16,9 +14,6 @@ export default async function EpistleDayPage({ params }: { params: Promise<{ dat
   const t = await getTranslations('Epistle');
   const locale = await getLocale();
   const { date } = await params;
-  const session = await getServerSession(authOptions);
-
-  if (!session) redirect(`/${locale}`);
 
   const { getUserTimezone } = await import('@/lib/timezone');
   const timezone = await getUserTimezone();

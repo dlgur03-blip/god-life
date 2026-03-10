@@ -66,4 +66,8 @@ export interface ChatContextData {
   tasks: { id: string; title: string; description?: string | null; status: string; category?: string | null; scheduledTime?: string | null; dueDate?: string | null }[];
   recentlyCompletedTasks: { title: string; completedAt?: string | null }[];
   recentMessages: { role: string; content: string }[];
+  // Added context
+  metResult?: { name: string; emoji: string; summary: string; strategy?: string } | null;
+  disciplineRules?: { title: string; checked: boolean }[];
+  successProjects?: { title: string; dayCount: number }[];
 }

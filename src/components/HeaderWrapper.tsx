@@ -4,14 +4,12 @@ import { User, Sun, Moon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Link, usePathname } from '@/navigation';
 import LanguageSwitcher from './LanguageSwitcher';
-import { useSession } from 'next-auth/react';
 import { useTheme } from '@/contexts/ThemeContext';
 import StreakBadge from './StreakBadge';
 
 export default function HeaderWrapper() {
   const pathname = usePathname();
   const t = useTranslations('Header');
-  const { data: session } = useSession();
   const { theme, setTheme } = useTheme();
   const isMyPage = pathname === '/mypage';
 
@@ -54,7 +52,7 @@ export default function HeaderWrapper() {
 
           <LanguageSwitcher />
 
-          {session && !isMyPage && (
+          {!isMyPage && (
             <Link
               href="/mypage"
               aria-label={t('myPage')}

@@ -2,7 +2,6 @@
 
 import { Compass, ClipboardList, Home, Activity, User } from 'lucide-react';
 import { usePathname } from 'next/navigation';
-import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/navigation';
 
@@ -15,11 +14,8 @@ const tabs: { key: string; href: string; icon: typeof Compass; color: string; ne
 ];
 
 export default function BottomTabBar() {
-  const { data: session } = useSession();
   const pathname = usePathname();
   const t = useTranslations('Nav');
-
-  if (!session?.user) return null;
 
   const today = new Date().toLocaleDateString('en-CA');
 

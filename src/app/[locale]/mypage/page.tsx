@@ -1,6 +1,3 @@
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
-import { redirect } from 'next/navigation';
 import { getUserStats } from '@/app/actions/mypage';
 import { getTranslations } from 'next-intl/server';
 import { Compass, Trophy, Activity, Mail, Calendar, Target, Flame, Check } from 'lucide-react';
@@ -8,8 +5,6 @@ import ThemeSelector from '@/components/mypage/ThemeSelector';
 import UserProfile from '@/components/mypage/UserProfile';
 
 export default async function MyPage() {
-  const session = await getServerSession(authOptions);
-  if (!session) redirect('/api/auth/signin');
 
   const t = await getTranslations('MyPage');
   const stats = await getUserStats();
@@ -159,15 +154,7 @@ export default async function MyPage() {
           </div>
         </section>
 
-        {/* Account Actions */}
-        <section className="pt-6 border-t border-[var(--color-border)]">
-          <a
-            href="/api/auth/signout"
-            className="inline-flex items-center gap-2 px-4 py-2 text-sm text-[var(--color-error)] hover:bg-[var(--color-error)]/10 rounded-lg transition-colors"
-          >
-            {t('signOut')}
-          </a>
-        </section>
+        {/* Settings placeholder */}
       </div>
     </main>
   );
