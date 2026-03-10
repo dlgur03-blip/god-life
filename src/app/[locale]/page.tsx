@@ -156,6 +156,7 @@ export default async function Home() {
     { name: t('modules.money.name'), href: '/money', iconKey: 'wallet', desc: t('modules.money.desc'), status: { label: t('status.database'), color: 'success' }, moduleColor: 'var(--color-money)', aiPrompt: t('modules.money.aiPrompt') },
     { name: t('modules.met.name'), href: '/met', iconKey: 'brain', desc: t('modules.met.desc'), status: { label: 'AI', color: 'secondary' }, moduleColor: 'var(--color-secondary)' },
     { name: t('modules.chat.name'), href: '/chat', iconKey: 'messageCircle', desc: t('modules.chat.desc'), status: { label: 'AI Coach', color: 'secondary' }, moduleColor: 'var(--color-secondary)' },
+    { name: '투모로우시그널', href: '/signal', iconKey: 'radio', desc: '6개국 뉴스 교차분석 · 데이트레이더 리포트', status: { label: 'Signal', color: 'info' }, moduleColor: '#8b5cf6' },
   ];
 
   // Get today's date for hero display
