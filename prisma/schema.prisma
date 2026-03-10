@@ -504,7 +504,8 @@ model NewsSignal {
 // Tomorrow Signal - Daily Report (4-step pipeline output)
 model SignalReport {
   id          String   @id @default(cuid())
-  date        String   @unique // YYYY-MM-DD
+  date        String   // YYYY-MM-DD
+  mode        String   @default("standard") // "standard" | "daytrader"
   step        Int      // 1=뉴스수집, 2=지표분석, 3=투자자분석, 4=칼럼
 
   // Step 1: 글로벌 뉴스 수집 결과
@@ -523,6 +524,7 @@ model SignalReport {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
+  @@unique([date, mode])
   @@index([date])
 }
 

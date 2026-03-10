@@ -35,19 +35,20 @@ export async function getSignalDates(limit: number = 7) {
   return results.map((r) => r.date);
 }
 
-// 칼럼/리포트 조회
-export async function getSignalReport(date?: string) {
+// 칼럼/리포트 조회 (mode별)
+export async function getSignalReport(mode: string = 'standard', date?: string) {
   const targetDate = date ?? getTodayKST();
 
   const report = await prisma.signalReport.findUnique({
-    where: { date: targetDate },
+    where: { date_mode: { date: targetDate, mode } },
   });
 
   return report;
 }
 
-export async function getReportDates(limit: number = 14) {
+export async function getReportDates(mode: string = 'standard', limit: number = 14) {
   const results = await prisma.signalReport.findMany({
+    where: { mode },
     select: { date: true, columnTitle: true, step: true },
     orderBy: { date: 'desc' },
     take: limit,

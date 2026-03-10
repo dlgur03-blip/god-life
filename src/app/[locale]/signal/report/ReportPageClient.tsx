@@ -5,12 +5,10 @@ import ReactMarkdown from 'react-markdown';
 
 interface Report {
   date: string;
+  mode: string;
   step: number;
   columnTitle: string | null;
   column: string | null;
-  newsData: unknown;
-  indicators: unknown;
-  analysis: unknown;
 }
 
 interface ReportDate {
@@ -23,6 +21,7 @@ interface Props {
   report: Report | null;
   reportDates: ReportDate[];
   currentDate: string;
+  currentMode: string;
   locale: string;
 }
 
@@ -35,11 +34,20 @@ function formatDateLabel(dateStr: string): string {
   return `${month}/${day} (${dayOfWeek})`;
 }
 
-export default function ReportPageClient({ report, reportDates, currentDate, locale }: Props) {
+const MODES = [
+  { id: 'standard', label: '🔮 글로벌 시그널', color: 'blue' },
+  { id: 'daytrader', label: '🎯 데이트레이더', color: 'amber' },
+] as const;
+
+export default function ReportPageClient({ report, reportDates, currentDate, currentMode, locale }: Props) {
   const router = useRouter();
 
   const handleDateChange = (date: string) => {
-    router.push(`/${locale}/signal/report?date=${date}`);
+    router.push(`/${locale}/signal/report?mode=${currentMode}&date=${date}`);
+  };
+
+  const handleModeChange = (mode: string) => {
+    router.push(`/${locale}/signal/report?mode=${mode}`);
   };
 
   return (
@@ -56,10 +64,26 @@ export default function ReportPageClient({ report, reportDates, currentDate, loc
           <h1 className="text-2xl font-extrabold text-white mb-1">
             📊 투모로우시그널 리포트
           </h1>
-          <p className="text-sm text-white/50">
-            [IQ130혁] 데일리 마켓 칼럼
-          </p>
         </header>
+
+        {/* Mode tabs */}
+        <div className="flex gap-1 mb-4 bg-white/5 rounded-xl p-1">
+          {MODES.map((m) => (
+            <button
+              key={m.id}
+              onClick={() => handleModeChange(m.id)}
+              className={`flex-1 px-3 py-2.5 rounded-lg text-sm font-semibold transition-all ${
+                currentMode === m.id
+                  ? m.color === 'blue'
+                    ? 'bg-blue-600/30 text-blue-300'
+                    : 'bg-amber-600/30 text-amber-300'
+                  : 'text-white/40 hover:text-white/60'
+              }`}
+            >
+              {m.label}
+            </button>
+          ))}
+        </div>
 
         {/* Date selector */}
         {reportDates.length > 0 && (
@@ -117,10 +141,10 @@ export default function ReportPageClient({ report, reportDates, currentDate, loc
           <div className="text-center py-20">
             <div className="text-5xl mb-4">📝</div>
             <h2 className="text-xl font-bold text-white/60 mb-2">
-              아직 리포트가 없습니다
+              {currentMode === 'daytrader' ? '데이트레이더 리포트가 없습니다' : '글로벌 시그널 리포트가 없습니다'}
             </h2>
             <p className="text-sm text-white/40">
-              매일 아침 자동으로 생성됩니다
+              시그널 페이지에서 생성 버튼을 눌러주세요
             </p>
           </div>
         )}

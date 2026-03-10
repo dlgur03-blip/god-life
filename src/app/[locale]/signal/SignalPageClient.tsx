@@ -234,12 +234,20 @@ export default function SignalPageClient({
             6개국 뉴스에서 겹치는 핵심만
           </p>
           {isAdmin && (
-            <button
-              onClick={() => router.push(`/${locale}/signal/report`)}
-              className="mt-3 inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-purple-600/20 border border-purple-500/30 text-purple-300 text-sm font-medium hover:bg-purple-600/30 transition-colors"
-            >
-              📊 데일리 리포트 보기
-            </button>
+            <div className="mt-3 flex gap-2 justify-center">
+              <button
+                onClick={() => router.push(`/${locale}/signal/report?mode=standard`)}
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-blue-600/20 border border-blue-500/30 text-blue-300 text-sm font-medium hover:bg-blue-600/30 transition-colors"
+              >
+                🔮 글로벌 리포트
+              </button>
+              <button
+                onClick={() => router.push(`/${locale}/signal/report?mode=daytrader`)}
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-amber-600/20 border border-amber-500/30 text-amber-300 text-sm font-medium hover:bg-amber-600/30 transition-colors"
+              >
+                🎯 데이트레이더
+              </button>
+            </div>
           )}
         </header>
 

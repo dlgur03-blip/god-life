@@ -71,15 +71,13 @@ async function collectRssSignals() {
 async function runStandard() {
   const dateCtx = getDateContext();
   const date = dateCtx.isoDate;
+  const mode = 'standard';
 
-  // RSS 수집
   const { rawHeadlines, signals } = await collectRssSignals();
 
-  // Step 1: 뉴스 분류
   const step1Prompt = buildStep1Prompt(rawHeadlines, dateCtx);
   const step1Data = await callGemini(step1Prompt, 8192);
 
-  // Step 4: 바로 칼럼 (지표/투자자 분석 생략)
   const columnPrompt = `아래 글로벌 뉴스 분석을 바탕으로 [IQ130혁] 투모로우시그널 칼럼을 작성해줘.
 
 === 뉴스 데이터 ===
@@ -103,12 +101,12 @@ ${step1Data}
   const title = titleMatch?.[1] ?? `투모로우시그널 ${dateCtx.dateStr}`;
 
   await prisma.signalReport.upsert({
-    where: { date },
-    create: { date, step: 4, newsData: step1Data, column, columnTitle: title },
+    where: { date_mode: { date, mode } },
+    create: { date, mode, step: 4, newsData: step1Data, column, columnTitle: title },
     update: { step: 4, newsData: step1Data, column, columnTitle: title },
   });
 
-  return { date, mode: 'standard', title, signals, columnLength: column.length };
+  return { date, mode, title, signals, columnLength: column.length };
 }
 
 // ============================================
@@ -118,49 +116,45 @@ ${step1Data}
 async function runDaytrader() {
   const dateCtx = getDateContext();
   const date = dateCtx.isoDate;
+  const mode = 'daytrader';
 
-  // RSS 수집
   const { rawHeadlines } = await collectRssSignals();
 
-  // Step 1
   const step1Data = await callGemini(buildStep1Prompt(rawHeadlines, dateCtx), 8192);
 
   await prisma.signalReport.upsert({
-    where: { date },
-    create: { date, step: 1, newsData: step1Data },
+    where: { date_mode: { date, mode } },
+    create: { date, mode, step: 1, newsData: step1Data },
     update: { step: 1, newsData: step1Data },
   });
 
-  // Step 2
   const step2Data = await callGemini(buildStep2Prompt(step1Data, dateCtx), 8192);
 
   await prisma.signalReport.upsert({
-    where: { date },
+    where: { date_mode: { date, mode } },
+    create: { date, mode, step: 2, indicators: step2Data },
     update: { step: 2, indicators: step2Data },
-    create: { date, step: 2, indicators: step2Data },
   });
 
-  // Step 3
   const step3Data = await callGemini(buildStep3Prompt(step1Data, step2Data, dateCtx), 16384);
 
   await prisma.signalReport.upsert({
-    where: { date },
+    where: { date_mode: { date, mode } },
+    create: { date, mode, step: 3, analysis: step3Data },
     update: { step: 3, analysis: step3Data },
-    create: { date, step: 3, analysis: step3Data },
   });
 
-  // Step 4
   const column = await callGemini(buildStep4Prompt(step1Data, step2Data, step3Data, dateCtx), 16384);
   const titleMatch = column.match(/^#\s+(.+)$/m);
   const title = titleMatch?.[1] ?? `데이트레이더 시그널 ${dateCtx.dateStr}`;
 
   await prisma.signalReport.upsert({
-    where: { date },
+    where: { date_mode: { date, mode } },
+    create: { date, mode, step: 4, newsData: step1Data, indicators: step2Data, analysis: step3Data, column, columnTitle: `🎯 ${title}` },
     update: { step: 4, column, columnTitle: `🎯 ${title}` },
-    create: { date, step: 4, newsData: step1Data, indicators: step2Data, analysis: step3Data, column, columnTitle: `🎯 ${title}` },
   });
 
-  return { date, mode: 'daytrader', title, columnLength: column.length };
+  return { date, mode, title, columnLength: column.length };
 }
 
 // ── POST /api/cron/signal?mode=standard|daytrader ──
@@ -182,16 +176,19 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// GET도 지원 (간단 상태 확인용)
+// GET - 상태 확인
 export async function GET() {
   const date = getTodayStr();
-  const report = await prisma.signalReport.findUnique({ where: { date } });
-  const signalCount = await prisma.newsSignal.count({ where: { date } });
+  const [standard, daytrader, signalCount] = await Promise.all([
+    prisma.signalReport.findUnique({ where: { date_mode: { date, mode: 'standard' } } }),
+    prisma.signalReport.findUnique({ where: { date_mode: { date, mode: 'daytrader' } } }),
+    prisma.newsSignal.count({ where: { date } }),
+  ]);
 
   return NextResponse.json({
     date,
-    hasReport: !!report,
-    reportStep: report?.step ?? 0,
     signalCount,
+    standard: { exists: !!standard, step: standard?.step ?? 0 },
+    daytrader: { exists: !!daytrader, step: daytrader?.step ?? 0 },
   });
 }
